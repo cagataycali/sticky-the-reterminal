@@ -2272,7 +2272,12 @@ test of the auto-entry constants.</p>
   BACK/scroll/tap all act on the underlying card.</li>
 <li>ACCEPTANCE: from sleep, button-press → glance strip visible &lt; 2 s (measured by
   log timestamps wake→refresh-complete); from awake, strip updates by partial
-  refresh only (no full-panel flash receipt).</li>
+  refresh only (no full-panel flash receipt).
+STATUS (batch #12, 0.17.2): awake path VERIFIED on glass — glance verb, honest
+JSON reply, lock glyph pixel-proven in cluster (diff bbox x632-746 y24-30, body
+diff 0). Pending: locked short-press → glance wiring (intent commented at
+tiny_button.cpp:89 but not called), from-sleep &lt;2s measurement, lift-to-look
+(deferred until a validated IMU lift signature exists — no guessy wakes).</li>
 </ul>
 <h2 id="13-sound-rules-ratified-m-a6">13. Sound rules — ratified (M-A6)<a class="headerlink" href="#13-sound-rules-ratified-m-a6" title="Permanent link">·</a></h2>
 <p>The buzzer (GPIO48, LEDC PWM) is the device's fastest output — sound lands

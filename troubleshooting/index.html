@@ -1248,6 +1248,45 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#probing-verdicts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Probing &amp; verdicts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Probing &amp; verdicts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-device-did-something-while-locked-or-otherwise-violated-its-own-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The device "did something while locked" (or otherwise violated its own rules)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-version-string-says-the-feature-is-there-but-the-glass-disagrees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The version string says the feature is there, but the glass disagrees
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#bench-flashing" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1945,6 +1984,45 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#probing-verdicts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Probing &amp; verdicts
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Probing &amp; verdicts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-device-did-something-while-locked-or-otherwise-violated-its-own-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The device "did something while locked" (or otherwise violated its own rules)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-version-string-says-the-feature-is-there-but-the-glass-disagrees" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The version string says the feature is there, but the glass disagrees
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#bench-flashing" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2043,6 +2121,36 @@
 <p>A sleeping device's radio is <strong>off</strong>. There is no <code>wake</code> verb and cannot be one — only the AI button (EXT1) or the sleep timer wakes it. <code>sleep &lt;sec&gt;</code> replies <em>before</em> sleeping for exactly this reason.</p>
 <h3 id="the-portal-never-appears">The portal never appears<a class="headerlink" href="#the-portal-never-appears" title="Permanent link">·</a></h3>
 <p>The provisioning portal (softAP <code>tiny-XXXX</code>, key <code>tinysetup</code>, <code>192.168.4.1</code>) is boot-gated on <strong>zero stored networks</strong> — a provisioned device deliberately never enters it. It reopens automatically after the 401 auth-halted path concludes the token is revoked.</p>
+<h2 id="probing-verdicts">Probing &amp; verdicts<a class="headerlink" href="#probing-verdicts" title="Permanent link">·</a></h2>
+<h3 id="the-device-did-something-while-locked-or-otherwise-violated-its-own-rules">The device "did something while locked" (or otherwise violated its own rules)<a class="headerlink" href="#the-device-did-something-while-locked-or-otherwise-violated-its-own-rules" title="Permanent link">·</a></h3>
+<p>Before filing the P0, check whether the <em>probe</em> is lying — this exact trap
+produced two false alarms in one day, against firmware that was correct both
+times:</p>
+<ol>
+<li><strong>Relay replies can be stale.</strong> An envelope that misses the ~20 s wait
+   returns <code>pending</code> and executes <strong>whenever the device next polls</strong> — up to
+   minutes later, <em>after</em> someone else changed the state you were testing.
+   The docs lane once watched a locked-device probe come back <code>verdict:live</code>:
+   the recording had been made three minutes later, seconds after another
+   lane's <code>unlock</code>. The refusal was real; the receipt was time-shifted.</li>
+<li><strong>OTA staging is a split-brain window.</strong> During stage + trial-boot, one
+   envelope can execute on the old image and the next on the new one. A probe
+   straddling the reboot "proves" whatever you fear.</li>
+<li><strong>A receipt is not proof the consequence survived</strong> (the swipe-wedge
+   lesson above) — and symmetrically, a <em>damning</em> receipt is not proof of
+   guilt until you know <em>when</em> it actually ran.</li>
+</ol>
+<p><strong>The rule that settles it — three confirmations now:</strong> a verdict counts only
+when the state change and the probe are the <strong>same actor, seconds apart, on
+fresh (non-pending) replies</strong>, with a <code>status</code> read (fw + <code>fw_commit</code> +
+uptime) bracketing the test. If the reply arrived via a redeemed pending
+envelope, it dates from the poll that drained it, not from when you sent it.</p>
+<h3 id="the-version-string-says-the-feature-is-there-but-the-glass-disagrees">The version string says the feature is there, but the glass disagrees<a class="headerlink" href="#the-version-string-says-the-feature-is-there-but-the-glass-disagrees" title="Permanent link">·</a></h3>
+<p>Version fields describe the <em>tree the binary claims</em>, not necessarily the
+binary. Settle it in this order: <code>status</code> (fw_commit + uptime — did it
+actually reboot into the new build?), then probe the <strong>behavior</strong>, then — for
+build-provenance disputes — <code>strings</code> on the exact published artifact (the
+D-UX6 self-check: the gate literals are either in the bytes or they aren't).</p>
 <h2 id="bench-flashing">Bench &amp; flashing<a class="headerlink" href="#bench-flashing" title="Permanent link">·</a></h2>
 <h3 id="opening-the-serial-port-reboots-the-chip">Opening the serial port reboots the chip<a class="headerlink" href="#opening-the-serial-port-reboots-the-chip" title="Permanent link">·</a></h3>
 <p>The CH343 asserts DTR/RTS on open, and toggles the lines again on <strong>close</strong> — any serial open/close resets the chip, even opened with both low. The port is for flashing and recovery only; the relay is the production path. (Development iterates over OTA — 9 updates shipped in one day without a cable.)</p>
