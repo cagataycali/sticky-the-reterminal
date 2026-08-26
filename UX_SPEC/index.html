@@ -2300,16 +2300,16 @@ JSON reply, lock glyph pixel-proven in cluster (diff bbox x632-746 y24-30, body
 diff 0). Pending: locked short-press → glance wiring (intent commented at
 tiny_button.cpp:89 but not called), lift-to-look (deferred until a validated
 IMU lift signature exists — no guessy wakes).
-FROM-SLEEP (batch #18 ruling, supersedes #16): acceptance = wake paint
-≤2600ms by receipt (first_paint_ms), ~3s human-perceived. The #16
-partial-first order stood on a wrong premise — the SSD1677 refresh baseline
-does not survive power-down, so a partial against the sleep-persisted card is
-the §0 collage bug class without baseline persistence. Measured floor
-ratified: 8.2s → 2496ms across 0.18.1-0.18.3 (init 399ms, flash ~2.1s).
-Target state stays on the books: hybrid partial + 5s self-heal flash ((c) in
-QUESTIONS 10:2xZ), scheduled after joy/LIVE queue; when it ships the
-acceptance tightens to &lt;1500ms. Classifier claim withdrawn (0 fresh receipts
-vs 3 cold-splash); esp_reset_reason in status downgraded to nice-to-have.</li>
+FROM-SLEEP (batch #20): CLOSED ON GLASS — acceptance &lt;1500ms (the #18
+self-tightening clause, executed), measured 1115ms on 0.18.4's
+partial-first wake via baseline RECONSTRUCTION (goodbye card noted in RTC
+RAM, redrawn as the previous plane, diffed; no note = honest full flash —
+satisfies both #16 and #18 at once by making the baseline true instead of
+persisting it). Arc: 8.2s → 3095 → 2496 → 1115 across 0.18.0-0.18.4, every
+number an on-glass receipt. Residual (eyes-only): screenshot reads the
+framebuffer, so physical ghosting can't be probed remotely — one
+button-wake look joins the owner's L8 list. Classifier claim withdrawn
+(batch #18); esp_reset_reason in status = nice-to-have.</li>
 </ul>
 <h2 id="13-sound-rules-ratified-m-a6">13. Sound rules — ratified (M-A6)<a class="headerlink" href="#13-sound-rules-ratified-m-a6" title="Permanent link">·</a></h2>
 <p>The buzzer (GPIO48, LEDC PWM) is the device's fastest output — sound lands

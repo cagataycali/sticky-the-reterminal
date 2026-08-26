@@ -1561,6 +1561,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#get-duck-get-ansiseq_id-the-ansi-terminal-twin-m-a8-source-4-2026-08-26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /duck · GET /ansi/&lt;seq_id&gt; — the ANSI terminal twin (M-A8 source 4, 2026-08-26)
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1820,6 +1831,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#get-duck-get-ansiseq_id-the-ansi-terminal-twin-m-a8-source-4-2026-08-26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /duck · GET /ansi/&lt;seq_id&gt; — the ANSI terminal twin (M-A8 source 4, 2026-08-26)
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1997,6 +2019,24 @@ Independently re-verified same day by a second agent against the live server: PO
 proven against <code>.sticky_auth.json</code> (jwt_secret) through the local port. Fixed with
 resolve-and-prefix containment; the jwt_secret was ROTATED (sessions invalidated,
 passkey credentials kept).</p>
+<h3 id="get-duck-get-ansiseq_id-the-ansi-terminal-twin-m-a8-source-4-2026-08-26">GET /duck · GET /ansi/<code>&lt;seq_id&gt;</code> — the ANSI terminal twin <em>(M-A8 source 4, 2026-08-26)</em><a class="headerlink" href="#get-duck-get-ansiseq_id-the-ansi-terminal-twin-m-a8-source-4-2026-08-26" title="Permanent link">·</a></h3>
+<p><code>curl sticky.cagatay.my/duck</code> — the demo that markets the thesis. The SAME stored
+sequences, downsampled (800×480 → 100 cols × 30 half-block rows via Pillow, from the
+sequences' own <code>&lt;n&gt;.png</code> previews) and streamed as chunked <code>text/plain</code>: clear-screen
+escape + xterm-256 gray half-blocks (<code>▀</code>, fg=top row / bg=bottom row, repeated SGR
+codes elided) per frame, frame delay = manifest <code>interval_ms</code> (~2 fps for the duck),
+looped to the <strong>same 60 s cap</strong> the device enforces, then <code>reset + cursor-show</code> and the
+one-line signature <code>rendered by tiny — sticky.cagatay.my</code>. <strong>UNAUTHENTICATED on
+purpose</strong> — read-only marketing: it touches no device, no owner data, only
+content-addressed previews that are already capability-URL public; the POST that spends
+CPU stays session-gated. No terminal detection: it streams the same bytes to anyone
+(keep-it-simple ruling in the bounded-task brief) — a non-terminal client just sees
+escape codes. <code>/ansi/&lt;seq_id&gt;</code> twins ANY stored sequence (16-hex id or 404 before disk);
+<code>/duck</code> is a bookmark to a built-in <code>duck_waddle</code> spec rendered at startup through the
+ordinary <code>render_sequence()</code> pipeline — authored in the grammar itself using the <code>scene</code>
+compound op (<code>{op:"scene", clear:"white|black"?, shapes:[{kind:rect|ellipse,tile,color}]}</code>
+— composes many primitives into ONE frame) and the <code>ellipse</code> primitive, both added to the
+server-side grammar superset alongside <code>rect</code> and documented in <code>GET /api/frames</code>.</p>
 
 
 
