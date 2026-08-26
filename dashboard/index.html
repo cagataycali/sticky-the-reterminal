@@ -1887,6 +1887,10 @@ sideways. All <code>/api/*</code> routes require the session JWT (cookie or Bear
 <td>passkey lifecycle — first enrollment gated by <code>STICKY_AUTH_BOOTSTRAP_TOKEN</code>; the last passkey cannot be deleted</td>
 </tr>
 <tr>
+<td><code>GET /rtttl</code></td>
+<td>the <strong>piezo tune composer</strong> — a standalone client-side page (no build step): paste or compose RTTTL, hear it through a Web Audio square-wave oscillator that mimics the buzzer (corpus-accurate defaults <code>d=4/o=6/b=63</code>, dotted notes in both positions, 10 ms inter-note gaps), see it on a piano-roll canvas, start from 12 corpus presets. <strong>"Send to device" is deliberately disabled</strong> — the firmware has no chime/play verb yet (<a href="../commands/#not-in-the-firmware-yet">Commands → not in the firmware</a>), and the dashboard does not invent relay verbs the glass never agreed to speak. The page exists so melodies are <em>composed and auditioned</em> before the engine ships, the same probe-before-build order the lockout used</td>
+</tr>
+<tr>
 <td><code>GET /{path}</code></td>
 <td>the built PWA (SPA fallback)</td>
 </tr>
