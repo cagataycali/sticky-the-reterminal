@@ -2228,14 +2228,23 @@ by its own watcher task</strong>, deliberately independent of the button layer i
 gates: the one path back cannot be disabled by the thing it escapes. Unlock
 re-renders the last card; lockout is a state, not a page.</p>
 <div class="admonition bug">
-<p class="admonition-title">Verified hole (P1, filed): <code>miccheck</code> records while locked</p>
+<p class="admonition-title">Verified hole (P1) — found on glass, fixed in tree, receipt pending</p>
 <p>The docs lane ran the D-UX5 probe on the live 0.17.0 panel: a locked
 device answered <code>miccheck 2</code> with two seconds of room audio
-(<code>rms 2188, peak 11605, 99% nonzero</code>). The gate is a verb-name check on
-<code>voice</code>; the audio <em>entry point</em> is unguarded — exactly the failure mode
+(<code>rms 2188, peak 11605, 99% nonzero</code>). The gate was a verb-name check on
+<code>voice</code>; the audio <em>entry point</em> was unguarded — exactly the failure mode
 D-UX5 pre-registered before the build. Mitigation: <code>miccheck</code> never
-uploads (only RMS numbers leave the device). The fix is one lock check at
-capture. This box stays until an on-glass refusal receipt replaces it.</p>
+uploads (only RMS numbers leave the device). <strong>0.17.1 <em>(in tree)</em> fixes it
+at the exact spot the ruling named</strong> — <code>tiny_audio_record_wav</code>, the single
+funnel every capture path passes through (voice verb, AI button, miccheck,
+and any future caller), refusing with <code>ESP_ERR_NOT_ALLOWED</code> while locked.
+Found-on-glass bugs get closed on glass: this box stays until a locked
+<code>miccheck</code> returns a refusal on the physical panel.</p>
+<p>One more truth from the incident: the "locked at boot" sighting was a
+<strong>queued probe envelope</strong>, not boot state — the device <strong>boots unlocked</strong>
+(receipt-logged in 0.17.1). Which means a pocket reboot (crash, brownout)
+silently exits lockout; noted here as an open edge for the IMU auto-entry
+package, which would re-enter on its own.</p>
 </div>
 <h3 id="sleep-seconds"><code>sleep [seconds]</code><a class="headerlink" href="#sleep-seconds" title="Permanent link">·</a></h3>
 <p>Deep sleep. Order matters, and it's deliberate: <strong>reply first</strong> (the PATCH must land while the radio is up) → paint the goodbye card (e-ink keeps it at 0 mA — that is the magic) → hand over to the HAL, which holds the power latch and gates the wake pin. The AI button (EXT1, GPIO4) always wakes; optional <code>seconds</code> adds a timer wake so sleep is remotely testable.</p>
