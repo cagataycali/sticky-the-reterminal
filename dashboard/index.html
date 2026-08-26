@@ -1743,6 +1743,10 @@ every one of them exists because the first live attempt lied on screen:</p>
 <td>the <code>screenshot</code> verb uploads the framebuffer and answers with a hosted URL <strong>in the reply text</strong> (<code>screenshot: https://plugin.tiny.technology/media/…png</code>), not in <code>images[]</code>. The backend extracts it, checks it against <code>is_device_media_url</code>, and proxies the bytes at the guarded <code>/api/screen.png</code> — so the mirror is the REAL panel and the media URL never has to be exposed to the browser.</td>
 </tr>
 <tr>
+<td>pocket controls</td>
+<td>a PocketRow on the Fleet card — 🔒 lock / 🔓 unlock / 👁 glance, buttons lit from the advertised-verbs handshake and etiquette-gated like every glass verb. Its acceptance run was this lane's <strong>first-ever paint on the real glass, done by its own rules</strong>: window announced on the marquee, glance run (receipt: partial refresh, battery 100 %, wifi ✓, unread 0, unlocked), home restored, window closed</td>
+</tr>
+<tr>
 <td>click-anywhere mirror</td>
 <td>beyond the derived button boxes: <strong>any pixel of the mirror is a real coordinate tap</strong> — <code>offsetX/offsetY</code> read in the element's pre-transform local space, so the mapping survives the ⟳ rotation the container applies (the same runtime-state discipline, applied to the browser's side of the glass). And <code>tap</code>/<code>scroll</code>/<code>swipe</code> joined <code>GLASS_VERBS</code>: <strong>a synthetic finger mid-premiere is as destructive as a paint</strong>, so the etiquette gate now covers input, not just output</td>
 </tr>
