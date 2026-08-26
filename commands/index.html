@@ -969,6 +969,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#lock-unlock-since-0170-grammar-v5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        lock / unlock (since 0.17.0, grammar v5)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#sleep-seconds" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1961,6 +1972,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#lock-unlock-since-0170-grammar-v5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        lock / unlock (since 0.17.0, grammar v5)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#sleep-seconds" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2178,12 +2200,13 @@ A dead post-wake mic mux reads flat zeros; a live mic reads the room's noise flo
 <div class="admonition note">
 <p class="admonition-title">The device has exactly three microphone paths</p>
 <p><code>voice</code>, <code>ask</code>-via-AI-button, and <code>miccheck</code> — and a pocket device must be
-able to gate <strong>all three at once</strong>. Today it cannot: there is <strong>no pocket
-lockout in the firmware yet</strong>. The designer's D-UX5 ruling pre-empts the
-classic bug before it can be written: lockout must guard the <strong>audio entry
-point</strong> (the capture path), not a list of verb names — <code>miccheck</code> never
-uploads, but it is still a microphone, and a lockout that forgets it is a
-lockout with a hole. See below for the designed-not-shipped contract.</p>
+able to gate <strong>all three at once</strong>. 0.17.0's lockout gates two of them —
+and the D-UX5 ruling ("guard the <strong>audio entry point</strong>, not a list of verb
+names") turned out to be prophecy, not caution: the shipped gate is a
+verb-name check on <code>voice</code>, and the docs lane's on-glass probe showed a
+locked device still answers <code>miccheck</code> with live room audio. <code>miccheck</code>
+never uploads, but it is still a microphone. Details in the
+<a href="#lock--unlock-since-0170-grammar-v5"><code>lock</code>/<code>unlock</code></a> bug box; filed P1.</p>
 </div>
 <h2 id="the-agent">The agent<a class="headerlink" href="#the-agent" title="Permanent link">·</a></h2>
 <h3 id="ask-text"><code>ask &lt;text&gt;</code><a class="headerlink" href="#ask-text" title="Permanent link">·</a></h3>
@@ -2191,6 +2214,29 @@ lockout with a hole. See below for the designed-not-shipped contract.</p>
 <h3 id="voice-seconds-default-5"><code>voice [seconds]</code> <em>(default 5)</em><a class="headerlink" href="#voice-seconds-default-5" title="Permanent link">·</a></h3>
 <p>Same pipeline, but records the PDM mic first: WAV → <code>/api/media</code> → <code>ask</code> with <code>audioUrl</code>. This is exactly what the <strong>AI button</strong> does — the verb exists so the pipeline is testable remotely.</p>
 <h2 id="power-lifecycle">Power &amp; lifecycle<a class="headerlink" href="#power-lifecycle" title="Permanent link">·</a></h2>
+<h3 id="lock-unlock-since-0170-grammar-v5"><code>lock</code> / <code>unlock</code> <em>(since 0.17.0, grammar v5)</em><a class="headerlink" href="#lock-unlock-since-0170-grammar-v5" title="Permanent link">·</a></h3>
+<p>Pocket lockout — the P-1 safety pillar, manual half (IMU auto-entry is the next
+package). <code>status</code> carries the truth as <code>"locked"</code>. While locked: physical
+touch is discarded at the router, AI press answers a double blip through the
+fabric and refuses, long-press home and UP/DOWN paging are dead, and the relay
+<code>voice</code> verb refuses — a remote-triggered pocket recording is the same privacy
+incident as an accidental one. The relay otherwise <strong>stays answerable by
+design</strong>: <code>say</code>/<code>render_ui</code>/<code>screenshot</code>/<code>tap</code> all work, because lockout guards
+the <em>device's inputs</em>, not the owner's reach (synthetic taps bypass the router
+gate on purpose). The unlock chord — UP+DOWN held 1 s — is read as <strong>raw GPIO
+by its own watcher task</strong>, deliberately independent of the button layer it
+gates: the one path back cannot be disabled by the thing it escapes. Unlock
+re-renders the last card; lockout is a state, not a page.</p>
+<div class="admonition bug">
+<p class="admonition-title">Verified hole (P1, filed): <code>miccheck</code> records while locked</p>
+<p>The docs lane ran the D-UX5 probe on the live 0.17.0 panel: a locked
+device answered <code>miccheck 2</code> with two seconds of room audio
+(<code>rms 2188, peak 11605, 99% nonzero</code>). The gate is a verb-name check on
+<code>voice</code>; the audio <em>entry point</em> is unguarded — exactly the failure mode
+D-UX5 pre-registered before the build. Mitigation: <code>miccheck</code> never
+uploads (only RMS numbers leave the device). The fix is one lock check at
+capture. This box stays until an on-glass refusal receipt replaces it.</p>
+</div>
 <h3 id="sleep-seconds"><code>sleep [seconds]</code><a class="headerlink" href="#sleep-seconds" title="Permanent link">·</a></h3>
 <p>Deep sleep. Order matters, and it's deliberate: <strong>reply first</strong> (the PATCH must land while the radio is up) → paint the goodbye card (e-ink keeps it at 0 mA — that is the magic) → hand over to the HAL, which holds the power latch and gates the wake pin. The AI button (EXT1, GPIO4) always wakes; optional <code>seconds</code> adds a timer wake so sleep is remotely testable.</p>
 <h3 id="messages-unread-thread-login-since-0147"><code>messages [unread | thread &lt;login&gt;]</code> <em>(since 0.14.7)</em><a class="headerlink" href="#messages-unread-thread-login-since-0147" title="Permanent link">·</a></h3>
@@ -2198,7 +2244,7 @@ lockout with a hole. See below for the designed-not-shipped contract.</p>
 <h3 id="ota-channel-default-sticky-dev"><code>ota [channel]</code> <em>(default <code>sticky-dev</code>)</em><a class="headerlink" href="#ota-channel-default-sticky-dev" title="Permanent link">·</a></h3>
 <p>Stage from the channel pointer → sha256-verify → reply <strong>then</strong> reboot into a rollback-armed trial (after <code>esp_restart</code> nobody would hear the result). Replies <code>already up to date (&lt;fw version&gt;)</code> when current, <code>OTA failed: &lt;esp_err&gt;</code> otherwise. Since 0.14.9 the stage also <strong>refuses downgrades</strong>: <code>ver_cmp</code> parses <code>MAJOR.MINOR.PATCH[-mN]</code> numerically (0.2.0 &lt; 0.14.8 — no lexicographic trap), an unparseable version is INCOMPARABLE, and incomparable-without-force = refuse, <strong>fail closed</strong>. The refusal reply is an actionable sentence, not an error code. A publisher who truly means to go backwards writes <code>force:"1"</code> into the bundle — and the forced install logs loudly.</p>
 <h2 id="not-in-the-firmware-yet">Not in the firmware (yet)<a class="headerlink" href="#not-in-the-firmware-yet" title="Permanent link">·</a></h2>
-<p><code>wake</code> (a sleeping device can only be woken by button/timer — the radio is off), <code>reprovision</code> (the rescue portal opens itself after a 3-strike auth-halt — 0.14.12), <code>press</code> (no synthetic twin for buttons/long-press yet — <code>tap</code> and <code>swipe</code> cover the touchscreen but not the three physical keys), <code>image</code>/<code>stream</code> (planned; the <code>qr</code> card and <code>render_ui</code> cover most needs today), <strong><code>lock</code>/<code>unlock</code></strong> (pocket lockout — designed, not built: the contract is already <strong>pre-registered as a runnable acceptance probe</strong>, <code>tools/probe_lockout.sh</code>, written <em>before</em> the firmware so the build has a test to meet rather than the test having a build to excuse. The designed shape: <code>status</code> gains a <code>"locked"</code> field; while locked, touch is discarded at the router, <strong>every mic path refuses</strong> — <code>voice</code>, button-hold, and <code>miccheck</code> alike, per D-UX5 — but <code>say</code>/<code>render_ui</code>/<code>screenshot</code> still answer, because the owner's remote eye is not device input. When these verbs ship, this entry moves up into the real tables with on-glass receipts). The <a href="../dashboard/">dashboard</a> greys these out with the reason — an action that does nothing is a lie on the screen.</p>
+<p><code>wake</code> (a sleeping device can only be woken by button/timer — the radio is off), <code>reprovision</code> (the rescue portal opens itself after a 3-strike auth-halt — 0.14.12), <code>press</code> (no synthetic twin for buttons/long-press yet — <code>tap</code> and <code>swipe</code> cover the touchscreen but not the three physical keys), <code>image</code>/<code>stream</code> (planned; the <code>qr</code> card and <code>render_ui</code> cover most needs today). ~~<code>lock</code>/<code>unlock</code>~~ shipped in 0.17.0 and moved up to <a href="#lock--unlock-since-0170-grammar-v5">Power &amp; lifecycle</a> — the pre-registered probe (<code>tools/probe_lockout.sh</code>) did its job both ways: the build had a test to meet, and the test caught the one gate the build missed (<code>miccheck</code>, see the bug box there). The <a href="../dashboard/">dashboard</a> greys these out with the reason — an action that does nothing is a lie on the screen.</p>
 <h2 id="reply-plumbing-all-verbs">Reply plumbing (all verbs)<a class="headerlink" href="#reply-plumbing-all-verbs" title="Permanent link">·</a></h2>
 <p>Replies go <code>PATCH /api/devices/relay</code> with <code>inReplyTo</code> and a payload that is a <strong>JSON-serialized string</strong> (<code>{"result":"…"}</code>), capped at 8 KB; images ride as hosted URLs, never bytes. A single <code>401</code> <strong>never wipes identity</strong> (blips happen — the M9 lesson, learned when one transient 401 bricked a good token): three consecutive auth failures trip an <strong>auth-halt</strong> (<code>auth_halted:true</code> in status), and since 0.14.12 the halt raises a <strong>rescue portal</strong> — live STA widens to APSTA, the same <code>/setup</code> contract as first boot, so a re-issued token has a path onto the device without a serial cable. STA stays associated throughout, so a 401 that clears self-heals without the portal ever being used.</p>
 
