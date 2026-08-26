@@ -1002,6 +1002,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#play-manifest_url-interval_s-max_frames-play-stop-0191-grammar-v8-in-tree-not-yet-on-this-glass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        play &lt;manifest_url&gt; [interval_s] [max_frames] / play stop (0.19.1, grammar v8 — in tree, not yet on this glass)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#messages-unread-thread-login-since-0147" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2016,6 +2027,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#play-manifest_url-interval_s-max_frames-play-stop-0191-grammar-v8-in-tree-not-yet-on-this-glass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        play &lt;manifest_url&gt; [interval_s] [max_frames] / play stop (0.19.1, grammar v8 — in tree, not yet on this glass)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#messages-unread-thread-login-since-0147" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2312,12 +2334,14 @@ lift the device, get this redraw unasked — rides the same
 auto-lock entry paths.</p>
 <h3 id="sleep-seconds"><code>sleep [seconds]</code><a class="headerlink" href="#sleep-seconds" title="Permanent link">·</a></h3>
 <p>Deep sleep. Order matters, and it's deliberate: <strong>reply first</strong> (the PATCH must land while the radio is up) → paint the goodbye card (e-ink keeps it at 0 mA — that is the magic) → hand over to the HAL, which holds the power latch and gates the wake pin. The AI button (EXT1, GPIO4) always wakes; optional <code>seconds</code> adds a timer wake so sleep is remotely testable.</p>
+<h3 id="play-manifest_url-interval_s-max_frames-play-stop-0191-grammar-v8-in-tree-not-yet-on-this-glass"><code>play &lt;manifest_url&gt; [interval_s] [max_frames]</code> / <code>play stop</code> <em>(0.19.1, grammar v8 — in tree, <strong>not yet on this glass</strong>)</em><a class="headerlink" href="#play-manifest_url-interval_s-max_frames-play-stop-0191-grammar-v8-in-tree-not-yet-on-this-glass" title="Permanent link">·</a></h3>
+<p>Walks an <a href="../dashboard/">anim-rail manifest</a>'s frames through the same capability-URL fetch path the <code>image</code> card proved pixel-perfect — in its <strong>own task, reply-first</strong>, because a 60 s stream outlives any relay window (the ack returns immediately; the stream runs on). The design carries the project's honesty patterns into motion: the metronome counts from frame <em>start</em> so cadence stays uniform regardless of fetch time; the interval honors the server's <code>frame_budget_ms</code> when that's slower and clamps to the 1500 ms partial floor; a failed fetch <strong>ends the stream</strong> — a freeze is honest, fake progress isn't. Panel hygiene: full flash on frame 0 and every 20th, partials between. Any glass-claiming verb ends a running stream — the same law the typer obeys. <em>(This section flips to <code>since 0.19.1</code> when a glass receipt lands; the device answered <code>0.19.0 / grammar 7</code> at the time of writing.)</em></p>
 <h3 id="messages-unread-thread-login-since-0147"><code>messages [unread | thread &lt;login&gt;]</code> <em>(since 0.14.7)</em><a class="headerlink" href="#messages-unread-thread-login-since-0147" title="Permanent link">·</a></h3>
 <p>The DM rail, driven remotely. Bare <code>messages</code> puts the <strong>inbox card</strong> on the glass; <code>messages thread &lt;login&gt;</code> opens that conversation; <code>messages unread</code> answers the badge counts as JSON and renders <strong>nothing</strong> (a monitoring probe should not repaint a panel). All three fetch with the <strong>device's own token</strong> over <code>/api/devices/messages</code> — no owner-side process anywhere. Same paths as a finger: a tapped <code>m:</code> row and a pushed verb converge on one fetch-and-render.</p>
 <h3 id="ota-channel-default-sticky-dev"><code>ota [channel]</code> <em>(default <code>sticky-dev</code>)</em><a class="headerlink" href="#ota-channel-default-sticky-dev" title="Permanent link">·</a></h3>
 <p>Stage from the channel pointer → sha256-verify → reply <strong>then</strong> reboot into a rollback-armed trial (after <code>esp_restart</code> nobody would hear the result). Replies <code>already up to date (&lt;fw version&gt;)</code> when current, <code>OTA failed: &lt;esp_err&gt;</code> otherwise. Since 0.14.9 the stage also <strong>refuses downgrades</strong>: <code>ver_cmp</code> parses <code>MAJOR.MINOR.PATCH[-mN]</code> numerically (0.2.0 &lt; 0.14.8 — no lexicographic trap), an unparseable version is INCOMPARABLE, and incomparable-without-force = refuse, <strong>fail closed</strong>. The refusal reply is an actionable sentence, not an error code. A publisher who truly means to go backwards writes <code>force:"1"</code> into the bundle — and the forced install logs loudly.</p>
 <h2 id="not-in-the-firmware-yet">Not in the firmware (yet)<a class="headerlink" href="#not-in-the-firmware-yet" title="Permanent link">·</a></h2>
-<p><code>wake</code> (a sleeping device can only be woken by button/timer — the radio is off), <code>reprovision</code> (the rescue portal opens itself after a 3-strike auth-halt — 0.14.12), <code>press</code> (no synthetic twin for buttons/long-press yet — <code>tap</code> and <code>swipe</code> cover the touchscreen but not the three physical keys), <code>image</code>/<code>stream</code> (planned; the <code>qr</code> card and <code>render_ui</code> cover most needs today). ~~<code>lock</code>/<code>unlock</code>~~ shipped in 0.17.0 and moved up to <a href="#lock--unlock-since-0170-grammar-v5">Power &amp; lifecycle</a> — the pre-registered probe (<code>tools/probe_lockout.sh</code>) did its job both ways: the build had a test to meet, and the test caught the one gate the build missed (<code>miccheck</code>, see the bug box there). The <a href="../dashboard/">dashboard</a> greys these out with the reason — an action that does nothing is a lie on the screen.</p>
+<p><code>wake</code> (a sleeping device can only be woken by button/timer — the radio is off), <code>reprovision</code> (the rescue portal opens itself after a 3-strike auth-halt — 0.14.12), <code>press</code> (no synthetic twin for buttons/long-press yet — <code>tap</code> and <code>swipe</code> cover the touchscreen but not the three physical keys), ~~<code>image</code>/<code>stream</code>~~ both landed — <code>image</code> as a <a href="../cards/">card type</a> (0.19.0, grammar 7, proven 0/384,000-pixel diff) and <code>stream</code> as the <a href="#play-manifest_url-interval_s-max_frames--play-stop-0191-grammar-v8--in-tree-not-yet-on-this-glass"><code>play</code> verb</a> (0.19.1, staged). ~~<code>lock</code>/<code>unlock</code>~~ shipped in 0.17.0 and moved up to <a href="#lock--unlock-since-0170-grammar-v5">Power &amp; lifecycle</a> — the pre-registered probe (<code>tools/probe_lockout.sh</code>) did its job both ways: the build had a test to meet, and the test caught the one gate the build missed (<code>miccheck</code>, see the bug box there). The <a href="../dashboard/">dashboard</a> greys these out with the reason — an action that does nothing is a lie on the screen.</p>
 <h2 id="reply-plumbing-all-verbs">Reply plumbing (all verbs)<a class="headerlink" href="#reply-plumbing-all-verbs" title="Permanent link">·</a></h2>
 <p>Replies go <code>PATCH /api/devices/relay</code> with <code>inReplyTo</code> and a payload that is a <strong>JSON-serialized string</strong> (<code>{"result":"…"}</code>), capped at 8 KB; images ride as hosted URLs, never bytes. A single <code>401</code> <strong>never wipes identity</strong> (blips happen — the M9 lesson, learned when one transient 401 bricked a good token): three consecutive auth failures trip an <strong>auth-halt</strong> (<code>auth_halted:true</code> in status), and since 0.14.12 the halt raises a <strong>rescue portal</strong> — live STA widens to APSTA, the same <code>/setup</code> contract as first boot, so a re-issued token has a path onto the device without a serial cable. STA stays associated throughout, so a 401 that clears self-heals without the portal ever being used.</p>
 
