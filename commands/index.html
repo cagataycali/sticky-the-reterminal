@@ -2095,12 +2095,18 @@ synthetic twin (<code>press</code> is not a verb yet), so those stay hand-verifi
 <p>History worth keeping: verdict batch #5 convicted the first receipt design
 <em>using this verb</em> — <strong>R-5</strong> (a 40 px sub-slop swipe answered <code>ESP_OK</code>) and
 <strong>R-6</strong> (<code>card_id</code> written at inject time raced the async route, same torn-read
-family as the M9 draw-time-regions lesson). <strong>Both fixed in the tree at
-0.16.6-m14</strong> (<code>6af1449</code>): the receipt now waits for the route to finish and
-reports display-time state, with the accepted/routed stages separated so an
-accepted-but-dead-end gesture can no longer masquerade as success. On a device
-still running ≤0.16.5, both caveats apply: treat sub-slop <code>ESP_OK</code> as
-untrustworthy, and let a follow-up <code>status</code>/<code>screenshot</code> — not the swipe reply —
+family as the M9 draw-time-regions lesson). <strong>Both fixed and VERIFIED ON GLASS at
+0.16.6-m14</strong> (<code>6af1449</code>, fw_commit <code>47821b73</code>): the receipt waits for the route
+to finish and reports display-time state, with the accepted/routed stages
+separated so an accepted-but-dead-end gesture can no longer masquerade as
+success. Live probes against the panel: a bottom-band swipe answered
+<code>"accepted":"ESP_OK","routed":true,"card_id":"home"</code> with the card provably
+home, and a <strong>20 px</strong> probe was <code>ESP_ERR_INVALID_SIZE, refused at classifier</code>.
+One correction to the record: R-5's original probe used <strong>40 px</strong> of travel and
+called it "sub-slop" — but <code>kTapSlop</code> is <strong>24 px</strong> (<code>tiny_touch.cpp</code>), so 40 px
+was always a legitimate swipe and its <code>ESP_OK</code> was correct; the <em>receipt design</em>
+(inject-time, R-6) was the real defect, and it is gone. On a device still
+running ≤0.16.5, let a follow-up <code>status</code>/<code>screenshot</code> — not the swipe reply —
 prove the consequence. <code>tap</code> got the same route-time contract (12 s wait,
 because a tap can trigger a blocking route like the ~8 s BLE scan;
 <code>"routed":false</code> means still running, not lost).</p>
