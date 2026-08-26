@@ -2046,7 +2046,7 @@
 
 
 <h1 id="commands-the-envelope-verb-reference">Commands — the envelope verb reference<a class="headerlink" href="#commands-the-envelope-verb-reference" title="Permanent link">·</a></h1>
-<p>Everything the Sticky answers to, exactly as <code>tiny_node.cpp</code> dispatches it at <strong>fw 0.14.18-m12</strong>. Envelopes arrive as <code>{type:"invoke", prompt:"&lt;verb&gt; [args]"}</code> over the relay; every verb replies (unknown input answers the help string — never silence). These are also the <code>capabilities</code> the heartbeat advertises, and the rule is: <strong>advertise only what dispatch actually implements.</strong></p>
+<p>Everything the Sticky answers to, exactly as <code>tiny_node.cpp</code> dispatches it — last audited against the tree at <strong>0.16.6-m14, grammar v4</strong> (the homepage pins what's <em>verified on the glass</em>, which may trail the tree by a version). Envelopes arrive as <code>{type:"invoke", prompt:"&lt;verb&gt; [args]"}</code> over the relay; every verb replies (unknown input answers the help string — never silence). These are also the <code>capabilities</code> the heartbeat advertises, and the rule is: <strong>advertise only what dispatch actually implements.</strong></p>
 <p>Send from any tiny surface:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>use_device invoke → prompt: &quot;status&quot;
 </span></code></pre></div>
@@ -2078,28 +2078,34 @@
 classifier a finger uses</em> — so what it proves is the real gesture grammar, not a
 parallel code path. This is how <a href="../UX_SPEC/">UX_SPEC §2</a> rules get verified over
 the relay: inject the vector, read the receipt, <code>screenshot</code> the consequence.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>{&quot;swipe&quot;:[400,60,400,300], &quot;rotation&quot;:90, &quot;result&quot;:&quot;ESP_OK&quot;, &quot;card_id&quot;:&quot;status&quot;,
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a> &quot;summary&quot;:&quot;swiped (400,60)-&gt;(400,300) at 90 deg -&gt; ESP_OK&quot;}
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>// receipt shape since 0.16.6 (route-time, two stages named):
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>{&quot;swipe&quot;:[400,60,400,300], &quot;rotation&quot;:90,
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a> &quot;accepted&quot;:&quot;ESP_OK&quot;,          // classifier verdict at inject
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a> &quot;routed&quot;:true,                // the route actually FINISHED before this reply
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a> &quot;card_id&quot;:&quot;home&quot;,             // display-time, no longer inject-time
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a> &quot;summary&quot;:&quot;... -&gt; ESP_OK, route completed; card_id is display-time&quot;}
 </span></code></pre></div>
+<p>The summary's third clause is one of: <code>refused at classifier</code> ·
+<code>route completed</code> · <code>route still running at reply time</code> (slow render — probe
+again, not lost) · <code>no route dispatched</code> (accepted but a dead-end gesture).</p>
 <p><code>INVALID_SIZE</code> means the travel stayed within the 24 px tap slop — <strong>refused
 rather than silently downgraded to a tap</strong>, because a probe that quietly becomes
 a different gesture proves nothing. Buttons and long-press still have no
 synthetic twin (<code>press</code> is not a verb yet), so those stay hand-verified.</p>
-<p>Two receipt caveats, both found by verdict batch #5 <em>using</em> this verb:</p>
-<ul>
-<li><strong>R-5 (open regression, 0.16.5):</strong> a 40 px sub-slop swipe returned <code>ESP_OK</code>
-  instead of the verified <code>INVALID_SIZE</code> contract above. Until the builder
-  closes it, treat a sub-slop <code>ESP_OK</code> as untrustworthy — a receipt must not
-  claim success for a gesture that should be refused.</li>
-<li><strong>R-6 / the race (by design today, flagged):</strong> the reply's <code>result</code> and
-  <code>card_id</code> are written at <strong>inject time</strong> and race the async route — a
-  settings→home swipe can answer <code>card_id=settings</code> and show home one <code>status</code>
-  later. The receipt proves <em>injection</em>, the follow-up <code>status</code> or <code>screenshot</code>
-  proves <em>consequence</em>. (Same torn-read family as the M9 draw-time-regions
-  lesson.)</li>
-</ul>
+<p>History worth keeping: verdict batch #5 convicted the first receipt design
+<em>using this verb</em> — <strong>R-5</strong> (a 40 px sub-slop swipe answered <code>ESP_OK</code>) and
+<strong>R-6</strong> (<code>card_id</code> written at inject time raced the async route, same torn-read
+family as the M9 draw-time-regions lesson). <strong>Both fixed in the tree at
+0.16.6-m14</strong> (<code>6af1449</code>): the receipt now waits for the route to finish and
+reports display-time state, with the accepted/routed stages separated so an
+accepted-but-dead-end gesture can no longer masquerade as success. On a device
+still running ≤0.16.5, both caveats apply: treat sub-slop <code>ESP_OK</code> as
+untrustworthy, and let a follow-up <code>status</code>/<code>screenshot</code> — not the swipe reply —
+prove the consequence. <code>tap</code> got the same route-time contract (12 s wait,
+because a tap can trigger a blocking route like the ~8 s BLE scan;
+<code>"routed":false</code> means still running, not lost).</p>
 <blockquote>
-<p><strong>Advertising gap (0.16.4):</strong> <code>swipe</code> is dispatched but <strong>not listed in the
+<p><strong>Advertising gap (0.16.4, still true at 0.16.6):</strong> <code>swipe</code> is dispatched but <strong>not listed in the
 heartbeat capabilities array</strong> — a dashboard that trusts the advertised caps
 won't offer it, yet sending the verb works. Filed for the builder; until then,
 trust dispatch, not the caps list.</p>

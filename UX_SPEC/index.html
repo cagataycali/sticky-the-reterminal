@@ -1057,6 +1057,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#15-chat-the-conversation-surface-m-a1m-s5-successor-spec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Chat — the conversation surface (M-A1/M-S5 successor spec)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#10-scoreboard" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1808,6 +1819,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#15-chat-the-conversation-surface-m-a1m-s5-successor-spec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        15. Chat — the conversation surface (M-A1/M-S5 successor spec)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#10-scoreboard" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1844,7 +1866,7 @@
 
 
 <h1 id="ux-spec-the-stickyos-interaction-contract">UX Spec — the stickyOS interaction contract<a class="headerlink" href="#ux-spec-the-stickyos-interaction-contract" title="Permanent link">·</a></h1>
-<p><strong>Owner: the product-designer loop. Version 1.5 (2026-08-26) — §13 sound rules ratified (M-A6), §14 animation usage rules, §7 settings IA v2 (snooze-first, M-A5-DEEP).</strong>
+<p><strong>Owner: the product-designer loop. Version 1.6 (2026-08-26) — §15 chat conversation surface (ask lifecycle, follow-up context, DM consent gate); v1.5 added §13 sound rules, §14 anim law, §7 settings IA v2.</strong>
 This file is the single source of truth for how the Sticky <em>feels</em>. The builder
 implements it; verdicts against it land in <a href="../ANSWERS/">ANSWERS.md</a>. Every rule
 carries a WHY, and every rule carries a status:
@@ -2329,6 +2351,50 @@ animation is therefore a <em>budgeted</em> act, never decoration.</p>
   liveliness the panel cannot (§0). Locked/snoozed states strip the tune per
   §13 and the anim plays silent.</li>
 </ul>
+<h2 id="15-chat-the-conversation-surface-m-a1m-s5-successor-spec">15. Chat — the conversation surface (M-A1/M-S5 successor spec)<a class="headerlink" href="#15-chat-the-conversation-surface-m-a1m-s5-successor-spec" title="Permanent link">·</a></h2>
+<p>Two different things wear bubbles; the spec refuses to blur them:
+- <strong>Ask thread</strong> — owner ⇄ their own agent, born from Speak/Type/<code>ask</code>.
+  Ephemeral by default; §7 Agent ▸ ask-history toggles local persistence.
+- <strong>DM thread</strong> — owner ⇄ another tiny.technology user (Chats ▸ <code>m:inbox</code>).
+  Server truth; the device is a viewport, never the store.
+WHY: an agent answer and a human message carry different obligations — a
+human's words must never be summarized, aged out, or restyled by the device.</p>
+<p><strong>Ask lifecycle (one law, five moments):</strong>
+1. <strong>Receipt</strong> — the question becomes the user bubble <em>before</em> any network
+   round-trip (shipped: <code>stream_render</code> seeds <code>s_stream_q</code>). A question the
+   glass didn't echo is a question the owner can't trust was heard.
+2. <strong>Thinking</strong> — caret alone, no empty assistant bubble (shipped). The caret
+   is the only legal "spinner" on this hardware.
+3. <strong>Streaming</strong> — G6 rules: stream owns the display, auto-scroll owns the
+   tail, physical long-press-AI is the one exit.
+4. <strong>Settle</strong> — stream end = ONE full refresh (ghost purge + caret removal,
+   shipped) AND the moment tap regions return. Touch bar on a settled ask
+   card: <strong>[Speak] [Type] [Home]</strong> — a settled answer is an invitation to
+   follow up, in place.
+5. <strong>Follow-up</strong> — Speak/Type from a settled ask card appends to the SAME
+   visual thread (new user bubble below), and the ask request carries the
+   prior turns of THIS thread as context (bounded: last 4 turns or 2KB,
+   oldest dropped first). WHY: "what about in celsius?" must work; an
+   amnesiac chat page is a text card in costume. DEPENDENCY: if
+   <code>/api/devices/ask</code> cannot accept a context array today, firmware ships
+   the visual thread first and the context field is filed in QUESTIONS.md —
+   the UI contract must not wait on the backend.</p>
+<p><strong>Thread typography at settle (extends §6):</strong>
+- Newest turn is the tail; entering a thread lands scrolled to the TAIL, not
+  the top (a conversation's present tense is its bottom line).
+- Older turns scroll away under M12 rules; the scrollbar is the only history
+  indicator. No timestamps inside bubbles — relative time lives in the inbox
+  list row only. WHY: on 4-gray every bubble byte competes with the answer.
+- An ask that arrives while a DIFFERENT card is showing (relay <code>ask</code>) still
+  takes the panel — asks are owner-initiated by definition, never a surprise.</p>
+<p><strong>Inbox (DMs) rules:</strong> rows = sender + relative time + first line (fold rules
+§6); unread = Black dot, read = none — binary, no counts per row (the §12
+glance strip owns the aggregate). Opening a thread marks read server-side
+(shipped semantics); the device never marks read on glance-strip evidence
+alone. Reply from a DM thread uses the keyboard; cancel returns to the SAME
+thread unsent (shipped, tiny_shell.cpp:426). DM send is the one action on
+this device that reaches another human: the composer's OK label reads
+<strong>"Send"</strong> on DM threads, never "ok". WHY: the label is the last consent gate.</p>
 <h2 id="10-scoreboard">10. Scoreboard<a class="headerlink" href="#10-scoreboard" title="Permanent link">·</a></h2>
 <table>
 <thead>
@@ -2423,6 +2489,16 @@ animation is therefore a <em>budgeted</em> act, never decoration.</p>
 <td>G17</td>
 <td>settings IA v2 §7 — snooze first row, owner silences device in ≤2 taps; every setting = NVS + partial redraw + <code>set</code> relay twin</td>
 <td>SPECIFIED (v1.5, absorbs M-A5-DEEP)</td>
+</tr>
+<tr>
+<td>G18</td>
+<td>chat §15 — ask lifecycle 5 moments; settled ask bar = Speak/Type/Home; follow-up appends to thread + carries bounded context</td>
+<td>SPECIFIED (v1.6)</td>
+</tr>
+<tr>
+<td>G19</td>
+<td>chat §15 — enter thread at TAIL; no timestamps in bubbles; DM composer OK reads "Send"; ask/DM threads never blurred</td>
+<td>SPECIFIED (v1.6)</td>
 </tr>
 </tbody>
 </table>
