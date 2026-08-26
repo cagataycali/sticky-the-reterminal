@@ -1760,10 +1760,10 @@ every one of them exists because the first live attempt lied on screen:</p>
 </tr>
 </tbody>
 </table>
-<p>Verbs that actually exist (fw 0.14.18-m12): <code>render_ui &lt;card-json&gt;</code>, <code>status</code>, <code>sensors [card]</code>, <code>say &lt;text&gt;</code>, <code>ask &lt;text&gt;</code>, <code>voice [secs]</code>, <code>screenshot</code>, <code>miccheck [secs]</code>, <code>page &lt;nav&gt;</code>, <code>rotate [deg|auto]</code>, <code>tap &lt;x&gt; &lt;y&gt;</code>, <code>scroll [up|down|top|±px]</code>, <code>sleep [secs]</code>, <code>ota [channel]</code>, <code>messages [unread|thread &lt;login&gt;]</code> — the verb-by-verb reference is <a href="../commands/">Commands</a>.</p>
+<p>Verbs that actually exist (fw 0.18.0-m14, nineteen, all advertised): <code>render_ui &lt;card-json&gt;</code>, <code>status</code>, <code>sensors [card]</code>, <code>say &lt;text&gt;</code>, <code>ask &lt;text&gt;</code>, <code>voice [secs]</code>, <code>screenshot</code>, <code>glance</code>, <code>miccheck [secs]</code>, <code>page &lt;nav&gt;</code>, <code>rotate [deg|auto]</code>, <code>tap &lt;x&gt; &lt;y&gt;</code>, <code>swipe &lt;x1&gt; &lt;y1&gt; &lt;x2&gt; &lt;y2&gt;</code>, <code>scroll [up|down|top|±px]</code>, <code>lock</code>, <code>unlock</code>, <code>sleep [secs]</code>, <code>ota [channel]</code>, <code>messages [unread|thread &lt;login&gt;]</code> — the verb-by-verb reference is <a href="../commands/">Commands</a>. The four that arrived after this page's original audit (<code>swipe</code> in caps, <code>lock</code>/<code>unlock</code> at 0.17.0, <code>glance</code> at 0.18.0) are exactly the case the next paragraph exists for: the capabilities handshake lights their buttons from the heartbeat, no dashboard deploy required.</p>
 <p>Since the capabilities pass, <strong>verb truth comes from the device itself</strong>: <code>/api/capabilities</code>
 crosses the dashboard's static table with the verbs the firmware <strong>advertises in its own
-heartbeat</strong> (verified live: 15 verbs round-trip). A verb shipped by OTA lights its button
+heartbeat</strong> (first verified live at 15 verbs round-trip; the array has since grown to 19 — parity held, see <a href="../commands/">Commands</a>). A verb shipped by OTA lights its button
 without a dashboard deploy — the Sensors button staying grey for a day was exactly this
 staleness class. The semantics are honest in both directions: the device's word wins;
 unadvertised verbs grey out with the reason; verbs the firmware advertises that have no
