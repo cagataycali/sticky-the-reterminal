@@ -2200,13 +2200,14 @@ A dead post-wake mic mux reads flat zeros; a live mic reads the room's noise flo
 <div class="admonition note">
 <p class="admonition-title">The device has exactly three microphone paths</p>
 <p><code>voice</code>, <code>ask</code>-via-AI-button, and <code>miccheck</code> — and a pocket device must be
-able to gate <strong>all three at once</strong>. 0.17.0's lockout gates two of them —
-and the D-UX5 ruling ("guard the <strong>audio entry point</strong>, not a list of verb
-names") turned out to be prophecy, not caution: the shipped gate is a
-verb-name check on <code>voice</code>, and the docs lane's on-glass probe showed a
-locked device still answers <code>miccheck</code> with live room audio. <code>miccheck</code>
-never uploads, but it is still a microphone. Details in the
-<a href="#lock--unlock-since-0170-grammar-v5"><code>lock</code>/<code>unlock</code></a> bug box; filed P1.</p>
+able to gate <strong>all three at once</strong>. Since 0.17.1 it does — at a single
+point: the D-UX5 ruling ("guard the <strong>audio entry point</strong>, not a list of
+verb names") proved out the hard way when the docs lane's on-glass probe
+caught 0.17.0's verb-name gate leaving <code>miccheck</code> live on a locked device.
+The gate now lives in <code>tiny_audio_record_wav</code>, the funnel every capture
+path shares — verified by A/B on the panel (locked → <code>ESP_ERR_NOT_ALLOWED</code>,
+unlocked → live). The full story is in the
+<a href="#lock--unlock-since-0170-grammar-v5"><code>lock</code>/<code>unlock</code></a> closure box.</p>
 </div>
 <h2 id="the-agent">The agent<a class="headerlink" href="#the-agent" title="Permanent link">·</a></h2>
 <h3 id="ask-text"><code>ask &lt;text&gt;</code><a class="headerlink" href="#ask-text" title="Permanent link">·</a></h3>
@@ -2227,24 +2228,28 @@ gate on purpose). The unlock chord — UP+DOWN held 1 s — is read as <strong>r
 by its own watcher task</strong>, deliberately independent of the button layer it
 gates: the one path back cannot be disabled by the thing it escapes. Unlock
 re-renders the last card; lockout is a state, not a page.</p>
-<div class="admonition bug">
-<p class="admonition-title">Verified hole (P1) — found on glass, fixed in tree, receipt pending</p>
-<p>The docs lane ran the D-UX5 probe on the live 0.17.0 panel: a locked
-device answered <code>miccheck 2</code> with two seconds of room audio
-(<code>rms 2188, peak 11605, 99% nonzero</code>). The gate was a verb-name check on
-<code>voice</code>; the audio <em>entry point</em> was unguarded — exactly the failure mode
-D-UX5 pre-registered before the build. Mitigation: <code>miccheck</code> never
-uploads (only RMS numbers leave the device). <strong>0.17.1 <em>(in tree)</em> fixes it
-at the exact spot the ruling named</strong> — <code>tiny_audio_record_wav</code>, the single
-funnel every capture path passes through (voice verb, AI button, miccheck,
-and any future caller), refusing with <code>ESP_ERR_NOT_ALLOWED</code> while locked.
-Found-on-glass bugs get closed on glass: this box stays until a locked
-<code>miccheck</code> returns a refusal on the physical panel.</p>
-<p>One more truth from the incident: the "locked at boot" sighting was a
-<strong>queued probe envelope</strong>, not boot state — the device <strong>boots unlocked</strong>
-(receipt-logged in 0.17.1). Which means a pocket reboot (crash, brownout)
-silently exits lockout; noted here as an open edge for the IMU auto-entry
-package, which would re-enter on its own.</p>
+<div class="admonition success">
+<p class="admonition-title">The miccheck hole — found on glass, fixed on glass (closed)</p>
+<p>Lifecycle of a P1, all within hours: the docs lane ran the D-UX5 probe on
+the live 0.17.0 panel and a <strong>locked device answered <code>miccheck 2</code> with two
+seconds of room audio</strong> (<code>rms 2188, 99% nonzero</code>) — the gate was a
+verb-name check on <code>voice</code>, the audio <em>entry point</em> unguarded, exactly the
+failure D-UX5 pre-registered before the build. 0.17.1 moved the gate to
+<code>tiny_audio_record_wav</code>, the single funnel every capture path shares.
+<strong>Closed with a same-session A/B on the physical panel (0.17.1,
+fw_commit <code>cbdca800</code>):</strong> <code>lock</code> → <code>miccheck 2</code> → <code>record failed:
+ESP_ERR_NOT_ALLOWED</code>; <code>unlock</code> → <code>miccheck 2</code> → <code>verdict:live, rms 2140</code>.
+The refusal and the recovery, seconds apart, same device.</p>
+<p>Probe discipline note, learned the honest way: the first 0.17.1 probe
+returned <code>live</code> — because it rode a <strong>stale pending envelope</strong> executed
+after another lane's unlock. Verdicts only count when the lock and the
+probe are the <em>same actor, seconds apart</em>; a queued envelope proves
+nothing about the state it was aimed at (same class of trap as the
+"locked at boot" sighting, which was also a queued envelope).</p>
+<p>Boot truth, absorbed from 0.17.1's receipts: the device <strong>boots
+unlocked</strong> — so a pocket reboot (crash, brownout) silently exits lockout.
+Documented as the standing argument for §11's IMU auto-entry half, which
+would re-enter on its own.</p>
 </div>
 <h3 id="sleep-seconds"><code>sleep [seconds]</code><a class="headerlink" href="#sleep-seconds" title="Permanent link">·</a></h3>
 <p>Deep sleep. Order matters, and it's deliberate: <strong>reply first</strong> (the PATCH must land while the radio is up) → paint the goodbye card (e-ink keeps it at 0 mA — that is the magic) → hand over to the HAL, which holds the power latch and gates the wake pin. The AI button (EXT1, GPIO4) always wakes; optional <code>seconds</code> adds a timer wake so sleep is remotely testable.</p>
