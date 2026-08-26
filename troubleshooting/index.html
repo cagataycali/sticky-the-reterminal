@@ -1132,10 +1132,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#the-device-goes-silent-after-a-horizontal-swipe-fixed-in-0165" class="md-nav__link">
+  <a href="#the-device-goes-silent-after-a-horizontal-swipe-fixed-in-0165-kill-sequence-replayed-on-glass-device-survived" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The device goes silent after a horizontal swipe (fixed in 0.16.5)
+        The device goes silent after a horizontal swipe (fixed in 0.16.5 — kill sequence replayed on glass, device survived)
       
     </span>
   </a>
@@ -1829,10 +1829,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#the-device-goes-silent-after-a-horizontal-swipe-fixed-in-0165" class="md-nav__link">
+  <a href="#the-device-goes-silent-after-a-horizontal-swipe-fixed-in-0165-kill-sequence-replayed-on-glass-device-survived" class="md-nav__link">
     <span class="md-ellipsis">
       
-        The device goes silent after a horizontal swipe (fixed in 0.16.5)
+        The device goes silent after a horizontal swipe (fixed in 0.16.5 — kill sequence replayed on glass, device survived)
       
     </span>
   </a>
@@ -2025,9 +2025,10 @@
 <p>GT911 ghost touches. Fixed in <code>0.4.0-m4</code>: a real finger spans several 30 ms polls, ghosts don't (2-poll debounce), plus a boot grace window (5000 ms originally, tuned to 1200 ms once points with <code>size &gt; 0</code> were trusted on first poll).</p>
 <h3 id="a-tap-lands-on-the-wrong-button-or-label-in-the-event-feed">A tap lands on the wrong button (or <code>label=?</code> in the event feed)<a class="headerlink" href="#a-tap-lands-on-the-wrong-button-or-label-in-the-event-feed" title="Permanent link">·</a></h3>
 <p>The stale-region race, closed in <code>0.9.x</code>: hit-regions used to be published at <em>draw</em> time, up to ~2 s before the e-ink actually displayed them. Regions now build into a staging table and publish atomically with the card commit — a tap is always hit-tested against the card that is really on the glass.</p>
-<h3 id="the-device-goes-silent-after-a-horizontal-swipe-fixed-in-0165">The device goes silent after a horizontal swipe <em>(fixed in 0.16.5)</em><a class="headerlink" href="#the-device-goes-silent-after-a-horizontal-swipe-fixed-in-0165" title="Permanent link">·</a></h3>
+<h3 id="the-device-goes-silent-after-a-horizontal-swipe-fixed-in-0165-kill-sequence-replayed-on-glass-device-survived">The device goes silent after a horizontal swipe <em>(fixed in 0.16.5 — kill sequence replayed on glass, device survived)</em><a class="headerlink" href="#the-device-goes-silent-after-a-horizontal-swipe-fixed-in-0165-kill-sequence-replayed-on-glass-device-survived" title="Permanent link">·</a></h3>
 <p>The batch-#4 P0, and the diagnosis published here first ("crashes, reboots clean") was <strong>wrong on the failure mode</strong>: the device never rebooted — it <strong>wedged</strong>. Root cause: <code>tiny_shell_cycle</code> computed its modulus over all 6 page-enum entries when the ring contract was 4 — silently wrong ever since WIFI/BLE were appended to the enum (M10.2). A mid-content swipe on the pushed wifi card ring-nexted into the <strong>BLE page</strong>: NimBLE first-time bring-up + a 4 s scan + two blocking e-ink renders, unrequested, on the act task, with Wi-Fi live on the same radio — and every later relay envelope sat pending forever behind it. (The swipe's own receipt still came back, because the reply writes before the render path runs — a receipt is not proof the <em>consequence</em> survived.)</p>
 <p>Fixed three ways in <code>0.16.5</code>: the ring mods over its <strong>4 roots only</strong> (a <code>static_assert</code> pins the enum; drill pages refuse cycling with a double blip), the pushed-card cell is an <strong>announced dead-end</strong> (double blip, <code>NOT_ALLOWED</code>) instead of undefined behavior, and a <strong>wedge watchdog</strong> on the node task — which survived the original wedge — reboots after 45 s of one stuck gesture route (10× the worst honest route) into the rollback-armed boot path, posting a <code>device_note</code> first. A gesture bug now costs one reboot, never the relay. Identity and Wi-Fi survive either way — NVS is untouched.</p>
+<p><strong>Verified, not just built</strong>: the exact batch-#4 killing sequence was replayed on 0.16.5 (<code>page wifi</code> → mid-content ← swipe → <code>status</code>): the card stayed <code>wifi</code>, the relay kept answering, uptime ran unbroken through the probes. One release-discipline footnote from the same session: that first 0.16.5 artifact reported <code>fw_commit e1fac273-dirty</code> — the taint was another lane's uncommitted <em>dashboard</em> files sweeping into <code>git describe</code> at build time (firmware source was clean), filed as a P1: rebuild from a clean snapshot and republish, because a channel pointer must equal a source commit.</p>
 <h2 id="voice">Voice<a class="headerlink" href="#voice" title="Permanent link">·</a></h2>
 <h3 id="ask-failed-422-nothing-transcribed"><code>ask failed (422): nothing transcribed</code><a class="headerlink" href="#ask-failed-422-nothing-transcribed" title="Permanent link">·</a></h3>
 <p>Not a bug — <strong>the recording contained no usable speech</strong> (a press with silence, or speech too short for the transcriber). The firmware logs the backend body, replies with it, and paints an honest <em>"didn't catch that — hold the AI button and talk to me"</em> card (<code>card_id=askfail</code>). Hold the AI button and speak a full sentence.</p>

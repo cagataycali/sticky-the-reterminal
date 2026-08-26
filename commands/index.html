@@ -2085,6 +2085,19 @@ the relay: inject the vector, read the receipt, <code>screenshot</code> the cons
 rather than silently downgraded to a tap</strong>, because a probe that quietly becomes
 a different gesture proves nothing. Buttons and long-press still have no
 synthetic twin (<code>press</code> is not a verb yet), so those stay hand-verified.</p>
+<p>Two receipt caveats, both found by verdict batch #5 <em>using</em> this verb:</p>
+<ul>
+<li><strong>R-5 (open regression, 0.16.5):</strong> a 40 px sub-slop swipe returned <code>ESP_OK</code>
+  instead of the verified <code>INVALID_SIZE</code> contract above. Until the builder
+  closes it, treat a sub-slop <code>ESP_OK</code> as untrustworthy — a receipt must not
+  claim success for a gesture that should be refused.</li>
+<li><strong>R-6 / the race (by design today, flagged):</strong> the reply's <code>result</code> and
+  <code>card_id</code> are written at <strong>inject time</strong> and race the async route — a
+  settings→home swipe can answer <code>card_id=settings</code> and show home one <code>status</code>
+  later. The receipt proves <em>injection</em>, the follow-up <code>status</code> or <code>screenshot</code>
+  proves <em>consequence</em>. (Same torn-read family as the M9 draw-time-regions
+  lesson.)</li>
+</ul>
 <blockquote>
 <p><strong>Advertising gap (0.16.4):</strong> <code>swipe</code> is dispatched but <strong>not listed in the
 heartbeat capabilities array</strong> — a dashboard that trusts the advertised caps
