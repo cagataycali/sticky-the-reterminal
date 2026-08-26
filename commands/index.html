@@ -2126,10 +2126,13 @@ prove the consequence. <code>tap</code> got the same route-time contract (12 s w
 because a tap can trigger a blocking route like the ~8 s BLE scan;
 <code>"routed":false</code> means still running, not lost).</p>
 <blockquote>
-<p><strong>Advertising gap (0.16.4, still true at 0.16.6):</strong> <code>swipe</code> is dispatched but <strong>not listed in the
-heartbeat capabilities array</strong> — a dashboard that trusts the advertised caps
-won't offer it, yet sending the verb works. Filed for the builder; until then,
-trust dispatch, not the caps list.</p>
+<p><strong>Advertising gap — CLOSED in 0.16.8.</strong> From 0.16.4 to 0.16.7, <code>swipe</code> was
+dispatched but missing from the heartbeat's <code>capabilities</code> array, so the
+fleet's device list under-reported the surface. Fixed in <code>4dd7fcf</code> and
+verified end-to-end on 0.16.8: <code>use_device list</code> now shows all 16 verbs,
+<code>swipe</code> included. The rule stands — <strong>advertise exactly what dispatch
+implements</strong> — and this section keeps the incident because under-advertising
+is the quiet failure mode of that rule.</p>
 </blockquote>
 <h3 id="scroll-updowntoppx"><code>scroll [up|down|top|&lt;±px&gt;]</code><a class="headerlink" href="#scroll-updowntoppx" title="Permanent link">·</a></h3>
 <p>Moves an overflowing card body (text/list/kv/menu taller than the body box). Bare <code>scroll</code> just reports — the probe form; <code>up</code>/<code>down</code> step ⅔ of a view (the buttons' relay twin), <code>top</code> rewinds, a signed pixel count is probe-precise. Always clamped at the edges; on a card that fits, <code>scrollable</code> comes back <code>false</code> and nothing moves. A right-edge track+thumb scrollbar shows position on the glass; steps draw with partial refresh.</p>
