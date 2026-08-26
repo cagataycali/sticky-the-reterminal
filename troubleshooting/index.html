@@ -1092,6 +1092,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#wake-feels-slow-read-the-boot-receipt-before-guessing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wake feels slow — read the boot receipt before guessing
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1828,6 +1839,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#wake-feels-slow-read-the-boot-receipt-before-guessing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wake feels slow — read the boot receipt before guessing
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2095,9 +2117,11 @@
 <h3 id="a-kv-card-renders-as-a-title-a-footer-and-a-void">A <code>kv</code> card renders as a title, a footer, and a void<a class="headerlink" href="#a-kv-card-renders-as-a-title-a-footer-and-a-void" title="Permanent link">·</a></h3>
 <p>The renderer reads the key <strong><code>rows</code></strong> — not <code>kv</code>. Since <code>0.9.6-m9</code> a <code>kv</code> card without <code>rows</code> says so <em>on the panel</em> instead of drawing a convincing empty card, and rows that don't fit are counted and admitted (<code>+N did not fit</code>) rather than vanishing.</p>
 <h3 id="dashes-and-other-punctuation-render-as">Dashes and other punctuation render as <code>???</code><a class="headerlink" href="#dashes-and-other-punctuation-render-as" title="Permanent link">·</a></h3>
-<p>The font is <strong>ASCII-only</strong> (known limitation, logged — not a bug to report). Keep card text ASCII; <code>—</code> becomes <code>???</code> on the glass.</p>
+<p><strong>You are running pre-0.14.15 firmware — OTA first.</strong> This entry used to say "the font is ASCII-only, keep card text ASCII"; that advice is dead. Since fold v2 the renderer folds punctuation by codepoint table — <code>—</code> <code>–</code> become <code>-</code>, curly quotes straighten, <code>✓</code>/<code>⚠</code> render via the symbol table, é/ñ strip to their base letters, and the twelve Turkish glyphs (çğıöşü ÇĞİÖŞÜ) render <strong>as written</strong> from the hand-drawn extended bank (glass-verified with a panel screenshot — see <a href="../stickyos/#messages-on-the-glass">stickyOS</a> for the receipt chain, including the two times that claim was made too early). What still folds to <code>?</code>: CJK and unknown scripts — there, position is content, so an honest <code>?</code> beats a silent drop. Emoji are stripped as tone (0.16.8), not rendered and not <code>?</code>'d. If you see <code>???</code> on a current build, the reply's <code>fw</code> field is the first thing to check — and a <code>screenshot</code> is ground truth for what the fold actually produced.</p>
 <h3 id="i-dont-trust-what-the-panel-shows">I don't trust what the panel shows<a class="headerlink" href="#i-dont-trust-what-the-panel-shows" title="Permanent link">·</a></h3>
 <p>Neither do we — that's why the <code>screenshot</code> verb exists. It uploads the actual framebuffer as a hosted PNG: <strong>render ground truth</strong>, not a belief about the last card sent. <code>render_ui</code> replies echo <code>card_id=&lt;id&gt;</code> — the id the panel actually <em>committed</em>.</p>
+<h3 id="wake-feels-slow-read-the-boot-receipt-before-guessing">Wake feels slow — read the boot receipt before guessing<a class="headerlink" href="#wake-feels-slow-read-the-boot-receipt-before-guessing" title="Permanent link">·</a></h3>
+<p>Since 0.18.1 every <code>status</code> reply from a boot that measured itself carries the §12 receipt: <code>first_paint_ms</code> + <code>boot_path</code> (<code>glance-wake</code> = deep-sleep wake, fast path, splash skipped · <code>cold-splash</code> = full boot with the version splash and its deliberate 3 s pause). Since 0.18.3, <code>paint_breakdown {board_ms, display_init_ms}</code> splits the budget — the remainder to <code>first_paint_ms</code> is shell render + the e-ink flash itself. How to read it, with the measured baselines: a cold boot near <strong>8.1 s</strong> is normal (splash pause is a feature — it's the diagnostic screen a rollback debug needs); a glance-wake near <strong>2.5 s</strong> is the current full-refresh floor (breakdown ~280+120 ms — init is a rounding error, the flash owns the rest; the partial-first paint that would beat it is directed but not yet shipped); a glance-wake <strong>way past 3 s</strong> or a breakdown where <code>board_ms</code> ballooned is news — file it with the numbers, they exist precisely so a slowness report can be a measurement instead of a feeling. One classification note, receipt-backed: OTA reboots read <code>cold-splash</code> (8158/8163/8164 across three consecutive OTAs, three lanes) — a <code>glance-wake</code> receipt on what you <em>think</em> was an OTA boot most likely means you redeemed a stale pending envelope from someone's sleep test (see <a href="#probing--verdicts">Probing &amp; verdicts</a>).</p>
 <h2 id="touch">Touch<a class="headerlink" href="#touch" title="Permanent link">·</a></h2>
 <h3 id="phantom-taps-right-after-boot">Phantom taps right after boot<a class="headerlink" href="#phantom-taps-right-after-boot" title="Permanent link">·</a></h3>
 <p>GT911 ghost touches. Fixed in <code>0.4.0-m4</code>: a real finger spans several 30 ms polls, ghosts don't (2-poll debounce), plus a boot grace window (5000 ms originally, tuned to 1200 ms once points with <code>size &gt; 0</code> were trusted on first poll).</p>
