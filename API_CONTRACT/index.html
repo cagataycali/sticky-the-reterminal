@@ -1505,6 +1505,67 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#m-a8-apiframes-the-remote-render-rail-dashboard-source-1-2026-08-26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        M-A8 /api/frames — the remote render rail (dashboard, source 1) (2026-08-26)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="M-A8 /api/frames — the remote render rail (dashboard, source 1) (2026-08-26)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-apiframes-webauthn-session-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /api/frames (WebAuthn session required)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-apiframesseq_idmanifest-public-capability-url-the-device-fetches-with-no-cookie-jar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /api/frames/&lt;seq_id&gt;/manifest (public capability URL — the device fetches with no cookie jar)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-apiframesseq_idnraw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /api/frames/&lt;seq_id&gt;/&lt;n&gt;.raw
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-apiframes-public" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /api/frames (public)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1703,6 +1764,67 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#m-a8-apiframes-the-remote-render-rail-dashboard-source-1-2026-08-26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        M-A8 /api/frames — the remote render rail (dashboard, source 1) (2026-08-26)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="M-A8 /api/frames — the remote render rail (dashboard, source 1) (2026-08-26)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#post-apiframes-webauthn-session-required" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        POST /api/frames (WebAuthn session required)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-apiframesseq_idmanifest-public-capability-url-the-device-fetches-with-no-cookie-jar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /api/frames/&lt;seq_id&gt;/manifest (public capability URL — the device fetches with no cookie jar)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-apiframesseq_idnraw" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /api/frames/&lt;seq_id&gt;/&lt;n&gt;.raw
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-apiframes-public" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        GET /api/frames (public)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1809,6 +1931,72 @@ if APSTA itself fails (the panel is never silent), and re-entry is idempotent. O
 hole is on the fix queue: the rescue card's text sits at 468 bytes of a 512-byte buffer —
 close enough to blank the panel in exactly the path that exists because everything else
 failed; filed by the truncation sweep, honest here until fixed.</p>
+<h2 id="m-a8-apiframes-the-remote-render-rail-dashboard-source-1-2026-08-26">M-A8 <code>/api/frames</code> — the remote render rail (dashboard, source 1) <em>(2026-08-26)</em><a class="headerlink" href="#m-a8-apiframes-the-remote-render-rail-dashboard-source-1-2026-08-26" title="Permanent link">·</a></h2>
+<p>Server-rendered animation for <code>tiny_stream_play(manifest_url, interval_s, max_frames)</code>
+(firmware/main/tiny/tiny_stream.h — the contract this shape serves). The dashboard
+rasterizes anim-grammar JSON (docs/research/EINK_ANIMATION.md §4) with Pillow and packs
+frames through the SAME dither.py packers as <code>/api/dither</code> — canvas-space bytes, the
+firmware-confirmed format. The device stays a dumb pixel-pusher.</p>
+<h3 id="post-apiframes-webauthn-session-required">POST /api/frames  <em>(WebAuthn session required)</em><a class="headerlink" href="#post-apiframes-webauthn-session-required" title="Permanent link">·</a></h3>
+<p>Body = one anim spec:
+<div class="language-json highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="p">{</span><span class="nt">&quot;anim_id&quot;</span><span class="p">:</span><span class="s2">&quot;bounce&quot;</span><span class="p">,</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nt">&quot;mode&quot;</span><span class="p">:</span><span class="s2">&quot;1bit_partial&quot;</span><span class="p">,</span><span class="nt">&quot;frame_budget_ms&quot;</span><span class="p">:</span><span class="mi">500</span><span class="p">,</span><span class="nt">&quot;loop&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w"> </span><span class="nt">&quot;background&quot;</span><span class="p">:</span><span class="s2">&quot;white&quot;</span><span class="p">,</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w"> </span><span class="nt">&quot;frames&quot;</span><span class="p">:[{</span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="s2">&quot;rect&quot;</span><span class="p">,</span><span class="nt">&quot;tile&quot;</span><span class="p">:{</span><span class="nt">&quot;x&quot;</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span><span class="nt">&quot;y&quot;</span><span class="p">:</span><span class="mi">300</span><span class="p">,</span><span class="nt">&quot;w&quot;</span><span class="p">:</span><span class="mi">80</span><span class="p">,</span><span class="nt">&quot;h&quot;</span><span class="p">:</span><span class="mi">80</span><span class="p">},</span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="s2">&quot;black&quot;</span><span class="p">},</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">           </span><span class="p">{</span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="s2">&quot;blit&quot;</span><span class="p">,</span><span class="nt">&quot;tile&quot;</span><span class="p">:{</span><span class="nt">&quot;x&quot;</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span><span class="nt">&quot;y&quot;</span><span class="p">:</span><span class="mi">200</span><span class="p">,</span><span class="nt">&quot;w&quot;</span><span class="p">:</span><span class="mi">48</span><span class="p">,</span><span class="nt">&quot;h&quot;</span><span class="p">:</span><span class="mi">64</span><span class="p">},</span><span class="nt">&quot;glyph&quot;</span><span class="p">:</span><span class="s2">&quot;H&quot;</span><span class="p">},</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">           </span><span class="p">{</span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="s2">&quot;delay&quot;</span><span class="p">,</span><span class="nt">&quot;ms&quot;</span><span class="p">:</span><span class="mi">1000</span><span class="p">},</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">           </span><span class="p">{</span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="s2">&quot;card_diff&quot;</span><span class="p">,</span><span class="nt">&quot;patch_id&quot;</span><span class="p">:</span><span class="s2">&quot;cursor_on&quot;</span><span class="p">},</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">           </span><span class="p">{</span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="s2">&quot;flush&quot;</span><span class="p">}],</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w"> </span><span class="nt">&quot;patches&quot;</span><span class="p">:{</span><span class="nt">&quot;cursor_on&quot;</span><span class="p">:{</span><span class="nt">&quot;region&quot;</span><span class="p">:{</span><span class="nt">&quot;x&quot;</span><span class="p">:</span><span class="mi">150</span><span class="p">,</span><span class="nt">&quot;y&quot;</span><span class="p">:</span><span class="mi">210</span><span class="p">,</span><span class="nt">&quot;w&quot;</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span><span class="nt">&quot;h&quot;</span><span class="p">:</span><span class="mi">48</span><span class="p">},</span><span class="nt">&quot;fill&quot;</span><span class="p">:</span><span class="s2">&quot;black&quot;</span><span class="p">}}}</span>
+</span></code></pre></div>
+Semantics (server-side): the 800×480 canvas PERSISTS across ops (e-ink model); every
+paint op (<code>blit</code>/<code>rect</code>/<code>card_diff</code>) emits one frame; <code>delay</code> holds the last frame for
+<code>round(ms / frame_budget_ms)</code> extra frames (time is quantized to the one uniform
+interval, honestly); <code>flush</code> is a no-op here — refresh hygiene is DEVICE law
+(full wipe every ~20 frames unless <code>closed_loop</code>). <code>rect</code> is a server-side grammar
+superset op (solid rectangle, <code>color: black|dark|light|white</code>) so agents can compose
+shapes without shipping bitmaps. <code>card_diff</code> patches take <code>fill:"black"|"white"</code> or
+<code>bitmap_b64</code> (raw 1-bit MSB-first rows, <code>ceil(w/8)</code> B/row × h — wrong byte count is a
+422 with the arithmetic). <code>mode</code> → format: <code>1bit_partial</code>→<code>1bit</code>,
+<code>4gray_partial</code>/<code>full</code>→<code>gray4</code>. <code>loop:n&gt;1</code> materializes n repeats; <code>loop:-1</code> marks the
+manifest <code>closed_loop:true</code> and the device replays.</p>
+<p>CAPS (server-enforced, device re-enforces — server promises are not device law):
+<strong>≤120 frames · ≤60 s (count × interval) · frame_budget_ms ≥ 250</strong> (panel physics).
+Over-cap → <code>422</code> with the refusing arithmetic in <code>detail</code>. No session → <code>401</code>.
+Malformed JSON → <code>400</code>.</p>
+<p>Response = the manifest (below). <code>seq_id = sha256(canonical spec)[:16]</code> — idempotent:
+re-POSTing the same spec returns the stored manifest without re-rendering.</p>
+<h3 id="get-apiframesseq_idmanifest-public-capability-url-the-device-fetches-with-no-cookie-jar">GET /api/frames/<code>&lt;seq_id&gt;</code>/manifest  <em>(public capability URL — the device fetches with no cookie jar)</em><a class="headerlink" href="#get-apiframesseq_idmanifest-public-capability-url-the-device-fetches-with-no-cookie-jar" title="Permanent link">·</a></h3>
+<p><div class="language-json highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="p">{</span><span class="nt">&quot;seq_id&quot;</span><span class="p">:</span><span class="s2">&quot;00053e27d9b2a8c6&quot;</span><span class="p">,</span><span class="nt">&quot;anim_id&quot;</span><span class="p">:</span><span class="s2">&quot;bounce_box_test&quot;</span><span class="p">,</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w"> </span><span class="nt">&quot;frames&quot;</span><span class="p">:[</span><span class="s2">&quot;/api/frames/00053e27d9b2a8c6/0.raw&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">],</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w"> </span><span class="nt">&quot;previews&quot;</span><span class="p">:[</span><span class="s2">&quot;/api/frames/00053e27d9b2a8c6/0.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">],</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w"> </span><span class="nt">&quot;interval_ms&quot;</span><span class="p">:</span><span class="mi">500</span><span class="p">,</span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="s2">&quot;1bit&quot;</span><span class="p">,</span><span class="nt">&quot;frame_bytes&quot;</span><span class="p">:</span><span class="mi">48000</span><span class="p">,</span><span class="nt">&quot;count&quot;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w"> </span><span class="nt">&quot;closed_loop&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="nt">&quot;duration_s&quot;</span><span class="p">:</span><span class="mf">2.5</span><span class="p">,</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w"> </span><span class="nt">&quot;caps&quot;</span><span class="p">:{</span><span class="nt">&quot;max_frames&quot;</span><span class="p">:</span><span class="mi">120</span><span class="p">,</span><span class="nt">&quot;max_duration_s&quot;</span><span class="p">:</span><span class="mi">60</span><span class="p">},</span><span class="nt">&quot;ts&quot;</span><span class="p">:</span><span class="mf">1787721000.0</span><span class="p">}</span>
+</span></code></pre></div>
+<code>format</code> is <code>"1bit"</code> (48000 B/frame) or <code>"gray4"</code> (96000 B/frame). URLs are
+tunnel-relative; the firmware prefixes its configured dashboard host (host allowlist
+applies device-side).</p>
+<h3 id="get-apiframesseq_idnraw">GET /api/frames/<code>&lt;seq_id&gt;</code>/<code>&lt;n&gt;</code>.raw<a class="headerlink" href="#get-apiframesseq_idnraw" title="Permanent link">·</a></h3>
+<p><code>application/octet-stream</code>, <code>Content-Length</code> EXACT — 48000 (1bit) or 96000 (gray4),
+no padding: exact-size read = format check (byte-count honesty idiom). Bytes are
+canvas-space; the driver applies its own 180° + pixel-order compensation
+(dither.py header). <code>&lt;n&gt;.png</code> = grayscale preview of the same bytes.
+<code>Cache-Control: immutable</code> (content-addressed). Strict name whitelist; <code>seq_id</code> must
+be 16 hex chars — anything else is 404 before disk is touched.</p>
+<h3 id="get-apiframes-public">GET /api/frames  <em>(public)</em><a class="headerlink" href="#get-apiframes-public" title="Permanent link">·</a></h3>
+<p>Machine-readable copy of this contract (same lesson as GET /api/dither: without it the
+SPA catch-all serves index.html to a spec-hunting agent).</p>
+<p>Verified 2026-08-26 (local, live server): POST no-session→401 · contract→200 ·
+manifest→200 · 2.raw→200 CL=48000 · gray4 0.raw→200 CL=96000 · over-cap specs→422
+with arithmetic · bad seq/frame→404 · traversal→404/index (see security note).
+Independently re-verified same day by a second agent against the live server: POST
+6-frame 1bit spec→200 manifest 694 B · GET manifest→200 694 B · 0.raw→200 exactly
+48000 B · 0.png preview→200.</p>
+<p><strong>Security note (found during M-A8 verify, fixed same commit):</strong> the SPA catch-all
+<code>DIST / path</code> resolved <code>%2e%2e</code> traversal OUTSIDE dist and served any file on disk —
+proven against <code>.sticky_auth.json</code> (jwt_secret) through the local port. Fixed with
+resolve-and-prefix containment; the jwt_secret was ROTATED (sessions invalidated,
+passkey credentials kept).</p>
 
 
 
