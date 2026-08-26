@@ -1068,6 +1068,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#16-offline-roaming-pocket-first-p-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Offline &amp; roaming — pocket-first (P-2)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#10-scoreboard" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1830,6 +1841,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#16-offline-roaming-pocket-first-p-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        16. Offline &amp; roaming — pocket-first (P-2)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#10-scoreboard" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2407,6 +2429,55 @@ alone. Reply from a DM thread uses the keyboard; cancel returns to the SAME
 thread unsent (shipped, tiny_shell.cpp:426). DM send is the one action on
 this device that reaches another human: the composer's OK label reads
 <strong>"Send"</strong> on DM threads, never "ok". WHY: the label is the last consent gate.</p>
+<h2 id="16-offline-roaming-pocket-first-p-2">16. Offline &amp; roaming — pocket-first (P-2)<a class="headerlink" href="#16-offline-roaming-pocket-first-p-2" title="Permanent link">·</a></h2>
+<p>A pocket device is offline for hours a day BY DESIGN (subway, walk, plane).
+Offline is a normal state with its own UX, never an error styling. §9 owns the
+sentences; this section owns the behavior.</p>
+<p><strong>The four laws:</strong></p>
+<ol>
+<li>
+<p><strong>The glass never goes dumber offline.</strong> Every card already painted stays
+   browsable — page ring, stack, gallery, settings all work from cache. E-ink
+   persistence makes the last card free; navigation must not check wifi first.
+   The ONLY surfaces allowed to refuse offline are the ones that truly need the
+   network (ask, OTA, image fetch), and they refuse in §9's words.</p>
+</li>
+<li>
+<p><strong>Nothing typed or spoken is lost.</strong> An ask composed offline is QUEUED, not
+   refused: card says "queued — will send when back online" with a persistent
+   qN badge in the glance cluster. Queue lives in NVS (survives reboot and the
+   pocket-reboot edge), depth cap 8 (oldest refused with its reason beyond
+   that: a bounded queue is honest, an unbounded one is a heap bug). On
+   reconnect: send in order, each answer arrives as a normal DM card, badge
+   counts down. TODAY: not built — asks fail honestly (§9); this law is the
+   build target, and the §9 sentence stays until the queue ships.</p>
+</li>
+<li>
+<p><strong>Roaming list, not home AP.</strong> <code>networks[]</code> in NVS is already plural —
+   the owner's iPhone hotspot belongs there (pocket = phone nearby, the same
+   pairing the necklace vision assumed). Join order: strongest known network;
+   glance shows which (w:ssid on the wifi page, w-/w+ glyph in the cluster).
+   Reconnect scan cadence follows P-3: 30s for the first 5 min offline, then
+   5 min — a pocket has no urgency, a battery has a budget.</p>
+</li>
+<li>
+<p><strong>Sync-on-reconnect is announced, not silent.</strong> One partial-refresh glance
+   update when connectivity returns (w+ glyph, queue draining) and ONE chirp
+   only if queued answers arrived (§13 sound law: sound = news for the human,
+   reconnect alone is not news). Time resync (SNTP) and relay poll resume ride
+   the same event; no full-panel flash for any of it.</p>
+</li>
+</ol>
+<p><strong>ACCEPTANCE (probe-able the day the queue ships):</strong> wifi off at the AP →
+status over BLE or serial shows online:false; page ring still cycles (card_id
+changes) → compose ask → reply says queued, status shows queue:1 → wifi back →
+within one scan cadence: queue:0, DM card on glass, exactly one chirp logged,
+glance w+ via partial refresh. The pocket-walk version of this is the same
+test with legs.</p>
+<p>STATUS: law ratified (batch #13); firmware today = laws 1 (e-ink persistence +
+nav honesty, verified in daily use), 3-partial (networks[] plural in NVS via
+provision merge; join-strongest + cadence unverified); laws 2 and 4 = build
+targets, queued behind the §12 remainders in the builder lane.</p>
 <h2 id="10-scoreboard">10. Scoreboard<a class="headerlink" href="#10-scoreboard" title="Permanent link">·</a></h2>
 <table>
 <thead>
