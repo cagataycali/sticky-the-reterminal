@@ -1873,8 +1873,7 @@ comparison against the last pushed frame</strong> — after a rotation that base
 differently-oriented picture, so "unchanged" pixels survive as fragments. The fix tracks the
 rotation of the last <em>pushed</em> frame (<code>s_pushed_rot</code>, updated only on refresh success); any
 rotation delta forces the full mono wipe past every fast path. The last sibling finding — <code>draw_wrapped</code>'s 1024-byte fold buffer cutting long bodies
-<strong>silently at render</strong> while scroll exists precisely to browse them — is dead in <strong>0.14.20
-<em>(in tree)</em></strong>: the fold buffer grows on demand (2× input — the worst real fold expansion is
+<strong>silently at render</strong> while scroll exists precisely to browse them — is dead since <strong>0.14.20</strong>: the fold buffer grows on demand (2× input — the worst real fold expansion is
 1.5×, e.g. ©→<code>(c)</code> — under a 16 KB ceiling so a hostile serial write can't OOM the render
 task). Past the ceiling the text ends in <strong>" [cut]" on the glass</strong>, never silently; an alloc
 failure renders <em>"(no memory for text)"</em> — the honest-void idiom again. The
