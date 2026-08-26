@@ -980,6 +980,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#glance-since-0180-grammar-v6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        glance (since 0.18.0, grammar v6)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#sleep-seconds" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1983,6 +1994,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#glance-since-0180-grammar-v6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        glance (since 0.18.0, grammar v6)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#sleep-seconds" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2068,7 +2090,7 @@
 
 
 <h1 id="commands-the-envelope-verb-reference">Commands — the envelope verb reference<a class="headerlink" href="#commands-the-envelope-verb-reference" title="Permanent link">·</a></h1>
-<p>Everything the Sticky answers to, exactly as <code>tiny_node.cpp</code> dispatches it — last audited against the tree at <strong>0.17.2-m14, grammar v5</strong> (the homepage pins what's <em>verified on the glass</em>, which may trail the tree by a version). <strong>Eighteen verbs, eighteen advertised</strong>: since 0.17.0 the heartbeat caps array and the dispatch table are in full parity (<code>lock</code>/<code>unlock</code> joined both at once, and <code>swipe</code> — the old known gap — was added to the caps array in the same commit), so the dashboard's buttons light from a complete, truthful list. Envelopes arrive as <code>{type:"invoke", prompt:"&lt;verb&gt; [args]"}</code> over the relay; every verb replies (unknown input answers the help string — never silence). These are also the <code>capabilities</code> the heartbeat advertises, and the rule is: <strong>advertise only what dispatch actually implements.</strong></p>
+<p>Everything the Sticky answers to, exactly as <code>tiny_node.cpp</code> dispatches it — last audited against the tree at <strong>0.18.0-m14, grammar v6</strong> (the homepage pins what's <em>verified on the glass</em>, which may trail the tree by a version). <strong>Nineteen verbs, nineteen advertised</strong>: since 0.17.0 the heartbeat caps array and the dispatch table are in full parity (<code>lock</code>/<code>unlock</code> joined both at once, <code>swipe</code> — the old known gap — was fixed in the same commit, and <code>glance</code> entered both surfaces together in 0.18.0), so the dashboard's buttons light from a complete, truthful list. Envelopes arrive as <code>{type:"invoke", prompt:"&lt;verb&gt; [args]"}</code> over the relay; every verb replies (unknown input answers the help string — never silence). These are also the <code>capabilities</code> the heartbeat advertises, and the rule is: <strong>advertise only what dispatch actually implements.</strong></p>
 <p>Send from any tiny surface:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>use_device invoke → prompt: &quot;status&quot;
 </span></code></pre></div>
@@ -2271,6 +2293,21 @@ unlocked</strong> — so a pocket reboot (crash, brownout) silently exits lockou
 Documented as the standing argument for §11's IMU auto-entry half, which
 would re-enter on its own.</p>
 </div>
+<h3 id="glance-since-0180-grammar-v6"><code>glance</code> <em>(since 0.18.0, grammar v6)</em><a class="headerlink" href="#glance-since-0180-grammar-v6" title="Permanent link">·</a></h3>
+<p>The pager lesson as a verb: redraw the <strong>cached</strong> current card through the
+<em>partial</em>-refresh path — no full-panel flash, no network, no re-composition —
+so the title-bar cluster (clock · battery · Wi-Fi · <code>dmN</code> unread when &gt; 0 ·
+<code>[L]</code> when locked) is current the moment the glass is looked at. Replies with
+a JSON receipt that <em>names its refresh path</em>, so the no-flash acceptance is
+in the reply, not in trust:</p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span><span class="nt">&quot;refresh&quot;</span><span class="p">:</span><span class="s2">&quot;partial&quot;</span><span class="p">,</span><span class="nt">&quot;battery_pct&quot;</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span><span class="nt">&quot;wifi&quot;</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="nt">&quot;unread&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">&quot;locked&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">}</span>
+</span></code></pre></div>
+<p>Verified on the panel the hour it shipped (0.18.0, fw_commit <code>d64024a3</code>):
+receipt above is a live reply, <code>refresh:"partial"</code> confirmed from an awake
+device. This is the relay half of §12 (glance-on-lift); the IMU wake half —
+lift the device, get this redraw unasked — rides the same
+<code>tiny_display_glance()</code> and is hand-verification territory, like the
+auto-lock entry paths.</p>
 <h3 id="sleep-seconds"><code>sleep [seconds]</code><a class="headerlink" href="#sleep-seconds" title="Permanent link">·</a></h3>
 <p>Deep sleep. Order matters, and it's deliberate: <strong>reply first</strong> (the PATCH must land while the radio is up) → paint the goodbye card (e-ink keeps it at 0 mA — that is the magic) → hand over to the HAL, which holds the power latch and gates the wake pin. The AI button (EXT1, GPIO4) always wakes; optional <code>seconds</code> adds a timer wake so sleep is remotely testable.</p>
 <h3 id="messages-unread-thread-login-since-0147"><code>messages [unread | thread &lt;login&gt;]</code> <em>(since 0.14.7)</em><a class="headerlink" href="#messages-unread-thread-login-since-0147" title="Permanent link">·</a></h3>
