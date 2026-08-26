@@ -2139,6 +2139,7 @@
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a> &quot;summary&quot;:&quot;tapped 400,440 at 90 deg -&gt; ESP_OK&quot;}
 </span></code></pre></div>
 <p>Together, <code>screenshot</code> → <code>tap</code> → <code>screenshot</code> closes the loop the agent needs to test the UI end-to-end with no one in the room.</p>
+<p>Two coordinate-space laws from the field (verdict batch #23): <strong>screenshot→tap must be atomic</strong> — an auto-rotate between the shot and the tap silently remaps every coordinate, so never tap from a screenshot older than the current rotation (the reply's <code>rotation</code> field is the check); and in <strong>portrait 270°</strong> the bottom-bar buttons enumerate canvas-y-ascending, which reads <strong>right-to-left on the glass</strong> — clients transform, the device's order is the truth.</p>
 <h3 id="swipe-x0-y0-x1-y1-since-0162-grammar-v4"><code>swipe &lt;x0&gt; &lt;y0&gt; &lt;x1&gt; &lt;y1&gt;</code> <em>(since 0.16.2, grammar v4)</em><a class="headerlink" href="#swipe-x0-y0-x1-y1-since-0162-grammar-v4" title="Permanent link">·</a></h3>
 <p>A synthetic swipe in <strong>panel coordinates</strong>, driven through the <em>same release
 classifier a finger uses</em> — so what it proves is the real gesture grammar, not a

@@ -1750,14 +1750,22 @@
 </span><span id="__span-0-41"><a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>   seeed_epaper · gt911 · bq27220 · button · debug_logging
 </span></code></pre></div>
 <div class="admonition note">
-<p class="admonition-title">This map is as-built, re-audited 2026-08-26 against the 0.18.0 tree</p>
+<p class="admonition-title">This map is as-built, re-audited 2026-08-26 against the 0.19.3 tree</p>
 <p>The original pre-implementation sketch (git history) planned <code>tiny_boot</code> /
 <code>tiny_commands</code> / <code>tiny_stream</code> as separate modules and a "401 → wipe
 token" recovery. Reality: boot judgment lives in <code>tiny_main</code> + <code>tiny_ota</code>,
-dispatch lives in <code>tiny_node</code>, streaming rides the display path — and the
-401-wipe design was <strong>rejected as a brick risk</strong> and replaced by the
-3-strike auth-halt that keeps the token for forensics. The map you are
-reading describes the binary, not the plan.</p>
+dispatch lives in <code>tiny_node</code>, and the 401-wipe design was <strong>rejected as a
+brick risk</strong>, replaced by the 3-strike auth-halt that keeps the token for
+forensics. One planned module has since become real the long way around:
+<code>tiny_stream.cpp</code> exists as of 0.19.1 — the stream player, running the
+<code>play</code> verb in its own reply-first task, plus a <code>play status</code> verdict
+string written on every exit path (0.19.2) with fetch failures naming
+their layer (0.19.3). Its birth was the five-chapter correction told in
+<a href="../commands/">Commands</a>; as of this audit its premiere is still pending an
+ESP_ERR_HTTP_CONNECT conviction that is <strong>task-scoped</strong> (connects fine
+from the node task, fails from the fresh stream task — the decisive
+experiment moves the fetch to serviced ground). The map you are reading
+describes the binary, not the plan.</p>
 </div>
 <h2 id="envelope-command-surface-what-use_device-reaches">Envelope command surface (what <code>use_device</code> reaches)<a class="headerlink" href="#envelope-command-surface-what-use_device-reaches" title="Permanent link">·</a></h2>
 <p>Envelopes are <code>{type:'invoke', prompt}</code>; prompt is parsed as <code>&lt;verb&gt; [args]</code>, unknown text answers the help string (never silence). Replies ≤ 8000 B; images ride as hosted URLs. The per-verb reference with exact reply shapes lives in <a href="../commands/">Commands</a> (audited against the tree at 0.16.6-m14; the homepage pins the on-glass version):</p>
@@ -1815,9 +1823,9 @@ reading describes the binary, not the plan.</p>
 </tr>
 </tbody>
 </table>
-<p>Planned, not dispatched: <code>image</code> / <code>stream</code> (blit path exists in the renderer), <code>wake</code> (radio is off — button/timer only), <code>reprovision</code> (heartbeat-401 reopens the portal automatically).</p>
+<p>Since shipped from this list: <code>image</code> (card type, 0.19.0 — server-dithered exact-size frames, pixel-perfect receipt) and <code>stream</code> (as the <code>play</code> / <code>play stop</code> / <code>play status</code> verbs, 0.19.1–0.19.3 — live but premiere-pending, see the correction chapters). Still not dispatched: <code>wake</code> (radio is off — button/timer only), <code>reprovision</code> (heartbeat-401 reopens the portal automatically).</p>
 <h2 id="card-spec-render_ui-as-shipped">Card spec (render_ui) — as shipped<a class="headerlink" href="#card-spec-render_ui-as-shipped" title="Permanent link">·</a></h2>
-<p>Types: <code>text</code> · <code>list</code> · <code>kv</code> · <code>composite</code> (≤4 parts) · <code>qr</code> (scannability-honest) · <code>keyboard</code> · <code>menu</code> · <code>buttons</code> (≤4, 56 px bottom bar) + <code>title</code>/<code>footer</code>/<code>card_id</code> on any card. Full spec with examples and the refresh policy: <a href="../cards/">Cards</a>.</p>
+<p>Types: <code>text</code> · <code>list</code> · <code>kv</code> · <code>composite</code> (≤4 parts) · <code>qr</code> (scannability-honest) · <code>keyboard</code> · <code>menu</code> · <code>buttons</code> (≤4, 56 px bottom bar) · <code>image</code> (0.19.0 — url to an exact-size server-dithered frame, <code>gray4</code> optional) + <code>title</code>/<code>footer</code>/<code>card_id</code> on any card. Full spec with examples and the refresh policy: <a href="../cards/">Cards</a>.</p>
 <p>Button tap → routed to the shell if the page owns it, else <code>ui_tap</code> device note → owner's activity feed → the agent answers with the next card. <strong>The screen is a conversation.</strong></p>
 <h2 id="refresh-policy">Refresh policy<a class="headerlink" href="#refresh-policy" title="Permanent link">·</a></h2>
 <ul>
