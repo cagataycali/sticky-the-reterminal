@@ -2300,14 +2300,16 @@ JSON reply, lock glyph pixel-proven in cluster (diff bbox x632-746 y24-30, body
 diff 0). Pending: locked short-press → glance wiring (intent commented at
 tiny_button.cpp:89 but not called), lift-to-look (deferred until a validated
 IMU lift signature exists — no guessy wakes).
-FROM-SLEEP (batch #16, 0.18.2): 3096 → 2496ms on a real timer wake —
-paint-first shave confirmed; 496ms over. RULING: acceptance stays 2000ms —
-the wake paint must use the PARTIAL path over the sleep-persisted card ("no
-full flash if the panel already holds a card" — sleep always leaves one), one
-lazy full flash allowed AFTER the glance lands to clean ghosts. Renegotiation
-refused: the panel can obey the law, it was doing the wrong refresh. Also
-still due: boot_path classifier counts software resets as wakes — guard with
-esp_reset_reason()==ESP_RST_DEEPSLEEP.</li>
+FROM-SLEEP (batch #18 ruling, supersedes #16): acceptance = wake paint
+≤2600ms by receipt (first_paint_ms), ~3s human-perceived. The #16
+partial-first order stood on a wrong premise — the SSD1677 refresh baseline
+does not survive power-down, so a partial against the sleep-persisted card is
+the §0 collage bug class without baseline persistence. Measured floor
+ratified: 8.2s → 2496ms across 0.18.1-0.18.3 (init 399ms, flash ~2.1s).
+Target state stays on the books: hybrid partial + 5s self-heal flash ((c) in
+QUESTIONS 10:2xZ), scheduled after joy/LIVE queue; when it ships the
+acceptance tightens to &lt;1500ms. Classifier claim withdrawn (0 fresh receipts
+vs 3 cold-splash); esp_reset_reason in status downgraded to nice-to-have.</li>
 </ul>
 <h2 id="13-sound-rules-ratified-m-a6">13. Sound rules — ratified (M-A6)<a class="headerlink" href="#13-sound-rules-ratified-m-a6" title="Permanent link">·</a></h2>
 <p>The buzzer (GPIO48, LEDC PWM) is the device's fastest output — sound lands
