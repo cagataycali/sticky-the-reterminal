@@ -1002,6 +1002,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#config-json-since-0220-grammar-v9-the-office-day-verb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        config &lt;json&gt; (since 0.22.0, grammar v9 — the office-day verb)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#play-manifest_url-interval_s-max_frames-play-stop-since-0191-grammar-v8" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2027,6 +2038,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#config-json-since-0220-grammar-v9-the-office-day-verb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        config &lt;json&gt; (since 0.22.0, grammar v9 — the office-day verb)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#play-manifest_url-interval_s-max_frames-play-stop-since-0191-grammar-v8" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2335,6 +2357,8 @@ lift the device, get this redraw unasked — rides the same
 auto-lock entry paths.</p>
 <h3 id="sleep-seconds"><code>sleep [seconds]</code><a class="headerlink" href="#sleep-seconds" title="Permanent link">·</a></h3>
 <p>Deep sleep. Order matters, and it's deliberate: <strong>reply first</strong> (the PATCH must land while the radio is up) → paint the goodbye card (e-ink keeps it at 0 mA — that is the magic) → hand over to the HAL, which holds the power latch and gates the wake pin. The AI button (EXT1, GPIO4) always wakes; optional <code>seconds</code> adds a timer wake so sleep is remotely testable.</p>
+<h3 id="config-json-since-0220-grammar-v9-the-office-day-verb"><code>config &lt;json&gt;</code> <em>(since 0.22.0, grammar v9 — the office-day verb)</em><a class="headerlink" href="#config-json-since-0220-grammar-v9-the-office-day-verb" title="Permanent link">·</a></h3>
+<p>Merges a Wi-Fi <strong>roaming list</strong> into NVS: <code>config {"networks":[{"ssid":"…","password":"…"}, {"ssid":"…","forget":true}]}</code> — upsert by ssid (<code>password</code> accepted as an alias of <code>key</code>), <code>forget</code> removes. <strong><code>networks[]</code> only: identity fields are refused by design</strong> — one malformed relay envelope must never be able to re-enroll or brick the device. The secrecy contract is total: the reply is counts-only (<code>networks_in</code>/stored), <strong>keys are never echoed</strong>, the dispatch entry log prints <code>config &lt;redacted&gt;</code>, and the parse buffer is zeroed after the merge. It pairs with two shipmates: a <strong>30 s re-roam task</strong> (a dropped AP no longer strands the radio until reboot; the task reloads the NVS list each pass, so a merge is live without rebooting, and GOT_IP resets the fast-retry budget) and a <strong>[Config] drill page in settings</strong> rendering a QR to the dashboard's WebAuthn-gated scan-to-configure page (<code>/s/&lt;device_id&gt;</code> — the URL carries no secret; the phone does the typing). Born of a deadline with a shape: <em>the owner takes the Sticky to the office tomorrow.</em></p>
 <h3 id="play-manifest_url-interval_s-max_frames-play-stop-since-0191-grammar-v8"><code>play &lt;manifest_url&gt; [interval_s] [max_frames]</code> / <code>play stop</code> <em>(since 0.19.1, grammar v8)</em><a class="headerlink" href="#play-manifest_url-interval_s-max_frames-play-stop-since-0191-grammar-v8" title="Permanent link">·</a></h3>
 <p>Walks an <a href="../dashboard/">anim-rail manifest</a>'s frames through the same capability-URL fetch path the <code>image</code> card proved pixel-perfect — in its <strong>own task, reply-first</strong>, because a 60 s stream outlives any relay window (the ack returns immediately; the stream runs on). The design carries the project's honesty patterns into motion: the metronome counts from frame <em>start</em> so cadence stays uniform regardless of fetch time; the interval honors the server's <code>frame_budget_ms</code> when that's slower and clamps to the 1500 ms partial floor; a failed fetch <strong>ends the stream</strong> — a freeze is honest, fake progress isn't. Panel hygiene: full flash on frame 0 and every 20th, partials between. Any glass-claiming verb ends a running stream — the same law the typer obeys. <strong>A correction lives here, kept on purpose.</strong> An earlier revision of this section reported the duck premiere as "the first stream ever played on the panel." It was not: the <code>play</code> ack said <em>stream started</em>, and the task then died <strong>before frame 0</strong> — the manifest fetch failed device-side — at the time convicted as a <strong>host allowlist</strong> miss, a conviction chapter 3 below overturns (no allowlist exists in the fetch path; grep receipt). The glass never left home. This lane's probe then read <code>0.19.1 / grammar 8 / card_id home</code> and inferred <em>restored-after-success</em> — but home-up is equally consistent with <em>never-started</em>, and screenshot pixel-diffs later proved the duck never painted. Two lessons, both filed as builder asks: <strong>(1)</strong> manifest/frame URLs must live on an allowlisted host until the dashboard origin is admitted or frames are mirrored through media; <strong>(2)</strong> <em>freeze-beats-fake-progress</em> is right mid-stream but wrong before it — a stream that dies pre-frame-0 must say so in the ack or on the glass, because there silence reads as success and costs a premiere. The verb itself is real and glass-resident (grammar 8 receipt); its first moving picture is still ahead.</p>
 <p><strong>Chapter 2 of the same correction (take 2, same night):</strong> the allowlist was bridged — the duck mirrored through the trusted media host, the mirror <em>fetch</em> device-eye verified — and the picture <strong>still</strong> didn't move. The builder's journal entry is a model of not rounding up: three attempts, evidence tabled — #1 acked "stream started," 14 s later the glass showed a drawn card matching <em>no</em> frame; #2 and #3 had their replies <strong>swallowed</strong> (pending &gt;45 s) while <code>status</code>/<code>screenshot</code> envelopes answered normally around them; uptime ran continuous throughout (no crash, heap steady); the rail itself proven healthy (manifest 200, frames 200, same-origin TLS already proven by the image card). Ranked hypotheses filed: the play task dying before its first blit and wedging the reply path in teardown (a stuck <code>s_playing</code> would explain the swallowed refusals <em>if the refusal reply is what's being swallowed</em>); a manifest-shape drift the device's cJSON walk reads as zero frames; lane repaints as secondary noise. <strong>The deciding instrument is named, not guessed at:</strong> the player logs every refusal by design — one serial monitor window answers this in 30 seconds, or a <code>play status</code> verb returns the last stream verdict over relay and survives remoteness. M-A8 stays open; nothing here touches the image card's standing receipt.</p>
