@@ -1724,7 +1724,7 @@
 </tbody>
 </table>
 <h2 id="pin-map">Pin map<a class="headerlink" href="#pin-map" title="Permanent link">·</a></h2>
-<p>Verified against the official hardware-overview docs + the community <code>reterminal-sticky-2048</code> production source.</p>
+<p>Verified against <strong>three independent sources</strong>: the official hardware-overview docs, the community <code>reterminal-sticky-2048</code> production source, and — as of this audit — the running firmware's own <code>pin_config.h</code>, which agrees pin-for-pin with everything below and contributed the two power-path pins the other sources omit.</p>
 <h3 id="display-spi2-ssd1677-controller-800480-landscape-native">Display — SPI2 (SSD1677 controller, 800×480 landscape native)<a class="headerlink" href="#display-spi2-ssd1677-controller-800480-landscape-native" title="Permanent link">·</a></h3>
 <table>
 <thead>
@@ -1770,7 +1770,7 @@
 </table>
 <div class="admonition warning">
 <p class="admonition-title">microSD shares SPI2</p>
-<p>microSD CS is <strong>GPIO8</strong> on the same bus — never drive it concurrently with a display transfer. Cards must be FAT32/exFAT with MBR; fonts ship as <code>fonts/*.fpack</code>. Hot-insert is supported.</p>
+<p>microSD CS is <strong>GPIO8</strong> on the same bus (card power enable <strong>GPIO10</strong>) — never drive it concurrently with a display transfer. Cards must be FAT32/exFAT with MBR; fonts ship as <code>fonts/*.fpack</code>. Hot-insert is supported.</p>
 </div>
 <h3 id="touch-gt911-on-i2c0">Touch — GT911 on I²C0<a class="headerlink" href="#touch-gt911-on-i2c0" title="Permanent link">·</a></h3>
 <table>
@@ -1860,6 +1860,11 @@
 <td>Power LOCK</td>
 <td>46</td>
 <td>latch pulse low→high→low</td>
+</tr>
+<tr>
+<td>Battery charge enable</td>
+<td>39</td>
+<td><code>EN_BAT_CHGn</code>, <strong>active low</strong> (firmware source only)</td>
 </tr>
 <tr>
 <td>PDM mic CLK</td>

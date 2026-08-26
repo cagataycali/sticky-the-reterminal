@@ -2134,10 +2134,10 @@ keys must be able to do everything destructive or rescuing."</p>
   hierarchy budget, not a palette.</li>
 <li>Streaming chat chrome per STREAMING_UI layer 4 (user bubble right/LightGray,
   assistant left/outlined; caret only while bytes may arrive). Bubble max-width =
-  <strong>70% of body width</strong> (v1.2, R-3): shrink-to-fit when short, wrap at 70% when long —
+  <strong>70% of body width</strong> (v1.2, R-3; VERIFIED-ON-GLASS 0.16.8 batch #8: 508/752=67.6% wrapped, short bubbles shrink-to-fit): shrink-to-fit when short, wrap at 70% when long —
   a 28-char column on an 800 px panel reads as a receipt, not a conversation.</li>
 <li>Emoji/glyphs with no 4-gray rendering are <strong>stripped in chat bubbles, never folded
-  to "?"</strong> (v1.3, R-4): "Hey! ?" is a different sentence than "Hey! 👋" — absence is
+  to "?"</strong> (v1.3, R-4; VERIFIED-ON-GLASS 0.16.8 batch #8 by 16px differential — 👋 gone, 東京 keeps ??): "Hey! ?" is a different sentence than "Hey! 👋" — absence is
   honest, substitution changes tone. Content characters keep the fold-table "?".</li>
 </ul>
 <h2 id="7-settings-information-architecture-law-4-truly-editable">7. Settings — information architecture (law #4: truly editable)<a class="headerlink" href="#7-settings-information-architecture-law-4-truly-editable" title="Permanent link">·</a></h2>
