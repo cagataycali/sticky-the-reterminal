@@ -940,6 +940,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#image-server-rendered-pixels-grammar-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        image — server-rendered pixels (grammar ≥ 7)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#planned-not-yet-dispatched" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1809,6 +1820,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#image-server-rendered-pixels-grammar-7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        image — server-rendered pixels (grammar ≥ 7)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#planned-not-yet-dispatched" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1933,8 +1955,12 @@ A tap on a button the shell doesn't own goes upstream as a <code>ui_tap</code> d
 </span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="p">]}</span>
 </span></code></pre></div>
 A streamed <strong>text</strong> <code>ask</code> renders as this card automatically: the question echoes as the user bubble (the receipt), and the answer <em>types</em> into the assistant bubble at ≤2 Hz partial refresh with a caret at the tail, then settles with one full refresh. Voice asks keep the plain text card — the device never sees its own transcript and must not invent an echo.</p>
+<h2 id="image-server-rendered-pixels-grammar-7"><code>image</code> — server-rendered pixels (grammar ≥ 7)<a class="headerlink" href="#image-server-rendered-pixels-grammar-7" title="Permanent link">·</a></h2>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;image&quot;</span><span class="p">,</span><span class="nt">&quot;card_id&quot;</span><span class="p">:</span><span class="s2">&quot;my-frame&quot;</span><span class="p">,</span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="s2">&quot;https://…/frames/&lt;sha16&gt;/portrait_1bit.bin&quot;</span><span class="p">}</span>
+</span></code></pre></div>
+<p>The device fetches a <strong>pre-dithered exact-size raw frame</strong> from a capability URL (the dashboard's <code>/api/dither</code> image rail or <code>/api/frames</code> anim rail produce them — sha-as-secret, no cookie, fetched outside the display lock) and blits it to the canvas. Shipped in 0.19.0 with the strongest receipt in the repo: the first server-rendered frame was screenshotted back and diffed against the server's own preview — <strong>0 of 384,000 pixels differ</strong>. The dashboard's Pillow raster and the device's 1-bit expand agree bit-for-bit. Consumers gate on <code>grammar_version &gt;= 7</code> from <code>status</code>. One cosmetic wart, filed not hidden: the relay ack currently echoes <code>card_id=image</code> (the publish label) instead of your card's own id — disambiguate via <code>screenshot</code> until the one-line fix lands.</p>
 <h2 id="planned-not-yet-dispatched">Planned (not yet dispatched)<a class="headerlink" href="#planned-not-yet-dispatched" title="Permanent link">·</a></h2>
-<p><code>image</code>/<code>stream</code> (pre-dithered frame blit — the 1-bit blit path <code>blit_1bit</code> already exists in the renderer). Until then the <code>qr</code>, <code>kv</code>, <code>chart</code> and <code>composite</code> types cover the practical cases.</p>
+<p><code>stream</code> — walking an anim-rail manifest's frames through the same fetch path with partial refresh (<code>tiny_stream_play</code> is a header-only contract today; un-gated by M-A4's proof, next builder package). Until it lands, <code>image</code> covers single frames and the other types cover the practical cases.</p>
 <h2 id="refresh-policy-e-ink-physics-honestly">Refresh policy (e-ink physics, honestly)<a class="headerlink" href="#refresh-policy-e-ink-physics-honestly" title="Permanent link">·</a></h2>
 <table>
 <thead>
