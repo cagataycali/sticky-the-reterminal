@@ -2298,8 +2298,15 @@ test of the auto-entry constants.</p>
 STATUS (batch #12, 0.17.2): awake path VERIFIED on glass — glance verb, honest
 JSON reply, lock glyph pixel-proven in cluster (diff bbox x632-746 y24-30, body
 diff 0). Pending: locked short-press → glance wiring (intent commented at
-tiny_button.cpp:89 but not called), from-sleep &lt;2s measurement, lift-to-look
-(deferred until a validated IMU lift signature exists — no guessy wakes).</li>
+tiny_button.cpp:89 but not called), lift-to-look (deferred until a validated
+IMU lift signature exists — no guessy wakes).
+FROM-SLEEP (batch #15, 0.18.1): MEASURED-FAIL — timer-wake first_paint_ms:3096
+vs &lt;2000 acceptance; receipt mechanism itself verified (device self-reports in
+status). Fix path: paint glance strip PARTIAL over the sleep-persisted card
+first, full home lazily — or produce the stage budget proving display init is
+physics, and the acceptance gets re-ratified to the honest number. Also:
+boot_path classifier counts software resets as wakes (wakeup-cause register
+survives esp_restart) — guard with esp_reset_reason()==ESP_RST_DEEPSLEEP.</li>
 </ul>
 <h2 id="13-sound-rules-ratified-m-a6">13. Sound rules — ratified (M-A6)<a class="headerlink" href="#13-sound-rules-ratified-m-a6" title="Permanent link">·</a></h2>
 <p>The buzzer (GPIO48, LEDC PWM) is the device's fastest output — sound lands
