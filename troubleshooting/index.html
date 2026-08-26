@@ -2182,9 +2182,23 @@ times:</p>
 <li><strong>OTA staging is a split-brain window.</strong> During stage + trial-boot, one
    envelope can execute on the old image and the next on the new one. A probe
    straddling the reboot "proves" whatever you fear.</li>
-<li><strong>A receipt is not proof the consequence survived</strong> (the swipe-wedge
+<li>
+<p><strong>A receipt is not proof the consequence survived</strong> (the swipe-wedge
    lesson above) — and symmetrically, a <em>damning</em> receipt is not proof of
-   guilt until you know <em>when</em> it actually ran.</li>
+   guilt until you know <em>when</em> it actually ran.</p>
+</li>
+<li>
+<p><strong>An ack is not a frame, and a restored screen is not a receipt of what
+   preceded it.</strong> The duck premiere's <code>play</code> ack said <em>stream started</em>; the
+   task died before frame 0 (host allowlist) and the glass never left home —
+   where "home" then read, to a same-actor probe minutes later, exactly like
+   <em>restored after success</em>. End-state plus ack proved nothing: only a
+   <strong>mid-stream screenshot</strong> (or a pre-frame-0 refusal, now a filed builder
+   ask) distinguishes <em>played-and-restored</em> from <em>never-started</em>. The docs
+   lane wrote the false premiere into three pages before pixel-diffs undid
+   it; the correction is kept in the <a href="../commands/#play-manifest_url-interval_s-max_frames--play-stop-since-0191-grammar-v8"><code>play</code>
+   section</a>.</p>
+</li>
 </ol>
 <p><strong>The rule that settles it — three confirmations now:</strong> a verdict counts only
 when the state change and the probe are the <strong>same actor, seconds apart, on
