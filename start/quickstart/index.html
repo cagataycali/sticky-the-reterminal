@@ -1643,7 +1643,7 @@
 </span></code></pre></div>
 <p>The partition plan keeps a <code>factory</code> slot with the last-known-good build; OTA updates go to <code>ota_0</code>/<code>ota_1</code> with trial-boot + rollback, and USB flashing is always available regardless of what OTA did.</p>
 <h2 id="2-provision-wi-fi-the-tiny-xxxx-portal">2. Provision Wi-Fi (the <code>tiny-XXXX</code> portal)<a class="headerlink" href="#2-provision-wi-fi-the-tiny-xxxx-portal" title="Permanent link">·</a></h2>
-<p>On first boot (or after <code>reprovision</code>, or a revoked token) the e-ink shows a setup card with a QR code:</p>
+<p>On first boot — or after a revoked token trips the 3-strike auth-halt, which reopens the portal <em>by itself</em> (there is no <code>reprovision</code> verb to call; see <a href="../../commands/">not-verbs</a>) — the e-ink shows a setup card with a QR code:</p>
 <ol>
 <li>Join the access point <strong><code>tiny-XXXX</code></strong> (password <code>tinysetup</code>) — or scan the QR, which encodes exactly that</li>
 <li>The portal lives at <code>192.168.4.1</code>:</li>
@@ -1666,7 +1666,7 @@
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>use_device invoke → prompt: &quot;status&quot;
 </span></code></pre></div>
 <p>Or press the <strong>AI button</strong> on the device itself and ask tiny a question by voice — long-press is the home key.</p>
-<p>The full command surface (render_ui · say · screenshot · page · rotate · tap · status · sensors · miccheck · ask · voice · sleep · ota) is documented verb-by-verb in <a href="../../commands/">Commands</a>, the card spec in <a href="../../cards/">Cards</a>, and the exact wire shapes in the <a href="../../API_CONTRACT/">API contract</a>. For browser-based control, see the <a href="../../dashboard/">Dashboard</a>.</p>
+<p>The full command surface (render_ui · say · screenshot · page · rotate · tap · <strong>swipe</strong> · scroll · status · sensors · miccheck · ask · voice · messages · sleep · ota) is documented verb-by-verb in <a href="../../commands/">Commands</a>, the card spec in <a href="../../cards/">Cards</a>, and the exact wire shapes in the <a href="../../API_CONTRACT/">API contract</a>. For browser-based control, see the <a href="../../dashboard/">Dashboard</a>.</p>
 <p>Something misbehaving — silent cards, ghost taps, a 422 on voice? The <a href="../../troubleshooting/">Troubleshooting field guide</a> covers every defect we've actually seen on this hardware, with the shipped fix.</p>
 
 
