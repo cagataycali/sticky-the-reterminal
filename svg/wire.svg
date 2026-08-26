@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">
+  <style>
+    .bg{fill:#0d1117}.panel{fill:#161b22;stroke:#30363d;stroke-width:1.5}
+    .t{fill:#c9d1d9;font-size:12px}.h{fill:#e6edf3;font-size:14px;font-weight:bold}
+    .dim{fill:#8b949e;font-size:10.5px}.cyan{fill:#58a6ff}.green{fill:#3fb950}
+    .yellow{fill:#d29922}.mag{fill:#bc8cff}.red{fill:#f85149}
+    .lane{stroke:#21262d;stroke-width:1;stroke-dasharray:3 5}
+  </style>
+  <rect class="bg" width="960" height="560" rx="12"/>
+  <text x="24" y="32" class="h" font-size="16">The wire — how the Sticky and ~/tinyai-id speak (every arrow is a real route)</text>
+
+  <!-- lane headers -->
+  <rect x="24"  y="52" width="200" height="46" class="panel" rx="8"/>
+  <text x="124" y="71" text-anchor="middle" class="h">owner surfaces</text>
+  <text x="124" y="88" text-anchor="middle" class="dim">iOS · web · any tiny agent</text>
+
+  <rect x="268" y="52" width="200" height="46" class="panel" rx="8"/>
+  <text x="368" y="71" text-anchor="middle" class="h">tiny.technology</text>
+  <text x="368" y="88" text-anchor="middle" class="dim">Next.js edge · app/api/devices/*</text>
+
+  <rect x="512" y="52" width="200" height="46" class="panel" rx="8"/>
+  <text x="612" y="71" text-anchor="middle" class="h">worker (registry)</text>
+  <text x="612" y="88" text-anchor="middle" class="dim">plugin.tiny.technology · D1 · R2</text>
+
+  <rect x="756" y="52" width="180" height="46" class="panel" rx="8"/>
+  <text x="846" y="71" text-anchor="middle" class="h">Sticky</text>
+  <text x="846" y="88" text-anchor="middle" class="dim">ESP32-S3 · device token only</text>
+
+  <!-- lifelines -->
+  <line x1="124" y1="98" x2="124" y2="530" class="lane"/>
+  <line x1="368" y1="98" x2="368" y2="530" class="lane"/>
+  <line x1="612" y1="98" x2="612" y2="530" class="lane"/>
+  <line x1="846" y1="98" x2="846" y2="530" class="lane"/>
+
+  <!-- 1 heartbeat -->
+  <line x1="846" y1="130" x2="368" y2="130" stroke="#3fb950" stroke-width="1.5" marker-end="none"/>
+  <circle r="4" fill="#3fb950"><animateMotion dur="3s" repeatCount="indefinite" path="M846 130 L372 130"/></circle>
+  <text x="607" y="122" text-anchor="middle" class="green" font-size="11">POST /api/devices/heartbeat · 30 s · {deviceId, token, capabilities[]}</text>
+  <line x1="368" y1="146" x2="612" y2="146" stroke="#238636" stroke-width="1" stroke-dasharray="2 3"/>
+  <text x="490" y="160" text-anchor="middle" class="dim">→ worker /device/heartbeat · token vs stored hash · presence + capabilities</text>
+
+  <!-- 2 command down -->
+  <line x1="124" y1="196" x2="368" y2="196" stroke="#58a6ff" stroke-width="1.5"/>
+  <circle r="4" fill="#58a6ff"><animateMotion dur="4s" repeatCount="indefinite" path="M124 196 L368 196 L368 212"/></circle>
+  <text x="246" y="188" text-anchor="middle" class="cyan" font-size="11">use_device / POST relay (session)</text>
+  <line x1="368" y1="212" x2="612" y2="212" stroke="#58a6ff" stroke-width="1.5"/>
+  <circle r="4" fill="#58a6ff"><animateMotion dur="4s" begin="1s" repeatCount="indefinite" path="M368 212 L612 212"/></circle>
+  <text x="490" y="204" text-anchor="middle" class="dim">queue envelope {type:'invoke', prompt} → {id: env_…}</text>
+
+  <!-- 3 poll -->
+  <line x1="846" y1="252" x2="612" y2="252" stroke="#bc8cff" stroke-width="1.5"/>
+  <circle r="4" fill="#bc8cff">
+    <animateMotion dur="4s" begin="1.6s" repeatCount="indefinite" path="M846 252 L616 252"/>
+  </circle>
+  <text x="729" y="244" text-anchor="middle" class="mag" font-size="11">PUT /api/devices/relay · 5 s poll</text>
+  <line x1="612" y1="268" x2="846" y2="268" stroke="#bc8cff" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <circle r="4" fill="#bc8cff">
+    <animateMotion dur="4s" begin="2.2s" repeatCount="indefinite" path="M612 268 L842 268"/>
+  </circle>
+  <text x="729" y="282" text-anchor="middle" class="dim">messages: [{id, payload}] → command table dispatch</text>
+
+  <!-- device work strip -->
+  <rect x="770" y="296" width="152" height="56" class="panel" rx="8"/>
+  <text x="846" y="315" text-anchor="middle" class="t">screenshot · render_ui</text>
+  <text x="846" y="331" text-anchor="middle" class="t">say · sensors · sleep…</text>
+  <text x="846" y="346" text-anchor="middle" class="dim">tiny_commands.c</text>
+  <rect x="770" y="296" width="152" height="56" fill="none" stroke="#d29922" stroke-width="1.5" rx="8" opacity="0.8">
+    <animate attributeName="opacity" values="0;0.9;0" keyTimes="0;0.5;1" dur="4s" begin="2.6s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- 4 media upload -->
+  <line x1="846" y1="382" x2="368" y2="382" stroke="#d29922" stroke-width="1.5"/>
+  <circle r="4" fill="#d29922"><animateMotion dur="4s" begin="3s" repeatCount="indefinite" path="M846 382 L372 382"/></circle>
+  <text x="607" y="374" text-anchor="middle" class="yellow" font-size="11">POST /api/media · base64 BMP/WAV → R2 → hosted url</text>
+
+  <!-- 5 reply -->
+  <line x1="846" y1="428" x2="368" y2="428" stroke="#3fb950" stroke-width="1.5"/>
+  <circle r="4" fill="#3fb950"><animateMotion dur="4s" begin="3.4s" repeatCount="indefinite" path="M846 428 L372 428"/></circle>
+  <text x="607" y="420" text-anchor="middle" class="green" font-size="11">PATCH /api/devices/relay · inReplyTo · payload = JSON-as-string ≤ 8 KB</text>
+
+  <!-- 6 reply reaches owner -->
+  <line x1="368" y1="464" x2="124" y2="464" stroke="#3fb950" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <circle r="4" fill="#3fb950"><animateMotion dur="4s" begin="3.8s" repeatCount="indefinite" path="M368 464 L128 464"/></circle>
+  <text x="246" y="456" text-anchor="middle" class="dim">GET relay?inReplyTo=env_… → {reply} · images as URLs</text>
+
+  <!-- footnotes -->
+  <text x="24" y="506" class="dim">auth: owner verbs carry a SESSION · device verbs carry deviceId+token IN THE BODY (no session — flash holds only a revocable device token)</text>
+  <text x="24" y="524" class="red" font-size="11">401 anywhere = token revoked → firmware wipes token and reopens its provisioning portal · 424 = registry unreachable (retry later)</text>
+</svg>

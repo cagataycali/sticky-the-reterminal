@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 380" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">
+  <style>
+    .bg{fill:#0d1117}.panel{fill:#161b22;stroke:#30363d;stroke-width:1.5;rx:10}
+    .t{fill:#c9d1d9;font-size:13px}.h{fill:#e6edf3;font-size:14px;font-weight:bold}
+    .dim{fill:#8b949e;font-size:11px}.cyan{fill:#58a6ff}.green{fill:#3fb950}
+    .yellow{fill:#d29922}.mag{fill:#bc8cff}.red{fill:#f85149}
+    .wire{stroke:#30363d;stroke-width:2;fill:none}
+    .wireg{stroke:#3fb950;stroke-width:2;fill:none}
+  </style>
+  <rect class="bg" width="960" height="380" rx="12"/>
+  <text x="24" y="34" class="h" font-size="16">Sticky lifecycle — from cold silicon to a device tiny can talk to</text>
+
+  <!-- STATE 1: boot -->
+  <rect x="24" y="60" width="200" height="88" class="panel" rx="10"/>
+  <text x="40" y="84" class="h">1 · tiny_boot</text>
+  <text x="40" y="104" class="t">power latch 45/46</text>
+  <text x="40" y="121" class="t">mic-mux deep-sleep fix</text>
+  <text x="40" y="138" class="dim">OTA trial / rollback judge</text>
+
+  <!-- STATE 2: config -->
+  <rect x="270" y="60" width="200" height="88" class="panel" rx="10"/>
+  <text x="286" y="84" class="h">2 · tiny_config</text>
+  <text x="286" y="104" class="t">NVS "tiny" namespace</text>
+  <text x="286" y="121" class="t">device_id · token · api</text>
+  <text x="286" y="138" class="dim">networks[] roaming list</text>
+
+  <!-- decision diamond -->
+  <g>
+    <polygon points="560,104 610,74 660,104 610,134" fill="#161b22" stroke="#d29922" stroke-width="1.5"/>
+    <text x="610" y="100" text-anchor="middle" class="yellow" font-size="11">token</text>
+    <text x="610" y="114" text-anchor="middle" class="yellow" font-size="11">saved?</text>
+  </g>
+
+  <!-- STATE 3a: provision -->
+  <rect x="710" y="40" width="226" height="120" class="panel" rx="10"/>
+  <text x="726" y="64" class="h">3a · tiny_provision</text>
+  <text x="726" y="84" class="t">softAP <tspan class="mag">tiny-XXXX</tspan> / tinysetup</text>
+  <text x="726" y="101" class="t">QR on e-ink · 192.168.4.1</text>
+  <text x="726" y="118" class="dim">GET /info · POST /setup</text>
+  <text x="726" y="135" class="dim">iOS app onboards unchanged</text>
+  <text x="726" y="152" class="green" font-size="11">→ save to NVS → reboot ⟲</text>
+
+  <!-- STATE 3b: node loop -->
+  <rect x="270" y="210" width="666" height="140" class="panel" rx="10"/>
+  <text x="286" y="236" class="h">3b · tiny_node — the steady state</text>
+  <text x="286" y="260" class="t"><tspan class="green">♥</tspan> POST /api/devices/heartbeat <tspan class="dim">every 30 s (capabilities advertised)</tspan></text>
+  <text x="286" y="282" class="t"><tspan class="cyan">⇄</tspan> PUT /api/devices/relay <tspan class="dim">every 5 s → envelopes → command table → PATCH reply</tspan></text>
+  <text x="286" y="304" class="t"><tspan class="red">401</tspan> on heartbeat <tspan class="dim">= token revoked →</tspan> wipe token, reopen portal <tspan class="dim">(self-healing)</tspan></text>
+  <text x="286" y="326" class="t"><tspan class="yellow">☾</tspan> idle → deep sleep <tspan class="dim">· EXT1 wake on AI button (GPIO4)</tspan></text>
+
+  <!-- wires -->
+  <path class="wire" d="M224 104 L270 104"/>
+  <path class="wire" d="M470 104 L560 104"/>
+  <path class="wire" d="M660 104 L710 104"/>
+  <text x="672" y="96" class="red" font-size="10">no</text>
+  <path class="wireg" d="M610 134 L610 175 L603 210"/>
+  <text x="618" y="168" class="green" font-size="10">yes</text>
+  <path class="wire" stroke-dasharray="4 4" d="M823 160 L823 185 L470 185 L400 148"/>
+  <text x="640" y="180" class="dim" font-size="10">reboot with credentials</text>
+
+  <!-- animated state token traveling the happy path -->
+  <circle r="5" fill="#3fb950">
+    <animateMotion dur="6s" repeatCount="indefinite"
+      path="M124 148 L124 104 L270 104 L470 104 L610 104 L610 175 L603 210 L603 230"/>
+    <animate attributeName="opacity" values="0;1;1;1;0" keyTimes="0;0.1;0.5;0.9;1" dur="6s" repeatCount="indefinite"/>
+  </circle>
+  <!-- animated first-boot token to the portal -->
+  <circle r="4" fill="#d29922">
+    <animateMotion dur="6s" begin="3s" repeatCount="indefinite"
+      path="M660 104 L710 104 L726 104"/>
+    <animate attributeName="opacity" values="0;1;0" keyTimes="0;0.5;1" dur="6s" begin="3s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- heartbeat pulse in the loop -->
+  <circle cx="292" cy="256" r="4" fill="#3fb950" opacity="0">
+    <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="3;6;3" dur="2s" repeatCount="indefinite"/>
+  </circle>
+</svg>

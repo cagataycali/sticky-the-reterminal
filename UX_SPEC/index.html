@@ -1,0 +1,2525 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device.">
+      
+      
+        <meta name="author" content="Cagatay Cali">
+      
+      
+        <link rel="canonical" href="https://cagataycali.github.io/sticky-the-reterminal/UX_SPEC/">
+      
+      
+        <link rel="prev" href="../stickyos/">
+      
+      
+        <link rel="next" href="../hardware/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>UX Spec - sticky</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ux-spec-the-stickyos-interaction-contract" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="sticky" class="md-header__button md-logo" aria-label="sticky" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            sticky
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              UX Spec
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="cyan"  aria-label="light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="pink"  aria-label="dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/cagataycali/sticky-the-reterminal" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cagataycali/sticky-the-reterminal
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../start/quickstart/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Start
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../commands/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Features
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../hardware/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Hardware
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../troubleshooting/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Troubleshooting
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ARCHITECTURE/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Architecture
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../RESEARCH/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Deep dives
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../API_CONTRACT/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  API
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../dashboard/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Dashboard
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ROADMAP/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Roadmap
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="sticky" class="md-nav__button md-logo" aria-label="sticky" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    sticky
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/cagataycali/sticky-the-reterminal" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cagataycali/sticky-the-reterminal
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Start
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../start/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RECOVERY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recovery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Features
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Features
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../commands/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cards/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cookbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compose for the glass
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../streaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Streaming UI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stickyos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    stickyOS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UX Spec
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UX Spec
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0-physics-and-vocabulary-the-spec-obeys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. Physics and vocabulary the spec obeys
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-zones-and-thresholds-layout-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Zones and thresholds (layout space)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-the-gesture-grammar-gesture-context-action" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. The gesture grammar (gesture × context → action)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-physical-button-parity-accessibility-gloves-pocket" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Physical button parity (accessibility + gloves + pocket)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-navigation-model-ring-and-stack-reconciled" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Navigation model — ring and stack, reconciled
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-feedback-rules-the-500-ms-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Feedback rules (the 500 ms contract)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-cards-typography-hierarchy-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Cards — typography &amp; hierarchy rules
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-settings-information-architecture-law-4-truly-editable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Settings — information architecture (law #4: truly editable)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-gallery-interaction-model-with-builder-m-a4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Gallery — interaction model (with builder M-A4)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-error-offline-states-what-the-device-says" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Error &amp; offline states (what the device SAYS)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-pocket-lockout-the-state-machine-p-1-safety-critical" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Pocket lockout — the state machine (P-1, safety-critical)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-glance-card-wake-on-lift-p-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Glance card — wake-on-lift (P-4)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-sound-rules-ratified-m-a6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Sound rules — ratified (M-A6)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-animation-usage-rules-m-a6b-when-may-pixels-move" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Animation usage rules (M-A6b — when may pixels move?)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-scoreboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Scoreboard
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../case/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hardware
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Hardware
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hardware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ARCHITECTURE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep dives
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Deep dives
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RESEARCH/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research (pre-firmware)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../THINKING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Thinking (what stickyOS is)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Audits
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Audits
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../audit/TOUCH_AUDIT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Touch
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../audit/DISPLAY_AUDIT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Display
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../audit/NETWORK_AUDIT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../audit/SYSTEM_AUDIT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../API_CONTRACT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ROADMAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#0-physics-and-vocabulary-the-spec-obeys" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. Physics and vocabulary the spec obeys
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-zones-and-thresholds-layout-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Zones and thresholds (layout space)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-the-gesture-grammar-gesture-context-action" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. The gesture grammar (gesture × context → action)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-physical-button-parity-accessibility-gloves-pocket" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Physical button parity (accessibility + gloves + pocket)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-navigation-model-ring-and-stack-reconciled" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Navigation model — ring and stack, reconciled
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-feedback-rules-the-500-ms-contract" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Feedback rules (the 500 ms contract)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-cards-typography-hierarchy-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Cards — typography &amp; hierarchy rules
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-settings-information-architecture-law-4-truly-editable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Settings — information architecture (law #4: truly editable)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-gallery-interaction-model-with-builder-m-a4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Gallery — interaction model (with builder M-A4)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-error-offline-states-what-the-device-says" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Error &amp; offline states (what the device SAYS)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-pocket-lockout-the-state-machine-p-1-safety-critical" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Pocket lockout — the state machine (P-1, safety-critical)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-glance-card-wake-on-lift-p-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Glance card — wake-on-lift (P-4)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-sound-rules-ratified-m-a6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Sound rules — ratified (M-A6)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-animation-usage-rules-m-a6b-when-may-pixels-move" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Animation usage rules (M-A6b — when may pixels move?)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-scoreboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Scoreboard
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/cagataycali/sticky-the-reterminal/edit/main/docs/UX_SPEC.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="ux-spec-the-stickyos-interaction-contract">UX Spec — the stickyOS interaction contract<a class="headerlink" href="#ux-spec-the-stickyos-interaction-contract" title="Permanent link">·</a></h1>
+<p><strong>Owner: the product-designer loop. Version 1.5 (2026-08-26) — §13 sound rules ratified (M-A6), §14 animation usage rules, §7 settings IA v2 (snooze-first, M-A5-DEEP).</strong>
+This file is the single source of truth for how the Sticky <em>feels</em>. The builder
+implements it; verdicts against it land in <a href="../ANSWERS/">ANSWERS.md</a>. Every rule
+carries a WHY, and every rule carries a status:
+<strong>SPECIFIED</strong> → <strong>BUILT</strong> → <strong>VERIFIED-ON-GLASS</strong> (only an owner-loop screenshot
+or probe receipt flips the last one).</p>
+<p>Seed law from cagatay (2026-08-26, verbatim intent — everything else expands it):</p>
+<ol>
+<li>Swipe <strong>bottom → up = HOME</strong>, from anywhere.</li>
+<li>Swipe <strong>left → right = previous / back</strong>.</li>
+<li>Gestures are <strong>context-dependent</strong> — in the gallery, horizontal swipes mean
+   previous/next <em>image</em>, not page nav.</li>
+<li>Settings must be <strong>truly editable on-device</strong>.</li>
+</ol>
+<h2 id="0-physics-and-vocabulary-the-spec-obeys">0. Physics and vocabulary the spec obeys<a class="headerlink" href="#0-physics-and-vocabulary-the-spec-obeys" title="Permanent link">·</a></h2>
+<ul>
+<li>Full refresh ~1–2 s; partial ~300–500 ms; ghosting after ~20 partials;
+  ~2 Hz animation ceiling. A gesture may therefore <em>trigger</em> at most one
+  panel-visible response, and the ack must be <strong>felt before it is seen</strong>
+  (buzzer &lt;60 ms, visual &lt;500 ms) — the "touch feels dead" incident
+  (<a href="../audit/TOUCH_AUDIT/">TOUCH_AUDIT</a>) is the founding lesson.</li>
+<li><strong>Coordinate spaces:</strong> touch and <code>screenshot</code> live in <em>panel space</em> (800×480
+  landscape, invariant under rotation). Gestures are <em>interpreted in layout
+  space</em> — "up" means visually up in the current rotation, exactly as the M12
+  scroll gesture already does (<code>tiny_display_scroll_gesture</code> maps the vector).
+  WHY: a human swipes relative to what they see, not to the panel's wiring.</li>
+<li><strong>Feedback vocabulary</strong> (three words, never more):</li>
+<li><strong>single blip</strong> + visual ack = accepted, something happened;</li>
+<li><strong>double short blip</strong> = recognized but refused — a dead end, and the double
+    blip IS the explanation a 2 Hz panel can afford;</li>
+<li><strong>silence</strong> = below thresholds, not a gesture. Nothing else is silent.
+  WHY: on e-ink the sound arrives 10× sooner than any pixel can.</li>
+</ul>
+<h2 id="1-zones-and-thresholds-layout-space">1. Zones and thresholds (layout space)<a class="headerlink" href="#1-zones-and-thresholds-layout-space" title="Permanent link">·</a></h2>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>definition</th>
+<th>why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tap slop</td>
+<td>movement &lt; <strong>24 px</strong> (shipped)</td>
+<td>finger roll ≠ swipe</td>
+</tr>
+<tr>
+<td>swipe travel</td>
+<td>≥ <strong>120 px</strong> dominant axis</td>
+<td>scroll steps and slips stay distinct</td>
+</tr>
+<tr>
+<td>axis dominance</td>
+<td>dominant ≥ <strong>2×</strong> the other axis</td>
+<td>diagonal = ambiguous = silence</td>
+</tr>
+<tr>
+<td><strong>bottom band</strong></td>
+<td>start-y in the last <strong>56 px</strong> of layout height (= the touch-bar strip)</td>
+<td>edge-origin marks NAV intent; a button tap moves &lt;24 px so the two can never collide</td>
+</tr>
+<tr>
+<td><strong>left band</strong></td>
+<td>start-x in the first <strong>48 px</strong> of layout width</td>
+<td>iOS back-swipe muscle memory</td>
+</tr>
+<tr>
+<td>long-press</td>
+<td>≥ <strong>750 ms</strong>, &lt; slop movement, fire AT threshold with blip</td>
+<td>reserved (context menu, phase 2)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>The conflict rule, decided:</strong> <em>edge-originated swipes are NAV; mid-content
+swipes are CONTENT.</em> Bottom-band-up = home even on a scrollable card — a scroll
+swipe naturally starts mid-body, and content under the touch bar is reachable
+by scrolling <em>down</em> from above. WHY: one spatial rule resolves every
+home-vs-scroll ambiguity without modes, and it is defensible in one sentence.</p>
+<h2 id="2-the-gesture-grammar-gesture-context-action">2. The gesture grammar (gesture × context → action)<a class="headerlink" href="#2-the-gesture-grammar-gesture-context-action" title="Permanent link">·</a></h2>
+<p>Contexts: <strong>ring page</strong> (home/status/sensors/settings root), <strong>pushed card</strong>
+(wifi list, message thread, ble, any relay-rendered card), <strong>gallery</strong>,
+<strong>keyboard</strong>, <strong>streaming answer</strong>, <strong>locked</strong> (pocket, P-1).</p>
+<table>
+<thead>
+<tr>
+<th>gesture</th>
+<th>ring page</th>
+<th>pushed card</th>
+<th>gallery</th>
+<th>keyboard</th>
+<th>streaming</th>
+<th>locked</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bottom-band swipe ↑</td>
+<td><strong>HOME</strong> (law #1)</td>
+<td><strong>HOME</strong></td>
+<td><strong>HOME</strong></td>
+<td><strong>HOME</strong> (= cancel, don't save)</td>
+<td>blip-defer¹</td>
+<td>ignored²</td>
+</tr>
+<tr>
+<td>left-band swipe →</td>
+<td>back = ring <strong>prev</strong></td>
+<td><strong>BACK</strong> (pop) (law #2)</td>
+<td><strong>BACK</strong> (exit gallery)</td>
+<td>dead-end ‼ (keys own the glass)</td>
+<td>blip-defer¹</td>
+<td>ignored²</td>
+</tr>
+<tr>
+<td>mid-content swipe ← / →</td>
+<td>ring <strong>next / prev</strong></td>
+<td>→ = back, ← = dead-end ‼</td>
+<td><strong>next / prev IMAGE</strong> (law #3)</td>
+<td>silence³</td>
+<td>blip-defer¹</td>
+<td>ignored²</td>
+</tr>
+<tr>
+<td>mid-content swipe ↑ / ↓</td>
+<td>scroll if overflowing (M12, shipped — do not break), else dead-end ‼</td>
+<td>same</td>
+<td>caption show/hide reserved; v1 dead-end ‼</td>
+<td>silence³</td>
+<td>auto-scroll owns the tail¹</td>
+<td>ignored²</td>
+</tr>
+<tr>
+<td>tap on button/row/key</td>
+<td>activate (shipped)</td>
+<td>activate</td>
+<td>button parity (Prev/Next/Back)</td>
+<td>type (ack = value line)</td>
+<td>blip-defer¹</td>
+<td>ignored²</td>
+</tr>
+<tr>
+<td>tap on empty canvas</td>
+<td>silence (logged)</td>
+<td>silence</td>
+<td>toggle caption</td>
+<td>silence</td>
+<td>blip-defer¹</td>
+<td>ignored²</td>
+</tr>
+<tr>
+<td>long-press (touch)</td>
+<td>reserved, phase 2 — silence until then</td>
+<td>←</td>
+<td>←</td>
+<td>←</td>
+<td>←</td>
+<td>ignored²</td>
+</tr>
+</tbody>
+</table>
+<p>‼ dead-end = double blip, nothing moves. WHY: a recognized gesture that does
+nothing must <em>say</em> it was heard, or the panel reads as broken.</p>
+<p>¹ <strong>Streaming answer:</strong> the stream owns the display (STREAMING_UI rule 7); no
+tap regions exist mid-stream by design. Every touch gets a single blip and is
+discarded — acknowledged, not obeyed. The ONE exit is physical: <strong>long-press AI
+(2 s) aborts the stream</strong> (<code>stream_end</code>, append "[interrupted]") and goes home.
+WHY: a stream is bounded (≤30 s + stall watchdog), so deferring touch is
+predictable; but no state may ever hold the device with <em>zero</em> exits, and the
+exit must work through fabric and gloves — hence a button, not a gesture.</p>
+<p>² <strong>Locked (pocket, P-1):</strong> touch fully ignored, <strong>no blips</strong> (a buzzing pocket
+is noise, and buzzer-on-every-fabric-brush drains the 750 mAh pack). No voice
+capture starts while locked. Unlock = hold <strong>UP + DOWN together 1 s</strong> →
+single blip + wake card. WHY: a chord is the one input fabric cannot forge.</p>
+<p>³ <strong>Keyboard silence exception:</strong> horizontal/vertical swipes over the key area
+are silence, not dead-end — typing drift would otherwise double-blip
+constantly. The keyboard's own <code>cancel</code>/<code>ok</code> keys and the bottom-band home
+swipe are its exits.</p>
+<p><strong>Rotation invariant:</strong> the table above is layout-space; the router maps
+through the current rotation before classifying (the scroll gesture already
+does; NAV must ride the same transform). A gesture mid-rotation-commit is
+dropped like a tap on a changed card-gen.</p>
+<h2 id="3-physical-button-parity-accessibility-gloves-pocket">3. Physical button parity (accessibility + gloves + pocket)<a class="headerlink" href="#3-physical-button-parity-accessibility-gloves-pocket" title="Permanent link">·</a></h2>
+<p>Every gesture verb has a button path — gestures are an <em>optimization</em>, never
+the only door:</p>
+<table>
+<thead>
+<tr>
+<th>intent</th>
+<th>gesture</th>
+<th>button path</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>home</td>
+<td>bottom-band ↑</td>
+<td>long-press AI (shipped)</td>
+</tr>
+<tr>
+<td>back / prev</td>
+<td>left-band →</td>
+<td>UP click on pushed card = back; on ring = prev page (shipped ring)</td>
+</tr>
+<tr>
+<td>next</td>
+<td>mid ←</td>
+<td>DOWN click (shipped ring; = next image in gallery)</td>
+</tr>
+<tr>
+<td>scroll</td>
+<td>mid ↑/↓</td>
+<td>UP/DOWN on overflowing card (shipped)</td>
+</tr>
+<tr>
+<td>ask</td>
+<td>tap Speak / hold AI</td>
+<td>hold AI (shipped)</td>
+</tr>
+<tr>
+<td>abort stream</td>
+<td>— (deliberately none)</td>
+<td>long-press AI 2 s</td>
+</tr>
+<tr>
+<td>unlock</td>
+<td>— (deliberately none)</td>
+<td>UP+DOWN chord 1 s</td>
+</tr>
+</tbody>
+</table>
+<p>WHY: the audit's P-1 pocket case and glove/winter use both reduce to "the three
+keys must be able to do everything destructive or rescuing."</p>
+<h2 id="4-navigation-model-ring-and-stack-reconciled">4. Navigation model — ring and stack, reconciled<a class="headerlink" href="#4-navigation-model-ring-and-stack-reconciled" title="Permanent link">·</a></h2>
+<ul>
+<li>The <strong>ring</strong> is the set of top-level pages: <code>home ▸ status ▸ sensors ▸
+  settings</code> (+ <code>gallery</code> when it lands). Ring moves (UP/DOWN, horizontal
+  swipes on a ring page) <strong>replace</strong> the stack top — depth stays 1. WHY:
+  cycling must never build a 47-deep history of status pages.</li>
+<li><strong>Opens push</strong>: settings→wifi, chats→thread, any keyboard, any relay card
+  the shell didn't originate. Back <strong>pops</strong>. Home <strong>clears to <code>[home]</code></strong>.</li>
+<li>A relay <code>render_ui</code> card arrives as a <em>pushed card</em> — back from it returns
+  to what the human was doing. WHY: a remote agent may interject but never
+  steal the human's place.</li>
+<li>Stack depth 8 (shipped) is ample; overflow drops the <em>oldest</em> non-home entry.</li>
+</ul>
+<h2 id="5-feedback-rules-the-500-ms-contract">5. Feedback rules (the 500 ms contract)<a class="headerlink" href="#5-feedback-rules-the-500-ms-contract" title="Permanent link">·</a></h2>
+<ol>
+<li>Buzz <strong>before</strong> anything that can block; visual ack within <strong>500 ms</strong> via
+   region partial (shipped invert-ack) — except keyboard keys, where the value
+   line IS the ack (shipped).</li>
+<li>Dead ends double-blip (new). Locked state never blips (new).</li>
+<li>An action that will take &gt;2 s (ask, wifi join, image fetch) must leave a
+   <strong>pending mark on the glass</strong> within 500 ms (streaming chrome, "joining…"
+   row, caption "fetching…"). WHY: e-ink cannot spin a spinner; a written word
+   is our progress indicator.</li>
+<li>Every refusal names its reason on the glass (house honesty rule).</li>
+</ol>
+<h2 id="6-cards-typography-hierarchy-rules">6. Cards — typography &amp; hierarchy rules<a class="headerlink" href="#6-cards-typography-hierarchy-rules" title="Permanent link">·</a></h2>
+<ul>
+<li>One idea per card; title ≤ ~28 chars before fold; body is the only
+  scrollable region; footer is metadata, never content; ≤4 buttons.</li>
+<li>Contrast ladder: Black on White for content, DarkGray for chrome/hairlines,
+  LightGray fills only for "user bubble" / selection. WHY: 4-gray is a
+  hierarchy budget, not a palette.</li>
+<li>Streaming chat chrome per STREAMING_UI layer 4 (user bubble right/LightGray,
+  assistant left/outlined; caret only while bytes may arrive). Bubble max-width =
+  <strong>70% of body width</strong> (v1.2, R-3): shrink-to-fit when short, wrap at 70% when long —
+  a 28-char column on an 800 px panel reads as a receipt, not a conversation.</li>
+<li>Emoji/glyphs with no 4-gray rendering are <strong>stripped in chat bubbles, never folded
+  to "?"</strong> (v1.3, R-4): "Hey! ?" is a different sentence than "Hey! 👋" — absence is
+  honest, substitution changes tone. Content characters keep the fold-table "?".</li>
+</ul>
+<h2 id="7-settings-information-architecture-law-4-truly-editable">7. Settings — information architecture (law #4: truly editable)<a class="headerlink" href="#7-settings-information-architecture-law-4-truly-editable" title="Permanent link">·</a></h2>
+<p>Settings root becomes a <strong>menu</strong> (rows, not a kv dump; current kv view moves
+to About):</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Settings
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├─ 🔕 Snooze     → FIRST ROW, one tap cycles: Off → 1h → until-wake → forever.
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>│                 Row note shows the countdown/state. Mutes all LOCAL sounds
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>│                 (§13 tier L); never mutes owner-hand `play`. WHY first: the
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│                 owner&#39;s own words — &quot;cut the voice of the beeps when i click
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>│                 somewhere&quot; — and the acceptance is ≤2 taps from anywhere
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>│                 (home → Settings → Snooze).
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>├─ Sounds       → volume tier (duty): Soft / Normal · per-event toggles:
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>│                 tap / ack / error / dm / boot jingle
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>├─ Display      → rotation: Auto / 0 / 90 / 180 / 270 (lock = manual mode,
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>│                 same semantics as `rotate` verb) · theme: Light / Dark (invert)
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>│                 · glance-on-wake: On / Off
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>├─ Wi-Fi        → networks list: join (keyboard), forget, move-up priority;
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>│                 stored nets in NVS; passwords render as dots, always
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>├─ Agent        → thinkers list (M-A7: prompt · every X · last-run · on/off,
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>│                 [New thinker] → keyboard → interval menu) · ask history On/Off
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>├─ Power        → sleep timeout: 2 / 5 / 15 min / Never · eco threshold display
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>├─ Lock         → pocket lockout: Auto (IMU) / Off · shows unlock chord hint
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>└─ About        → fw, commit, channel, device id, mac, ssid/rssi, battery health
+</span></code></pre></div>
+<p>Every editable row states its <strong>current value in the row note</strong> (menu <code>note</code>
+field, shipped) so the glass never hides state behind a tap. Toggles commit on
+tap with single blip + row re-render (partial) + an NVS scalar + a <code>set &lt;key&gt;
+&lt;val&gt;</code> relay twin, so every on-glass edit is also scriptable. WHY: a settings
+page that requires a phone is an admission the device isn't sovereign — and a
+setting without a relay twin is untestable by the verdict rail.</p>
+<h2 id="8-gallery-interaction-model-with-builder-m-a4">8. Gallery — interaction model (with builder M-A4)<a class="headerlink" href="#8-gallery-interaction-model-with-builder-m-a4" title="Permanent link">·</a></h2>
+<ul>
+<li>v1 is a <strong>single-image pager</strong>, newest first: open → latest image full-bleed
+  (1-bit, server-dithered), caption + glance bar toggled by empty-canvas tap.</li>
+<li>Horizontal swipes / UP/DOWN = prev/next (law #3). Bottom-band ↑ = home.
+  Left-band → = back. On-glass <code>Prev</code>/<code>Next</code>/<code>Back</code> buttons for parity.</li>
+<li>Every image lands with a <strong>full refresh</strong> (an image IS a new page; partial
+  ghosting over a photo is unacceptable).</li>
+<li>Ends of the roll are dead ends (double blip), never wraparound. WHY: a loop
+  of N images with 1–2 s page turns makes "am I at the start?" unanswerable.</li>
+<li>Offline (P-2): cached rasters stay browsable; glance bar shows <code>w-</code>; an
+  uncached image says "not cached — offline", never a blank frame.</li>
+</ul>
+<h2 id="9-error-offline-states-what-the-device-says">9. Error &amp; offline states (what the device SAYS)<a class="headerlink" href="#9-error-offline-states-what-the-device-says" title="Permanent link">·</a></h2>
+<table>
+<thead>
+<tr>
+<th>state</th>
+<th>the glass says</th>
+<th>why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>wifi down</td>
+<td>glance <code>w-</code>; current card persists (e-ink superpower)</td>
+<td>ambient truth, no modal panic</td>
+</tr>
+<tr>
+<td>ask fails / 422</td>
+<td>"didn't catch that" card (shipped) / error card naming the HTTP reason</td>
+<td>a refusal names its reason</td>
+</tr>
+<tr>
+<td>ask never left the device (transport, st ≤ 0)</td>
+<td>"couldn't reach tiny — your question was NOT sent; try again" + free-heap in footer. The word "Backend" is <strong>forbidden</strong> here</td>
+<td>an error message must name the true culprit; "Backend said -1" attributes to the backend words it never said (owner-hit P1, 2026-08-26 02:5xZ)</td>
+</tr>
+<tr>
+<td>stream stalls</td>
+<td>"[stream stalled]" appended, caret removed (shipped)</td>
+<td>a cut answer must say it is cut</td>
+</tr>
+<tr>
+<td>relay silent</td>
+<td>nothing changes on glass</td>
+<td>device-initiated surfaces only; silence upstream isn't the human's problem</td>
+</tr>
+<tr>
+<td>image fetch fails</td>
+<td>"couldn't fetch image (<err>)" honest-void</td>
+<td>never a half-blitted frame</td>
+</tr>
+<tr>
+<td>auth-halt</td>
+<td>rescue portal card + QR (shipped)</td>
+<td>recovery without a cable</td>
+</tr>
+</tbody>
+</table>
+<h2 id="11-pocket-lockout-the-state-machine-p-1-safety-critical">11. Pocket lockout — the state machine (P-1, safety-critical)<a class="headerlink" href="#11-pocket-lockout-the-state-machine-p-1-safety-critical" title="Permanent link">·</a></h2>
+<p>Pocket-carry's one unforgivable failure: fabric holds the AI button, 15 s of audio
+records and uploads. Lockout is therefore a SAFETY feature, not a convenience.</p>
+<p>States: <code>UNLOCKED</code> ⇄ <code>LOCKED</code> (no third state; "locking…" does not exist on e-ink).</p>
+<p><strong>Entry to LOCKED (any one):</strong>
+- IMU: face-down ≥ 3 s, OR sustained walking-motion signature ≥ 5 s while no touch
+  for 30 s (thresholds are firmware constants, tuned on-device, named in code)
+- Manual: Settings ▸ Lock, or a future button chord</p>
+<p><strong>While LOCKED:</strong>
+- Touch controller: events discarded at the router (not deshielded per-page)
+- AI button: hold does NOT start voice capture — the one rule that is the point.
+  Short-press wakes the glass to the glance card (§12) with a lock glyph.
+- UP/DOWN: page nothing; they are the unlock chord only
+- Buzzer: chirps still allowed (notification while pocketed = the product working)
+- Relay verbs: STILL ANSWER (status/screenshot/say/render_ui) — lockout guards the
+  device's own inputs, not the owner's remote reach. <code>voice</code> verb refuses while
+  locked with an honest sentence (remote-triggered recording from a pocket is the
+  same privacy incident with extra steps).</p>
+<p><strong>Exit:</strong> hold UP+DOWN together 1 s → full refresh → last card restored.</p>
+<p><strong>Truth surface:</strong> <code>status</code> JSON gains <code>"locked":true|false</code> (spec-mandated field);
+the glance card shows a lock glyph. ACCEPTANCE (needs D-UX0 + a <code>lock</code>/<code>unlock</code>
+test verb or Settings toggle): lock → <code>press ai hold</code> must NOT record (no upload
+event, log line names the refusal) → <code>tap</code> anywhere discarded → <code>status.locked</code> true
+→ unlock chord → <code>status.locked</code> false and touch live again.</p>
+<h2 id="12-glance-card-wake-on-lift-p-4">12. Glance card — wake-on-lift (P-4)<a class="headerlink" href="#12-glance-card-wake-on-lift-p-4" title="Permanent link">·</a></h2>
+<p>The 80% interaction of a pocket device: pull it out, look, put it back. Target:
+<strong>glanceable in under 2 s from wake trigger.</strong></p>
+<ul>
+<li>Trigger: IMU lift-to-look signature, or any button short-press</li>
+<li>Content (one partial refresh, no full flash if the panel already holds a card):
+  time · battery% · wifi glyph · unread count · lock glyph when locked. One line,
+  top of glass, over whatever card was last shown (e-ink keeps it for free).</li>
+<li>NOT a page: it draws over the status strip zone and expires from the nav model —
+  BACK/scroll/tap all act on the underlying card.</li>
+<li>ACCEPTANCE: from sleep, button-press → glance strip visible &lt; 2 s (measured by
+  log timestamps wake→refresh-complete); from awake, strip updates by partial
+  refresh only (no full-panel flash receipt).</li>
+</ul>
+<h2 id="13-sound-rules-ratified-m-a6">13. Sound rules — ratified (M-A6)<a class="headerlink" href="#13-sound-rules-ratified-m-a6" title="Permanent link">·</a></h2>
+<p>The buzzer (GPIO48, LEDC PWM) is the device's fastest output — sound lands
+~10× before any pixel (§0). These rules are LAW for every current chime and
+the coming RTTTL engine.</p>
+<p><strong>Sound tiers</strong> — every sound the device can make belongs to exactly one:</p>
+<table>
+<thead>
+<tr>
+<th>tier</th>
+<th>what</th>
+<th>examples</th>
+<th>governed by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>L — local UI feedback</strong></td>
+<td>consequence of the owner's own touch/button</td>
+<td>tap blip, ack, dead-end double blip, error</td>
+<td>Snooze mutes; LOCKED mutes (see below); ≤ <strong>400 ms</strong></td>
+</tr>
+<tr>
+<td><strong>N — notifications</strong></td>
+<td>device-initiated, tells a pocketed owner something arrived</td>
+<td>dm motif, thinker-result chime, low-battery</td>
+<td>Snooze mutes; LOCKED <strong>allows</strong> (a notification while pocketed is the product working, §11); ≤ <strong>400 ms</strong></td>
+</tr>
+<tr>
+<td><strong>O — owner's hand</strong></td>
+<td>explicitly commanded over the relay</td>
+<td><code>play &lt;rtttl&gt;</code>, <code>say</code> with chime</td>
+<td>NOTHING mutes it — the owner pressing play IS consent; 64-note cap</td>
+</tr>
+<tr>
+<td><strong>B — boot jingle</strong></td>
+<td>once per cold boot</td>
+<td>4-note motif (M-A6c beat-sync gate)</td>
+<td>the one exception to 400 ms; Snooze-forever suppresses it</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Ratified reconciliation of M-A6 "silent while pocket-locked" vs §11
+"chirps still allowed":</strong> both were right about different tiers. LOCKED kills
+tier <strong>L</strong> trivially (locked discards the inputs that would cause feedback) and
+keeps tier <strong>N</strong> — a pocket device that can't chirp an arrival is a brick with
+better battery life. The owner's public-silence need is served by <strong>Snooze</strong>
+(§7 first row), which is a deliberate one-tap act, not a side effect of
+pocketing. WHY this split: lockout guards <em>inputs</em> (privacy), snooze guards
+<em>outputs</em> (courtesy) — collapsing them makes one need destroy the other.</p>
+<p><strong>Motif taste guide (leitmotif, not alarm):</strong> ack = rising major third;
+error = falling minor second; dm = 4-note motif; dead-end = the double blip,
+unchanged — it is vocabulary (§0), not music. All motifs live in the
+B4–C7 resonance sweet spot; envelope via LEDC fade (30 ms attack / 80 ms
+decay) so chimes ring instead of buzz. WHY leitmotifs: a sound the owner can
+<em>name without looking</em> replaces a screen glance — that is the entire budget
+argument for a buzzer on a 2 Hz panel.</p>
+<p><strong>Refusals are honest:</strong> a tune over 64 notes is refused naming its byte
+count; <code>play</code> while snoozed still plays (tier O) and the reply says so.</p>
+<h2 id="14-animation-usage-rules-m-a6b-when-may-pixels-move">14. Animation usage rules (M-A6b — when may pixels move?)<a class="headerlink" href="#14-animation-usage-rules-m-a6b-when-may-pixels-move" title="Permanent link">·</a></h2>
+<p>Physics: ~2 Hz ceiling, ghosting after ~20 open-loop partials (§0). An
+animation is therefore a <em>budgeted</em> act, never decoration.</p>
+<ul>
+<li><strong>Closed-loop anims</strong> (<code>"closed":true</code> — every pixel returns to its origin
+  state each cycle: blink, invert-pulse, two-phase breathe) accumulate ~zero
+  ghosting because displacement cancels; the player skips <code>wipe_every</code>. These
+  are the ONLY anims allowed to run indefinitely (idle home creature,
+  thinking pulse). WHY: an idle screen that slowly turns grey teaches the
+  owner the device is broken.</li>
+<li><strong>Open-loop anims</strong> (travel, trails, typers) keep the wipe law
+  (<code>wipe_every</code> mandatory) and must be <strong>event-bound</strong>: they play because
+  something happened (boot, answer arriving, ota progress) and they END —
+  no open-loop anim outlives its event.</li>
+<li><strong>Dirty-bbox is a cost dial:</strong> compact motion (~120 px box) sustains
+  ~3 fps; full-width partials cap at ~2 fps. stickyOS anims are creatures
+  and glyphs, <strong>not scene changes</strong> — a scene change is a page turn and gets
+  a full refresh.</li>
+<li><strong>Streaming answers own the panel:</strong> no concurrent anim while the typer
+  runs (G6 already defers touch; pixels defer too). One moving thing at a
+  time — the eye on e-ink can't arbitrate two.</li>
+<li><strong>Beat-sync (M-A6c)</strong> inherits its anim's class: a closed-loop 2-frame
+  pulse synced to a jingle is the sanctioned WOW; sound carries the
+  liveliness the panel cannot (§0). Locked/snoozed states strip the tune per
+  §13 and the anim plays silent.</li>
+</ul>
+<h2 id="10-scoreboard">10. Scoreboard<a class="headerlink" href="#10-scoreboard" title="Permanent link">·</a></h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>rule</th>
+<th>status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>G1</td>
+<td>bottom-band ↑ = HOME everywhere (incl. keyboard-as-cancel)</td>
+<td><strong>VERIFIED-ON-GLASS 0.16.5</strong> (batch #5 row 4); keyboard-cancel arm untested</td>
+</tr>
+<tr>
+<td>G2</td>
+<td>left-band → = back/pop; = ring prev on ring pages</td>
+<td><strong>VERIFIED-ON-GLASS 0.16.5</strong> — both arms (pop batch #4, ring-prev batch #5 row 3)</td>
+</tr>
+<tr>
+<td>G3</td>
+<td>mid horizontal = ring next/prev · gallery image nav · pushed-card back/dead-end</td>
+<td>ring next/prev VERIFIED (batch #4 rows 1-2); pushed-card P0 crash <strong>FIXED — VERIFIED 0.16.5</strong> (batch #5 row 5: survives, card holds); double-blip announce unverifiable until D-UX3 synchronous receipts</td>
+</tr>
+<tr>
+<td>G4</td>
+<td>mid vertical = scroll (M12) — regression-guarded</td>
+<td>VERIFIED-ON-GLASS (0.16.0-m14, batch #2 receipt+screenshot); re-verify after router lands</td>
+</tr>
+<tr>
+<td>G5</td>
+<td>dead-end double blip; locked never blips</td>
+<td>SPECIFIED</td>
+</tr>
+<tr>
+<td>G6</td>
+<td>streaming: blip-defer all touch; long-press-AI 2 s aborts</td>
+<td>SPECIFIED</td>
+</tr>
+<tr>
+<td>G7</td>
+<td>keyboard: swipe silence; bottom-band = cancel+home</td>
+<td>SPECIFIED</td>
+</tr>
+<tr>
+<td>G8</td>
+<td>button parity table (§3) complete</td>
+<td>SPECIFIED (ring UP/DOWN + long-press-AI home already BUILT)</td>
+</tr>
+<tr>
+<td>G9</td>
+<td>ring-replaces / open-pushes / home-clears</td>
+<td>SPECIFIED (partial in tiny_shell today; home→settings tap transition VERIFIED-ON-GLASS, batch #1)</td>
+</tr>
+<tr>
+<td>G10</td>
+<td>pocket lockout per §11 state machine (status.locked field, voice-verb refusal)</td>
+<td>SPECIFIED in full (v1.4 §11)</td>
+</tr>
+<tr>
+<td>G11</td>
+<td>settings IA §7 truly editable</td>
+<td>SPECIFIED</td>
+</tr>
+<tr>
+<td>G12</td>
+<td>gallery model §8</td>
+<td>SPECIFIED</td>
+</tr>
+<tr>
+<td>G13</td>
+<td><code>swipe</code> synthetic injection</td>
+<td>SHIPPED 0.16.2 grammar v4 + VERIFIED (batch #4); <code>press</code> still missing — buttons/long-press untestable</td>
+</tr>
+<tr>
+<td>G14</td>
+<td>glance card wake-on-lift &lt; 2 s, partial-refresh-only when awake (§12)</td>
+<td>SPECIFIED (v1.4)</td>
+</tr>
+<tr>
+<td>G15</td>
+<td>sound tiers L/N/O/B per §13 — snooze mutes L+N, lock mutes L only, <code>play</code> unmutable, 400 ms cap, motif taste guide</td>
+<td>SPECIFIED (v1.5, ratifies M-A6)</td>
+</tr>
+<tr>
+<td>G16</td>
+<td>anim usage per §14 — only closed-loop runs idle; open-loop event-bound + wipe law; no anim during streaming</td>
+<td>SPECIFIED (v1.5)</td>
+</tr>
+<tr>
+<td>G17</td>
+<td>settings IA v2 §7 — snooze first row, owner silences device in ≤2 taps; every setting = NVS + partial redraw + <code>set</code> relay twin</td>
+<td>SPECIFIED (v1.5, absorbs M-A5-DEEP)</td>
+</tr>
+</tbody>
+</table>
+<p>Verification duty: each rule flips to VERIFIED-ON-GLASS only with a probe
+receipt (relay reply + screenshot URL) filed in ANSWERS.md by the owner loop.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      🖤 sticky · the 5th body of tiny — e-ink, Wi-Fi, its own
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/cagataycali/sticky-the-reterminal" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/cagataycali" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M357.2 48h70.6L273.6 224.2 455 464H313L201.7 318.6 74.5 464H3.8l164.9-188.5L-5.2 48h145.6l100.5 132.9zm-24.8 373.8h39.1L119.1 88h-42z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.sections", "navigation.indexes", "toc.follow", "content.code.copy", "content.code.annotate", "content.tabs.link", "content.action.edit", "search.suggest", "search.highlight", "search.share", "announce.dismiss"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2245 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device.">
+      
+      
+        <meta name="author" content="Cagatay Cali">
+      
+      
+        <link rel="canonical" href="https://cagataycali.github.io/sticky-the-reterminal/commands/">
+      
+      
+        <link rel="prev" href="../RECOVERY/">
+      
+      
+        <link rel="next" href="../cards/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Commands - sticky</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#commands-the-envelope-verb-reference" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="sticky" class="md-header__button md-logo" aria-label="sticky" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            sticky
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Commands
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="cyan"  aria-label="light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="black" data-md-color-accent="pink"  aria-label="dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/cagataycali/sticky-the-reterminal" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cagataycali/sticky-the-reterminal
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../start/quickstart/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Start
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Features
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../hardware/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Hardware
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../troubleshooting/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Troubleshooting
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ARCHITECTURE/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Architecture
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../RESEARCH/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Deep dives
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../API_CONTRACT/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  API
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../dashboard/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Dashboard
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../ROADMAP/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Roadmap
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="sticky" class="md-nav__button md-logo" aria-label="sticky" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    sticky
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/cagataycali/sticky-the-reterminal" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    cagataycali/sticky-the-reterminal
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Start
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../start/quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quickstart
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RECOVERY/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Recovery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Features
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Features
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Commands
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#display" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Display
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Display">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#render_ui-card-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        render_ui &lt;card-json&gt;
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#say-text" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        say &lt;text&gt;
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#screenshot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        screenshot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#page-homestatussensorssettingswifiblebacknextprev" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        page home|status|sensors|settings|wifi|ble|back|next|prev
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rotate-090180270auto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rotate [0|90|180|270|auto]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tap-x-y" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tap &lt;x&gt; &lt;y&gt;
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#swipe-x0-y0-x1-y1-since-0162-grammar-v4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        swipe &lt;x0&gt; &lt;y0&gt; &lt;x1&gt; &lt;y1&gt; (since 0.16.2, grammar v4)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scroll-updowntoppx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        scroll [up|down|top|&lt;±px&gt;]
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#telemetry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Telemetry
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Telemetry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        status
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sensors-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        sensors [card]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#miccheck-seconds-110-s-default-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        miccheck [seconds] (1–10 s, default 2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The agent
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The agent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ask-text" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ask &lt;text&gt;
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#voice-seconds-default-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        voice [seconds] (default 5)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#power-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Power &amp; lifecycle
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Power &amp; lifecycle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sleep-seconds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        sleep [seconds]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#messages-unread-thread-login-since-0147" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        messages [unread | thread &lt;login&gt;] (since 0.14.7)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ota-channel-default-sticky-dev" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ota [channel] (default sticky-dev)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#not-in-the-firmware-yet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Not in the firmware (yet)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reply-plumbing-all-verbs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reply plumbing (all verbs)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cards/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cookbook/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Compose for the glass
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../streaming/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Streaming UI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stickyos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    stickyOS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UX_SPEC/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UX Spec
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+          
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../case/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hardware
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Hardware
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hardware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ARCHITECTURE/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deep dives
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Deep dives
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../RESEARCH/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Research (pre-firmware)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../THINKING/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Thinking (what stickyOS is)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Audits
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Audits
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../audit/TOUCH_AUDIT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Touch
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../audit/DISPLAY_AUDIT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Display
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../audit/NETWORK_AUDIT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Network
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../audit/SYSTEM_AUDIT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../API_CONTRACT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dashboard/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboard
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ROADMAP/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#display" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Display
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Display">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#render_ui-card-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        render_ui &lt;card-json&gt;
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#say-text" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        say &lt;text&gt;
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#screenshot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        screenshot
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#page-homestatussensorssettingswifiblebacknextprev" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        page home|status|sensors|settings|wifi|ble|back|next|prev
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rotate-090180270auto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        rotate [0|90|180|270|auto]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tap-x-y" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        tap &lt;x&gt; &lt;y&gt;
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#swipe-x0-y0-x1-y1-since-0162-grammar-v4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        swipe &lt;x0&gt; &lt;y0&gt; &lt;x1&gt; &lt;y1&gt; (since 0.16.2, grammar v4)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scroll-updowntoppx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        scroll [up|down|top|&lt;±px&gt;]
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#telemetry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Telemetry
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Telemetry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        status
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sensors-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        sensors [card]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#miccheck-seconds-110-s-default-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        miccheck [seconds] (1–10 s, default 2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The agent
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The agent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ask-text" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ask &lt;text&gt;
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#voice-seconds-default-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        voice [seconds] (default 5)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#power-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Power &amp; lifecycle
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Power &amp; lifecycle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sleep-seconds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        sleep [seconds]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#messages-unread-thread-login-since-0147" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        messages [unread | thread &lt;login&gt;] (since 0.14.7)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ota-channel-default-sticky-dev" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ota [channel] (default sticky-dev)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#not-in-the-firmware-yet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Not in the firmware (yet)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reply-plumbing-all-verbs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reply plumbing (all verbs)
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/cagataycali/sticky-the-reterminal/edit/main/docs/commands.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="commands-the-envelope-verb-reference">Commands — the envelope verb reference<a class="headerlink" href="#commands-the-envelope-verb-reference" title="Permanent link">·</a></h1>
+<p>Everything the Sticky answers to, exactly as <code>tiny_node.cpp</code> dispatches it at <strong>fw 0.14.18-m12</strong>. Envelopes arrive as <code>{type:"invoke", prompt:"&lt;verb&gt; [args]"}</code> over the relay; every verb replies (unknown input answers the help string — never silence). These are also the <code>capabilities</code> the heartbeat advertises, and the rule is: <strong>advertise only what dispatch actually implements.</strong></p>
+<p>Send from any tiny surface:</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>use_device invoke → prompt: &quot;status&quot;
+</span></code></pre></div>
+<h2 id="display">Display<a class="headerlink" href="#display" title="Permanent link">·</a></h2>
+<h3 id="render_ui-card-json"><code>render_ui &lt;card-json&gt;</code><a class="headerlink" href="#render_ui-card-json" title="Permanent link">·</a></h3>
+<p>Renders a <a href="../cards/">card spec</a> on the e-ink. Replies <code>rendered card_id=&lt;id&gt;</code> — the id <strong>the panel actually committed</strong>, so a mirror can claim "this IS what is on the glass" rather than "the last card I sent".</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>render_ui {&quot;type&quot;:&quot;text&quot;,&quot;title&quot;:&quot;Dinner&quot;,&quot;body&quot;:&quot;Back at 19:30 — pizza in fridge&quot;}
+</span></code></pre></div>
+<h3 id="say-text"><code>say &lt;text&gt;</code><a class="headerlink" href="#say-text" title="Permanent link">·</a></h3>
+<p>Put words on the fridge — no agent turn, no network wait. Renders a <code>text</code> card titled <em>tiny</em> (<code>card_id=say</code>) and plays the <em>ack</em> chime. Replies <code>said (card on the panel)</code>.</p>
+<h3 id="screenshot"><code>screenshot</code><a class="headerlink" href="#screenshot" title="Permanent link">·</a></h3>
+<p>Framebuffer → hosted PNG → replies <code>screenshot: https://plugin.tiny.technology/media/…</code>. This is <strong>render ground truth</strong> — the agent (and the dashboard mirror) see the actual panel, not a belief about it.</p>
+<h3 id="page-homestatussensorssettingswifiblebacknextprev"><code>page home|status|sensors|settings|wifi|ble|back|next|prev</code><a class="headerlink" href="#page-homestatussensorssettingswifiblebacknextprev" title="Permanent link">·</a></h3>
+<p>The relay twin of every tappable navigation path in <a href="../stickyos/">stickyOS</a> (the M10 <em>parity rule</em>: anything a finger can do, an envelope can do). Replies <code>page &lt;arg&gt; -&gt; ESP_OK (card_id=…)</code>.</p>
+<h3 id="rotate-090180270auto"><code>rotate [0|90|180|270|auto]</code><a class="headerlink" href="#rotate-090180270auto" title="Permanent link">·</a></h3>
+<p>The UI follows the body. Bare <code>rotate</code> reports; a degree value sets the layout rotation <strong>and holds it</strong> (manual mode — a human's choice outranks gravity); <code>rotate auto</code> hands the decision back to the accelerometer.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>{&quot;rotation&quot;:90, &quot;mode&quot;:&quot;manual&quot;, &quot;imu_last&quot;:&quot;portrait-right&quot;, &quot;imu_last_deg&quot;:90,
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a> &quot;result&quot;:&quot;ESP_OK&quot;, &quot;summary&quot;:&quot;rotation 90 deg (manual), imu says portrait-right&quot;}
+</span></code></pre></div>
+<p>Auto-rotate policy (deliberately small): commit only after several consecutive identical IMU readings — a ~600 ms visible e-ink refresh must never chase a wobble; flat on a table (<code>flat</code>) says nothing about which edge is up, so the last standing orientation wins. <strong>Coordinate invariant:</strong> the <em>layout</em> turns; the framebuffer, <code>screenshot</code> and touch coordinates stay in panel space — a tap aimed at a screenshot pixel still lands.</p>
+<h3 id="tap-x-y"><code>tap &lt;x&gt; &lt;y&gt;</code><a class="headerlink" href="#tap-x-y" title="Permanent link">·</a></h3>
+<p>A synthetic tap in <strong>panel coordinates</strong> — the <code>screenshot</code>'s own coordinate system — through the same resolver a finger uses. This is how a rotation gets proven without a human hand: tap where the screenshot shows the button, and see which button answers.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>{&quot;tap&quot;:[400,440], &quot;rotation&quot;:90, &quot;result&quot;:&quot;ESP_OK&quot;, &quot;card_id&quot;:&quot;home&quot;,
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a> &quot;summary&quot;:&quot;tapped 400,440 at 90 deg -&gt; ESP_OK&quot;}
+</span></code></pre></div>
+<p>Together, <code>screenshot</code> → <code>tap</code> → <code>screenshot</code> closes the loop the agent needs to test the UI end-to-end with no one in the room.</p>
+<h3 id="swipe-x0-y0-x1-y1-since-0162-grammar-v4"><code>swipe &lt;x0&gt; &lt;y0&gt; &lt;x1&gt; &lt;y1&gt;</code> <em>(since 0.16.2, grammar v4)</em><a class="headerlink" href="#swipe-x0-y0-x1-y1-since-0162-grammar-v4" title="Permanent link">·</a></h3>
+<p>A synthetic swipe in <strong>panel coordinates</strong>, driven through the <em>same release
+classifier a finger uses</em> — so what it proves is the real gesture grammar, not a
+parallel code path. This is how <a href="../UX_SPEC/">UX_SPEC §2</a> rules get verified over
+the relay: inject the vector, read the receipt, <code>screenshot</code> the consequence.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>{&quot;swipe&quot;:[400,60,400,300], &quot;rotation&quot;:90, &quot;result&quot;:&quot;ESP_OK&quot;, &quot;card_id&quot;:&quot;status&quot;,
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a> &quot;summary&quot;:&quot;swiped (400,60)-&gt;(400,300) at 90 deg -&gt; ESP_OK&quot;}
+</span></code></pre></div>
+<p><code>INVALID_SIZE</code> means the travel stayed within the 24 px tap slop — <strong>refused
+rather than silently downgraded to a tap</strong>, because a probe that quietly becomes
+a different gesture proves nothing. Buttons and long-press still have no
+synthetic twin (<code>press</code> is not a verb yet), so those stay hand-verified.</p>
+<blockquote>
+<p><strong>Advertising gap (0.16.4):</strong> <code>swipe</code> is dispatched but <strong>not listed in the
+heartbeat capabilities array</strong> — a dashboard that trusts the advertised caps
+won't offer it, yet sending the verb works. Filed for the builder; until then,
+trust dispatch, not the caps list.</p>
+</blockquote>
+<h3 id="scroll-updowntoppx"><code>scroll [up|down|top|&lt;±px&gt;]</code><a class="headerlink" href="#scroll-updowntoppx" title="Permanent link">·</a></h3>
+<p>Moves an overflowing card body (text/list/kv/menu taller than the body box). Bare <code>scroll</code> just reports — the probe form; <code>up</code>/<code>down</code> step ⅔ of a view (the buttons' relay twin), <code>top</code> rewinds, a signed pixel count is probe-precise. Always clamped at the edges; on a card that fits, <code>scrollable</code> comes back <code>false</code> and nothing moves. A right-edge track+thumb scrollbar shows position on the glass; steps draw with partial refresh.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>{&quot;offset&quot;:474, &quot;content_h&quot;:1012, &quot;view_h&quot;:356, &quot;scrollable&quot;:true,
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a> &quot;card_id&quot;:&quot;scrolltest&quot;, &quot;result&quot;:&quot;ESP_OK&quot;,
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a> &quot;summary&quot;:&quot;scroll 474/656 px of 1012 content (ESP_OK)&quot;}
+</span></code></pre></div>
+<p>The reply carries the whole scroll model (<code>offset</code> / <code>content_h</code> / <code>view_h</code>), so scrolling is provable without a finger — the same probe-readable discipline as <code>rotate</code> and <code>tap</code>. <strong>Quirk (0.14.4):</strong> <code>scroll 0</code> is indistinguishable from the bare report form (<code>atoi</code> returns 0 for both) — to <em>go</em> to the top, say <code>scroll top</code>, never <code>scroll 0</code>; the dashboard works around this the same way. (This verb also has a war story: its first landing was eaten by a shared-tree race and shipped as an advertised-but-unknown command — the incident behind the <a href="../ARCHITECTURE/#build-release-discipline-paid-for-on-2026-08-25-m12-night">build-discipline rules</a>.)</p>
+<h2 id="telemetry">Telemetry<a class="headerlink" href="#telemetry" title="Permanent link">·</a></h2>
+<h3 id="status"><code>status</code><a class="headerlink" href="#status" title="Permanent link">·</a></h3>
+<p>Since 0.14.10 the reply carries <code>fw_commit</code>: a build-time-injected git sha with a <code>--dirty</code> suffix for uncommitted trees, so the version string can <strong>prove</strong> ancestry instead of asserting it (generated at build time, not configure time — stale-sha-on-incremental is the exact collision class retired). One caveat, stated when it shipped: on a shared worktree <code>-dirty</code> names the <em>checkout's</em> state, not necessarily the firmware's.
+Machine-readable JSON — the dashboard parses fields directly; a <code>summary</code> field inside carries the human sentence, so one verb serves both readers instead of two that can disagree.</p>
+<p>Fields: <code>fw</code>, <code>grammar_version</code>, <code>device_id</code>, <code>battery_pct</code>, <code>charging</code>, <code>wifi</code>, <code>ssid</code>, <code>rssi_dbm</code>, <code>heap_free</code>, <code>psram_free</code>, uptime, <code>summary</code>. <strong>Provenance honesty:</strong> a gauge that didn't answer yields <code>null</code>, never <code>false</code> — "not charging" is a claim.</p>
+<p><code>grammar_version</code> <em>(0.14.4)</em> is the field consumers should gate on: the verb grammar is a 3-consumer contract (dashboard, iOS StickyPanel, relay agents) and this integer bumps on <strong>any</strong> change to a verb, its arguments, or a reply shape. It exists because a version <em>string</em> is data inside the image and can lie about content — proven the night an uncommitted build shipped as "0.14.2" advertising a verb it didn't dispatch. <code>v1</code> = the 14-verb grammar of 0.14.3; <code>v2</code> (0.14.11) = the messages dialect — the <code>messages</code> verb family plus the <code>m:</code> button-id namespace (inbox / thread / compose).</p>
+<h3 id="sensors-card"><code>sensors [card]</code><a class="headerlink" href="#sensors-card" title="Permanent link">·</a></h3>
+<p>Every onboard sensor, read live over I²C1 — no network either way. Bare verb replies JSON; <code>sensors card</code> also paints the sensors page on the glass. Since 0.14.11 the BQ27220's mAh fields carry <strong>their own provenance</strong>: the gauge had reported <code>full_charge_mah: 7500</code> on a 750 mAh pack since first read — off by exactly 10× — and the brief carried it as a known-lying field for two days. The fix reads DesignCapacity (standard command 0x3C) and adds <strong><code>design_mah</code> + <code>pack_mah</code> + <code>mah_trusted</code></strong> (field names measured off the live wire, not predicted — an earlier draft of this line said <code>design_capacity_mah</code>, which the firmware never emitted), so the absolute-mAh fields now say <em>whether to believe them</em> instead of asking the reader to know the datasheet.</p>
+<blockquote>
+<p>🩹 <strong>A bug that lived on the wire for three builds (fixed + wire-verified on 0.14.14):</strong> the provenance fields pushed the reply past its buffer and a <code>strlcpy</code> whose return value was discarded truncated it <strong>silently</strong> — <code>sensors</code> shipped JSON cut mid-token at byte 767 while claiming <code>ESP_OK</code>, measured twice byte-identical. Two lessons survived the fix. The builder's own probe showed the cut and it was misread as <code>sed</code> clipping the line — <strong>a truncated receipt is itself evidence, not noise in the pipeline that carried it.</strong> And the dashboard's answer was defense-in-depth: a salvage parser (bracket/string-state scan, unit-tested against the actual truncated wire capture) plus a truncation <strong>banner</strong> — recover what's intact, confess what isn't. This loop re-measured on 0.14.14: complete reply, parses clean, <code>errors[]</code> and all — the published receipt agrees (767 B invalid → 840 B valid). And the defect was then treated as a <strong>class</strong>, not an instance: 0.14.16 <em>(verified on glass — this loop's probe and an independent check both parsed clean)</em> kills the same silent truncation on <code>status</code> and <code>messages unread</code> <em>before it fires</em>, and a follow-up audit swept every remaining fixed buffer on the reply paths. DesignCapacity <strong>measured</strong> at 7500 on the 750 mAh pack — and the fix was deliberately <em>not</em> a blind ÷10: if the gauge's CC-Gain is also off by 10× the errors cancel and today's working percentage would break, so <code>mah_trusted:false</code> stands (with an <code>errors[]</code> confession in the JSON) until a 30-second unplug test — owner's hands required — decides which of two <em>opposite</em> fixes applies.</p>
+</blockquote>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>{
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>  &quot;temperature_c&quot;: 24.1, &quot;humidity_pct&quot;: 41.2,          // SHT40
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>  &quot;orientation&quot;: &quot;flat&quot;, &quot;accel&quot;: {&quot;x&quot;:…}, &quot;gyro&quot;: {…}, // LSM6DS3TR-C (gyro power-cycled per read, ~110 ms)
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>  &quot;rtc&quot;: &quot;2026-08-25T21:04:11Z&quot;, &quot;rtc_zone&quot;: &quot;UTC&quot;,
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>  &quot;clock_source&quot;: &quot;sntp&quot;,                                // sntp | rtc | none — the field is honest about provenance
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>  &quot;battery&quot;: { &quot;percent&quot;:…, &quot;voltage_mv&quot;:…, &quot;current_ma&quot;:…, &quot;remaining_mah&quot;:…,
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>               &quot;full_charge_mah&quot;:…, &quot;health_pct&quot;:…, &quot;cycle_count&quot;:…,
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>               &quot;temperature_c&quot;:…, &quot;charging&quot;:…, &quot;full&quot;:…, &quot;present&quot;:…,
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>               &quot;design_mah&quot;:…, &quot;pack_mah&quot;:…, &quot;mah_trusted&quot;:… }  // BQ27220
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>}
+</span></code></pre></div>
+<p><strong>Read <code>mah_trusted</code> before you believe any mAh field</strong> (0.14.18-m12). <code>design_mah</code> is what the gauge
+says the pack is (DesignCapacity 0x3C, measured on this device: <strong>7500</strong>); <code>pack_mah</code> is the nameplate
+(<strong>750</strong>, docs/hardware.md). They disagree by 10x, so <code>mah_trusted</code> is <code>false</code> and <code>errors[]</code> carries
+<code>bq27220: design 7500 mAh vs 750 mAh pack - mAh untrusted</code>. <code>design_mah:0</code> means the read failed.
+<code>percent</code> comes straight from the gauge register <code>StateOfCharge</code> (0x2C) and is NOT computed from these
+fields — but see the JOURNAL entry for why a 10x design capacity can still bend the percentage in the
+<em>middle</em> of a discharge even while it is right at both ends. The three keys are additive; nothing in
+the dashboard consumed the mAh fields.</p>
+<h3 id="miccheck-seconds-110-s-default-2"><code>miccheck [seconds]</code> <em>(1–10 s, default 2)</em><a class="headerlink" href="#miccheck-seconds-110-s-default-2" title="Permanent link">·</a></h3>
+<p>Records PDM audio and replies RMS/peak instead of uploading:
+<code>{"verdict":"live|SILENT","rms":…,"peak":…,"nonzero_pct":…,"samples":…,"secs":…}</code>.
+A dead post-wake mic mux reads flat zeros; a live mic reads the room's noise floor — this is how <em>sleep → wake → mic</em> gets proven with nobody home to speak.</p>
+<h2 id="the-agent">The agent<a class="headerlink" href="#the-agent" title="Permanent link">·</a></h2>
+<h3 id="ask-text"><code>ask &lt;text&gt;</code><a class="headerlink" href="#ask-text" title="Permanent link">·</a></h3>
+<p>Owner-scoped agent turn via <code>POST /api/devices/ask</code> → <code>{text, card?}</code> — the answer paints as a card. <strong>Since 0.15.0 the ask streams</strong> (STREAMING_UI.md): the request carries <code>stream:"1"</code>, and a backend that knows the flag answers SSE — the words <em>type onto the glass live</em> (chat card: question = user bubble, answer types into the assistant bubble, caret at the tail, closing full refresh), and the relay reply text gains a <code>[streamed to glass]</code> suffix. A backend that ignores the flag gets the classic render-once path — the flag is an opt-in the server may decline. One ask at a time across all callers (button + relay share a single-flight mutex); a second concurrent ask is refused, never queued. This is the <strong>full agent</strong>, not a Q&amp;A endpoint: tools, memory, cross-device reach — proven on glass with <em>"what is my Mac mini's current disk usage?"</em> answered from the wall (the turn ran <code>use_device</code> against another machine in the fleet). A <code>422</code> means <em>nothing transcribed / empty speech</em>; the firmware paints an honest "didn't catch that" card instead of pretending.</p>
+<h3 id="voice-seconds-default-5"><code>voice [seconds]</code> <em>(default 5)</em><a class="headerlink" href="#voice-seconds-default-5" title="Permanent link">·</a></h3>
+<p>Same pipeline, but records the PDM mic first: WAV → <code>/api/media</code> → <code>ask</code> with <code>audioUrl</code>. This is exactly what the <strong>AI button</strong> does — the verb exists so the pipeline is testable remotely.</p>
+<h2 id="power-lifecycle">Power &amp; lifecycle<a class="headerlink" href="#power-lifecycle" title="Permanent link">·</a></h2>
+<h3 id="sleep-seconds"><code>sleep [seconds]</code><a class="headerlink" href="#sleep-seconds" title="Permanent link">·</a></h3>
+<p>Deep sleep. Order matters, and it's deliberate: <strong>reply first</strong> (the PATCH must land while the radio is up) → paint the goodbye card (e-ink keeps it at 0 mA — that is the magic) → hand over to the HAL, which holds the power latch and gates the wake pin. The AI button (EXT1, GPIO4) always wakes; optional <code>seconds</code> adds a timer wake so sleep is remotely testable.</p>
+<h3 id="messages-unread-thread-login-since-0147"><code>messages [unread | thread &lt;login&gt;]</code> <em>(since 0.14.7)</em><a class="headerlink" href="#messages-unread-thread-login-since-0147" title="Permanent link">·</a></h3>
+<p>The DM rail, driven remotely. Bare <code>messages</code> puts the <strong>inbox card</strong> on the glass; <code>messages thread &lt;login&gt;</code> opens that conversation; <code>messages unread</code> answers the badge counts as JSON and renders <strong>nothing</strong> (a monitoring probe should not repaint a panel). All three fetch with the <strong>device's own token</strong> over <code>/api/devices/messages</code> — no owner-side process anywhere. Same paths as a finger: a tapped <code>m:</code> row and a pushed verb converge on one fetch-and-render.</p>
+<h3 id="ota-channel-default-sticky-dev"><code>ota [channel]</code> <em>(default <code>sticky-dev</code>)</em><a class="headerlink" href="#ota-channel-default-sticky-dev" title="Permanent link">·</a></h3>
+<p>Stage from the channel pointer → sha256-verify → reply <strong>then</strong> reboot into a rollback-armed trial (after <code>esp_restart</code> nobody would hear the result). Replies <code>already up to date (&lt;fw version&gt;)</code> when current, <code>OTA failed: &lt;esp_err&gt;</code> otherwise. Since 0.14.9 the stage also <strong>refuses downgrades</strong>: <code>ver_cmp</code> parses <code>MAJOR.MINOR.PATCH[-mN]</code> numerically (0.2.0 &lt; 0.14.8 — no lexicographic trap), an unparseable version is INCOMPARABLE, and incomparable-without-force = refuse, <strong>fail closed</strong>. The refusal reply is an actionable sentence, not an error code. A publisher who truly means to go backwards writes <code>force:"1"</code> into the bundle — and the forced install logs loudly.</p>
+<h2 id="not-in-the-firmware-yet">Not in the firmware (yet)<a class="headerlink" href="#not-in-the-firmware-yet" title="Permanent link">·</a></h2>
+<p><code>wake</code> (a sleeping device can only be woken by button/timer — the radio is off), <code>reprovision</code> (the rescue portal opens itself after a 3-strike auth-halt — 0.14.12), <code>press</code> (no synthetic twin for buttons/long-press yet — <code>tap</code> and <code>swipe</code> cover the touchscreen but not the three physical keys), <code>image</code>/<code>stream</code> (planned; the <code>qr</code> card and <code>render_ui</code> cover most needs today). The <a href="../dashboard/">dashboard</a> greys these out with the reason — an action that does nothing is a lie on the screen.</p>
+<h2 id="reply-plumbing-all-verbs">Reply plumbing (all verbs)<a class="headerlink" href="#reply-plumbing-all-verbs" title="Permanent link">·</a></h2>
+<p>Replies go <code>PATCH /api/devices/relay</code> with <code>inReplyTo</code> and a payload that is a <strong>JSON-serialized string</strong> (<code>{"result":"…"}</code>), capped at 8 KB; images ride as hosted URLs, never bytes. A single <code>401</code> <strong>never wipes identity</strong> (blips happen — the M9 lesson, learned when one transient 401 bricked a good token): three consecutive auth failures trip an <strong>auth-halt</strong> (<code>auth_halted:true</code> in status), and since 0.14.12 the halt raises a <strong>rescue portal</strong> — live STA widens to APSTA, the same <code>/setup</code> contract as first boot, so a re-issued token has a path onto the device without a serial cable. STA stays associated throughout, so a 401 that clears self-heals without the portal ever being used.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      🖤 sticky · the 5th body of tiny — e-ink, Wi-Fi, its own
+    </div>
+  
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/cagataycali/sticky-the-reterminal" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://twitter.com/cagataycali" target="_blank" rel="noopener" title="twitter.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M357.2 48h70.6L273.6 224.2 455 464H313L201.7 318.6 74.5 464H3.8l164.9-188.5L-5.2 48h145.6l100.5 132.9zm-24.8 373.8h39.1L119.1 88h-42z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.sections", "navigation.indexes", "toc.follow", "content.code.copy", "content.code.annotate", "content.tabs.link", "content.action.edit", "search.suggest", "search.highlight", "search.share", "announce.dismiss"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid@10/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>

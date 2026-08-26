@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 300" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">
+  <style>
+    .bg{fill:#0d1117}.panel{fill:#161b22;stroke:#30363d;stroke-width:1.5}
+    .t{fill:#c9d1d9;font-size:12px}.h{fill:#e6edf3;font-size:13px;font-weight:bold}
+    .dim{fill:#8b949e;font-size:10.5px}.cyan{fill:#58a6ff}.green{fill:#3fb950}
+    .yellow{fill:#d29922}.mag{fill:#bc8cff}
+    .wire{stroke:#30363d;stroke-width:2;fill:none}
+  </style>
+  <rect class="bg" width="960" height="300" rx="12"/>
+  <text x="24" y="32" class="h" font-size="16">Voice ask — hold the AI button, speak, get a card (no phone in the loop)</text>
+
+  <!-- step boxes -->
+  <rect x="24" y="60" width="150" height="76" class="panel" rx="10"/>
+  <text x="99" y="84" text-anchor="middle" class="h">🎙 hold AI btn</text>
+  <text x="99" y="103" text-anchor="middle" class="t">PDM 16 kHz/16-bit</text>
+  <text x="99" y="120" text-anchor="middle" class="dim">PSRAM ring · ≤15 s</text>
+
+  <rect x="214" y="60" width="150" height="76" class="panel" rx="10"/>
+  <text x="289" y="84" text-anchor="middle" class="h">WAV → upload</text>
+  <text x="289" y="103" text-anchor="middle" class="yellow" font-size="11">POST /api/media</text>
+  <text x="289" y="120" text-anchor="middle" class="dim">→ audioUrl (R2)</text>
+
+  <rect x="404" y="60" width="170" height="76" class="panel" rx="10"/>
+  <text x="489" y="84" text-anchor="middle" class="h">ask the backend</text>
+  <text x="489" y="103" text-anchor="middle" class="cyan" font-size="11">POST /api/devices/ask</text>
+  <text x="489" y="120" text-anchor="middle" class="dim">{deviceId, token, audioUrl}</text>
+
+  <rect x="614" y="60" width="160" height="76" class="panel" rx="10"/>
+  <text x="694" y="84" text-anchor="middle" class="h">owner's tiny</text>
+  <text x="694" y="103" text-anchor="middle" class="t">transcribe → agent turn</text>
+  <text x="694" y="120" text-anchor="middle" class="dim">75 s budget · owner-scoped</text>
+
+  <rect x="814" y="60" width="122" height="76" class="panel" rx="10"/>
+  <text x="875" y="84" text-anchor="middle" class="h">e-ink card</text>
+  <text x="875" y="103" text-anchor="middle" class="green" font-size="11">{text, card?}</text>
+  <text x="875" y="120" text-anchor="middle" class="dim">rendered natively</text>
+
+  <!-- wires -->
+  <path class="wire" d="M174 98 L214 98"/>
+  <path class="wire" d="M364 98 L404 98"/>
+  <path class="wire" d="M574 98 L614 98"/>
+  <path class="wire" d="M774 98 L814 98"/>
+
+  <!-- animated question packet -->
+  <circle r="5" fill="#58a6ff">
+    <animateMotion dur="5s" repeatCount="indefinite" path="M99 98 L875 98"/>
+    <animate attributeName="fill" values="#f85149;#d29922;#58a6ff;#bc8cff;#3fb950" dur="5s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- listening pulse on mic box -->
+  <circle cx="42" cy="76" r="4" fill="#f85149">
+    <animate attributeName="opacity" values="1;0.15;1" dur="1s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- transcript + fallback strip -->
+  <rect x="24" y="170" width="912" height="100" class="panel" rx="10"/>
+  <text x="40" y="194" class="h">also on the wire</text>
+  <text x="40" y="216" class="t"><tspan class="mag">durable memory:</tspan> the exchange is POSTed to /api/devices/transcript {text, label:"sticky-ask", audioUrl, durationS} — it survives in the owner's history</text>
+  <text x="40" y="238" class="t"><tspan class="yellow">status codes:</tspan> 401 = revoked → reopen portal · 422 = bad audio → re-record and retry · 424 = registry down → back off</text>
+  <text x="40" y="260" class="dim">fallback path (if /ask is ever unavailable): upload WAV → POST transcript → the owner's agent notices and answers with a relay envelope</text>
+</svg>
