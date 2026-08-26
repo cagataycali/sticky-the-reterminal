@@ -1743,6 +1743,10 @@ every one of them exists because the first live attempt lied on screen:</p>
 <td>the <code>screenshot</code> verb uploads the framebuffer and answers with a hosted URL <strong>in the reply text</strong> (<code>screenshot: https://plugin.tiny.technology/media/…png</code>), not in <code>images[]</code>. The backend extracts it, checks it against <code>is_device_media_url</code>, and proxies the bytes at the guarded <code>/api/screen.png</code> — so the mirror is the REAL panel and the media URL never has to be exposed to the browser.</td>
 </tr>
 <tr>
+<td>click-anywhere mirror</td>
+<td>beyond the derived button boxes: <strong>any pixel of the mirror is a real coordinate tap</strong> — <code>offsetX/offsetY</code> read in the element's pre-transform local space, so the mapping survives the ⟳ rotation the container applies (the same runtime-state discipline, applied to the browser's side of the glass). And <code>tap</code>/<code>scroll</code>/<code>swipe</code> joined <code>GLASS_VERBS</code>: <strong>a synthetic finger mid-premiere is as destructive as a paint</strong>, so the etiquette gate now covers input, not just output</td>
+</tr>
+<tr>
 <td>clickable mirror</td>
 <td>the relay cannot read the panel's current card back, so the backend remembers the last card spec <strong>it</strong> sent and derives button boxes with the firmware's own geometry (800×480, margin 24, 56 px bar at the bottom, gap 16, n≤4 split evenly — pixel-verified against a device screenshot).</td>
 </tr>
