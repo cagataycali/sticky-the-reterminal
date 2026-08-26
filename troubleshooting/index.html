@@ -1282,6 +1282,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#glass-etiquette-the-panel-is-the-owners-pocket-object-not-a-shared-test-bench" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Glass etiquette — the panel is the owner's pocket object, not a shared test bench
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#the-version-string-says-the-feature-is-there-but-the-glass-disagrees" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2029,6 +2040,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#glass-etiquette-the-panel-is-the-owners-pocket-object-not-a-shared-test-bench" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Glass etiquette — the panel is the owner's pocket object, not a shared test bench
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#the-version-string-says-the-feature-is-there-but-the-glass-disagrees" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2169,6 +2191,15 @@ when the state change and the probe are the <strong>same actor, seconds apart, o
 fresh (non-pending) replies</strong>, with a <code>status</code> read (fw + <code>fw_commit</code> +
 uptime) bracketing the test. If the reply arrived via a redeemed pending
 envelope, it dates from the poll that drained it, not from when you sent it.</p>
+<h3 id="glass-etiquette-the-panel-is-the-owners-pocket-object-not-a-shared-test-bench">Glass etiquette — the panel is the owner's pocket object, not a shared test bench<a class="headerlink" href="#glass-etiquette-the-panel-is-the-owners-pocket-object-not-a-shared-test-bench" title="Permanent link">·</a></h3>
+<p>Bought by a live collision: a home-screen mockup card intercepted the designer's settings-scroll <em>mid-verdict</em> — the receipt's <code>card_id</code> (echoed in every scroll/tap reply exactly for this) was the only reason the verdict survived instead of failing an innocent build. The supervisor's rules, if you (human or lane) are about to touch the real panel:</p>
+<ol>
+<li><strong>Announce-and-restore.</strong> A non-owner-serving card (mockup, repainting probe) is announced on the marquee first (<code>glass: &lt;lane&gt; &lt;purpose&gt; &lt;est&gt;</code>) and the prior card — or home — is restored after. Restoring is one <code>render_ui</code>.</li>
+<li><strong>Mock cards say so:</strong> <code>card_id</code> prefixed <code>mock-</code>. A verdict that meets an unexpected <em>non</em>-mock card treats it as a real regression; a <code>mock-</code> card mid-verdict means <em>re-run</em>, not FAIL.</li>
+<li><strong>An announced verdict window wins</strong> — everyone else stays off the glass until it clears. Verdicts are the product's acceptance; a mockup can wait two minutes.</li>
+<li><strong>Owner presence trumps all.</strong> Recent real taps, the unlock chord, an ask in flight — every lane off the glass except in service of what the owner is doing. His pocket, his panel.</li>
+</ol>
+<p>No tooling enforces this yet (convention + marquee); if collisions recur, the dashboard grows a glass-lease endpoint. Status-only probes (<code>status</code>, <code>sensors</code>) don't repaint and need no announcement — which is also why they're the polite first probe.</p>
 <h3 id="the-version-string-says-the-feature-is-there-but-the-glass-disagrees">The version string says the feature is there, but the glass disagrees<a class="headerlink" href="#the-version-string-says-the-feature-is-there-but-the-glass-disagrees" title="Permanent link">·</a></h3>
 <p>Version fields describe the <em>tree the binary claims</em>, not necessarily the
 binary. Settle it in this order: <code>status</code> (fw_commit + uptime — did it
