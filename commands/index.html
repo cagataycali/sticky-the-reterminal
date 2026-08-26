@@ -2083,12 +2083,15 @@ the relay: inject the vector, read the receipt, <code>screenshot</code> the cons
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>{&quot;swipe&quot;:[400,60,400,300], &quot;rotation&quot;:90,
 </span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a> &quot;accepted&quot;:&quot;ESP_OK&quot;,          // classifier verdict at inject
 </span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a> &quot;routed&quot;:true,                // the route actually FINISHED before this reply
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a> &quot;route&quot;:&quot;ESP_OK&quot;,             // the route&#39;s OWN verdict (0.16.7): OK = nav
-</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>                               // happened, NOT_ALLOWED = announced dead-end,
-</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>                               // &quot;none&quot; = no route ran — before this field a
-</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>                               // dead-end and a nav returned identical receipts
-</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a> &quot;card_id&quot;:&quot;home&quot;,             // display-time, no longer inject-time
-</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a> &quot;summary&quot;:&quot;... -&gt; ESP_OK, route completed; card_id is display-time&quot;}
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a> &quot;route&quot;:&quot;ESP_OK&quot;,             // the route&#39;s OWN verdict (0.16.7, verified on
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>                               // glass): any esp_err name — ESP_OK = nav
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>                               // happened, ESP_ERR_NOT_ALLOWED = announced
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>                               // dead-end, ESP_ERR_INVALID_STATE = scroll with
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>                               // nothing to scroll (content fits), &quot;none&quot; = no
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>                               // route ran — before this field a dead-end and
+</span><span id="__span-4-12"><a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>                               // a nav returned identical receipts
+</span><span id="__span-4-13"><a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a> &quot;card_id&quot;:&quot;home&quot;,             // display-time, no longer inject-time
+</span><span id="__span-4-14"><a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a> &quot;summary&quot;:&quot;... -&gt; ESP_OK, route completed; card_id is display-time&quot;}
 </span></code></pre></div>
 <p>The summary's third clause is one of: <code>refused at classifier</code> ·
 <code>route completed</code> · <code>route still running at reply time</code> (slow render — probe
@@ -2097,6 +2100,13 @@ again, not lost) · <code>no route dispatched</code> (accepted but a dead-end ge
 rather than silently downgraded to a tap</strong>, because a probe that quietly becomes
 a different gesture proves nothing. Buttons and long-press still have no
 synthetic twin (<code>press</code> is not a verb yet), so those stay hand-verified.</p>
+<p><strong>Probe under rotation:</strong> coordinates are <em>panel</em> space but the gesture is
+classified in <em>logical</em> space — under <code>rotation:90</code> a panel-horizontal swipe is
+logically vertical and routes to scroll, not page-turn (live probe on 0.16.7:
+the same <code>200,240 → 500,240</code> vector answered <code>route:ESP_ERR_INVALID_STATE</code> —
+scroll with nothing to scroll — at 90°, and popped a pushed card at 0°). Read
+the receipt's <code>rotation</code> field before interpreting <code>route</code>, or pin the frame
+with <code>rotate 0</code> first.</p>
 <p>History worth keeping: verdict batch #5 convicted the first receipt design
 <em>using this verb</em> — <strong>R-5</strong> (a 40 px sub-slop swipe answered <code>ESP_OK</code>) and
 <strong>R-6</strong> (<code>card_id</code> written at inject time raced the async route, same torn-read

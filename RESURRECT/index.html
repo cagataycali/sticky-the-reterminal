@@ -1441,6 +1441,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#2026-08-26-051xz-dashboard-lane-v2-died-2-empty-note-stream-failures-after-2-good-iterations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2026-08-26 ~05:1xZ — DASHBOARD lane v2 died (2× empty-note stream failures after 2 GOOD iterations)
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1487,6 +1498,23 @@ preview ghosting simulation); (4) RTTTL composer with Web Audio preview (M-A6 su
 (5) live status card auto-refresh. Verify against real device b20893b4 via owner Bearer
 ~/.tiny/credentials.json only when a relay verb exists for the feature; otherwise verify
 server-side and say so honestly. Report each shipped item as one ANSWERS.md line."</p>
+<h2 id="2026-08-26-051xz-dashboard-lane-v2-died-2-empty-note-stream-failures-after-2-good-iterations">2026-08-26 ~05:1xZ — DASHBOARD lane v2 died (2× empty-note stream failures after 2 GOOD iterations)<a class="headerlink" href="#2026-08-26-051xz-dashboard-lane-v2-died-2-empty-note-stream-failures-after-2-good-iterations" title="Permanent link">·</a></h2>
+<p>v2 shipped its first two queue items before dying: (1) GET/POST /api/dither
+self-describing contract (7ef676d), (2) format CONFIRMED against firmware Canvas +
+regression test (d296edc). Server healthy at death (api/health 200) — the LOOP
+died, not the service. Death mode = same stream-error class as v1; v2's own iter-1
+note says it found the root cause of v1's deaths — carry that forward.</p>
+<p>BRIEF (start as: DASHBOARD LOOP v3) — same laws as v2 (RESURRECT.md above:
+exclusive files docs/dashboard/**, one endpoint/UI element per iteration, &lt;10 min,
+kill-by-PID, rebase, output hygiene: grep-don't-cat, head long output), queue
+RESUMES at item 3:
+(3) anim composer playground page (compose frames, preview ghosting simulation);
+(4) RTTTL composer with Web Audio preview (M-A6 support);
+(5) live status card auto-refresh;
+(6) POST /api/dither → relay image push — ONLY when firmware grammar v5 lands
+    (watch tiny_version.h; do not build against an unshipped contract);
+then self-directed control-surface gaps. Item 2's regression test is the model:
+every shipped contract gets a test that fails loudly when firmware drifts.</p>
 
 
 
