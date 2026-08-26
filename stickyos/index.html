@@ -1696,7 +1696,7 @@
 <tbody>
 <tr>
 <td><strong>home</strong></td>
-<td>app grid (buttons bar): Ask tiny · Status · Sensors · Settings</td>
+<td><strong>the agent UI</strong> <em>(0.20.0, M-A9A — an owner design session made this law: "the home screen MUST be the agent UI")</em>: a bespoke <code>agent_home</code> card — gear top-left, chats bubble with unread count top-right (88 px targets), a conversation canvas holding the greeting or the last answer (the streaming typer writes onto <code>card_id=home</code> directly), and a bottom <em>"Message tiny…"</em> input bar with a mic zone. Region ids reuse the existing touch-router vocabulary (<code>settings</code> / <code>m:inbox</code> / <code>type</code> / <code>speak</code>) so the routing layer didn't change — the shell now only supplies data. <em>(The pre-0.20.0 home was an app grid: Ask tiny · Status · Sensors · Settings — the four roots survive as the page ring itself.)</em></td>
 </tr>
 <tr>
 <td><strong>status</strong></td>

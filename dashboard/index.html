@@ -1851,6 +1851,10 @@ sideways. All <code>/api/*</code> routes require the session JWT (cookie or Bear
 <td>fleet row for the selected device via platform <code>/api/devices</code></td>
 </tr>
 <tr>
+<td><code>GET /api/glass</code></td>
+<td>the glass-etiquette state as an API: busy + the open window's line + note (marquee markup stripped). The UI's 🚦 GlassBanner polls it every 15 s so a refused paint says <strong>why</strong> — <em>which lane holds the announced window</em> — instead of a mysterious 409. Etiquette that started as prose, became a gate (<code>preflight_glass.py</code>), and is now legible to every client</td>
+</tr>
+<tr>
 <td><code>POST /api/invoke</code></td>
 <td>raw verb → relay envelope; waits ≤ 45 s then returns <code>{pending, envelope_id}</code> (the <code>use_device</code> contract). Since the <code>play</code> premiere: <strong>any heartbeat-advertised verb passes through</strong> — the device's own word wins, the same rule the capabilities gate follows (a verb shipped in firmware was briefly visible-but-unsendable here because the dashboard kept its own allowlist; that contradiction is now structurally impossible). Scalar args flatten positionally for every verb, so a seq id never arrives JSON-quoted</td>
 </tr>
@@ -1864,7 +1868,7 @@ sideways. All <code>/api/*</code> routes require the session JWT (cookie or Bear
 </tr>
 <tr>
 <td><code>POST /api/screenshot</code> → <code>GET /api/screen.png</code></td>
-<td>trigger a framebuffer upload, then proxy the allowlisted media URL — the browser never sees it</td>
+<td>trigger a framebuffer upload, then proxy the allowlisted media URL — the browser never sees it. <strong>Orientation travels with the pixels</strong> (owner ask): the response carries <code>rotation</code> + <code>rotation_source</code> (reply key → text fallback → an honest <code>assumed 0</code>), the mirror rotates its whole container so %-based tap zones stay glued to their pixels, and a ⟳ badge shows the effective rotation — the dashboard-side answer to the same runtime-state trap that white-painted the duck</td>
 </tr>
 <tr>
 <td><code>GET /api/buttons</code></td>
