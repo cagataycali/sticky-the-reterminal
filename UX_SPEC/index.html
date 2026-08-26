@@ -2244,9 +2244,11 @@ records and uploads. Lockout is therefore a SAFETY feature, not a convenience.</
 - UP/DOWN: page nothing; they are the unlock chord only
 - Buzzer: chirps still allowed (notification while pocketed = the product working)
 - Relay verbs: STILL ANSWER (status/screenshot/say/render_ui) — lockout guards the
-  device's own inputs, not the owner's remote reach. <code>voice</code> verb refuses while
-  locked with an honest sentence (remote-triggered recording from a pocket is the
-  same privacy incident with extra steps).</p>
+  device's own inputs, not the owner's remote reach. EVERY mic path refuses while
+  locked with an honest sentence — <code>voice</code> AND <code>miccheck</code> (D-UX5: the rule is
+  "no capture while locked", enumerated over paths, not verbs; a diagnostics verb
+  that samples the mic is still the mic). Remote-triggered recording from a pocket
+  is the same privacy incident with extra steps. <code>ask &lt;text&gt;</code> stays allowed (no mic).</p>
 <p><strong>Exit:</strong> hold UP+DOWN together 1 s → full refresh → last card restored.</p>
 <p><strong>Truth surface:</strong> <code>status</code> JSON gains <code>"locked":true|false</code> (spec-mandated field);
 the glance card shows a lock glyph. ACCEPTANCE (needs D-UX0 + a <code>lock</code>/<code>unlock</code>
