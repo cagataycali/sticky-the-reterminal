@@ -2228,7 +2228,7 @@ gate on purpose). The unlock chord — UP+DOWN held 1 s — is read as <strong>r
 by its own watcher task</strong>, deliberately independent of the button layer it
 gates: the one path back cannot be disabled by the thing it escapes. Unlock
 re-renders the last card; lockout is a state, not a page.</p>
-<p><strong>§11 half 2 — IMU auto-entry <em>(0.17.2, in tree)</em>:</strong> the pocket locks itself.
+<p><strong>§11 half 2 — IMU auto-entry <em>(since 0.17.2)</em>:</strong> the pocket locks itself.
 <code>tiny_orient</code>'s existing 1 Hz reader (no new sensor task) feeds a policy in
 <code>tiny_lock</code>: <strong>face-down ≥ 3 s</strong> (az &lt; −0.60 g — glass to the fabric) locks
 immediately; <strong>walking ≥ 5 s</strong> (sustained |mag| swings &gt; 0.18 g between 1 Hz
@@ -2238,9 +2238,12 @@ Auto-entry also resolves the standing edge below: a pocket reboot boots
 unlocked, but a pocket <em>re-locks itself</em> within seconds of the walk resuming.
 Two P-3 kindnesses ride along: rotation classification sleeps while locked
 (no orientation math for a pocket), and the locked <code>miccheck</code> refusal now
-names the reason (<code>locked</code>) instead of an errno. On-glass verification
-pending OTA — constants are named, and the spec says thresholds get tuned
-on-device.</p>
+names the reason in words instead of an errno — verified on the panel
+(0.17.2, fw_commit <code>6b94f2cd</code>): locked → <em>"miccheck refused: device is
+pocket-locked (S11) — the mic stays dead until unlock"</em>, unlocked → live mic,
+same actor, seconds apart. The IMU entry paths themselves (face-down, walk)
+need a hand and a pocket — they are the standing manual-verification item,
+and the constants are declared tunable on-device.</p>
 <div class="admonition success">
 <p class="admonition-title">The miccheck hole — found on glass, fixed on glass (closed)</p>
 <p>Lifecycle of a P1, all within hours: the docs lane ran the D-UX5 probe on
@@ -2252,7 +2255,11 @@ failure D-UX5 pre-registered before the build. 0.17.1 moved the gate to
 <strong>Closed with a same-session A/B on the physical panel (0.17.1,
 fw_commit <code>cbdca800</code>):</strong> <code>lock</code> → <code>miccheck 2</code> → <code>record failed:
 ESP_ERR_NOT_ALLOWED</code>; <code>unlock</code> → <code>miccheck 2</code> → <code>verdict:live, rms 2140</code>.
-The refusal and the recovery, seconds apart, same device.</p>
+The refusal and the recovery, seconds apart, same device. Re-run on
+0.17.2 after a P0 scare (a probe race made 0.17.1 <em>look</em> mic-leaking —
+third confirmed instance of the stale-envelope trap): refusal holds, and
+it now speaks human — <em>"device is pocket-locked (S11) — the mic stays
+dead until unlock"</em> — instead of an errno.</p>
 <p>Probe discipline note, learned the honest way: the first 0.17.1 probe
 returned <code>live</code> — because it rode a <strong>stale pending envelope</strong> executed
 after another lane's unlock. Verdicts only count when the lock and the
