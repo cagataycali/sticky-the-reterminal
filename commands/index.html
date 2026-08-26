@@ -2078,12 +2078,17 @@
 classifier a finger uses</em> — so what it proves is the real gesture grammar, not a
 parallel code path. This is how <a href="../UX_SPEC/">UX_SPEC §2</a> rules get verified over
 the relay: inject the vector, read the receipt, <code>screenshot</code> the consequence.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>// receipt shape since 0.16.6 (route-time, two stages named):
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>{&quot;swipe&quot;:[400,60,400,300], &quot;rotation&quot;:90,
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a> &quot;accepted&quot;:&quot;ESP_OK&quot;,          // classifier verdict at inject
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a> &quot;routed&quot;:true,                // the route actually FINISHED before this reply
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a> &quot;card_id&quot;:&quot;home&quot;,             // display-time, no longer inject-time
-</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a> &quot;summary&quot;:&quot;... -&gt; ESP_OK, route completed; card_id is display-time&quot;}
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>// receipt shape since 0.16.6 (route-time, two stages named);
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>// &quot;route&quot; added in 0.16.7 (R-6b, tap and swipe both):
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>{&quot;swipe&quot;:[400,60,400,300], &quot;rotation&quot;:90,
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a> &quot;accepted&quot;:&quot;ESP_OK&quot;,          // classifier verdict at inject
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a> &quot;routed&quot;:true,                // the route actually FINISHED before this reply
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a> &quot;route&quot;:&quot;ESP_OK&quot;,             // the route&#39;s OWN verdict (0.16.7): OK = nav
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>                               // happened, NOT_ALLOWED = announced dead-end,
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>                               // &quot;none&quot; = no route ran — before this field a
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>                               // dead-end and a nav returned identical receipts
+</span><span id="__span-4-10"><a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a> &quot;card_id&quot;:&quot;home&quot;,             // display-time, no longer inject-time
+</span><span id="__span-4-11"><a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a> &quot;summary&quot;:&quot;... -&gt; ESP_OK, route completed; card_id is display-time&quot;}
 </span></code></pre></div>
 <p>The summary's third clause is one of: <code>refused at classifier</code> ·
 <code>route completed</code> · <code>route still running at reply time</code> (slow render — probe
