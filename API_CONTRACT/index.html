@@ -18,7 +18,7 @@
         <link rel="prev" href="../ARCHITECTURE/">
       
       
-        <link rel="next" href="../troubleshooting/">
+        <link rel="next" href="../release/">
       
       
         
@@ -825,6 +825,8 @@
       
         
       
+        
+      
     
     
     
@@ -1153,6 +1155,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../release/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Build & release
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -1974,7 +2004,7 @@ b64 of n bytes = 4·⌈n/3⌉; with 8MB PSRAM we buffer whole (≤1MB artifacts)
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>{&quot;deviceId&quot;:&quot;…&quot;,&quot;token&quot;:&quot;…&quot;,&quot;channel&quot;:&quot;sticky-stable&quot;}
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>→ {&quot;bundle&quot;:{&quot;url&quot;:&quot;https://…manifest.json&quot;,&quot;sha256&quot;:&quot;…&quot;}}
 </span></code></pre></div>
-Manifest → files[] each with sha256; hosts must be in the pinned allowlist (tiny.technology, plugin.tiny.technology). <strong>Downgrade refusal (0.14.9; the fix for an audited hazard):</strong> the original trigger was direction-blind (<code>strcmp</code> <em>difference</em>, not <em>newer</em>) — integrity fully verified, direction unchecked, so a stale pointer would have been installed as faithfully as a fresh one. Since 0.14.9 the device compares versions numerically (<code>MAJOR.MINOR.PATCH[-mN]</code>; unparseable = INCOMPARABLE = refuse, fail closed) and stages only when the pointer is newer — unless the bundle carries <code>force:"1"</code>, which installs and <strong>logs loudly</strong>. <code>force</code> lives as <strong>channel state</strong> (migration 0035): set at publish time, served in every bundle read, self-clearing on the next forward publish — closing a cross-guard deadlock the audit caught, where the publish rail <em>allowed</em> a forced rollback but dropped the flag the install rail needed to <em>accept</em> it: two guards that individually worked and jointly wedged. The refusal reply is an actionable sentence. The publisher's ancestry check (<a href="../ARCHITECTURE/#build-release-discipline-paid-for-on-2026-08-25-m12-night">discipline rule 5</a>) remains in force, the <strong>publish route itself now 409s a backwards pointer</strong> (<code>force:true</code> = an intentional rollback, spelled out at publish time), and the dashboard's <code>ota</code> action opens a <strong>30-minute watch</strong>: <code>fw_before</code> is captured by a fresh probe, every parsed status receipt afterwards feeds the redeem, and the verdict is rendered — ⬆✅ upgraded, ⬆🚨 DOWNGRADED, or ⌛ expired-unredeemed, never silence. Three enforcement points (publish, install, watch), each with its own receipt.</p>
+Manifest → files[] each with sha256; hosts must be in the pinned allowlist (tiny.technology, plugin.tiny.technology). <strong>Downgrade refusal (0.14.9; the fix for an audited hazard):</strong> the original trigger was direction-blind (<code>strcmp</code> <em>difference</em>, not <em>newer</em>) — integrity fully verified, direction unchecked, so a stale pointer would have been installed as faithfully as a fresh one. Since 0.14.9 the device compares versions numerically (<code>MAJOR.MINOR.PATCH[-mN]</code>; unparseable = INCOMPARABLE = refuse, fail closed) and stages only when the pointer is newer — unless the bundle carries <code>force:"1"</code>, which installs and <strong>logs loudly</strong>. <code>force</code> lives as <strong>channel state</strong> (migration 0035): set at publish time, served in every bundle read, self-clearing on the next forward publish — closing a cross-guard deadlock the audit caught, where the publish rail <em>allowed</em> a forced rollback but dropped the flag the install rail needed to <em>accept</em> it: two guards that individually worked and jointly wedged. The refusal reply is an actionable sentence. The publisher's ancestry check (<a href="../release/">discipline rule 5</a>) remains in force, the <strong>publish route itself now 409s a backwards pointer</strong> (<code>force:true</code> = an intentional rollback, spelled out at publish time), and the dashboard's <code>ota</code> action opens a <strong>30-minute watch</strong>: <code>fw_before</code> is captured by a fresh probe, every parsed status receipt afterwards feeds the redeem, and the verdict is rendered — ⬆✅ upgraded, ⬆🚨 DOWNGRADED, or ⌛ expired-unredeemed, never silence. Three enforcement points (publish, install, watch), each with its own receipt.</p>
 <h2 id="apidevicesask-shipped-in-m5-full-tools-since-phase-3-gate-1"><code>/api/devices/ask</code> — shipped in M5, full tools since phase-3 gate #1<a class="headerlink" href="#apidevicesask-shipped-in-m5-full-tools-since-phase-3-gate-1" title="Permanent link">·</a></h2>
 <p><div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>POST /api/devices/ask
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>{&quot;deviceId&quot;:&quot;…&quot;,&quot;token&quot;:&quot;…&quot;,&quot;audioUrl&quot;:&quot;https://…&quot;} | {&quot;…&quot;,&quot;text&quot;:&quot;what&#39;s on my calendar&quot;}

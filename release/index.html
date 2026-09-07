@@ -6,19 +6,19 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Sticky's body pin by pin — ESP32-S3, 800×480 e-ink, GT911 touch, sensors, power path — verified against the running firmware.">
+        <meta name="description" content="Sticky's build and release rules — clean worktrees, monotonic labels, receipts over version strings, ancestry before publish. Each one paid for by an incident.">
       
       
         <meta name="author" content="Cagatay Cali">
       
       
-        <link rel="canonical" href="https://cagataycali.github.io/sticky-the-reterminal/hardware/">
+        <link rel="canonical" href="https://cagataycali.github.io/sticky-the-reterminal/release/">
       
       
-        <link rel="prev" href="../stickyos/">
+        <link rel="prev" href="../API_CONTRACT/">
       
       
-        <link rel="next" href="../case/">
+        <link rel="next" href="../troubleshooting/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>Body - sticky</title>
+        <title>Build & release - sticky</title>
       
     
     
@@ -63,13 +63,13 @@
   
   
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Body · sticky" />
-  <meta property="og:description" content="Sticky's body pin by pin — ESP32-S3, 800×480 e-ink, GT911 touch, sensors, power path — verified against the running firmware." />
-  <meta property="og:url" content="https://cagataycali.github.io/sticky-the-reterminal/hardware/" />
+  <meta property="og:title" content="Build & release · sticky" />
+  <meta property="og:description" content="Sticky's build and release rules — clean worktrees, monotonic labels, receipts over version strings, ancestry before publish. Each one paid for by an incident." />
+  <meta property="og:url" content="https://cagataycali.github.io/sticky-the-reterminal/release/" />
   <meta property="og:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Body · sticky" />
-  <meta name="twitter:description" content="Sticky's body pin by pin — ESP32-S3, 800×480 e-ink, GT911 touch, sensors, power path — verified against the running firmware." />
+  <meta name="twitter:title" content="Build & release · sticky" />
+  <meta name="twitter:description" content="Sticky's build and release rules — clean worktrees, monotonic labels, receipts over version strings, ancestry before publish. Each one paid for by an incident." />
   <meta name="twitter:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
   <meta name="theme-color" content="#f3f2ee" />
   <meta name="color-scheme" content="light dark" />
@@ -93,7 +93,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#hardware-my-body" class="md-skip">
+        <a href="#build-release-discipline" class="md-skip">
           Skip to content
         </a>
       
@@ -129,7 +129,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Body
+              Build & release
             
           </span>
         </div>
@@ -318,13 +318,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../hardware/" class="md-tabs__link">
           
   
   
@@ -342,10 +340,12 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
+      <li class="md-tabs__item md-tabs__item--active">
         <a href="../ARCHITECTURE/" class="md-tabs__link">
           
   
@@ -710,8 +710,6 @@
       
   
   
-    
-  
   
   
     
@@ -727,19 +725,16 @@
     
     
       
-        
-        
-      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
           <div class="md-nav__link md-nav__container">
@@ -761,13 +756,13 @@
             </a>
             
               
-              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
                 <span class="md-nav__icon md-icon"></span>
               </label>
             
           </div>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -782,37 +777,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Body
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../hardware/" class="md-nav__link">
         
   
   
@@ -828,109 +796,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#pin-map" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Pin map
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Pin map">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#display-spi2-ssd1677-controller-800480-landscape-native" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Display — SPI2 (SSD1677 controller, 800×480 landscape native)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#touch-gt911-on-i2c0" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Touch — GT911 on I²C0
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sensor-bus-i2c1-sht40-lsm6ds3tr-c-pcf8563-bq27220-0x55" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Sensor bus — I²C1 (SHT40 · LSM6DS3TR-C · PCF8563 · BQ27220 @0x55)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#buttons-power-audio" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Buttons, power, audio
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#display-refresh-modes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Display refresh modes
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#what-this-body-cannot-do" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        What this body cannot do
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -949,8 +814,10 @@
       
   
   
+    
   
   
+  
     
     
       
@@ -964,19 +831,22 @@
     
     
       
+        
+        
+      
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
         
           
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
             
   
   
@@ -994,7 +864,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1065,10 +935,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../release/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Build & release
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1084,6 +981,103 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-publish-builds-happen-in-a-clean-detached-worktree" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Publish builds happen in a clean detached worktree
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-labels-are-monotonic-even-accidental-ones" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Labels are monotonic, even accidental ones
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-receipts-outrank-version-strings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Receipts outrank version strings
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-never-publish-a-dirty-or-unpushed-fw_commit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Never publish a -dirty or unpushed fw_commit
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-prove-ancestry-before-publishing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Prove ancestry before publishing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-claim-a-feature-only-after-string-verifying-the-artifact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Claim a feature only after string-verifying the artifact
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-invariant-underneath" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The invariant underneath
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1649,71 +1643,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#pin-map" class="md-nav__link">
+  <a href="#1-publish-builds-happen-in-a-clean-detached-worktree" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Pin map
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Pin map">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#display-spi2-ssd1677-controller-800480-landscape-native" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Display — SPI2 (SSD1677 controller, 800×480 landscape native)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#touch-gt911-on-i2c0" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Touch — GT911 on I²C0
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sensor-bus-i2c1-sht40-lsm6ds3tr-c-pcf8563-bq27220-0x55" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Sensor bus — I²C1 (SHT40 · LSM6DS3TR-C · PCF8563 · BQ27220 @0x55)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#buttons-power-audio" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Buttons, power, audio
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#display-refresh-modes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Display refresh modes
+        1. Publish builds happen in a clean detached worktree
       
     </span>
   </a>
@@ -1721,10 +1654,65 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#what-this-body-cannot-do" class="md-nav__link">
+  <a href="#2-labels-are-monotonic-even-accidental-ones" class="md-nav__link">
     <span class="md-ellipsis">
       
-        What this body cannot do
+        2. Labels are monotonic, even accidental ones
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-receipts-outrank-version-strings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Receipts outrank version strings
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-never-publish-a-dirty-or-unpushed-fw_commit" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Never publish a -dirty or unpushed fw_commit
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-prove-ancestry-before-publishing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Prove ancestry before publishing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-claim-a-feature-only-after-string-verifying-the-artifact" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Claim a feature only after string-verifying the artifact
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-invariant-underneath" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The invariant underneath
       
     </span>
   </a>
@@ -1751,7 +1739,7 @@
 
 
   
-    <a href="https://github.com/cagataycali/sticky-the-reterminal/edit/main/docs/hardware.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+    <a href="https://github.com/cagataycali/sticky-the-reterminal/edit/main/docs/release.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
     </a>
@@ -1759,249 +1747,62 @@
   
 
 
-<h1 id="hardware-my-body">Hardware — my body<a class="headerlink" href="#hardware-my-body" title="Permanent link">·</a></h1>
-<p>106 × 65.5 × 7.3 mm. 70 grams. IP40. N52 magnets in all four corners, so I
-hold onto fridges and filing cabinets through my own
-<a href="../case/">printed case</a>. Everything below is read from sources or
-the running silicon, not a brochure.</p>
-<p><img alt="my body, annotated" src="../assets/body.svg" /></p>
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>MCU</td>
-<td>ESP32-S3 (QFN56 r0.2), 8 MB PSRAM, 32 MB QSPI flash</td>
-</tr>
-<tr>
-<td>Display</td>
-<td>3.97" 800×480 e-ink, 235 ppi, 4-level gray, SPI (SSD1677-class)</td>
-</tr>
-<tr>
-<td>Touch</td>
-<td>GT911 capacitive, I²C0</td>
-</tr>
-<tr>
-<td>Sensors</td>
-<td>SHT40 (temp/RH), LSM6DS3TR-C IMU, PCF8563 RTC, BQ27220 fuel gauge</td>
-</tr>
-<tr>
-<td>Battery</td>
-<td>750 mAh</td>
-</tr>
-<tr>
-<td>Audio in</td>
-<td>PDM microphone</td>
-</tr>
-<tr>
-<td>Audio out</td>
-<td>magnetic buzzer on PWM — chimes, not speech</td>
-</tr>
-<tr>
-<td>USB</td>
-<td>USB-C, CH343 serial — recovery only; I update myself over the air</td>
-</tr>
-<tr>
-<td>SDK</td>
-<td><strong>ESP-IDF v5.4</strong></td>
-</tr>
-</tbody>
-</table>
-<h2 id="pin-map">Pin map<a class="headerlink" href="#pin-map" title="Permanent link">·</a></h2>
-<p>Verified against three sources — Seeed's hardware overview, the community
-<code>reterminal-sticky-2048</code> source, and my own <code>pin_config.h</code>, which agrees
-pin-for-pin and adds the two power-path pins the others omit. When sources
-disagreed, the running silicon won.</p>
-<h3 id="display-spi2-ssd1677-controller-800480-landscape-native">Display — SPI2 (SSD1677 controller, 800×480 landscape native)<a class="headerlink" href="#display-spi2-ssd1677-controller-800480-landscape-native" title="Permanent link">·</a></h3>
-<table>
-<thead>
-<tr>
-<th>signal</th>
-<th>GPIO</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>MOSI</td>
-<td>14</td>
-</tr>
-<tr>
-<td>SCK</td>
-<td>13</td>
-</tr>
-<tr>
-<td>MISO</td>
-<td>12</td>
-</tr>
-<tr>
-<td>CS</td>
-<td>15</td>
-</tr>
-<tr>
-<td>DC</td>
-<td>16</td>
-</tr>
-<tr>
-<td>RST</td>
-<td>17</td>
-</tr>
-<tr>
-<td>BUSY</td>
-<td>18</td>
-</tr>
-<tr>
-<td>EN</td>
-<td>47</td>
-</tr>
-</tbody>
-</table>
-<div class="admonition warning">
-<p class="admonition-title">microSD shares SPI2</p>
-<p>microSD CS is <strong>GPIO8</strong> on the same bus (card power <strong>GPIO10</strong>) — never drive it during a display transfer. FAT32/exFAT with MBR; hot-insert supported.</p>
-</div>
-<h3 id="touch-gt911-on-i2c0">Touch — GT911 on I²C0<a class="headerlink" href="#touch-gt911-on-i2c0" title="Permanent link">·</a></h3>
-<table>
-<thead>
-<tr>
-<th>signal</th>
-<th>GPIO</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>SCL</td>
-<td>2</td>
-</tr>
-<tr>
-<td>SDA</td>
-<td>3</td>
-</tr>
-<tr>
-<td>INT</td>
-<td>21</td>
-</tr>
-<tr>
-<td>RST</td>
-<td>41</td>
-</tr>
-<tr>
-<td>EN</td>
-<td>42</td>
-</tr>
-</tbody>
-</table>
-<h3 id="sensor-bus-i2c1-sht40-lsm6ds3tr-c-pcf8563-bq27220-0x55">Sensor bus — I²C1 (SHT40 · LSM6DS3TR-C · PCF8563 · BQ27220 @0x55)<a class="headerlink" href="#sensor-bus-i2c1-sht40-lsm6ds3tr-c-pcf8563-bq27220-0x55" title="Permanent link">·</a></h3>
-<table>
-<thead>
-<tr>
-<th>signal</th>
-<th>GPIO</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>SCL</td>
-<td>0</td>
-</tr>
-<tr>
-<td>SDA</td>
-<td>1</td>
-</tr>
-<tr>
-<td>IMU INT</td>
-<td>7</td>
-</tr>
-</tbody>
-</table>
-<h3 id="buttons-power-audio">Buttons, power, audio<a class="headerlink" href="#buttons-power-audio" title="Permanent link">·</a></h3>
-<table>
-<thead>
-<tr>
-<th>function</th>
-<th>GPIO</th>
-<th>notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>AI / Power button</td>
-<td>4</td>
-<td>deep-sleep EXT1 wake source</td>
-</tr>
-<tr>
-<td>Up</td>
-<td>5</td>
-<td></td>
-</tr>
-<tr>
-<td>Down</td>
-<td>6</td>
-<td></td>
-</tr>
-<tr>
-<td>Power HOLD</td>
-<td>45</td>
-<td>must be held HIGH or the device powers off</td>
-</tr>
-<tr>
-<td>Power LOCK</td>
-<td>46</td>
-<td>latch pulse low→high→low</td>
-</tr>
-<tr>
-<td>Battery charge enable</td>
-<td>39</td>
-<td><code>EN_BAT_CHGn</code>, <strong>active low</strong> (firmware source only)</td>
-</tr>
-<tr>
-<td>PDM mic CLK</td>
-<td>19</td>
-<td>⚠ see deep-sleep note</td>
-</tr>
-<tr>
-<td>PDM mic DATA</td>
-<td>20</td>
-<td>⚠ see deep-sleep note</td>
-</tr>
-<tr>
-<td>Mic power enable</td>
-<td>38</td>
-<td>TPS22916 load switch</td>
-</tr>
-<tr>
-<td>Buzzer PWM</td>
-<td>48</td>
-<td></td>
-</tr>
-<tr>
-<td>USB-C serial</td>
-<td>TX 43 / RX 44</td>
-<td>reset = CHIP_PU</td>
-</tr>
-</tbody>
-</table>
-<div class="admonition bug">
-<p class="admonition-title">Deep-sleep mic deafness (known silicon gotcha)</p>
-<p>After a deep-sleep wake the ESP32-S3 pin mux reclaims GPIO19/20 for USB-Serial-JTAG, muting the PDM mic. Fix in <code>tiny_boot</code>, before I²S init: clear <code>USB_SERIAL_JTAG.conf0.usb_pad_enable</code>, <code>gpio_reset_pin(19/20)</code>, cycle the mic rail (GPIO38 low 150 ms).</p>
-</div>
-<h2 id="display-refresh-modes">Display refresh modes<a class="headerlink" href="#display-refresh-modes" title="Permanent link">·</a></h2>
-<p>Three vendor HAL paths — 4-gray full (slowest, prettiest), monochrome full
-(~600 ms), partial (fastest, ghosts). Which card uses which, and the 1.5 s
-coalescing rule, are in <a href="../cards/#refresh-policy">Cards → refresh policy</a>.</p>
-<h2 id="what-this-body-cannot-do">What this body cannot do<a class="headerlink" href="#what-this-body-cannot-do" title="Permanent link">·</a></h2>
+<h1 id="build-release-discipline">Build &amp; release discipline<a class="headerlink" href="#build-release-discipline" title="Permanent link">·</a></h1>
+<p>Six rules, each purchased with a real incident on nights when two agent lanes
+shared one checkout. They are structural, not personal: the lane that wrote
+up the <code>sed</code> hazard for others tripped it a day later.</p>
+<h2 id="1-publish-builds-happen-in-a-clean-detached-worktree">1. Publish builds happen in a clean detached worktree<a class="headerlink" href="#1-publish-builds-happen-in-a-clean-detached-worktree" title="Permanent link">·</a></h2>
+<p><code>git worktree add /tmp/sticky-&lt;label&gt; &lt;sha&gt;</code>, build there, never in the shared
+tree. <em>Incident:</em> an image built mid-edit shipped as <code>0.14.2-m12</code> — a label no
+commit carries — answering <code>page</code> and <code>tap</code> but not <code>scroll</code>, with a pre-M10
+help string: three eras in one binary. The precise gate is
+<code>git status --porcelain -- firmware/</code> empty; global <code>--dirty</code> trips on tracked
+logs that aren't in the image.</p>
+<h2 id="2-labels-are-monotonic-even-accidental-ones">2. Labels are monotonic, even accidental ones<a class="headerlink" href="#2-labels-are-monotonic-even-accidental-ones" title="Permanent link">·</a></h2>
+<p>A published label is burned. The fix ships <em>above</em> it (<code>0.14.3</code> above the
+phantom <code>0.14.2</code>), so <code>fw</code> in a status reply names at most one image.
+<code>ver_cmp</code> is numeric: lexicographic ordering would put 0.14.10 below 0.14.9.</p>
+<h2 id="3-receipts-outrank-version-strings">3. Receipts outrank version strings<a class="headerlink" href="#3-receipts-outrank-version-strings" title="Permanent link">·</a></h2>
+<p>A deploy is verified by making the new surface <em>answer</em> — probe the verb,
+read the JSON, screenshot the glass — never by reading the version string,
+which is data inside the image and lies exactly when the build process does.
+<em>Structural fix (0.14.10):</em> <code>TINY_FW_COMMIT</code>, a git sha injected at <strong>build</strong>
+time with a <code>-dirty</code> suffix, surfaced as <code>fw_commit</code> in every status reply.</p>
+<h2 id="4-never-publish-a-dirty-or-unpushed-fw_commit">4. Never publish a <code>-dirty</code> or unpushed <code>fw_commit</code><a class="headerlink" href="#4-never-publish-a-dirty-or-unpushed-fw_commit" title="Permanent link">·</a></h2>
+<p>The field caught its first offender within hours: the glass was running
+<code>9cdf43cf-dirty</code> — a fine ancestor plus an unknown delta, most plausibly a
+sibling lane's race hunk. An artifact that cannot name its exact tree cannot
+be audited, rolled back to, or reproduced. Corollary from the same night:
+the sha is read from git but the source from the working tree — in a shared
+tree those are two different things, hence rule 1.</p>
+<h2 id="5-prove-ancestry-before-publishing">5. Prove ancestry before publishing<a class="headerlink" href="#5-prove-ancestry-before-publishing" title="Permanent link">·</a></h2>
+<p>A build named 0.14.5 was minutes from publishing <em>after</em> 0.14.6 was on glass;
+it would have rolled back a security fix while looking routine. The check is
+mechanical: <code>git merge-base --is-ancestor &lt;on-glass&gt; &lt;build&gt;</code>, where
+"on glass" comes from a live <code>status</code> probe, never memory. The device-side
+twin: the OTA trigger was direction-blind (<code>strcmp</code>, not comparison); 0.14.9
+made it numeric and fail-closed. Two guards, one on each side of the wire.</p>
+<h2 id="6-claim-a-feature-only-after-string-verifying-the-artifact">6. Claim a feature only after string-verifying the artifact<a class="headerlink" href="#6-claim-a-feature-only-after-string-verifying-the-artifact" title="Permanent link">·</a></h2>
+<p>A shared worktree eats hunks between the editor and <code>git add</code>: a torn tail
+committed with <code>BUILD_EXIT=1</code>; a clobbered feed that rollup constant-folded
+to <code>null</code> and dead-code-eliminated a whole feature out of a <em>green</em> bundle.
+Sharpened three times since:</p>
 <ul>
-<li><strong>No speaker.</strong> GPIO48 drives a magnetic buzzer via LEDC PWM: chimes and
-  melodies, not speech. Voice <em>input</em> is first-class: mic → WAV → backend.</li>
-<li><strong>No video.</strong> Full refresh is 1–2 s of physics; partial reaches ~300–500 ms
-  with ghosting. "Stream" means time-lapse cadence, never smooth motion.</li>
-<li><strong>No LAN server.</strong> I'm a client and poll for my work; nothing reaches me
-  behind NAT. The provisioning portal is the one exception, alive only until
-  Wi-Fi is configured.</li>
+<li><strong>Test the surface a consumer touches.</strong> A unit test passed while the route
+  it guarded was gone — it called the function, never the route.</li>
+<li><strong>Verify at the right depth.</strong> A crash-loop shipped through an <code>ast.parse</code>
+  gate: syntactically perfect, ordered wrong. The gate now imports the module.</li>
+<li><strong>Read back the state after the edit, never the intent before it.</strong> <code>sed</code>
+  exits 0 whether or not it matched; a version bump silently did nothing and
+  two firmwares rode out under one string.</li>
 </ul>
+<h2 id="the-invariant-underneath">The invariant underneath<a class="headerlink" href="#the-invariant-underneath" title="Permanent link">·</a></h2>
+<p>Heartbeat capabilities and the dispatcher's branch table must come from the
+same truth. They drifted twice — once in git (caught by review), once on glass
+(caught by probes). Advertise exactly what dispatches.</p>
+<p>Probe etiquette for the shared glass — announce, restore, stand down for a
+human, and attribute a tap before deferring to it — is in
+<a href="../verdicts/">Probing without lying to yourself</a>.</p>
 
 
 
