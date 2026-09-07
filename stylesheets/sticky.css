@@ -95,6 +95,73 @@
 .md-sidebar--secondary .md-nav__link--active { color: var(--accent); }
 .md-progress { background: var(--accent); }
 
+/* ==== .sk-* : the shell every page shares (SHELL lane). Partials: overrides/partials/sk-header.html ====
+   One slim bar: wordmark · seven quiet links · theme · search · GitHub. Sticky, paper behind it, one hairline under it.
+   It replaces Material's header AND tabs AND the left sidebar on desktop; under 76.25em the burger opens Material's
+   drawer, restyled as paper + ink. Material's ids stay so its JS keeps working. */
+.sk-header { position: sticky; top: 0; z-index: 4; height: auto; box-shadow: none !important; border-bottom: var(--hairline);
+  background: color-mix(in srgb, var(--paper) 86%, transparent); -webkit-backdrop-filter: saturate(1.2) blur(12px); backdrop-filter: saturate(1.2) blur(12px);
+  color: var(--ink-3); transition: none; }
+@supports not (background: color-mix(in srgb, red 50%, transparent)) { .sk-header { background: var(--paper); } }
+.sk-bar { display: flex; align-items: center; gap: 1.2rem; max-width: 72rem; margin: 0 auto; padding: 0 1.25rem; height: 2.8rem; }
+.sk-wordmark { font-weight: 650; font-size: .95rem; letter-spacing: -.02em; color: var(--ink-3); text-decoration: none; line-height: 1; padding: .3rem 0; }
+.sk-wordmark:hover, .sk-wordmark:focus-visible { color: var(--ink-3); }
+.sk-nav { display: none; list-style: none; margin: 0 0 0 .4rem; padding: 0; gap: 1.35rem; flex: 1 1 auto; min-width: 0; }
+.sk-nav li { margin: 0; padding: 0; }
+.sk-nav__link { display: inline-block; position: relative; font-size: .76rem; font-weight: 500; letter-spacing: -.005em; color: var(--ink-2);
+  text-decoration: none; padding: .95rem 0; line-height: 1; white-space: nowrap; transition: color .2s; }
+.sk-nav__link:hover, .sk-nav__link:focus-visible { color: var(--ink-3); outline: none; }
+.sk-nav__link.is-active { color: var(--ink-3); }
+.sk-nav__link.is-active::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--accent); }
+.sk-tools { display: flex; align-items: center; gap: .25rem; margin-left: auto; }
+.sk-header .md-icon, .sk-header .md-header__button { color: var(--ink-2); padding: .4rem; margin: 0; }
+.sk-header .md-icon:hover, .sk-header .md-header__button:hover { color: var(--ink-3); opacity: 1; }
+.sk-header .md-icon svg, .sk-header .md-header__button svg { width: 1.1rem; height: 1.1rem; fill: currentcolor; display: block; }
+.sk-github { display: inline-flex; }
+.sk-burger { display: inline-flex; margin-left: -.4rem !important; }
+.sk-header .md-header__option { display: inline-flex; }
+/* search: a quiet pill; Material grows it on focus */
+.sk-header .md-search { margin: 0; }
+.sk-header .md-search__form { height: 1.7rem; border-radius: 999px; background: var(--ink-0); border: var(--hairline); box-shadow: none; }
+.sk-header .md-search__input { font-size: .72rem; height: 1.7rem; padding-left: 2.1rem; color: var(--ink-3); }
+.sk-header .md-search__input::placeholder { color: var(--ink-2); }
+.sk-header .md-search__icon[for="__search"] { top: .3rem; left: .5rem; width: 1rem; height: 1rem; color: var(--ink-2); }
+.sk-header .md-search__icon svg, .sk-header .md-search__options svg { width: 1rem; height: 1rem; }
+.sk-header .md-search__options { top: .3rem; }
+.sk-header .md-search__output { border-radius: 14px; margin-top: .4rem; box-shadow: 0 30px 60px -30px rgba(0,0,0,.35), 0 0 0 1px var(--ink-1); overflow: hidden; }
+[data-md-toggle="search"]:checked ~ .sk-header .md-search__form { border-radius: 14px 14px 0 0; background: var(--paper); }
+@media screen and (min-width: 60em) {
+  .sk-header .md-search__inner { width: 9rem; }
+  .sk-search-btn { display: none; }
+}
+@media screen and (min-width: 76.25em) {
+  .sk-nav { display: flex; }
+  .sk-burger { display: none; }
+  .sk-header ~ .md-container .md-sidebar--primary { display: none; }   /* the bar IS the nav on desktop */
+}
+@media screen and (max-width: 76.1875em) {
+  .sk-bar { height: 2.6rem; gap: .6rem; padding: 0 .8rem; }
+  .sk-wordmark { font-size: .9rem; }
+}
+@media screen and (max-width: 59.9375em) {
+  .sk-header .md-search__form { border-radius: 0; border: 0; background: transparent; }
+  [data-md-toggle="search"]:checked ~ .sk-header .md-search { background: var(--paper); }
+  [data-md-toggle="search"]:checked ~ .sk-header .md-search__inner { background: var(--paper); }
+  .sk-header .md-search__input { padding-left: 2.6rem; }
+}
+/* the drawer (phone/tablet): paper, ink, hairlines — no primary-colour banner */
+.md-nav--primary .md-nav__title[for="__drawer"] { background: var(--paper); color: var(--ink-3); border-bottom: var(--hairline); height: auto; padding: 1.4rem .8rem .8rem; font-size: .85rem; font-weight: 650; letter-spacing: -.02em; text-transform: none; }
+.md-nav--primary .md-nav__title .md-nav__button { display: none; }
+.md-nav--primary .md-nav__title { background: var(--paper); color: var(--ink-3); box-shadow: none; }
+.md-nav--primary .md-nav__item { border-top: 0; }
+.md-nav--primary .md-nav__link { font-size: .8rem; color: var(--ink-3); }
+.md-nav--primary .md-nav__link--active { color: var(--accent); }
+.md-nav--primary .md-nav__item--active > .md-nav__link { color: var(--accent); }
+.md-nav--primary .md-nav__list > .md-nav__item--section > .md-nav__link { font-size: .64rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); }
+.md-nav--primary .md-nav__source { background: var(--ink-0); border-bottom: var(--hairline); color: var(--ink-3); }
+.md-overlay { background: rgba(20,20,20,.35); }
+[data-md-color-scheme="slate"] .md-overlay { background: rgba(0,0,0,.6); }
+
 /* ---- type: a magazine ramp, generous leading ---- */
 .md-typeset { font-size: .82rem; line-height: 1.65; }
 .md-typeset h1 { font-weight: 650; letter-spacing: -.025em; color: var(--md-default-fg-color); font-size: 2.1em; margin-bottom: .6em; }
