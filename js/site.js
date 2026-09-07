@@ -4,9 +4,12 @@
       data-sk-pages = every page URL under that nav entry (relative to the page that rendered it).
    2. Tables: mark ones with 3+ columns .sk-wide (phone scrolls them instead of folding rows) and keep a paper fade
       on the wrapper's right edge only while there is more table to the right (.has-more).
-   S5 adds reveal-on-scroll here. */
+   3. Motion: below-the-fold blocks (figures, cards, tables, code, notes, .glass) rise 10 px into place the first time
+      they scroll in. Only when JS runs (html.sk-js), only once per block, never above the fold, never when the
+      reader asked for reduced motion. Home has its own choreography in landing.js and is skipped. */
 (function () {
   'use strict';
+  document.documentElement.classList.add('sk-js');
   var norm = function (u) { return new URL(u, location.href).pathname.replace(/index\.html$/, ''); };
   function syncActive() {
     var nav = document.querySelector('[data-sk-nav]');
@@ -27,7 +30,22 @@
       box.addEventListener('scroll', update, { passive: true }); window.addEventListener('resize', update, { passive: true }); update();
     });
   }
-  function boot() { syncActive(); tables(); }
+  var SEL = '.md-typeset > figure, .md-typeset > .glass-grid, .md-typeset > .glass, .md-typeset > .md-typeset__scrollwrap, ' +
+            '.md-typeset > .highlight, .md-typeset > pre, .md-typeset > .admonition, .md-typeset > details, .md-typeset > .tabbed-set, .md-typeset > .grid';
+  function reveal() {
+    if (!document.querySelector('.sk-header ~ .md-container') || document.getElementById('landing')) return;
+    if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var fold = innerHeight;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll(SEL).forEach(function (el) {
+      if (el.classList.contains('sk-reveal')) return;
+      if (el.getBoundingClientRect().top < fold) return;      // already on screen: never hide what the reader can see
+      el.classList.add('sk-reveal'); io.observe(el);
+    });
+  }
+  function boot() { syncActive(); tables(); reveal(); }
   if (window.document$ && window.document$.subscribe) window.document$.subscribe(boot);
   else document.addEventListener('DOMContentLoaded', boot);
 })();

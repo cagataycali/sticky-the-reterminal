@@ -402,6 +402,11 @@
   color: var(--md-default-fg-color--light); margin: 0 0 1.2rem; display: flex; gap: 1.2rem; flex-wrap: wrap; }
 .sticky-budget b { color: var(--accent); font-weight: 500; }
 
+/* ---- S5 motion: a block rises 10 px into place the first time it scrolls in (site.js adds .sk-reveal below the fold only) ---- */
+.sk-js .sk-reveal { opacity: 0; transform: translateY(10px); transition: opacity .5s cubic-bezier(.2,.7,.2,1), transform .5s cubic-bezier(.2,.7,.2,1); }
+.sk-js .sk-reveal.is-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .sk-js .sk-reveal { opacity: 1; transform: none; transition: none; } }
+
 /* ---- motion: e-ink does not animate, and neither should the manual for people who asked it not to ---- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
