@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device.">
+        <meta name="description" content="The card grammar Sticky renders — text, list, kv, composite, qr, chart, chat, image, keyboard, menu — with the honesty rules behind each.">
       
       
         <meta name="author" content="Cagatay Cali">
@@ -64,12 +64,12 @@
   
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Cards · sticky" />
-  <meta property="og:description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device." />
+  <meta property="og:description" content="The card grammar Sticky renders — text, list, kv, composite, qr, chart, chat, image, keyboard, menu — with the honesty rules behind each." />
   <meta property="og:url" content="https://cagataycali.github.io/sticky-the-reterminal/cards/" />
   <meta property="og:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Cards · sticky" />
-  <meta name="twitter:description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device." />
+  <meta name="twitter:description" content="The card grammar Sticky renders — text, list, kv, composite, qr, chart, chat, image, keyboard, menu — with the honesty rules behind each." />
   <meta name="twitter:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
   <meta name="theme-color" content="#f3f2ee" />
   <meta name="color-scheme" content="light dark" />
@@ -1838,6 +1838,8 @@
               
               <article class="md-content__inner md-typeset">
                 
+  <p class="sticky-budget"><span><b>~3 min</b> read</span></p>
+  
   
                   
 
@@ -1853,9 +1855,9 @@
 
 <h1 id="cards-the-language-spoken-to-my-glass">Cards — the language spoken to my glass<a class="headerlink" href="#cards-the-language-spoken-to-my-glass" title="Permanent link">·</a></h1>
 <p>Everything on my panel is a card. Agent answers, my own pages, the setup
-screen — one renderer draws them all from JSON. The rule I inherited from
+screen — one renderer draws them all from JSON. The rule inherited from
 tiny's <code>render_ui</code>: <strong>no code ships in a card, only data.</strong> I render each
-type natively, in 800×480 and four grays.</p>
+type natively, 800×480, four grays.</p>
 <p><img alt="anatomy of a card" src="../assets/card-anatomy.svg" /></p>
 <p>Every card can carry: <code>title</code>, <code>card_id</code> (echoed back in receipts — it's
 how you know what's actually on my glass), <code>footer</code>, and <code>buttons</code>.
@@ -1865,10 +1867,10 @@ with the next card. The screen is a conversation.</p>
 <h3 id="text">text<a class="headerlink" href="#text" title="Permanent link">·</a></h3>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;text&quot;</span><span class="p">,</span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Dinner&quot;</span><span class="p">,</span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="s2">&quot;Back at 19:30 — pizza in fridge&quot;</span><span class="p">}</span>
 </span></code></pre></div>
-<p>Word-wrapped. An unknown card type degrades to a labelled error card —
-never a blank panel. A card without an id gets a stable synthesized one
-(<code>auto-xxxxxxxx</code>, hashed from its content), so receipts always correlate.
-Text past my fold budget ends in a visible <code>[cut]</code>, never silently.</p>
+<p>Word-wrapped. An unknown type degrades to a labelled error card, never a
+blank panel. A card without an id gets a stable one hashed from its content
+(<code>auto-xxxxxxxx</code>), so receipts always correlate. Text past the fold ends in
+a visible <code>[cut]</code>.</p>
 <h3 id="list">list<a class="headerlink" href="#list" title="Permanent link">·</a></h3>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;list&quot;</span><span class="p">,</span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Groceries&quot;</span><span class="p">,</span><span class="nt">&quot;items&quot;</span><span class="p">:[</span><span class="s2">&quot;milk&quot;</span><span class="p">,</span><span class="s2">&quot;eggs&quot;</span><span class="p">,</span><span class="s2">&quot;bread&quot;</span><span class="p">]}</span>
 </span></code></pre></div>
@@ -1879,58 +1881,51 @@ Text past my fold budget ends in a visible <code>[cut]</code>, never silently.</
 <h3 id="composite">composite<a class="headerlink" href="#composite" title="Permanent link">·</a></h3>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;composite&quot;</span><span class="p">,</span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Morning&quot;</span><span class="p">,</span><span class="nt">&quot;parts&quot;</span><span class="p">:[{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;kv&quot;</span><span class="p">},{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;list&quot;</span><span class="p">}]}</span>
 </span></code></pre></div>
-<p>Up to 4 parts sharing the body evenly. More than that and nothing is
-legible at my glyph size — so I refuse rather than squint.</p>
+<p>Up to 4 parts sharing the body evenly. More than that is illegible at my
+glyph size, so I refuse rather than squint.</p>
 <h3 id="qr">qr<a class="headerlink" href="#qr" title="Permanent link">·</a></h3>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;qr&quot;</span><span class="p">,</span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="s2">&quot;WIFI:S:tiny-1a2b;T:WPA;P:tinysetup;;&quot;</span><span class="p">,</span><span class="nt">&quot;caption&quot;</span><span class="p">:</span><span class="s2">&quot;scan to join&quot;</span><span class="p">}</span>
 </span></code></pre></div>
 <p>Exists because typing a Wi-Fi password <em>off</em> a 4-gray panel is the worst
-part of setup. Two honesty rules, because an unscannable QR looks exactly
-like a scannable one from across the room: below 3px per module a phone
-camera gives up on e-ink, so I say how much room the symbol needed instead
-of painting a decorative square; text over the version cap gets its byte
+part of setup. An unscannable QR looks exactly like a scannable one, so:
+below 3 px per module I say how much room the symbol needed instead of
+painting a decorative square, and text over the version cap gets its byte
 count named, not encoded wrong.</p>
 <h3 id="chart">chart<a class="headerlink" href="#chart" title="Permanent link">·</a></h3>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;chart&quot;</span><span class="p">,</span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Battery&quot;</span><span class="p">,</span><span class="nt">&quot;data&quot;</span><span class="p">:[</span><span class="mi">92</span><span class="p">,</span><span class="mi">90</span><span class="p">,</span><span class="mi">88</span><span class="p">,</span><span class="mi">85</span><span class="p">,</span><span class="mi">84</span><span class="p">],</span><span class="nt">&quot;style&quot;</span><span class="p">:</span><span class="s2">&quot;line&quot;</span><span class="p">,</span><span class="nt">&quot;y_min&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">&quot;y_max&quot;</span><span class="p">:</span><span class="mi">100</span><span class="p">}</span>
 </span></code></pre></div>
-<p>Sparkline-class line or bar. The scale is drawn on the axis — a chart that
-hides its scale is a mood, not a measurement. E-ink tuning: 2px stroke
-(1px ghosts), first/last x-labels only, 160-point cap. Fewer than 2 points
-gets an honest void, not a fake plot.</p>
+<p>Line or bar, scale drawn on the axis — a chart that hides its scale is a
+mood, not a measurement. E-ink tuning: 2 px stroke (1 px ghosts), 160-point
+cap. Fewer than 2 points gets an honest void.</p>
 <h3 id="chat">chat<a class="headerlink" href="#chat" title="Permanent link">·</a></h3>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;chat&quot;</span><span class="p">,</span><span class="nt">&quot;card_id&quot;</span><span class="p">:</span><span class="s2">&quot;ask&quot;</span><span class="p">,</span><span class="nt">&quot;messages&quot;</span><span class="p">:[</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="p">{</span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="s2">&quot;user&quot;</span><span class="p">,</span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="s2">&quot;what&#39;s the weather&quot;</span><span class="p">},</span>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="p">{</span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="s2">&quot;assistant&quot;</span><span class="p">,</span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="s2">&quot;Sunny, 24C.&quot;</span><span class="p">}</span>
 </span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">]}</span>
 </span></code></pre></div>
-<p>The phone conversation, translated to four grays: your messages filled and
-right-aligned, the agent's outlined and left. A streamed text ask renders
-as this automatically — your question echoes as the receipt, the answer
-types itself in at ≤2Hz partial refresh, then settles with one full
-refresh. A short answer shrinks to its own width: "Yes." is a chip, not
-a banner.</p>
+<p>The phone conversation in four grays: yours filled and right-aligned, the
+agent's outlined and left. A streamed <code>ask</code> renders as this automatically —
+the answer types itself in at ≤2 Hz partial refresh, then settles with one
+full refresh. "Yes." is a chip, not a banner.</p>
 <h3 id="image">image<a class="headerlink" href="#image" title="Permanent link">·</a></h3>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;image&quot;</span><span class="p">,</span><span class="nt">&quot;card_id&quot;</span><span class="p">:</span><span class="s2">&quot;my-frame&quot;</span><span class="p">,</span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="s2">&quot;https://…/portrait_1bit.bin&quot;</span><span class="p">}</span>
 </span></code></pre></div>
 <p>Server-rendered pixels: the backend dithers, I fetch the exact-size raw
-frame and blit it. Shipped with the strongest receipt in this repo — the
-first frame was screenshotted back and diffed against the server's own
-preview: <strong>0 of 384,000 pixels differed.</strong> Gate on <code>grammar_version &gt;= 7</code>.</p>
+frame and blit it. First frame screenshotted back and diffed against the
+server's preview: <strong>0 of 384,000 pixels differed.</strong> Gate on <code>grammar_version &gt;= 7</code>.</p>
 <h3 id="keyboard-menu-my-own-pages-use-these">keyboard · menu <em>(my own pages use these)</em><a class="headerlink" href="#keyboard-menu-my-own-pages-use-these" title="Permanent link">·</a></h3>
-<p>The e-ink keyboard (letters + a <code>?123</code> symbols plane, iOS key faces —
-filled, because outlines ghost on partial refresh and fills don't) and
-tappable menu rows with right-aligned notes. Both reachable via <code>render_ui</code>
-too. A menu shows up to 24 items and unstages rows that scroll out of
-view — an invisible button must not be tappable.</p>
+<p>The e-ink keyboard (letters + <code>?123</code> plane; filled key faces, because
+outlines ghost on partial refresh) and tappable menu rows with right-aligned
+notes. A menu shows up to 24 items and unstages rows that scroll out of view
+— an invisible button must not be tappable.</p>
 <h3 id="priority">priority<a class="headerlink" href="#priority" title="Permanent link">·</a></h3>
-<p>Any card may declare <code>"priority":"alert"</code> — today that's a <code>!</code> prefix on
-the title, parsed now so senders can declare intent before the full
-notification model lands. Declared, not oversold.</p>
+<p>Any card may declare <code>"priority":"alert"</code> — today a <code>!</code> prefix on the
+title, parsed now so senders can declare intent before the notification
+model lands.</p>
 <h2 id="scrolling">Scrolling<a class="headerlink" href="#scrolling" title="Permanent link">·</a></h2>
-<p>A body taller than my panel scrolls: right-edge track-and-thumb scrollbar,
-partial-refresh steps, driven by swipe, my UP/DOWN keys, or the agent's
-<code>scroll</code> verb — whose reply carries the whole model (<code>offset</code> /
-<code>content_h</code> / <code>view_h</code>). A card that fits says <code>scrollable:false</code>.</p>
+<p>A body taller than my panel scrolls: right-edge scrollbar, partial-refresh
+steps, driven by swipe, UP/DOWN, or the <code>scroll</code> verb, whose reply carries
+the whole model (<code>offset</code> / <code>content_h</code> / <code>view_h</code>).</p>
 <h2 id="refresh-policy">Refresh policy<a class="headerlink" href="#refresh-policy" title="Permanent link">·</a></h2>
 <p>E-ink physics, honestly:</p>
 <table>
@@ -1959,13 +1954,12 @@ partial-refresh steps, driven by swipe, my UP/DOWN keys, or the agent's
 </tr>
 </tbody>
 </table>
-<p>Minimum 1.5s between refreshes; bursts coalesce — I queue and render the
-last. And my favorite spec line: a goodbye card survives deep sleep at
-<strong>0mA</strong>. I keep the picture with every rail off.</p>
+<p>Minimum 1.5 s between refreshes; bursts coalesce — I render the last. My
+favourite spec line: a goodbye card survives deep sleep at <strong>0 mA</strong>.</p>
 <h2 id="whats-not-a-card">What's not a card<a class="headerlink" href="#whats-not-a-card" title="Permanent link">·</a></h2>
-<p>Frame sequences graduated to the <a href="../commands/"><code>play</code> verb</a> — manifests of
-pre-dithered frames at partial-refresh cadence. The full renderer history,
-including every bug conviction and retraction, lives in the
+<p>Frame sequences graduated to the <a href="../commands/#the-verbs"><code>play</code> verb</a>.
+Recipes for all of the above are in the <a href="../cookbook/">Cookbook</a>; the
+renderer's full history, convictions and retractions included, is in the
 <a href="https://github.com/cagataycali/sticky-the-reterminal/blob/main/archive/docs/JOURNAL.md">journal</a>.</p>
 
 
@@ -1973,6 +1967,9 @@ including every bug conviction and retraction, lives in the
 
 
 
+
+  
+  
 
 
 

@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device.">
+        <meta name="description" content="Recipes for putting things on Sticky's e-ink — the four ways in, nine cards worth copying, and what you can't compose yet.">
       
       
         <meta name="author" content="Cagatay Cali">
@@ -64,12 +64,12 @@
   
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Cookbook · sticky" />
-  <meta property="og:description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device." />
+  <meta property="og:description" content="Recipes for putting things on Sticky's e-ink — the four ways in, nine cards worth copying, and what you can't compose yet." />
   <meta property="og:url" content="https://cagataycali.github.io/sticky-the-reterminal/cookbook/" />
   <meta property="og:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Cookbook · sticky" />
-  <meta name="twitter:description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device." />
+  <meta name="twitter:description" content="Recipes for putting things on Sticky's e-ink — the four ways in, nine cards worth copying, and what you can't compose yet." />
   <meta name="twitter:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
   <meta name="theme-color" content="#f3f2ee" />
   <meta name="color-scheme" content="light dark" />
@@ -93,7 +93,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#compose-for-my-glass-a-cookbook" class="md-skip">
+        <a href="#cookbook-composing-for-my-glass" class="md-skip">
           Skip to content
         </a>
       
@@ -853,10 +853,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#e-ink-etiquette-why-your-card-renders-slowly" class="md-nav__link">
+  <a href="#e-ink-etiquette" class="md-nav__link">
     <span class="md-ellipsis">
       
-        E-ink etiquette (why your card renders "slowly")
+        E-ink etiquette
       
     </span>
   </a>
@@ -1793,10 +1793,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#e-ink-etiquette-why-your-card-renders-slowly" class="md-nav__link">
+  <a href="#e-ink-etiquette" class="md-nav__link">
     <span class="md-ellipsis">
       
-        E-ink etiquette (why your card renders "slowly")
+        E-ink etiquette
       
     </span>
   </a>
@@ -1816,6 +1816,8 @@
               
               <article class="md-content__inner md-typeset">
                 
+  <p class="sticky-budget"><span><b>~3 min</b> read</span></p>
+  
   
                   
 
@@ -1829,10 +1831,9 @@
   
 
 
-<h1 id="compose-for-my-glass-a-cookbook">Compose for my glass — a cookbook<a class="headerlink" href="#compose-for-my-glass-a-cookbook" title="Permanent link">·</a></h1>
-<p>Recipes for putting things on my e-ink, written for the agents who do it
-daily. Everything here is checked against my actual dispatch table and
-renderers — anything I don't do yet is marked planned, not implied.</p>
+<h1 id="cookbook-composing-for-my-glass">Cookbook — composing for my glass<a class="headerlink" href="#cookbook-composing-for-my-glass" title="Permanent link">·</a></h1>
+<p>Recipes for the agents who put things on my e-ink daily, checked against my
+actual dispatch table. Anything I don't do yet is marked planned, not implied.</p>
 <h2 id="four-ways-in">Four ways in<a class="headerlink" href="#four-ways-in" title="Permanent link">·</a></h2>
 <table>
 <thead>
@@ -1845,67 +1846,62 @@ renderers — anything I don't do yet is marked planned, not implied.</p>
 <tbody>
 <tr>
 <td><strong><code>sticky_display</code> tiny-tool</strong></td>
-<td>you are one of the owner's tinys with <code>~/.tiny/tools</code> loaded</td>
-<td><code>{text:"…"}</code> → <code>say</code> · <code>{card:"&lt;json&gt;"}</code> → <code>render_ui</code> · <code>{verb:"status"}</code> → anything else. Waits ~20 s; a still-pending envelope is returned honestly with its id</td>
+<td>one of the owner's tinys with <code>~/.tiny/tools</code> loaded</td>
+<td><code>{text}</code> → <code>say</code> · <code>{card}</code> → <code>render_ui</code> · <code>{verb}</code> → anything else. Waits ~20 s; a pending envelope is returned with its id</td>
 </tr>
 <tr>
 <td><strong><code>use_device</code></strong></td>
 <td>any tiny surface (iOS, web, another machine)</td>
-<td><code>action:'invoke'</code>, device <code>sticky</code>, prompt = the verb string itself, e.g. <code>say hello</code> or <code>render_ui {...}</code></td>
+<td><code>invoke</code> on device <code>sticky</code>, prompt = the verb string, e.g. <code>say hello</code></td>
 </tr>
 <tr>
 <td><strong><a href="../dashboard/">dashboard</a></strong></td>
 <td>a human at a browser</td>
-<td>buttons light from the device's advertised caps; unsupported actions are greyed <em>with the reason</em></td>
+<td>buttons light from my advertised caps; unsupported ones are greyed <em>with the reason</em></td>
 </tr>
 <tr>
 <td><strong>raw relay HTTP</strong></td>
 <td>no tiny runtime at all</td>
-<td><code>POST /api/devices/relay</code> <code>{toDevice, payload:{type:'invoke', prompt}}</code> with an owner Bearer → poll <code>GET /api/devices/relay?inReplyTo=&lt;id&gt;</code>. Replies are a <strong>JSON-serialized string</strong>, ≤ 8 KB — see <a href="../commands/#reply-plumbing">Commands → reply plumbing</a></td>
+<td><code>POST /api/devices/relay</code> <code>{toDevice, payload:{type:'invoke', prompt}}</code> with an owner Bearer, then poll <code>GET …?inReplyTo=&lt;id&gt;</code> (<a href="../commands/#reply-plumbing">reply plumbing</a>)</td>
 </tr>
 </tbody>
 </table>
-<p>The device polls its relay every <strong>5 s awake, backing off to 60 s idle</strong> — a
-"slow" first response is usually just the poll cadence, not a fault. Asleep, it
-answers nothing until a button or timer wakes it (<a href="../commands/#not-in-the-firmware">why there is no <code>wake</code>
-verb</a>).</p>
+<p>I poll my relay every <strong>5 s awake, backing off to 60 s idle</strong> — a "slow" first
+response is usually the poll cadence, not a fault. Asleep, I answer nothing
+until a button or timer wakes me (<a href="../commands/#not-in-the-firmware">no <code>wake</code> verb</a>).</p>
 <h2 id="recipes">Recipes<a class="headerlink" href="#recipes" title="Permanent link">·</a></h2>
 <h3 id="say-something-the-one-liner">Say something (the one-liner)<a class="headerlink" href="#say-something-the-one-liner" title="Permanent link">·</a></h3>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>say Kettle&#39;s boiled — tea window: 4 minutes
 </span></code></pre></div>
-<p>Plain text, monochrome full refresh, on the glass in one panel cycle. With the
-tiny-tool, <code>{text, title}</code> upgrades this to a titled <code>text</code> card.</p>
+<p>Plain text, on the glass in one panel cycle. With the tiny-tool, <code>{text,
+title}</code> upgrades it to a titled <code>text</code> card.</p>
 <h3 id="a-glanceable-status-card">A glanceable status card<a class="headerlink" href="#a-glanceable-status-card" title="Permanent link">·</a></h3>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="err">re</span><span class="kc">n</span><span class="err">der_ui</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;kv&quot;</span><span class="p">,</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;brew&quot;</span><span class="p">,</span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Kombucha — day 6&quot;</span><span class="p">,</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">&quot;rows&quot;</span><span class="p">:[[</span><span class="s2">&quot;pH&quot;</span><span class="p">,</span><span class="s2">&quot;3.4&quot;</span><span class="p">],[</span><span class="s2">&quot;temp&quot;</span><span class="p">,</span><span class="s2">&quot;24.1 C&quot;</span><span class="p">],[</span><span class="s2">&quot;started&quot;</span><span class="p">,</span><span class="s2">&quot;Aug 20&quot;</span><span class="p">],[</span><span class="s2">&quot;bottle&quot;</span><span class="p">,</span><span class="s2">&quot;in 2 days&quot;</span><span class="p">]],</span>
 </span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">  </span><span class="nt">&quot;footer&quot;</span><span class="p">:</span><span class="s2">&quot;sensors read 03:20Z&quot;</span><span class="p">}</span>
 </span></code></pre></div>
-<p><code>kv</code> is the workhorse for agent status. Put provenance in the footer — the
+<p><code>kv</code> is the workhorse for agent status. Put provenance in the footer: the
 panel persists for hours, so <strong>when the data was true matters more than on a
-phone</strong> (the <a href="../stickyos/#the-pages">glance cluster</a> carries the same
-discipline).</p>
+phone</strong>.</p>
 <h3 id="a-tappable-menu-the-screen-answers-back">A tappable menu — the screen answers back<a class="headerlink" href="#a-tappable-menu-the-screen-answers-back" title="Permanent link">·</a></h3>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="err">re</span><span class="kc">n</span><span class="err">der_ui</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;menu&quot;</span><span class="p">,</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;lunch&quot;</span><span class="p">,</span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Lunch?&quot;</span><span class="p">,</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">&quot;items&quot;</span><span class="p">:[{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;m:ramen&quot;</span><span class="p">,</span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="s2">&quot;Ramen&quot;</span><span class="p">},{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;m:leftovers&quot;</span><span class="p">,</span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="s2">&quot;Leftovers&quot;</span><span class="p">},</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">           </span><span class="p">{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;m:skip&quot;</span><span class="p">,</span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="s2">&quot;Skip - deep work&quot;</span><span class="p">}]}</span>
 </span></code></pre></div>
 <p>A tap comes back to the owner's event feed as a <code>ui_tap</code> with your item id —
-<strong>the screen is a conversation, not a poster.</strong> Design ids like the firmware's
-own namespaces (<code>m:t:&lt;login&gt;</code> in the <a href="../stickyos/#messages-on-the-glass">messages app</a>):
-the destination travels in the id, so no state needs remembering. Menus show up
-to 24 items and unstage off-window rows — an invisible button is never tappable.</p>
+<strong>the screen is a conversation, not a poster.</strong> Put the destination in the id
+(the firmware's own <code>m:t:&lt;login&gt;</code> style) so no state needs remembering.</p>
 <h3 id="a-chart-that-admits-its-scale">A chart that admits its scale<a class="headerlink" href="#a-chart-that-admits-its-scale" title="Permanent link">·</a></h3>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="err">re</span><span class="kc">n</span><span class="err">der_ui</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;chart&quot;</span><span class="p">,</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;temp24h&quot;</span><span class="p">,</span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Office temp - 24h&quot;</span><span class="p">,</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">&quot;series&quot;</span><span class="p">:[</span><span class="mf">21.2</span><span class="p">,</span><span class="mf">21.4</span><span class="p">,</span><span class="mf">22.8</span><span class="p">,</span><span class="mf">24.1</span><span class="p">,</span><span class="mf">23.6</span><span class="p">,</span><span class="mf">22.2</span><span class="p">,</span><span class="mf">21.9</span><span class="p">],</span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="s2">&quot;C&quot;</span><span class="p">}</span>
 </span></code></pre></div>
-<p>Axis labels are drawn because <em>a chart that hides its scale is a mood, not a
-measurement</em>; under 2 points or a 60 px squeeze it renders an honest void
+<p>Axis labels are always drawn; under 2 points it renders an honest void
 (<a href="../cards/#chart">cards → chart</a>).</p>
 <h3 id="a-qr-that-hands-off-to-a-phone">A QR that hands off to a phone<a class="headerlink" href="#a-qr-that-hands-off-to-a-phone" title="Permanent link">·</a></h3>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="err">re</span><span class="kc">n</span><span class="err">der_ui</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;qr&quot;</span><span class="p">,</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;handoff&quot;</span><span class="p">,</span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Full report&quot;</span><span class="p">,</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="s2">&quot;https://tiny.technology/s/abc123&quot;</span><span class="p">,</span><span class="nt">&quot;caption&quot;</span><span class="p">:</span><span class="s2">&quot;scan for the long version&quot;</span><span class="p">}</span>
 </span></code></pre></div>
-<p>E-ink's best trick: ~200 chars of glass become an unbounded payload on the
+<p>E-ink's best trick: 200 chars of glass become an unbounded payload on the
 device that <em>does</em> scroll fast.</p>
 <h3 id="probe-the-ui-with-no-one-in-the-room">Probe the UI with no one in the room<a class="headerlink" href="#probe-the-ui-with-no-one-in-the-room" title="Permanent link">·</a></h3>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>screenshot            → hosted PNG of the real framebuffer
@@ -1913,29 +1909,25 @@ device that <em>does</em> scroll fast.</p>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>swipe 400 60 400 300  → same release classifier; INVALID_SIZE = within tap slop
 </span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>screenshot            → prove the consequence
 </span></code></pre></div>
-<p>The verified loop for testing what you rendered —
-<a href="../commands/#the-verbs"><code>tap</code></a> / <a href="../commands/#the-verbs"><code>swipe</code></a>.
-One honesty rule from the P0 postmortem: <strong>a receipt is not proof the
-consequence survived</strong> — always close with the second screenshot.</p>
+<p>The loop for testing what you rendered with nobody home. One rule from a
+postmortem: <strong>a receipt is not proof the consequence survived</strong> — always
+close with the second screenshot.</p>
 <h3 id="a-photo-server-rendered">A photo, server-rendered<a class="headerlink" href="#a-photo-server-rendered" title="Permanent link">·</a></h3>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="err">re</span><span class="kc">n</span><span class="err">der_ui</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;image&quot;</span><span class="p">,</span><span class="nt">&quot;card_id&quot;</span><span class="p">:</span><span class="s2">&quot;photo&quot;</span><span class="p">,</span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="s2">&quot;https://…/portrait_1bit.bin&quot;</span><span class="p">}</span>
 </span></code></pre></div>
-<p>The backend dithers, I fetch the exact-size raw frame and blit —
-pixel-perfect by receipt (0 of 384,000 pixels differed on the proving run).
-Gate on <code>grammar_version &gt;= 7</code> from <code>status</code>. Photos sent from the iOS app
-land in my gallery, browsable with my UP/DOWN keys.</p>
+<p>The backend dithers, I fetch the exact-size raw frame and blit. Gate on
+<code>grammar_version &gt;= 7</code> from <code>status</code>. Photos sent from the iOS app land in my
+gallery, browsable with UP/DOWN.</p>
 <h3 id="a-moving-picture-time-lapse-honesty">A moving picture (time-lapse honesty)<a class="headerlink" href="#a-moving-picture-time-lapse-honesty" title="Permanent link">·</a></h3>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>play https://…/manifest.json 2
 </span></code></pre></div>
-<p>Frames at partial-refresh cadence — a slideshow, never smooth motion
-(physics, see <a href="../hardware/">hardware</a>). All frames prefetch before the ack;
-half a duck is not a smaller duck. <code>play status</code> reads the player's own
-verdict; <code>play stop</code> or any card ends it.</p>
+<p>Frames at partial-refresh cadence — a slideshow, never smooth motion. All
+frames prefetch before the ack; half a duck is not a smaller duck. <code>play
+status</code> reads the player's verdict; <code>play stop</code> or any card ends it.</p>
 <h3 id="stream-an-answer-the-typer">Stream an answer (the typer)<a class="headerlink" href="#stream-an-answer-the-typer" title="Permanent link">·</a></h3>
-<p><code>ask &lt;text&gt;</code> with a streaming-aware backend types the answer onto the glass
-word by word (~2 Hz — the panel's partial-refresh budget, not a simulation of
-one). One ask at a time, fleet-wide; a second is refused, never queued. Full
-design: <a href="../streaming/">Streaming UI</a>.</p>
+<p><code>ask &lt;text&gt;</code> types the answer onto the glass word by word at ~2 Hz — the
+panel's partial-refresh budget. One ask at a time; a second is refused, never
+queued. Design: <a href="../streaming/">Streaming UI</a>.</p>
 <h2 id="what-you-cannot-compose-yet">What you cannot compose yet<a class="headerlink" href="#what-you-cannot-compose-yet" title="Permanent link">·</a></h2>
 <table>
 <thead>
@@ -1947,30 +1939,28 @@ design: <a href="../streaming/">Streaming UI</a>.</p>
 <tbody>
 <tr>
 <td>RTTTL melodies on my buzzer</td>
-<td><strong>planned</strong> — today my buzzer speaks a 3-word vocabulary: blip (accepted), double-blip (refused), chime. The dashboard's tune composer is built and waiting for the verb</td>
+<td><strong>planned</strong> — today my buzzer speaks three words: blip (accepted), double-blip (refused), chime. The dashboard's tune composer is built and waiting for the verb</td>
 </tr>
 <tr>
 <td>video</td>
-<td><strong>never</strong> — physics, not roadmap: my full refresh floors at 1–2 s. The honest ceiling is slideshow cadence, and I will keep calling it that</td>
+<td><strong>never</strong> — physics, not roadmap: full refresh floors at 1–2 s. The ceiling is slideshow cadence and I will keep calling it that</td>
 </tr>
 </tbody>
 </table>
-<p>(<code>image</code> and frame streams used to live in this table. They shipped —
-recipes above.)</p>
-<h2 id="e-ink-etiquette-why-your-card-renders-slowly">E-ink etiquette (why your card renders "slowly")<a class="headerlink" href="#e-ink-etiquette-why-your-card-renders-slowly" title="Permanent link">·</a></h2>
-<ul>
-<li>Refreshes floor at <strong>1.5 s apart</strong>; bursts coalesce — queue, render <em>last</em>.
-  Design cards to be <strong>final</strong>, not chatty: one good card beats four updates.</li>
-<li>A card left on the glass costs <strong>0 mA</strong> — e-ink holds the image with every
-  rail off. Lean on that: render, then leave it alone.</li>
-<li>Full policy: <a href="../cards/#refresh-policy">cards → refresh policy</a>.</li>
-</ul>
+<h2 id="e-ink-etiquette">E-ink etiquette<a class="headerlink" href="#e-ink-etiquette" title="Permanent link">·</a></h2>
+<p>Refreshes floor at <strong>1.5 s apart</strong> and bursts coalesce, so design cards to be
+<strong>final</strong>, not chatty: one good card beats four updates. A card left on the
+glass costs <strong>0 mA</strong> — render, then leave it alone
+(<a href="../cards/#refresh-policy">refresh policy</a>).</p>
 
 
 
 
 
 
+
+  
+  
 
 
 
