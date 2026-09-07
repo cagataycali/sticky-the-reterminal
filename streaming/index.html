@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device.">
+        <meta name="description" content="How an agent's answer types itself onto e-ink at ~2 Hz — the physics budget, the SSE wire, the eight rules, and the on-glass proof.">
       
       
         <meta name="author" content="Cagatay Cali">
@@ -64,12 +64,12 @@
   
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Streaming UI · sticky" />
-  <meta property="og:description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device." />
+  <meta property="og:description" content="How an agent's answer types itself onto e-ink at ~2 Hz — the physics budget, the SSE wire, the eight rules, and the on-glass proof." />
   <meta property="og:url" content="https://cagataycali.github.io/sticky-the-reterminal/streaming/" />
   <meta property="og:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Streaming UI · sticky" />
-  <meta name="twitter:description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device." />
+  <meta name="twitter:description" content="How an agent's answer types itself onto e-ink at ~2 Hz — the physics budget, the SSE wire, the eight rules, and the on-glass proof." />
   <meta name="twitter:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
   <meta name="theme-color" content="#f3f2ee" />
   <meta name="color-scheme" content="light dark" />
@@ -93,7 +93,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#streaming-ui-the-typer-on-e-ink" class="md-skip">
+        <a href="#streaming-the-typer-on-e-ink" class="md-skip">
           Skip to content
         </a>
       
@@ -1289,6 +1289,24 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Streaming UI
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1305,6 +1323,91 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-physics-budget" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The physics budget
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#end-to-end" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        End to end
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#eight-rules-each-paid-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Eight rules, each paid for
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-wire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The wire
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-chat-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The chat card
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proof-on-glass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Proof on glass
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1525,6 +1628,80 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-physics-budget" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The physics budget
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#end-to-end" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        End to end
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#eight-rules-each-paid-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Eight rules, each paid for
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-wire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The wire
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-chat-card" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The chat card
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#proof-on-glass" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Proof on glass
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1536,6 +1713,8 @@
               
               <article class="md-content__inner md-typeset">
                 
+  <p class="sticky-budget"><span><b>~3 min</b> read</span></p>
+  
   
                   
 
@@ -1549,252 +1728,99 @@
   
 
 
-<h1 id="streaming-ui-the-typer-on-e-ink">Streaming UI — the typer on e-ink<a class="headerlink" href="#streaming-ui-the-typer-on-e-ink" title="Permanent link">·</a></h1>
-<p>Words arriving on my glass live, at the ~2Hz my partial refresh allows —
-a real budget, not a simulated one.</p>
-<div class="admonition info">
-<p class="admonition-title">Provenance</p>
-<p>Below is the <code>archive/docs/STREAMING_UI.md</code> design document, included
-verbatim — the spec the feature was built against (grammar v3, shipped
-0.15.x: the <code>chat</code> card, SSE ask, <code>[streamed to glass]</code> receipts). It
-stays unedited here so there is exactly one source of truth — and it
-speaks as a spec, not as me. Shipped-reality cross-references:
-<a href="../cards/#chat"><code>chat</code> card</a> · <a href="../commands/#the-verbs"><code>ask</code> verb</a>.</p>
-</div>
-<h1 id="streaming_ui-the-human-typer-on-e-ink">STREAMING_UI — the human-typer on e-ink<a class="headerlink" href="#streaming_ui-the-human-typer-on-e-ink" title="Permanent link">·</a></h1>
-<blockquote>
-<p>Agent answers arrive on the glass the way tiny types on iOS: word by word,
-a caret blinking at the tail, the bubble settling with a final full refresh.
-Target: <strong>grammar v3</strong>, fw 0.15.x.</p>
-</blockquote>
-<h2 id="why-this-is-possible-the-physics-budget">Why this is possible (the physics budget)<a class="headerlink" href="#why-this-is-possible-the-physics-budget" title="Permanent link">·</a></h2>
+<h1 id="streaming-the-typer-on-e-ink">Streaming — the typer on e-ink<a class="headerlink" href="#streaming-the-typer-on-e-ink" title="Permanent link">·</a></h1>
+<p>Answers arrive on my glass the way tiny types on a phone: word by word, a
+caret at the tail, the bubble settling with one final full refresh. Not a
+simulation of typing — the real rate my panel allows.</p>
+<h2 id="the-physics-budget">The physics budget<a class="headerlink" href="#the-physics-budget" title="Permanent link">·</a></h2>
 <table>
 <thead>
 <tr>
 <th>operation</th>
 <th>cost</th>
-<th>source</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>full mono refresh</td>
 <td>~1–2 s</td>
-<td><code>sticky_display_refresh_monochrome()</code></td>
 </tr>
 <tr>
 <td>partial refresh</td>
 <td>~300–500 ms</td>
-<td><code>sticky_display_refresh_partial()</code></td>
 </tr>
 <tr>
-<td>max stream commit rate</td>
+<td><strong>max stream commit rate</strong></td>
 <td><strong>~2 Hz</strong></td>
-<td>partial cost + panel busy-wait</td>
 </tr>
 </tbody>
 </table>
-<p>Char-by-char is impossible; <strong>word/phrase-batched typewriter at ~2 Hz</strong> is
-comfortable and reads as intentional on e-ink — a telegram arriving, not a
-degraded phone. The fast path already exists: keyboard self-re-renders (same
-<code>card_id</code>) and scroll steps take <code>refresh_partial()</code> (tiny_display.cpp:1175).
-Streaming rides the SAME gate.</p>
-<h2 id="architecture-end-to-end">Architecture (end to end)<a class="headerlink" href="#architecture-end-to-end" title="Permanent link">·</a></h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>   backend (worker /device/ask)          firmware (esp32s3)
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>   ───────────────────────────           ─────────────────────────────
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>   POST {…, stream:&quot;1&quot;}       ──────►    tiny_node_do_ask_stream()
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>   ◄────── SSE: data:{&quot;t&quot;:&quot;…&quot;}           esp_http_client_read() loop
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>           data:{&quot;t&quot;:&quot;…&quot;}                  │ parse data: lines
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>           data:{&quot;card&quot;:{…}}               ▼
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>           data:[DONE]                   tiny_display stream API
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>                                           stream_begin(title)   full refresh
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>                                           stream_append(delta)  buffer only
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>                                           stream_commit()       PARTIAL ≤2Hz
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>                                           stream_end(card?)     full refresh
+<p>Character-by-character is impossible. A word-batched typewriter at 2 Hz reads
+as intentional — a telegram arriving, not a degraded phone. Streaming rides
+the same partial-refresh gate the keyboard and scroll steps already use.</p>
+<h2 id="end-to-end">End to end<a class="headerlink" href="#end-to-end" title="Permanent link">·</a></h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>backend (/api/devices/ask, stream:&quot;1&quot;)      firmware
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>────────────────────────────────────       ──────────────────────────────
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>                        ◄── POST            do_ask_stream()
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>SSE  data:{&quot;t&quot;:&quot;Hello &quot;}  ──►               stream_begin(title)   1 full refresh
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>     data:{&quot;t&quot;:&quot;from the fridge.&quot;}          stream_append(delta)  buffer only
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>     data:{&quot;card&quot;:{…}}                      stream_commit()       PARTIAL, ≥400 ms apart
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>     data:[DONE]          ──►               stream_end(card?)     1 full refresh
 </span></code></pre></div>
-<p>Fallback chain: no <code>stream:"1"</code> support upstream → plain JSON reply → the
-existing blocking path renders once. <strong>The stream is an enhancement, never a
-requirement</strong> — a device on old backend behaves exactly like 0.14.x.</p>
-<h2 id="layer-1-display-the-stream-card-firmwaremaintiny_displaycpp">Layer 1 — display: the stream card (firmware/main/tiny_display.cpp)<a class="headerlink" href="#layer-1-display-the-stream-card-firmwaremaintiny_displaycpp" title="Permanent link">·</a></h2>
-<p>New extern-C API (tiny/tiny_display.h):</p>
-<div class="language-c highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// Begin a streaming text card: draws chrome (title bar, glance cluster,</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="c1">// empty body, caret) with ONE FULL refresh and enters stream mode.</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">esp_err_t</span><span class="w"> </span><span class="nf">tiny_display_stream_begin</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">title</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">card_id</span><span class="p">);</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1">// Append UTF-8 text to the stream buffer. Cheap; no drawing. Returns</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1">// ESP_ERR_NO_MEM past the 8000-byte reply cap (excess dropped, marked).</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">esp_err_t</span><span class="w"> </span><span class="nf">tiny_display_stream_append</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">text</span><span class="p">);</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="c1">// Re-render body + caret via the PARTIAL path. Callers rate-limit; this</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="c1">// also self-limits to &gt;=400ms between commits (drop-coalesce, never queue).</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="n">esp_err_t</span><span class="w"> </span><span class="nf">tiny_display_stream_commit</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="c1">// Leave stream mode: final render WITHOUT caret, FULL refresh (clears the</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="c1">// partial-ghosting), publish tap regions. `final_card_json` optional — when</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="c1">// the answer carried a ```card``` block it replaces the text card entirely.</span>
-</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="n">esp_err_t</span><span class="w"> </span><span class="nf">tiny_display_stream_end</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">final_card_json</span><span class="p">);</span>
-</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="kt">bool</span><span class="w"> </span><span class="nf">tiny_display_stream_active</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
-</span></code></pre></div>
-<h3 id="rules-each-one-is-a-lesson-this-repo-already-paid-for">Rules (each one is a lesson this repo already paid for)<a class="headerlink" href="#rules-each-one-is-a-lesson-this-repo-already-paid-for" title="Permanent link">·</a></h3>
+<p>The stream is an enhancement, never a requirement: if the reply isn't
+<code>text/event-stream</code>, the body is the old JSON shape and the existing
+render-once path takes it. One firmware, both backends. Voice asks stream too.</p>
+<h2 id="eight-rules-each-paid-for">Eight rules, each paid for<a class="headerlink" href="#eight-rules-each-paid-for" title="Permanent link">·</a></h2>
 <ol>
-<li><strong>Same <code>card_id</code> per commit → partial refresh.</strong> Extend the
-   <code>kb_rerender || s_scroll_partial</code> gate with <code>s_stream_partial</code>.</li>
-<li><strong>Full refresh at end is mandatory</strong> — 20+ consecutive partials ghost on
+<li><strong>Same <code>card_id</code> per commit → partial refresh.</strong> A new id would flash.</li>
+<li><strong>Full refresh at the end is mandatory.</strong> Twenty consecutive partials ghost
    the SSD1677; the closing wipe is the "bubble settles" moment.</li>
-<li><strong>No tap regions until stream_end.</strong> Mid-stream layout is unsettled;
-   publishing early violates the publish-after-refresh honesty rule.</li>
-<li><strong>Caret</strong> = 3px <code>fill_rect</code> DarkGray at the text tail (keyboard caret
-   idiom), drawn only while streaming.</li>
-<li><strong>Auto-scroll to tail</strong> each commit when content overflows the body box
-   (<code>tiny_display_scroll(1&lt;&lt;20)</code> idiom from render_thread) — the human reads
-   the newest words, like every chat app.</li>
-<li><strong>UTF-8 boundary discipline:</strong> a delta may split a multibyte char. Buffer
-   holds raw bytes; an incomplete trailing sequence is held back from fold
-   (clip_utf8 idiom) and completed by the next append.</li>
-<li><strong>Stream mode owns the display</strong>: <code>render_card</code> during an active stream
-   ends the stream first (a relay envelope outranks a typer animation).</li>
-<li><strong>Rotation mid-stream</strong>: commit path inherits the rot_changed full-wipe
-   guard automatically (same render funnel).</li>
+<li><strong>No tap regions until <code>stream_end</code>.</strong> Mid-stream layout is unsettled, and
+   regions publish only after a refresh — a Reply button on a half-arrived
+   answer invites replying to words that may change.</li>
+<li><strong>The caret exists only while bytes may still arrive.</strong> A caret on a dead
+   stream is a lie about liveness.</li>
+<li><strong>Auto-scroll to the tail</strong> on every commit — the human reads the newest
+   words, like every chat app.</li>
+<li><strong>UTF-8 boundary discipline.</strong> A delta may split a multibyte character; the
+   incomplete tail is held back and completed by the next append.</li>
+<li><strong>A relay envelope outranks the typer.</strong> <code>render_card</code> during a stream ends
+   the stream first.</li>
+<li><strong>A stalled stream says so.</strong> 15 s without bytes → <code>stream_end</code> plus
+   <code>[stream stalled]</code> on the glass. A cut answer must say it is cut.</li>
 </ol>
-<h3 id="state-file-static-next-to-the-scroll-state">State (file-static, next to the scroll state)<a class="headerlink" href="#state-file-static-next-to-the-scroll-state" title="Permanent link">·</a></h3>
-<div class="language-c highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w">   </span><span class="n">s_stream_on</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w">   </span><span class="n">s_stream_partial</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w">      </span><span class="c1">// commit -&gt; partial gate</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">static</span><span class="w"> </span><span class="kt">char</span><span class="w">  </span><span class="o">*</span><span class="n">s_stream_buf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w">           </span><span class="c1">// PSRAM, REPLY_MAX cap</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="k">static</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">s_stream_len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">s_stream_cap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="k">static</span><span class="w"> </span><span class="kt">char</span><span class="w">   </span><span class="n">s_stream_title</span><span class="p">[</span><span class="mi">64</span><span class="p">];</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="k">static</span><span class="w"> </span><span class="kt">char</span><span class="w">   </span><span class="n">s_stream_cid</span><span class="p">[</span><span class="mi">24</span><span class="p">];</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="k">static</span><span class="w"> </span><span class="kt">int64_t</span><span class="w"> </span><span class="n">s_stream_last_commit_us</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">  </span><span class="c1">// 400ms floor</span>
-</span></code></pre></div>
-<p>Renders go through the normal <code>tiny_display_render_card()</code> funnel with a
-synthesized <code>{"type":"text",...}</code> spec + a <code>s_stream_caret</code> flag the text
-renderer reads — ONE render path, no forked drawing code.</p>
-<h2 id="layer-2-wire-sse-ask-firmwaremaintiny_nodecpp">Layer 2 — wire: SSE ask (firmware/main/tiny_node.cpp)<a class="headerlink" href="#layer-2-wire-sse-ask-firmwaremaintiny_nodecpp" title="Permanent link">·</a></h2>
-<p><code>tiny_node_do_ask_stream(text, voice_secs, out, out_cap)</code>:</p>
-<ul>
-<li>Body gains <code>"stream":"1"</code> (string — the zod idiom).</li>
-<li>Open with <code>esp_http_client_open()</code> + <code>fetch_headers</code> + chunked
-  <code>esp_http_client_read()</code> (<strong>exact pattern of tiny_ota.cpp's download loop</strong>).</li>
-<li><code>Content-Type: text/event-stream</code> → parse <code>data:</code> lines:</li>
-<li><code>{"t":"&lt;delta&gt;"}</code>  → <code>stream_append</code> + flush policy</li>
-<li><code>{"card":{...}}</code>   → save as final card</li>
-<li><code>{"error":"..."}</code>  → honest error card (existing askfail idiom)</li>
-<li><code>[DONE]</code>           → <code>stream_end(card)</code></li>
-<li><strong>Flush policy:</strong> commit when (pending bytes &gt; 0) AND (≥400 ms since last
-  commit) — checked after each read; word batching falls out naturally from
-  the 2 Hz floor.</li>
-<li>Content-Type is NOT event-stream → body is the old JSON shape → fall
-  through to the existing render-once path. <strong>One firmware, both backends.</strong></li>
-<li>Voice asks stream too (recording happens before the request as today).</li>
-<li>15 s stall watchdog per read (a hung stream must not hold the panel);
-  on stall: <code>stream_end(NULL)</code> + append <code>" [stream stalled]"</code> — a cut answer
-  must say it is cut.</li>
-</ul>
-<p>Callers: <code>dispatch("ask …")</code>, <code>dispatch("voice …")</code> and the AI button worker
-switch to the streaming engine; reply/summary semantics unchanged.</p>
-<h2 id="layer-3-backend-sse-on-deviceask">Layer 3 — backend: SSE on /device/ask<a class="headerlink" href="#layer-3-backend-sse-on-deviceask" title="Permanent link">·</a></h2>
-<p><strong>Files: ~/tinyai-id/chatgpt-plugin-tinyai/src/ask.ts + app/api/devices/ask/route.ts</strong></p>
-<ul>
-<li><code>stream:"1"</code> in the body → reply <code>text/event-stream</code>:
-  <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>data: {&quot;t&quot;:&quot;Hello &quot;}
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>data: {&quot;t&quot;:&quot;from the &quot;}
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>data: {&quot;t&quot;:&quot;fridge.&quot;}
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>data: {&quot;card&quot;:{&quot;type&quot;:&quot;kv&quot;,...}}   ← only when a ```card``` block emerged
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>data: [DONE]
-</span></code></pre></div></li>
-<li>The worker already streams internally from the model (job-run pipeline);
-  today it buffers to one JSON. The SSE arm forwards deltas AND still runs
-  extractCard() over the accumulated text at the end (card blocks are lifted
-  out; <strong>card-fence text is withheld from the delta stream</strong> — the device
-  must not type raw JSON at the human, so deltas pause when a ``` fence
-  opens and the fenced content ships only as the final card event).</li>
-<li>Next.js proxy: <code>runtime='nodejs'</code> already; pipe the worker stream through
-  (ReadableStream passthrough), don't await json().</li>
-<li>Non-stream callers see byte-identical behavior. Old firmware never sends
-  the flag. <strong>No breaking change anywhere.</strong></li>
-</ul>
-<h2 id="layer-4-chat-chrome-the-ios-look-translated-to-4-gray">Layer 4 — chat chrome (the iOS look, translated to 4-gray)<a class="headerlink" href="#layer-4-chat-chrome-the-ios-look-translated-to-4-gray" title="Permanent link">·</a></h2>
-<p>From ios/DESIGN.md + Theme.swift, honest e-ink equivalents:</p>
-<table>
-<thead>
-<tr>
-<th>iOS</th>
-<th>Sticky</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>.tinyCard()</code> 14pt radius + accent hairline</td>
-<td>rounded-rect border (new <code>draw_round_rect</code>, Bresenham corners) + DarkGray hairline</td>
-</tr>
-<tr>
-<td>user bubble: accent 22%, 18pt radius</td>
-<td>LightGray fill, right-aligned</td>
-</tr>
-<tr>
-<td>assistant bubble: secondary bg</td>
-<td>White fill + Black outline, left-aligned</td>
-</tr>
-<tr>
-<td>StatusDot filled/hollow</td>
-<td>already shape-based — copy as-is</td>
-</tr>
-<tr>
-<td>status bar</td>
-<td>existing glance cluster (time/battery/wifi)</td>
-</tr>
-</tbody>
-</table>
-<p>New card type <code>chat</code> (spec v1.1):
-<div class="language-json highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;chat&quot;</span><span class="p">,</span><span class="nt">&quot;card_id&quot;</span><span class="p">:</span><span class="s2">&quot;ask&quot;</span><span class="p">,</span><span class="nt">&quot;messages&quot;</span><span class="p">:[</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="p">{</span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="s2">&quot;user&quot;</span><span class="p">,</span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="s2">&quot;what&#39;s the weather&quot;</span><span class="p">},</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span><span class="p">{</span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="s2">&quot;assistant&quot;</span><span class="p">,</span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="s2">&quot;Sunny, 24C.&quot;</span><span class="p">}</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="p">]}</span>
-</span></code></pre></div>
-The streaming ask renders as a chat card: user bubble immediately (echo of
-the question — the receipt), assistant bubble streams into place. Scroll +
-buttons + fold all inherited (body renderer registered in render_body()).</p>
-<p><em>Layer 4 ships after 1–3; the typer works on the plain text card first.</em></p>
-<h2 id="version-consumer-gates">Version &amp; consumer gates<a class="headerlink" href="#version-consumer-gates" title="Permanent link">·</a></h2>
-<ul>
-<li><code>TINY_GRAMMAR_VERSION</code> → 3 (new <code>chat</code> type + streaming ask are v3 claims).</li>
-<li>Heartbeat capabilities unchanged (<code>ask</code> verb is the same verb).</li>
-<li>Dashboard: no change needed (relay replies unchanged); the mirror simply
-  shows a caret mid-answer when screenshotted — which is true.</li>
-</ul>
-<h2 id="delivery-plan">Delivery plan<a class="headerlink" href="#delivery-plan" title="Permanent link">·</a></h2>
-<ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> M-S0 this document</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> M-S1 display stream API (stream_begin/append/commit/end) + caret</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> M-S2 firmware SSE ask engine + fallback + dispatch wiring</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> M-S3 backend SSE arm (worker ask.ts + app proxy) — 22/22 tests</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> M-S4 on-glass proof (2026-08-25 22:2xZ, fw 0.15.1-m13): relay envelope
-  <code>ask …duck on a fridge</code> → <code>stream begin</code> 33.9s, <strong>7 partial commits at
-  ~0.98s cadence</strong> (33.9→41.9s serial log), <code>stream end -&gt; ESP_OK</code>, reply
-  "…[streamed to glass]". Glass evidence:
-  https://plugin.tiny.technology/media/c4f03565-0d4b-4c17-a070-3d901179f60e.png</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> M-S5 chat card + bubbles (0.15.3-m13, proven on glass): <code>type=chat</code>
-  renders iOS bubbles on 4-gray — user = LightGray fill right-aligned,
-  assistant = outlined white left, radius 12, measure-then-paint via the
-  one draw_wrapped. Streamed text asks render as chat (question = user
-  bubble receipt, answer types into the assistant bubble); 10 chat commits
-  at ~1.1s cadence in the proof run. Bonus fix: do_ask gained a cross-caller
-  single-flight mutex (the M-S5 proof caught a ghost AI-button ask
-  interleaving with a relay ask — two writers, one panel).
-  Glass: https://plugin.tiny.technology/media/dfc23817-8184-4dc4-b8b5-5b3b39aa7ee6.png</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> M-S6 grammar v3 (shipped with M-S2) + docs: cards.md <code>chat</code> type, commands.md streaming ask</li>
-</ul>
-<h2 id="honesty-rules-for-this-feature">Honesty rules for this feature<a class="headerlink" href="#honesty-rules-for-this-feature" title="Permanent link">·</a></h2>
-<ul>
-<li>A stalled stream says "[stream stalled]" on the glass — never a silent tail.</li>
-<li>The caret exists ONLY while bytes may still arrive; a caret on a dead
-  stream is a lie about liveness.</li>
-<li>Buttons appear only when the answer is complete — a Reply button on a
-  half-arrived answer invites replying to words that may change.</li>
-<li>The final full refresh is the contract that what you read is what stays.</li>
-</ul>
+<h2 id="the-wire">The wire<a class="headerlink" href="#the-wire" title="Permanent link">·</a></h2>
+<p>Body gains <code>"stream":"1"</code>; the firmware reads chunked with the exact loop
+<code>tiny_ota</code> uses for downloads. <code>data:</code> lines carry <code>{"t":…}</code> deltas,
+<code>{"card":…}</code> for a final card, <code>{"error":…}</code> for an honest error card, and
+<code>[DONE]</code>. Flush policy: commit when there are pending bytes <em>and</em> ≥400 ms have
+passed — word batching falls out of the floor. Backend-side, text inside a
+fenced <code>card</code> block is withheld from the delta stream and shipped only as the
+final card event: I must never type raw JSON at a human.</p>
+<h2 id="the-chat-card">The chat card<a class="headerlink" href="#the-chat-card" title="Permanent link">·</a></h2>
+<p>A streamed ask renders as a <a href="../cards/#chat"><code>chat</code> card</a>: your question echoes
+immediately as the user bubble (the receipt), the answer types into the
+assistant bubble. Filled right-aligned for you, outlined left for the agent —
+the iOS look translated to four grays. A cross-caller single-flight mutex
+guards <code>do_ask</code>: the proof run caught a ghost AI-button ask interleaving with
+a relay ask — two writers, one panel.</p>
+<h2 id="proof-on-glass">Proof on glass<a class="headerlink" href="#proof-on-glass" title="Permanent link">·</a></h2>
+<p>fw 0.15.1: relay <code>ask …duck on a fridge</code> → <code>stream begin</code>, <strong>7 partial commits
+at ~0.98 s cadence</strong>, <code>stream end -&gt; ESP_OK</code>, reply tagged
+<code>[streamed to glass]</code>. fw 0.15.3: the chat card, 10 commits at ~1.1 s.</p>
+<p><a href="https://plugin.tiny.technology/media/dfc23817-8184-4dc4-b8b5-5b3b39aa7ee6.png"><img alt="the typer mid-answer, captured off the framebuffer" src="https://plugin.tiny.technology/media/dfc23817-8184-4dc4-b8b5-5b3b39aa7ee6.png" width="480" /></a></p>
+<p>The full design document the feature was built against — display API,
+file-static state, backend proxy notes, delivery checklist — is
+<a href="https://github.com/cagataycali/sticky-the-reterminal/blob/main/archive/docs/STREAMING_UI.md">archive/docs/STREAMING_UI.md</a>.</p>
 
 
 
 
 
 
+
+  
+  
 
 
 
