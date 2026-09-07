@@ -105,7 +105,8 @@
 .md-typeset a:hover, .md-typeset a:focus { color: var(--accent); text-decoration-color: var(--accent); }
 .md-typeset code { font-size: .86em; border-radius: .15rem; padding: .05em .35em; }
 .md-typeset pre > code { font-size: .74rem; line-height: 1.55; }
-.md-typeset .highlight, .md-typeset pre { border: var(--hairline); border-radius: .2rem; }
+.md-typeset .highlight > pre, .md-typeset > pre, .md-typeset .highlight { border-radius: .2rem; }
+.md-typeset pre > code { border: var(--hairline); border-radius: .2rem; }
 .md-typeset hr { border-bottom: var(--hairline); }
 .md-typeset strong { font-weight: 600; }
 .md-typeset kbd { font-family: var(--md-code-font); border-radius: .15rem; box-shadow: 0 1px 0 var(--ink-1); }
@@ -115,6 +116,8 @@
 .md-typeset table:not([class]) { font-size: .72rem; border: 0; border-top: 2px solid var(--md-default-fg-color); box-shadow: none; border-radius: 0; }
 .md-typeset table:not([class]) th { font-weight: 600; background: transparent; border-bottom: var(--hairline); color: var(--md-default-fg-color); }
 .md-typeset table:not([class]) td { border-top: var(--hairline); vertical-align: top; }
+.md-typeset table:not([class]) code { word-break: normal; overflow-wrap: normal; }  /* wrap at spaces, never inside a verb */
+.md-typeset table:not([class]) td:first-child { white-space: nowrap; }
 .md-typeset table:not([class]) tr:hover { background: transparent; box-shadow: none; }
 
 /* ---- admonitions echo the card grammar: a flat card, title in mono caps, one hairline, no colour flood ---- */

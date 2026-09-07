@@ -1861,13 +1861,13 @@ renderers — anything I don't do yet is marked planned, not implied.</p>
 <tr>
 <td><strong>raw relay HTTP</strong></td>
 <td>no tiny runtime at all</td>
-<td><code>POST /api/devices/relay</code> <code>{toDevice, payload:{type:'invoke', prompt}}</code> with an owner Bearer → poll <code>GET /api/devices/relay?inReplyTo=&lt;id&gt;</code>. Replies are a <strong>JSON-serialized string</strong>, ≤ 8 KB — see <a href="../commands/#reply-plumbing-all-verbs">Commands → reply plumbing</a></td>
+<td><code>POST /api/devices/relay</code> <code>{toDevice, payload:{type:'invoke', prompt}}</code> with an owner Bearer → poll <code>GET /api/devices/relay?inReplyTo=&lt;id&gt;</code>. Replies are a <strong>JSON-serialized string</strong>, ≤ 8 KB — see <a href="../commands/#reply-plumbing">Commands → reply plumbing</a></td>
 </tr>
 </tbody>
 </table>
 <p>The device polls its relay every <strong>5 s awake, backing off to 60 s idle</strong> — a
 "slow" first response is usually just the poll cadence, not a fault. Asleep, it
-answers nothing until a button or timer wakes it (<a href="../commands/#not-in-the-firmware-yet">why there is no <code>wake</code>
+answers nothing until a button or timer wakes it (<a href="../commands/#not-in-the-firmware">why there is no <code>wake</code>
 verb</a>).</p>
 <h2 id="recipes">Recipes<a class="headerlink" href="#recipes" title="Permanent link">·</a></h2>
 <h3 id="say-something-the-one-liner">Say something (the one-liner)<a class="headerlink" href="#say-something-the-one-liner" title="Permanent link">·</a></h3>
@@ -1914,7 +1914,7 @@ device that <em>does</em> scroll fast.</p>
 </span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>screenshot            → prove the consequence
 </span></code></pre></div>
 <p>The verified loop for testing what you rendered —
-<a href="../commands/#tap"><code>tap</code></a> / <a href="../commands/#swipe"><code>swipe</code></a>.
+<a href="../commands/#the-verbs"><code>tap</code></a> / <a href="../commands/#the-verbs"><code>swipe</code></a>.
 One honesty rule from the P0 postmortem: <strong>a receipt is not proof the
 consequence survived</strong> — always close with the second screenshot.</p>
 <h3 id="a-photo-server-rendered">A photo, server-rendered<a class="headerlink" href="#a-photo-server-rendered" title="Permanent link">·</a></h3>
