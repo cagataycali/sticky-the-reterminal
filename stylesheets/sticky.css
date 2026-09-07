@@ -250,6 +250,17 @@
 .sk-header ~ .md-container .md-typeset__scrollwrap::after { content: ""; position: absolute; top: 1px; right: 1px; bottom: 1px; width: 3rem; border-radius: 0 14px 14px 0; pointer-events: none;
   background: linear-gradient(to right, transparent, var(--ink-0)); opacity: 0; transition: opacity .3s; }
 .sk-header ~ .md-container .md-typeset__scrollwrap.has-more::after { opacity: 1; }
+/* S6: long code lines — same fade as tables, on the block; the code element itself scrolls */
+.sk-header ~ .md-container .md-typeset .highlight, .sk-header ~ .md-container .md-typeset > pre { position: relative; }
+.sk-header ~ .md-container .md-typeset .highlight::after, .sk-header ~ .md-container .md-typeset > pre::after { content: ""; position: absolute; top: 1px; right: 1px; bottom: 1px; width: 3rem;
+  border-radius: 0 14px 14px 0; pointer-events: none; background: linear-gradient(to right, transparent, var(--ink-0)); opacity: 0; transition: opacity .3s; }
+.sk-header ~ .md-container .md-typeset .highlight.has-more::after, .sk-header ~ .md-container .md-typeset > pre.has-more::after { opacity: 1; }
+.sk-header ~ .md-container .md-typeset .highlight.has-more .md-clipboard { opacity: 0; }   /* the fade is the affordance; the copy button returns at the end of the line */
+.sk-header ~ .md-container .md-typeset .highlight.has-more:hover .md-clipboard { opacity: 1; }
+/* S6: the version chip on the install button must not break mid-token on a phone */
+.sk-header ~ .md-container .install-cta small { white-space: nowrap; }
+/* S6: two-up grids must not let an unbreakable code line inflate one column (1fr = minmax(auto,1fr)) */
+.sk-header ~ .md-container .md-typeset .install-hero > *, .sk-header ~ .md-container .md-typeset .grid > * { min-width: 0; }
 @media screen and (min-width: 76.25em) {   /* wide tables borrow 2 rem of gutter each side and drop a size — four columns in 70ch is a squeeze */
   .sk-header ~ .md-container .sk-wide { margin-left: -2rem; margin-right: -2rem; }
   .sk-header ~ .md-container .sk-wide .md-typeset__table table:not([class]) { font-size: .74rem; }

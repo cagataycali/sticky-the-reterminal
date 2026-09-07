@@ -30,6 +30,18 @@
       box.addEventListener('scroll', update, { passive: true }); window.addEventListener('resize', update, { passive: true }); update();
     });
   }
+  function code() {   // long-lined code borrows the gutter on desktop (.sk-wide) and shows a paper fade while there is more to the right
+    document.querySelectorAll('.md-typeset > .highlight > pre, .md-typeset > pre').forEach(function (pre) {
+      var c = pre.querySelector('code'); if (!c) return;
+      var block = pre.parentElement.classList.contains('highlight') ? pre.parentElement : pre;
+      var update = function () {
+        var more = c.scrollWidth - c.clientWidth;
+        block.classList.toggle('sk-wide', more > 0);
+        block.classList.toggle('has-more', more - c.scrollLeft > 8);
+      };
+      c.addEventListener('scroll', update, { passive: true }); window.addEventListener('resize', update, { passive: true }); update();
+    });
+  }
   var SEL = '.md-typeset > figure, .md-typeset > .glass-grid, .md-typeset > .glass, .md-typeset > .md-typeset__scrollwrap, ' +
             '.md-typeset > .highlight, .md-typeset > pre, .md-typeset > .admonition, .md-typeset > details, .md-typeset > .tabbed-set, .md-typeset > .grid';
   function reveal() {
@@ -45,7 +57,7 @@
       el.classList.add('sk-reveal'); io.observe(el);
     });
   }
-  function boot() { syncActive(); tables(); reveal(); }
+  function boot() { syncActive(); tables(); code(); reveal(); }
   if (window.document$ && window.document$.subscribe) window.document$.subscribe(boot);
   else document.addEventListener('DOMContentLoaded', boot);
 })();
