@@ -14,23 +14,26 @@ esp-web-install-button { --esp-tools-button-color: var(--ink-3); --esp-tools-but
 /* ---- Home landing ---------------------------------------------------------- */
 .landing { --ease: cubic-bezier(.2,.7,.2,1); --dur: .9s; font-family: var(--md-text-font); color: var(--ink-3); overflow-x: clip; }
 .landing section { max-width: 72rem; margin: 0 auto; padding: clamp(3rem, 8vh, 6rem) 1.25rem; box-sizing: border-box; }
-.landing h1, .landing h2 { letter-spacing: -0.03em; line-height: 1.02; font-weight: 700; margin: 0 0 .75rem; }
-.l-h1 { font-size: clamp(3rem, 8vw, 6.5rem); }
+.landing h1, .landing h2 { letter-spacing: -0.035em; line-height: 1.02; font-weight: 700; margin: 0 0 1rem; text-wrap: balance; }
+.l-h1 { font-size: clamp(3rem, 8vw, 6.5rem); letter-spacing: -0.045em; }
 .l-h1 span { display: inline-block; }
 .landing h2 { font-size: clamp(2rem, 4.5vw, 3.5rem); }
 .landing p { font-size: clamp(1.05rem, 1.4vw, 1.3rem); line-height: 1.45; color: var(--ink-2); margin: 0 0 1rem; max-width: 34ch; }
 .landing code { font-family: var(--md-code-font); font-size: .85em; background: var(--ink-0); border: var(--hairline); border-radius: 6px; padding: .1em .4em; color: var(--ink-3); }
 .l-fine { font-size: .9rem !important; color: var(--ink-2); max-width: none !important; }
-.l-fine code { white-space: nowrap; }
+.l-fine code { white-space: normal; overflow-wrap: normal; word-break: keep-all; display: block; max-width: max-content; box-sizing: border-box; font-size: .76rem; line-height: 1.5; padding: .55em .8em; margin-top: .5rem; border-radius: 10px; }
+.l-fine__phone { display: none; }
 .l-caption { font-size: .85rem !important; text-align: center; margin: .9rem auto 0; max-width: 40ch !important; }
 .l-btn { display: inline-block; padding: .8em 1.4em; border-radius: 999px; border: 1.5px solid var(--ink-3); color: var(--ink-3); font-weight: 600; text-decoration: none; margin: 0 .5rem .5rem 0; transition: transform .25s var(--ease), background .25s; }
 .l-btn:hover { transform: translateY(-1px); }
+.l-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .l-btn--primary { background: var(--ink-3); color: var(--paper); }
 .l-btn--primary:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
 .l-cta--center { text-align: center; max-width: none !important; margin-top: 2rem; }
 
 /* hero */
-.l-hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 3rem; align-items: center; min-height: calc(100vh - 6rem); }
+.l-hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 3rem; align-items: center; min-height: calc(100vh - 6rem); }
+.l-hero > *, .l-split > *, .l-pin > * { min-width: 0; }
 .l-hero .l-h1 span { opacity: 0; transform: translateY(.35em); animation: rise var(--dur) var(--ease) forwards; }
 .l-hero .l-h1 span:nth-child(2) { animation-delay: .15s; }
 .l-hero .l-lead, .l-hero .l-cta, .l-hero .l-fine { opacity: 0; animation: rise var(--dur) var(--ease) .35s forwards; }
@@ -39,8 +42,8 @@ esp-web-install-button { --esp-tools-button-color: var(--ink-3); --esp-tools-but
 @keyframes rise { to { opacity: 1; transform: none; } }
 @keyframes rise-device { to { opacity: 1; transform: none; } }
 
-/* the device: 106 × 65.5 mm body, 3.97" 800×480 panel, four corner magnets, three buttons on the top edge */
-.bezel { position: relative; width: 100%; aspect-ratio: 106 / 65.5; border-radius: 7.5% / 12%; background: #f6f5f1; border: 1px solid #d8d7d2;
+/* the device: 106 × 65.5 mm body (will-change: transform-only animation), 3.97" 800×480 panel, four corner magnets, three buttons on the top edge */
+.bezel { position: relative; width: 100%; aspect-ratio: 106 / 65.5; border-radius: 22px; will-change: transform; background: #f6f5f1; border: 1px solid #d8d7d2;
   box-shadow: 0 1px 0 #fff inset, 0 30px 60px -30px rgba(20,20,20,.35), 0 8px 20px -12px rgba(20,20,20,.25); }
 [data-md-color-scheme="slate"] .bezel { background: #24272c; border-color: #3a3d43; box-shadow: 0 1px 0 rgba(255,255,255,.06) inset, 0 30px 60px -30px rgba(0,0,0,.8); }
 .bezel .screen { position: absolute; left: 9.4%; right: 9.4%; top: 10.3%; bottom: 10.3%; overflow: hidden; border-radius: 3px; background: #e9e8e2; box-shadow: 0 0 0 1px rgba(0,0,0,.08) inset; }
@@ -52,7 +55,7 @@ esp-web-install-button { --esp-tools-button-color: var(--ink-3); --esp-tools-but
 .bezel .btn-ai { left: 12%; width: 9%; } .bezel .btn-up { right: 22%; width: 6%; } .bezel .btn-down { right: 13%; width: 6%; }
 
 /* pinned story: device sticks, steps scroll, frames crossfade */
-.l-pin { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; padding-top: 0 !important; }
+.l-pin { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 3rem; align-items: start; padding-top: 0 !important; }
 .l-pin__device { position: sticky; top: calc(50vh - 20vw); }
 .l-pin .frame { opacity: 0; transition: opacity .6s var(--ease); }
 .l-pin .frame.is-on { opacity: 1; }
@@ -60,7 +63,7 @@ esp-web-install-button { --esp-tools-button-color: var(--ink-3); --esp-tools-but
 .l-step:last-child { min-height: 70vh; }
 
 /* split sections + reveal */
-.l-split { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; min-height: 80vh; }
+.l-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 3rem; align-items: center; min-height: 80vh; }
 .l-split:nth-of-type(even) .l-copy { order: 2; }
 .l-reveal > * { opacity: 0; transform: translateY(1.5rem); transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease); }
 .l-reveal.in > * { opacity: 1; transform: none; }
@@ -115,7 +118,10 @@ esp-web-install-button { --esp-tools-button-color: var(--ink-3); --esp-tools-but
 
 /* small screens: single column, device first */
 @media (max-width: 60em) {
-  .l-hero, .l-split, .l-pin { grid-template-columns: 1fr; gap: 1.5rem; min-height: 0; }
+  .l-hero, .l-split, .l-pin { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; min-height: 0; }
+  .l-fine code, .l-fine__desk { display: none; }  /* a phone cannot flash me: Web Serial is desktop Chrome/Edge only */
+  .l-fine__phone { display: inline; }
+  .l-cta .l-btn { display: block; text-align: center; margin-right: 0; }
   .l-hero .l-device { order: -1; max-width: 26rem; margin: 0 auto; }
   .l-split .l-copy { order: 0 !important; }
   .l-split .l-device { max-width: 26rem; margin: 0 auto; width: 100%; }
