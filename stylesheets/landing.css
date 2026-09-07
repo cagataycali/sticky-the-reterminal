@@ -88,11 +88,11 @@ esp-web-install-button { --esp-tools-button-color: var(--ink-3); --esp-tools-but
 .l-reveal.in .l-device--tilt .bezel { transform: rotate(-2deg); }
 
 /* ota */
-.ota-steps { display: grid; gap: .75rem; }
-.ota-step { display: flex; justify-content: space-between; align-items: baseline; border: var(--hairline); border-radius: 12px; padding: 1rem 1.25rem; background: var(--ink-0); opacity: 0; transform: translateX(1rem); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+.ota-steps { display: grid; gap: 1rem; max-width: 34rem; margin: 0 auto; }
+.ota-step { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; border: var(--hairline); border-radius: 14px; padding: 1.5rem 1.75rem; font-size: 1.15rem; background: var(--ink-0); opacity: 0; transform: translateX(1rem); transition: opacity .7s var(--ease), transform .7s var(--ease); }
 .in .ota-step { opacity: 1; transform: none; }
 .in .ota-step:nth-child(2) { transition-delay: .25s; } .in .ota-step:nth-child(3) { transition-delay: .5s; }
-.ota-step b { font-family: var(--md-code-font); font-weight: 600; } .ota-step span { color: var(--ink-2); }
+.ota-step b { font-family: var(--md-code-font); font-weight: 600; font-size: 1.15rem; } .ota-step span { color: var(--ink-2); font-size: 1rem; text-align: right; }
 
 /* limits + spec */
 .l-limits ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; grid-template-columns: repeat(3, 1fr); }
