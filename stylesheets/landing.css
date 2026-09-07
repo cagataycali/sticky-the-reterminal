@@ -21,6 +21,7 @@ esp-web-install-button { --esp-tools-button-color: var(--ink-3); --esp-tools-but
 .landing p { font-size: clamp(1.05rem, 1.4vw, 1.3rem); line-height: 1.45; color: var(--ink-2); margin: 0 0 1rem; max-width: 34ch; }
 .landing code { font-family: var(--md-code-font); font-size: .85em; background: var(--ink-0); border: var(--hairline); border-radius: 6px; padding: .1em .4em; color: var(--ink-3); }
 .l-fine { font-size: .9rem !important; color: var(--ink-2); max-width: none !important; }
+.l-fine code { white-space: nowrap; }
 .l-caption { font-size: .85rem !important; text-align: center; margin: .9rem auto 0; max-width: 40ch !important; }
 .l-btn { display: inline-block; padding: .8em 1.4em; border-radius: 999px; border: 1.5px solid var(--ink-3); color: var(--ink-3); font-weight: 600; text-decoration: none; margin: 0 .5rem .5rem 0; transition: transform .25s var(--ease), background .25s; }
 .l-btn:hover { transform: translateY(-1px); }
@@ -68,8 +69,8 @@ esp-web-install-button { --esp-tools-button-color: var(--ink-3); --esp-tools-but
 
 /* listen: the answer types itself onto the glass, in the panel's grays */
 .css-card { position: absolute; inset: 0; padding: 5% 6%; font-family: var(--md-text-font); color: #141414; background: #fbfbf9; }
-.css-card__title { font-family: var(--md-code-font); font-size: clamp(.6rem, 1vw, .8rem); color: #5c5c58; border-bottom: 1px solid #b9b9b4; padding-bottom: 2%; margin-bottom: 3%; }
-.type-line { font-size: clamp(.62rem, 1.15vw, .95rem) !important; line-height: 1.35; margin: 0 0 2.5% !important; color: #141414 !important; max-width: 90% !important; opacity: 0; transform: translateY(4px); }
+.css-card__title { font-family: var(--md-code-font); font-size: clamp(.7rem, 1.1vw, .95rem); color: #5c5c58; border-bottom: 1px solid #b9b9b4; padding-bottom: 2%; margin-bottom: 3%; }
+.type-line { font-size: clamp(.8rem, 1.5vw, 1.25rem) !important; line-height: 1.35; margin: 0 0 3% !important; color: #141414 !important; max-width: 90% !important; opacity: 0; transform: translateY(4px); }
 .type-line--a { color: #5c5c58 !important; margin-left: 8% !important; }
 .in .type-line { animation: paint .5s steps(3) forwards; animation-delay: calc(.4s + var(--i) * .55s); }
 @keyframes paint { to { opacity: 1; transform: none; } }
@@ -102,6 +103,7 @@ esp-web-install-button { --esp-tools-button-color: var(--ink-3); --esp-tools-but
 .l-spec dt { font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-2); }
 .l-spec dd { margin: .3rem 0 0; font-weight: 600; font-size: 1.05rem; letter-spacing: -0.01em; }
 .l-foot { text-align: center; padding: 3rem 1.25rem 2rem; color: var(--ink-2); font-size: .9rem; }
+.l-foot p { max-width: 60ch; margin: 0 auto; font-size: .9rem; }
 .l-foot a { color: var(--ink-3); }
 .l-manual { max-width: 44rem !important; border-top: var(--hairline); }
 .l-manual .md-typeset { font-size: 1.05rem; }
