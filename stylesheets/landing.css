@@ -103,9 +103,13 @@ esp-web-install-button { --esp-tools-button-color: var(--ink-3); --esp-tools-but
 .l-spec dd { margin: .3rem 0 0; font-weight: 600; font-size: 1.05rem; letter-spacing: -0.01em; }
 .l-foot { text-align: center; padding: 3rem 1.25rem 2rem; color: var(--ink-2); font-size: .9rem; }
 .l-foot a { color: var(--ink-3); }
-.l-manual { max-width: 40rem; margin: 0 auto; padding-bottom: 3rem; }
-.l-manual .md-content__inner { margin: 0 1.25rem; }
-.l-manual .md-content__inner::before { display: none; }
+.l-manual { max-width: 44rem !important; border-top: var(--hairline); }
+.l-manual .md-typeset { font-size: 1.05rem; }
+.l-manual .md-typeset h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); letter-spacing: -0.02em; margin: 0 0 .75rem; }
+.l-manual .md-typeset p { max-width: none; font-size: 1.05rem; }
+.l-manual .md-typeset a { color: var(--ink-3); text-decoration: underline; text-decoration-color: var(--ink-1); text-underline-offset: 3px; }
+.l-manual .md-typeset a:hover { text-decoration-color: var(--accent); }
+.l-foot { border-top: var(--hairline); max-width: 72rem; margin: 0 auto; }
 
 /* small screens: single column, device first */
 @media (max-width: 60em) {
