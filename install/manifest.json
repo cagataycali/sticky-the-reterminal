@@ -1,0 +1,29 @@
+{
+  "name": "Sticky",
+  "version": "0.27.0-u2",
+  "new_install_prompt_erase": true,
+  "new_install_improv_wait_time": 0,
+  "builds": [
+    {
+      "chipFamily": "ESP32-S3",
+      "parts": [
+        {
+          "path": "fw/bootloader.bin",
+          "offset": 0
+        },
+        {
+          "path": "fw/partition-table.bin",
+          "offset": 32768
+        },
+        {
+          "path": "fw/ota_data_initial.bin",
+          "offset": 61440
+        },
+        {
+          "path": "fw/tiny_sticky.bin",
+          "offset": 131072
+        }
+      ]
+    }
+  ]
+}

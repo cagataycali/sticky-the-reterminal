@@ -1,0 +1,12 @@
+/* landing.css — LANDING lane: Home landing page + Install page. Extends sticky.css. */
+
+/* ---- install page ---- */
+.install-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin: 1.5rem 0; }
+@media (max-width: 60em) { .install-hero { grid-template-columns: 1fr; } }
+.install-card { border: var(--hairline); border-radius: 14px; padding: 1.25rem 1.5rem; background: var(--ink-0); }
+.install-card > h2 { margin-top: 0; }
+.install-button-row { margin: 1.25rem 0; min-height: 3.25rem; }
+.install-cta { font-weight: 600; letter-spacing: -0.01em; }
+.install-cta small { font-weight: 400; opacity: .7; margin-left: .4em; font-family: var(--md-code-font); font-size: .75em; }
+.install-note { display: inline-block; color: var(--ink-2); font-size: .85em; }
+esp-web-install-button { --esp-tools-button-color: var(--ink-3); --esp-tools-button-text-color: var(--paper); }
