@@ -617,17 +617,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#lockout-precisely" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Lockout, precisely
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#not-in-the-firmware" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1638,17 +1627,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#lockout-precisely" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Lockout, precisely
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#not-in-the-firmware" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1699,9 +1677,9 @@
 
 
 <h1 id="commands-everything-i-answer-to">Commands — everything I answer to<a class="headerlink" href="#commands-everything-i-answer-to" title="Permanent link">·</a></h1>
-<p>Twenty-two verbs, each dispatched in <code>tiny_node.cpp</code> and advertised in my
-heartbeat — I <strong>advertise exactly what I implement</strong>. Envelopes arrive as
-<code>{type:"invoke", prompt:"&lt;verb&gt; [args]"}</code>; I always reply, and unknown input
+<p>Twenty-two verbs advertised in my heartbeat, each dispatched in <code>tiny_node.cpp</code>
+— I <strong>advertise exactly what I implement</strong> (one drift, below). Envelopes
+are <code>{type:"invoke", prompt:"&lt;verb&gt; [args]"}</code>; I always reply — unknown input
 gets the help string, never silence. From any tiny surface:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>use_device invoke → prompt: &quot;status&quot;
 </span></code></pre></div>
@@ -1726,7 +1704,7 @@ gets the help string, never silence. From any tiny surface:</p>
 <td><code>say</code></td>
 <td>text</td>
 <td>text card titled <em>tiny</em>, ack chime, no agent turn</td>
-<td>ok</td>
+<td><code>ok</code></td>
 </tr>
 <tr>
 <td><code>screenshot</code></td>
@@ -1744,7 +1722,7 @@ gets the help string, never silence. From any tiny surface:</p>
 <td><code>rotate</code></td>
 <td><code>0\|90\|180\|270\|auto</code></td>
 <td>holds an orientation against gravity; <code>auto</code> returns it to the IMU</td>
-<td>rotation. Framebuffer, screenshot and touch stay in panel space</td>
+<td>rotation; screenshot and touch stay in panel space</td>
 </tr>
 <tr>
 <td><code>tap</code></td>
@@ -1756,7 +1734,7 @@ gets the help string, never silence. From any tiny surface:</p>
 <td><code>swipe</code></td>
 <td><code>x0 y0 x1 y1</code></td>
 <td>synthetic swipe through the real release classifier</td>
-<td><code>accepted</code> / <code>routed</code> / <code>route</code>, separately. Travel inside the 24 px slop is refused, not downgraded to a tap</td>
+<td><code>accepted</code> / <code>routed</code> / <code>route</code>; travel inside the 24 px slop is refused, not downgraded to a tap</td>
 </tr>
 <tr>
 <td><code>scroll</code></td>
@@ -1780,7 +1758,7 @@ gets the help string, never silence. From any tiny surface:</p>
 <td><code>sensors</code></td>
 <td><code>[card]</code></td>
 <td>live I²C read: SHT40, IMU, RTC, BQ27220; <code>card</code> also paints the page</td>
-<td>JSON. <strong>Read <code>mah_trusted</code> before any mAh</strong> — the gauge claims 7500 mAh on a 750 mAh pack</td>
+<td>JSON. <strong>Read <code>mah_trusted</code> first</strong> — the gauge claims 7500 mAh on a 750 mAh pack</td>
 </tr>
 <tr>
 <td><code>miccheck</code></td>
@@ -1797,7 +1775,7 @@ gets the help string, never silence. From any tiny surface:</p>
 <tr>
 <td><code>voice</code></td>
 <td><code>[seconds]</code></td>
-<td>records, uploads, then <code>ask</code> with <code>audioUrl</code> — what the AI button does</td>
+<td>records, uploads, then <code>ask</code> with <code>audioUrl</code> — the AI button's path</td>
 <td>the answer, or "didn't catch that" on 422</td>
 </tr>
 <tr>
@@ -1842,31 +1820,37 @@ gets the help string, never silence. From any tiny surface:</p>
 <td>sha256-verified stage, reply, <em>then</em> reboot into a rollback-armed trial</td>
 <td>ok, or a downgrade refusal (<code>force:"1"</code> overrides, loudly)</td>
 </tr>
+<tr>
+<td><code>sd</code></td>
+<td><code>[status \| df \| ls [path] \| probe \| format yes]</code></td>
+<td>the microSD's own verb (0.26); same shape as the <code>sd</code> object in <code>status</code></td>
+<td>JSON, or <code>no card</code>; <code>format</code> without <code>yes</code> is refused</td>
+</tr>
 </tbody>
 </table>
+<div class="admonition warning">
+<p class="admonition-title">One drift, on the record</p>
+<p><code>sd</code> dispatches but is <strong>not</strong> in the heartbeat capability list, and the
+help string still names the 0.14-era verbs. Twenty-two advertised,
+twenty-three dispatched — the exact drift the invariant exists for. It
+stays written here until a firmware release closes it.</p>
+</div>
 <h2 id="two-status-fields-that-earned-their-place">Two <code>status</code> fields that earned their place<a class="headerlink" href="#two-status-fields-that-earned-their-place" title="Permanent link">·</a></h2>
 <ul>
 <li><strong><code>internal_min_free</code></strong> — <code>heap_free</code> counts PSRAM and once said 8.2 MB free
   while I died of internal-RAM exhaustion. A TLS handshake needs ~40 KB.</li>
-<li><strong><code>grammar_version</code></strong> — the integer consumers gate on. A version <em>string</em> can
-  lie; an uncommitted build once shipped advertising a verb it didn't dispatch.</li>
+<li><strong><code>grammar_version</code></strong> — the integer consumers gate on; a version <em>string</em> can lie.</li>
 </ul>
-<h2 id="lockout-precisely">Lockout, precisely<a class="headerlink" href="#lockout-precisely" title="Permanent link">·</a></h2>
-<p>Face-down 3 s locks at once; walking 5 s locks if untouched for 30 s. The unlock
-chord (UP+DOWN, 1 s) is raw GPIO on its own task, independent of the button
-layer it gates. Lockout guards <em>my inputs</em>, not my owner's reach: <code>say</code>,
-<code>render_ui</code> and <code>screenshot</code> keep working.</p>
+<p>Lockout guards <em>my inputs</em>, not my owner's reach: <code>say</code>, <code>render_ui</code> and
+<code>screenshot</code> work while locked. Triggers and chord: <a href="../stickyos/">stickyOS</a>.</p>
 <h2 id="not-in-the-firmware">Not in the firmware<a class="headerlink" href="#not-in-the-firmware" title="Permanent link">·</a></h2>
 <p><code>wake</code> (a sleeping radio hears nothing — button or timer only) · <code>reprovision</code>
-(the rescue portal opens itself after three auth failures) · <code>press</code> (no
-synthetic twin for the physical keys yet).</p>
+(the rescue portal opens itself) · <code>press</code> (no synthetic twin for the keys yet).</p>
 <h2 id="reply-plumbing">Reply plumbing<a class="headerlink" href="#reply-plumbing" title="Permanent link">·</a></h2>
 <p>Replies go <code>PATCH /api/devices/relay</code> with <code>inReplyTo</code>; the payload is a
 JSON-serialized string capped at 8 KB, images as hosted URLs. One <code>401</code> never
-wipes my identity — three in a row trip an auth-halt and raise the rescue
-portal, the same <code>/setup</code> contract as first boot. The scars behind every rule
-are in the
-<a href="https://github.com/cagataycali/sticky-the-reterminal/blob/main/archive/docs/JOURNAL.md">journal</a>.</p>
+wipes my identity — three in a row trip an auth-halt and the rescue portal.
+Exact shapes: <a href="../API_CONTRACT/">API contract</a>.</p>
 
 
 
