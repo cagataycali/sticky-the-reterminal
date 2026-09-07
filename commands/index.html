@@ -1141,13 +1141,13 @@ gets the help string, never silence. From any tiny surface:</p>
 </tr>
 <tr>
 <td><code>page</code></td>
-<td><code>home\|status\|sensors\|settings\|wifi\|ble\|back\|next\|prev</code></td>
+<td><code>home&vert;<wbr>status&vert;<wbr>sensors&vert;<wbr>settings&vert;<wbr>wifi&vert;<wbr>ble&vert;<wbr>back&vert;<wbr>next&vert;<wbr>prev</code></td>
 <td>the relay twin of every tap path in <a href="../stickyos/">stickyOS</a></td>
 <td>card id</td>
 </tr>
 <tr>
 <td><code>rotate</code></td>
-<td><code>0\|90\|180\|270\|auto</code></td>
+<td><code>0&vert;<wbr>90&vert;<wbr>180&vert;<wbr>270&vert;<wbr>auto</code></td>
 <td>holds an orientation against gravity; <code>auto</code> returns it to the IMU</td>
 <td>rotation; screenshot and touch stay in panel space</td>
 </tr>
@@ -1165,7 +1165,7 @@ gets the help string, never silence. From any tiny surface:</p>
 </tr>
 <tr>
 <td><code>scroll</code></td>
-<td><code>up\|down\|top\|±px</code></td>
+<td><code>up&vert;<wbr>down&vert;<wbr>top&vert;<wbr>±px</code></td>
 <td>steps ⅔ of a view; bare form reports</td>
 <td><code>offset</code>, <code>content_h</code>, <code>view_h</code>, <code>scrollable</code></td>
 </tr>
@@ -1191,7 +1191,7 @@ gets the help string, never silence. From any tiny surface:</p>
 <td><code>miccheck</code></td>
 <td><code>[seconds]</code></td>
 <td>records PDM audio, replies levels instead of uploading</td>
-<td><code>verdict:"live\|SILENT"</code>, <code>rms</code>, <code>peak</code></td>
+<td><code>verdict:"live&vert;<wbr>SILENT"</code>, <code>rms</code>, <code>peak</code></td>
 </tr>
 <tr>
 <td><code>ask</code></td>
@@ -1207,13 +1207,13 @@ gets the help string, never silence. From any tiny surface:</p>
 </tr>
 <tr>
 <td><code>agent</code></td>
-<td><code>[slug \| list \| clear \| add\|rm &lt;slug&gt;]</code></td>
+<td><code>[slug &vert; list &vert; clear &vert; add&vert;<wbr>rm &lt;slug&gt;]</code></td>
 <td>which tiny answers my asks; persists in NVS</td>
 <td><code>active</code>, <code>roster</code></td>
 </tr>
 <tr>
 <td><code>messages</code></td>
-<td><code>[unread \| thread &lt;login&gt;]</code></td>
+<td><code>[unread &vert; thread &lt;login&gt;]</code></td>
 <td>paints the inbox or a thread; <code>unread</code> answers counts and paints <strong>nothing</strong></td>
 <td>counts, or card id</td>
 </tr>
@@ -1237,7 +1237,7 @@ gets the help string, never silence. From any tiny surface:</p>
 </tr>
 <tr>
 <td><code>config</code></td>
-<td><code>{"networks":[{ssid,password} \| {ssid,forget:true}]}</code></td>
+<td><code>{"networks":[{ssid,password} &vert; {ssid,forget:true}]}</code></td>
 <td>merges a Wi-Fi roaming list into NVS; <strong>identity fields are refused</strong></td>
 <td>counts only — keys never echoed, log prints <code>&lt;redacted&gt;</code></td>
 </tr>
@@ -1249,7 +1249,7 @@ gets the help string, never silence. From any tiny surface:</p>
 </tr>
 <tr>
 <td><code>sd</code></td>
-<td><code>[status \| df \| ls [path] \| probe \| format yes]</code></td>
+<td><code>[status &vert; df &vert; ls [path] &vert; probe &vert; format yes]</code></td>
 <td>the microSD's own verb (0.26); same shape as the <code>sd</code> object in <code>status</code></td>
 <td>JSON, or <code>no card</code>; <code>format</code> without <code>yes</code> is refused</td>
 </tr>

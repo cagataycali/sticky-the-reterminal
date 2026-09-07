@@ -145,7 +145,7 @@ esp-web-install-button { --esp-tools-button-color: var(--ink-3); --esp-tools-but
 .l-numbers li > span { font-size: .95rem; color: var(--ink-2); }
 
 /* closing install: the product's one action, on the page itself */
-.l-install { text-align: center; max-width: 46rem !important; }
+.l-install { text-align: center; max-width: 46rem !important; padding-block: clamp(5rem, 14vh, 9rem) !important; }
 .l-install h2 { font-size: clamp(2rem, 5vw, 3.6rem); letter-spacing: -0.035em; margin: 0 0 1rem; }
 .l-install p { margin: 0 auto; }
 .l-install__row { display: flex; gap: .75rem; justify-content: center; flex-wrap: wrap; margin: 2rem 0 1.25rem; }
@@ -154,7 +154,7 @@ esp-web-install-button { --esp-tools-button-color: var(--ink-3); --esp-tools-but
 .l-install .l-fine { text-align: center; }
 .l-install .l-fine code { white-space: normal; word-break: break-all; }
 
-.l-manual { max-width: 44rem !important; border-top: var(--hairline); }
+.l-manual { max-width: 44rem !important; border-top: var(--hairline); border-bottom: var(--hairline); }
 .l-manual .md-typeset { font-size: 1.05rem; }
 .l-manual .md-typeset h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); letter-spacing: -0.02em; margin: 0 0 .75rem; }
 .l-manual .md-typeset p { max-width: none; font-size: 1.05rem; }

@@ -215,6 +215,69 @@
   .sk-header ~ .md-container .md-typeset table:not([class]) { font-size: .74rem; }
 }
 
+/* ==== S3 · surfaces. Tables, code, notes and details as the landing draws them: ink-0 cards, one hairline,
+   14 px corners, mono-caps labels, cyan only where it means something. Same `.sk-header ~ .md-container` scope. ==== */
+/* inline code = the landing's chip */
+.sk-header ~ .md-container .md-typeset code { background: var(--ink-0); border: var(--hairline); border-radius: 6px; padding: .1em .4em; color: var(--ink-3); }
+.sk-header ~ .md-container .md-typeset pre > code, .sk-header ~ .md-container .md-typeset a > code { border: 0; }
+.sk-header ~ .md-container .md-typeset a > code { background: var(--ink-0); }
+/* code blocks = a card with a quiet copy glyph */
+.sk-header ~ .md-container .md-typeset .highlight, .sk-header ~ .md-container .md-typeset > pre { margin: 1.4rem 0; }
+.sk-header ~ .md-container .md-typeset .highlight > pre, .sk-header ~ .md-container .md-typeset > pre { margin: 0; }
+.sk-header ~ .md-container .md-typeset .highlight > pre > code, .sk-header ~ .md-container .md-typeset > pre > code {
+  display: block; background: var(--ink-0); border: var(--hairline); border-radius: 14px; padding: 1rem 1.2rem; line-height: 1.6; tab-size: 2; }
+.sk-header ~ .md-container .md-typeset .highlight .md-clipboard { top: .55rem; right: .55rem; width: 1.6rem; height: 1.6rem; color: var(--ink-1); }
+.sk-header ~ .md-container .md-typeset .highlight .md-clipboard::after { width: 1rem; height: 1rem; margin: .3rem; }
+.sk-header ~ .md-container .md-typeset .highlight:hover .md-clipboard { color: var(--ink-2); }
+.sk-header ~ .md-container .md-typeset .highlight .filename { font-family: var(--md-code-font); font-size: .62rem; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--ink-2); background: var(--ink-0); border: var(--hairline); border-bottom: 0; border-radius: 14px 14px 0 0; padding: .6rem 1.2rem .3rem; margin: 0; }
+.sk-header ~ .md-container .md-typeset .highlight .filename + pre > code { border-top-left-radius: 0; border-top-right-radius: 0; }
+.sk-header ~ .md-container .md-typeset .highlight span.filename { display: block; }
+/* tables = a card that scrolls sideways when it must, never wraps a verb */
+.sk-header ~ .md-container .md-typeset__scrollwrap { margin: 1.4rem 0; position: relative; overflow: visible; }
+.sk-header ~ .md-container .md-typeset__table { display: block; overflow-x: auto; padding: 0; margin: 0; background: var(--ink-0); border: var(--hairline); border-radius: 14px;
+  -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: var(--ink-1) transparent; }
+.sk-header ~ .md-container .md-typeset__table table:not([class]) { display: table; width: 100%; margin: 0; border: 0; border-top: 0; font-size: .8rem; line-height: 1.5; }
+.sk-header ~ .md-container .md-typeset table:not([class]) th { font-family: var(--md-code-font); font-weight: 500; font-size: .6rem; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--ink-2); padding: .8rem 1rem .6rem; border-bottom: var(--hairline); text-align: left; vertical-align: bottom; }
+.sk-header ~ .md-container .md-typeset table:not([class]) td { padding: .7rem 1rem; border-top: var(--hairline); color: var(--ink-3); }
+.sk-header ~ .md-container .md-typeset table:not([class]) tr:first-child td { border-top: 0; }
+.sk-header ~ .md-container .md-typeset table:not([class]) th:first-child, .sk-header ~ .md-container .md-typeset table:not([class]) td:first-child { padding-left: 1.2rem; }
+.sk-header ~ .md-container .md-typeset table:not([class]) th:last-child, .sk-header ~ .md-container .md-typeset table:not([class]) td:last-child { padding-right: 1.2rem; }
+.sk-header ~ .md-container .md-typeset table:not([class]) td code { background: transparent; border: 0; padding: 0; font-size: .86em; white-space: normal; }  /* wrap at spaces (word-break stays normal: never inside a verb) */
+.sk-header ~ .md-container .md-typeset table:not([class]) td:first-child code { white-space: nowrap; }
+/* the "there is more to the right" hint: a paper fade, present only while there is more (site.js toggles .has-more) */
+.sk-header ~ .md-container .md-typeset__scrollwrap::after { content: ""; position: absolute; top: 1px; right: 1px; bottom: 1px; width: 3rem; border-radius: 0 14px 14px 0; pointer-events: none;
+  background: linear-gradient(to right, transparent, var(--ink-0)); opacity: 0; transition: opacity .3s; }
+.sk-header ~ .md-container .md-typeset__scrollwrap.has-more::after { opacity: 1; }
+@media screen and (min-width: 76.25em) {   /* wide tables borrow 2 rem of gutter each side and drop a size — four columns in 70ch is a squeeze */
+  .sk-header ~ .md-container .sk-wide { margin-left: -2rem; margin-right: -2rem; }
+  .sk-header ~ .md-container .sk-wide .md-typeset__table table:not([class]) { font-size: .74rem; }
+  .sk-header ~ .md-container .sk-wide table:not([class]) th, .sk-header ~ .md-container .sk-wide table:not([class]) td { padding: .6rem .8rem; }
+}
+@media screen and (max-width: 44rem) {
+  .sk-header ~ .md-container .md-typeset__table table:not([class]) { font-size: .74rem; }
+  .sk-header ~ .md-container .sk-wide .md-typeset__table table:not([class]) { min-width: 36rem; }   /* 3+ columns: scroll, do not fold into 110 px rows */
+  .sk-header ~ .md-container .md-typeset table:not([class]) th, .sk-header ~ .md-container .md-typeset table:not([class]) td { padding: .6rem .8rem; }
+}
+/* notes and details = the same card; the label is the only decoration */
+.sk-header ~ .md-container .md-typeset .admonition, .sk-header ~ .md-container .md-typeset details { border-radius: 14px; font-size: .92rem; padding: 0 1.2rem .3rem; margin: 1.4rem 0; }
+.sk-header ~ .md-container .md-typeset .admonition-title, .sk-header ~ .md-container .md-typeset summary { padding: .75rem 0 .5rem; margin: 0 0 .7rem; font-size: .62rem; }
+.sk-header ~ .md-container .md-typeset .admonition-title::before, .sk-header ~ .md-container .md-typeset summary::before { display: none; }
+.sk-header ~ .md-container .md-typeset summary::after { top: .6rem; right: 0; width: .9rem; height: .9rem; background-color: var(--ink-2); }
+.sk-header ~ .md-container .md-typeset .admonition > :last-child, .sk-header ~ .md-container .md-typeset details > :last-child { margin-bottom: .8rem; }
+.sk-header ~ .md-container .md-typeset .admonition.warning, .sk-header ~ .md-container .md-typeset .admonition.danger, .sk-header ~ .md-container .md-typeset .admonition.bug { border-left: 2px solid var(--accent); }
+/* the rest of the furniture */
+.sk-header ~ .md-container .md-typeset blockquote { border-left: 2px solid var(--ink-1); color: var(--ink-2); padding-left: 1rem; margin: 1.4rem 0; font-size: 1rem; }
+.sk-header ~ .md-container .md-typeset hr { margin: 2.5rem 0; }
+.sk-header ~ .md-container .md-typeset kbd { font-size: .75em; padding: .15em .5em; background: var(--ink-0); border: var(--hairline); box-shadow: 0 1px 0 var(--ink-1); border-radius: 6px; }
+.sk-header ~ .md-container .md-typeset dl dt { font-weight: 600; margin-top: .8rem; }
+.sk-header ~ .md-container .md-typeset dl dd { margin: .2rem 0 0 1.2rem; color: var(--ink-2); }
+.sk-header ~ .md-container .md-typeset .tabbed-set { margin: 1.4rem 0; }
+.sk-header ~ .md-container .md-typeset .tabbed-labels > label { font-size: .78rem; font-weight: 500; padding: .6rem 1rem; }
+.sk-header ~ .md-container .md-typeset .tabbed-content { padding-top: .6rem; }
+.sk-header ~ .md-container .md-typeset img:not(.glass img) { border-radius: 14px; }
+
 /* ---- type: a magazine ramp, generous leading ---- */
 .md-typeset { font-size: .82rem; line-height: 1.65; }
 .md-typeset h1 { font-weight: 650; letter-spacing: -.025em; color: var(--md-default-fg-color); font-size: 2.1em; margin-bottom: .6em; }

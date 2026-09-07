@@ -1212,7 +1212,7 @@
 <tr>
 <td><code>POST /api/devices/messages</code></td>
 <td>messages app, <code>messages</code> verb</td>
-<td><code>op:unread\|inbox\|thread\|send</code> (+<code>with</code> / <code>to</code>,<code>body</code>)</td>
+<td><code>op:unread&vert;<wbr>inbox&vert;<wbr>thread&vert;<wbr>send</code> (+<code>with</code> / <code>to</code>,<code>body</code>)</td>
 <td>see below</td>
 </tr>
 <tr>
@@ -1278,7 +1278,7 @@ verb; the device stays a dumb pixel-pusher.</p>
 <tr>
 <td><code>GET /api/frames/&lt;seq&gt;/manifest</code></td>
 <td>capability URL</td>
-<td><code>{frames[], previews[], interval_ms, format:"1bit"\|"gray4", frame_bytes, count, closed_loop, caps}</code></td>
+<td><code>{frames[], previews[], interval_ms, format:"1bit"&vert;<wbr>"gray4", frame_bytes, count, closed_loop, caps}</code></td>
 </tr>
 <tr>
 <td><code>GET /api/frames/&lt;seq&gt;/&lt;n&gt;.raw</code></td>
