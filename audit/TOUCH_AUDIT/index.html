@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device.">
+        <meta name="description" content="Touch and input layer audit — the stale-region race dissected step by step, plus debounce, ghost taps and the unlock chord.">
       
       
         <meta name="author" content="Cagatay Cali">
@@ -64,12 +64,12 @@
   
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Touch · sticky" />
-  <meta property="og:description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device." />
+  <meta property="og:description" content="Touch and input layer audit — the stale-region race dissected step by step, plus debounce, ghost taps and the unlock chord." />
   <meta property="og:url" content="https://cagataycali.github.io/sticky-the-reterminal/audit/TOUCH_AUDIT/" />
   <meta property="og:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Touch · sticky" />
-  <meta name="twitter:description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device." />
+  <meta name="twitter:description" content="Touch and input layer audit — the stale-region race dissected step by step, plus debounce, ghost taps and the unlock chord." />
   <meta name="twitter:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
   <meta name="theme-color" content="#f3f2ee" />
   <meta name="color-scheme" content="light dark" />
@@ -1827,6 +1827,8 @@
               
               <article class="md-content__inner md-typeset">
                 
+  <p class="sticky-budget"><span><b>~5 min</b> read</span><span>long-form · a deep dive, honestly labelled</span></p>
+  
   
                   
 
@@ -1841,6 +1843,7 @@
 
 
 <h1 id="touch-input-layer-audit-2026-08-25-auditor-1-full-read">Touch + Input Layer Audit — 2026-08-25 (auditor 1, full read)<a class="headerlink" href="#touch-input-layer-audit-2026-08-25-auditor-1-full-read" title="Permanent link">·</a></h1>
+<p><em>Long-form audit, 2026-08-25. The stale-region race it dissects was closed in 0.9.x by publishing regions atomically with the card commit — the finding is kept because the dissection is the lesson.</em></p>
 <h2 id="p0-must-fix">P0 — must fix<a class="headerlink" href="#p0-must-fix" title="Permanent link">·</a></h2>
 <h3 id="p0-1-the-stale-region-bug-unsynchronized-region-publication-regions-published-at-draw-time-not-display-time-with-three-unserialized-render-callers">P0-1: The stale-region bug — unsynchronized region publication + regions published at <em>draw</em> time, not <em>display</em> time, with three unserialized render callers<a class="headerlink" href="#p0-1-the-stale-region-bug-unsynchronized-region-publication-regions-published-at-draw-time-not-display-time-with-three-unserialized-render-callers" title="Permanent link">·</a></h3>
 <p><strong>The race, exactly:</strong></p>
@@ -1950,6 +1953,9 @@
 
 
 
+
+  
+  
 
 
 

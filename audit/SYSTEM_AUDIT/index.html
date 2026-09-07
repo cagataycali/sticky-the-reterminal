@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device.">
+        <meta name="description" content="Boot, power, audio and button audit of the 0.8.x firmware — P0/P1/P2 findings with file:line evidence, most since fixed.">
       
       
         <meta name="author" content="Cagatay Cali">
@@ -62,12 +62,12 @@
   
   <meta property="og:type" content="website" />
   <meta property="og:title" content="System · sticky" />
-  <meta property="og:description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device." />
+  <meta property="og:description" content="Boot, power, audio and button audit of the 0.8.x firmware — P0/P1/P2 findings with file:line evidence, most since fixed." />
   <meta property="og:url" content="https://cagataycali.github.io/sticky-the-reterminal/audit/SYSTEM_AUDIT/" />
   <meta property="og:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="System · sticky" />
-  <meta name="twitter:description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device." />
+  <meta name="twitter:description" content="Boot, power, audio and button audit of the 0.8.x firmware — P0/P1/P2 findings with file:line evidence, most since fixed." />
   <meta name="twitter:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
   <meta name="theme-color" content="#f3f2ee" />
   <meta name="color-scheme" content="light dark" />
@@ -1891,6 +1891,8 @@
               
               <article class="md-content__inner md-typeset">
                 
+  <p class="sticky-budget"><span><b>~7 min</b> read</span><span>long-form · a deep dive, honestly labelled</span></p>
+  
   
                   
 
@@ -1905,6 +1907,7 @@
 
 
 <h1 id="system-boot-power-audio-audit-firmwaremain">SYSTEM + BOOT + POWER + AUDIO Audit — firmware/main<a class="headerlink" href="#system-boot-power-audio-audit-firmwaremain" title="Permanent link">·</a></h1>
+<p><em>Long-form audit, 2026-08-25, of a firmware that no longer exists in this form. Findings are kept as written; what shipped in response is in <a href="../../troubleshooting/">Troubleshooting</a> and the journal.</em></p>
 <p>Auditor: tiny (sub-agent #2), 2026-08-25.
 Scope: <code>tiny_main.cpp</code> <code>board.cpp</code> <code>sticky_power.cpp</code> <code>sticky_battery.cpp</code>
 <code>sticky_buzzer.cpp</code> <code>tiny_audio.cpp</code> <code>tiny_button.cpp</code> <code>pin_config.h</code>
@@ -2105,6 +2108,9 @@ USB-JTAG demux must run <strong>before</strong> any I2S/mic init after a deep-sl
 
 
 
+
+  
+  
 
 
 

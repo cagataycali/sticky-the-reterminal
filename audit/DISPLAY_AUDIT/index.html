@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device.">
+        <meta name="description" content="Display and rendering stack audit — the missing display mutex, the refresh policy that didn't exist, and the rest, with evidence.">
       
       
         <meta name="author" content="Cagatay Cali">
@@ -64,12 +64,12 @@
   
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Display · sticky" />
-  <meta property="og:description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device." />
+  <meta property="og:description" content="Display and rendering stack audit — the missing display mutex, the refresh policy that didn't exist, and the rest, with evidence." />
   <meta property="og:url" content="https://cagataycali.github.io/sticky-the-reterminal/audit/DISPLAY_AUDIT/" />
   <meta property="og:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Display · sticky" />
-  <meta name="twitter:description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device." />
+  <meta name="twitter:description" content="Display and rendering stack audit — the missing display mutex, the refresh policy that didn't exist, and the rest, with evidence." />
   <meta name="twitter:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
   <meta name="theme-color" content="#f3f2ee" />
   <meta name="color-scheme" content="light dark" />
@@ -1693,6 +1693,8 @@
               
               <article class="md-content__inner md-typeset">
                 
+  <p class="sticky-budget"><span><b>~5 min</b> read</span><span>long-form · a deep dive, honestly labelled</span></p>
+  
   
                   
 
@@ -1707,6 +1709,7 @@
 
 
 <h1 id="display-rendering-stack-audit-2026-08-25-auditor-2-full-read">Display + Rendering Stack Audit — 2026-08-25 (auditor 2, full read)<a class="headerlink" href="#display-rendering-stack-audit-2026-08-25-auditor-2-full-read" title="Permanent link">·</a></h1>
+<p><em>Long-form audit, 2026-08-25, of the first display stack. Every P0 here has since shipped a fix; the page stays because the reasoning is reusable on any e-ink project.</em></p>
 <p>Files read in full: <code>tiny_display.cpp</code> (278L), <code>canvas.cpp/h</code>, <code>font.cpp/h</code>, <code>sticky_display.cpp/h</code>, <code>tiny/tiny_display.h</code>, plus render paths in <code>tiny_main.cpp</code>, <code>tiny_node.cpp</code>, <code>tiny_touch.cpp</code>, <code>tiny_screenshot.cpp</code>, and the card spec in <code>docs/ARCHITECTURE.md:54-80</code>.</p>
 <h2 id="p0-correctness-safety">P0 — correctness / safety<a class="headerlink" href="#p0-correctness-safety" title="Permanent link">·</a></h2>
 <p><strong>P0-1: No display mutex — three tasks call <code>tiny_display_render_card()</code> concurrently.</strong>
@@ -1774,6 +1777,9 @@ Implemented (<code>tiny_display.cpp:196-206</code>): only <code>text/list/kv</co
 
 
 
+
+  
+  
 
 
 

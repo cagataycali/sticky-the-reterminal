@@ -1519,6 +1519,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#b-cards-render_ui-json" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. Cards (render_ui &lt;json&gt;)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#pending-this-lane-is-mid-session" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1627,9 +1638,40 @@ refresh, then <code>screenshot</code>. Lane: GALLERY (archive/lanes/GALLERY.md).
 </tr>
 </tbody>
 </table>
+<h2 id="b-cards-render_ui-json">B. Cards (<code>render_ui &lt;json&gt;</code>)<a class="headerlink" href="#b-cards-render_ui-json" title="Permanent link">·</a></h2>
+<table>
+<thead>
+<tr>
+<th>image</th>
+<th>spec</th>
+<th>captured (UTC)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>card-text.png</code></td>
+<td><code>{"type":"text","card_id":"doc-text","title":"Dinner","body":"Back at 19:30 - pizza in the fridge, oven at 220C for 8 minutes. Leave the door unlocked for the courier, the parcel is the servo order.","footer":"from cagatay, 18:04","buttons":["Got it","Later"]}</code></td>
+<td>2026-09-07T04:19Z</td>
+</tr>
+<tr>
+<td><code>card-list.png</code></td>
+<td><code>{"type":"list","card_id":"doc-list","title":"Groceries","items":["oat milk","eggs x12","sourdough","basil","parmesan","M3x20 screws (for the arm)","AA batteries"],"footer":"7 items - tap the AI button to add by voice"}</code></td>
+<td>2026-09-07T04:19Z</td>
+</tr>
+<tr>
+<td><code>card-kv.png</code></td>
+<td><code>{"type":"kv","card_id":"doc-kv","title":"Weather - Newark","rows":[["now","17.5 C, clear sky"],["feels like","18.5 C"],["humidity","91%"],["wind","7.7 km/h"],["sunrise","06:27"],["tonight","low 15 C"]],"footer":"open-meteo, 00:30"}</code> (live Open-Meteo numbers)</td>
+<td>2026-09-07T04:19Z</td>
+</tr>
+<tr>
+<td><code>card-menu.png</code></td>
+<td><code>{"type":"menu","card_id":"doc-menu","title":"Who's home?","items":[{"id":"m:t:cagatay","label":"cagatay","note":"living room - 2 min ago"},{"id":"m:t:mac","label":"cagatay-mac","note":"desk - online"},{"id":"m:t:arm","label":"strands-arm","note":"folded - torque off"},{"id":"m:t:printer","label":"3D printer","note":"idle - bed 25 C"},{"id":"m:t:fleet","label":"stickies","note":"3 online"}]}</code></td>
+<td>2026-09-07T04:19Z</td>
+</tr>
+</tbody>
+</table>
 <h2 id="pending-this-lane-is-mid-session">Pending (this lane is mid-session)<a class="headerlink" href="#pending-this-lane-is-mid-session" title="Permanent link">·</a></h2>
-<p>cards (text, list, kv,
-menu, composite, qr, chart, image, chat, anim, say, ask) · portrait.</p>
+<p>cards (composite, qr, chart, image, chat, anim, say, ask) · portrait.</p>
 
 
 

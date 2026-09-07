@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device.">
+        <meta name="description" content="The sticky.cagatay.my cockpit — passkey-gated FastAPI + React remote control, live mirror, composer, OTA watch, frames rail — how it drives the device through the relay.">
       
       
         <meta name="author" content="Cagatay Cali">
@@ -64,12 +64,12 @@
   
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Dashboard · sticky" />
-  <meta property="og:description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device." />
+  <meta property="og:description" content="The sticky.cagatay.my cockpit — passkey-gated FastAPI + React remote control, live mirror, composer, OTA watch, frames rail — how it drives the device through the relay." />
   <meta property="og:url" content="https://cagataycali.github.io/sticky-the-reterminal/dashboard/" />
   <meta property="og:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Dashboard · sticky" />
-  <meta name="twitter:description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device." />
+  <meta name="twitter:description" content="The sticky.cagatay.my cockpit — passkey-gated FastAPI + React remote control, live mirror, composer, OTA watch, frames rail — how it drives the device through the relay." />
   <meta name="twitter:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
   <meta name="theme-color" content="#f3f2ee" />
   <meta name="color-scheme" content="light dark" />
@@ -1628,6 +1628,8 @@
               
               <article class="md-content__inner md-typeset">
                 
+  <p class="sticky-budget"><span><b>~18 min</b> read</span><span>long-form · a deep dive, honestly labelled</span></p>
+  
   
                   
 
@@ -1642,6 +1644,7 @@
 
 
 <h1 id="dashboard-stickycagataymy">Dashboard — sticky.cagatay.my<a class="headerlink" href="#dashboard-stickycagataymy" title="Permanent link">·</a></h1>
+<p><em>Long-form. The dashboard's own engineering ledger: architecture, every panel, every rail, every incident. If you only want to drive a Sticky, <a href="../commands/">Commands</a> is enough.</em></p>
 <p>A remote-control cockpit for the Sticky: device status, live screen mirror, a <code>render_ui</code> composer, action buttons and an activity feed — served behind a <strong>WebAuthn passkey gate</strong> at <code>https://sticky.cagatay.my</code> (Cloudflare Tunnel <code>sticky</code>, backend on <code>localhost:8787</code>).</p>
 <p>Code lives in <code>docs/dashboard/</code>: FastAPI backend (<code>server.py</code>) + React/Vite SPA (<code>frontend/</code>), launched by <code>run.sh</code>.</p>
 <h2 id="how-it-controls-the-device">How it controls the device<a class="headerlink" href="#how-it-controls-the-device" title="Permanent link">·</a></h2>
@@ -1957,6 +1960,9 @@ sideways. All <code>/api/*</code> routes require the session JWT (cookie or Bear
 
 
 
+
+  
+  
 
 
 

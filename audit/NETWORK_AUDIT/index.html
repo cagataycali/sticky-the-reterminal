@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device.">
+        <meta name="description" content="Network, node and OTA stack audit of fw 0.8.1 — the 401-brick finding and the rest, with file:line evidence.">
       
       
         <meta name="author" content="Cagatay Cali">
@@ -64,12 +64,12 @@
   
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Network · sticky" />
-  <meta property="og:description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device." />
+  <meta property="og:description" content="Network, node and OTA stack audit of fw 0.8.1 — the 401-brick finding and the rest, with file:line evidence." />
   <meta property="og:url" content="https://cagataycali.github.io/sticky-the-reterminal/audit/NETWORK_AUDIT/" />
   <meta property="og:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Network · sticky" />
-  <meta name="twitter:description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device." />
+  <meta name="twitter:description" content="Network, node and OTA stack audit of fw 0.8.1 — the 401-brick finding and the rest, with file:line evidence." />
   <meta name="twitter:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
   <meta name="theme-color" content="#f3f2ee" />
   <meta name="color-scheme" content="light dark" />
@@ -1771,6 +1771,8 @@
               
               <article class="md-content__inner md-typeset">
                 
+  <p class="sticky-budget"><span><b>~7 min</b> read</span><span>long-form · a deep dive, honestly labelled</span></p>
+  
   
                   
 
@@ -1785,6 +1787,7 @@
 
 
 <h1 id="network-node-ota-stack-audit-firmwaremain">NETWORK + NODE + OTA Stack Audit — firmware/main<a class="headerlink" href="#network-node-ota-stack-audit-firmwaremain" title="Permanent link">·</a></h1>
+<p><em>Long-form audit, 2026-08-25, of fw 0.8.1. Its P0-1 is why one 401 never erases identity today. Findings kept as written; fixes live in the tree and in <a href="../../ARCHITECTURE/">How I work</a>.</em></p>
 <p>Auditor: tiny (sub-agent #1/2), 2026-08-25.
 Scope: <code>tiny_node.cpp</code> (363L), <code>tiny_wifi.cpp</code> (79L), <code>tiny_ota.cpp</code> (188L),
 <code>tiny_upload.cpp</code> (95L), <code>tiny_config.cpp</code> (193L), all headers in <code>tiny/</code>,
@@ -1980,6 +1983,9 @@ plus <code>tiny_main.cpp</code> for the boot wiring. fw version at audit: <code>
 
 
 
+
+  
+  
 
 
 
