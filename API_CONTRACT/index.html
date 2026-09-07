@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device.">
+        <meta name="description" content="Every HTTP route Sticky's firmware touches — exact wire shapes, the two invariants that bit us, and the provisioning portal.">
       
       
         <meta name="author" content="Cagatay Cali">
@@ -64,12 +64,12 @@
   
   <meta property="og:type" content="website" />
   <meta property="og:title" content="API contract · sticky" />
-  <meta property="og:description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device." />
+  <meta property="og:description" content="Every HTTP route Sticky's firmware touches — exact wire shapes, the two invariants that bit us, and the provisioning portal." />
   <meta property="og:url" content="https://cagataycali.github.io/sticky-the-reterminal/API_CONTRACT/" />
   <meta property="og:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="API contract · sticky" />
-  <meta name="twitter:description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device." />
+  <meta name="twitter:description" content="Every HTTP route Sticky's firmware touches — exact wire shapes, the two invariants that bit us, and the provisioning portal." />
   <meta name="twitter:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
   <meta name="theme-color" content="#f3f2ee" />
   <meta name="color-scheme" content="light dark" />
@@ -93,7 +93,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#api-contract-exact-wire-shapes-source-tinyai-id-routes-strands-niclafirmware" class="md-skip">
+        <a href="#api-contract-exact-wire-shapes" class="md-skip">
           Skip to content
         </a>
       
@@ -970,10 +970,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#heartbeat-every-30-s-60-s-when-idle-01414" class="md-nav__link">
+  <a href="#two-invariants-that-bit-us" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Heartbeat — every 30 s (≈60 s when idle, 0.14.14+)
+        Two invariants that bit us
       
     </span>
   </a>
@@ -981,10 +981,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#relay-poll-every-5-s-active-60-s-idle-adaptive-01414" class="md-nav__link">
+  <a href="#routes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Relay poll — every 5 s active · 60 s idle (adaptive, 0.14.14+)
+        Routes
       
     </span>
   </a>
@@ -992,10 +992,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#relay-reply-per-envelope" class="md-nav__link">
+  <a href="#messages-on-a-device-token" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Relay reply — per envelope
+        Messages on a device token
       
     </span>
   </a>
@@ -1003,10 +1003,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#media-upload" class="md-nav__link">
+  <a href="#ota-three-guards-each-with-a-receipt" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Media upload
+        OTA: three guards, each with a receipt
       
     </span>
   </a>
@@ -1014,10 +1014,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#transcript-durable-text" class="md-nav__link">
+  <a href="#provisioning-portal-device-side-nicla-compatible" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Transcript (durable text)
+        Provisioning portal (device-side, Nicla-compatible)
       
     </span>
   </a>
@@ -1025,129 +1025,13 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#device-event-button-taps-owners-activity-feed" class="md-nav__link">
+  <a href="#apiframes-the-remote-render-rail" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Device event (button taps → owner's activity feed)
+        /api/frames — the remote render rail
       
     </span>
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ota-channel-pointer" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        OTA channel pointer
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#apidevicesask-shipped-in-m5-full-tools-since-phase-3-gate-1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        /api/devices/ask — shipped in M5, full tools since phase-3 gate #1
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#apidevicesmessages-the-dm-rail-on-a-device-token-option-b-2026-08-26" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        /api/devices/messages — the DM rail on a device token (option B, 2026-08-26)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#provisioning-portal-device-side-server-nicla-compatible" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Provisioning portal (device-side server, Nicla-compatible)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#m-a8-apiframes-the-remote-render-rail-dashboard-source-1-2026-08-26" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        M-A8 /api/frames — the remote render rail (dashboard, source 1) (2026-08-26)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="M-A8 /api/frames — the remote render rail (dashboard, source 1) (2026-08-26)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#post-apiframes-webauthn-session-required" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        POST /api/frames (WebAuthn session required)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-apiframesseq_idmanifest-public-capability-url-the-device-fetches-with-no-cookie-jar" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GET /api/frames/&lt;seq_id&gt;/manifest (public capability URL — the device fetches with no cookie jar)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-apiframesseq_idnraw" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GET /api/frames/&lt;seq_id&gt;/&lt;n&gt;.raw
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-apiframes-public" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GET /api/frames (public)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-duck-get-ansiseq_id-the-ansi-terminal-twin-m-a8-source-4-2026-08-26" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GET /duck · GET /ansi/&lt;seq_id&gt; — the ANSI terminal twin (M-A8 source 4, 2026-08-26)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1748,10 +1632,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#heartbeat-every-30-s-60-s-when-idle-01414" class="md-nav__link">
+  <a href="#two-invariants-that-bit-us" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Heartbeat — every 30 s (≈60 s when idle, 0.14.14+)
+        Two invariants that bit us
       
     </span>
   </a>
@@ -1759,10 +1643,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#relay-poll-every-5-s-active-60-s-idle-adaptive-01414" class="md-nav__link">
+  <a href="#routes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Relay poll — every 5 s active · 60 s idle (adaptive, 0.14.14+)
+        Routes
       
     </span>
   </a>
@@ -1770,10 +1654,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#relay-reply-per-envelope" class="md-nav__link">
+  <a href="#messages-on-a-device-token" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Relay reply — per envelope
+        Messages on a device token
       
     </span>
   </a>
@@ -1781,10 +1665,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#media-upload" class="md-nav__link">
+  <a href="#ota-three-guards-each-with-a-receipt" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Media upload
+        OTA: three guards, each with a receipt
       
     </span>
   </a>
@@ -1792,10 +1676,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#transcript-durable-text" class="md-nav__link">
+  <a href="#provisioning-portal-device-side-nicla-compatible" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Transcript (durable text)
+        Provisioning portal (device-side, Nicla-compatible)
       
     </span>
   </a>
@@ -1803,129 +1687,13 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#device-event-button-taps-owners-activity-feed" class="md-nav__link">
+  <a href="#apiframes-the-remote-render-rail" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Device event (button taps → owner's activity feed)
+        /api/frames — the remote render rail
       
     </span>
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#ota-channel-pointer" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        OTA channel pointer
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#apidevicesask-shipped-in-m5-full-tools-since-phase-3-gate-1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        /api/devices/ask — shipped in M5, full tools since phase-3 gate #1
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#apidevicesmessages-the-dm-rail-on-a-device-token-option-b-2026-08-26" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        /api/devices/messages — the DM rail on a device token (option B, 2026-08-26)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#provisioning-portal-device-side-server-nicla-compatible" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Provisioning portal (device-side server, Nicla-compatible)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#m-a8-apiframes-the-remote-render-rail-dashboard-source-1-2026-08-26" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        M-A8 /api/frames — the remote render rail (dashboard, source 1) (2026-08-26)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="M-A8 /api/frames — the remote render rail (dashboard, source 1) (2026-08-26)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#post-apiframes-webauthn-session-required" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        POST /api/frames (WebAuthn session required)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-apiframesseq_idmanifest-public-capability-url-the-device-fetches-with-no-cookie-jar" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GET /api/frames/&lt;seq_id&gt;/manifest (public capability URL — the device fetches with no cookie jar)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-apiframesseq_idnraw" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GET /api/frames/&lt;seq_id&gt;/&lt;n&gt;.raw
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-apiframes-public" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GET /api/frames (public)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-duck-get-ansiseq_id-the-ansi-terminal-twin-m-a8-source-4-2026-08-26" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        GET /duck · GET /ansi/&lt;seq_id&gt; — the ANSI terminal twin (M-A8 source 4, 2026-08-26)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1942,6 +1710,8 @@
               
               <article class="md-content__inner md-typeset">
                 
+  <p class="sticky-budget"><span><b>~3 min</b> read</span></p>
+  
   
                   
 
@@ -1955,177 +1725,172 @@
   
 
 
-<h1 id="api-contract-exact-wire-shapes-source-tinyai-id-routes-strands-niclafirmware">API CONTRACT — exact wire shapes (source: ~/tinyai-id routes + ~/strands-nicla/firmware)<a class="headerlink" href="#api-contract-exact-wire-shapes-source-tinyai-id-routes-strands-niclafirmware" title="Permanent link">·</a></h1>
-<p>Base URL from config (<code>api</code>, default <code>https://tiny.technology</code>). All device verbs authenticate with <strong><code>deviceId</code> + <code>token</code> IN THE JSON BODY</strong> (not headers). Every request: 15 s timeout, TLS. All bodies <code>Content-Type: application/json</code>.</p>
-<h2 id="heartbeat-every-30-s-60-s-when-idle-01414">Heartbeat — every 30 s (≈60 s when idle, 0.14.14+)<a class="headerlink" href="#heartbeat-every-30-s-60-s-when-idle-01414" title="Permanent link">·</a></h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>POST /api/devices/heartbeat
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>{&quot;deviceId&quot;:&quot;…&quot;,&quot;token&quot;:&quot;tind_…&quot;,&quot;capabilities&quot;:[&quot;render_ui&quot;,&quot;screenshot&quot;,&quot;ask&quot;,&quot;say&quot;,&quot;sensors&quot;,&quot;image&quot;,&quot;stream&quot;,&quot;sleep&quot;,&quot;ota&quot;,&quot;messages&quot;]}
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>→ 200 {ok:true}
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>→ 200 {ok:true,&quot;unread&quot;:3}   when the beat opts in with &quot;wantUnread&quot;:&quot;1&quot; — the DM badge rides the beat, no extra request
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>→ 401  = revoked/rotated — but never erase identity on ONE 401 (blips happen):
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>         3 consecutive = auth-halt + rescue portal (0.14.12); do NOT retry-loop
+<h1 id="api-contract-exact-wire-shapes">API contract — exact wire shapes<a class="headerlink" href="#api-contract-exact-wire-shapes" title="Permanent link">·</a></h1>
+<p>Third person; contracts don't do voices. Base URL from config (<code>api</code>, default
+<code>https://tiny.technology</code>). Every device call authenticates with <strong><code>deviceId</code>
++ <code>token</code> in the JSON body</strong>, not headers. 15 s timeout, TLS, <code>application/json</code>.</p>
+<h2 id="two-invariants-that-bit-us">Two invariants that bit us<a class="headerlink" href="#two-invariants-that-bit-us" title="Permanent link">·</a></h2>
+<ol>
+<li><strong>Relay payloads are strings containing JSON</strong>, not nested objects — the
+   sender <code>JSON.stringify</code>s. Parse the string, then read <code>.prompt</code>. Early
+   firmware read it as an object and skipped every envelope in silence.</li>
+<li><strong>One <code>401</code> never erases identity.</strong> Blips happen. Three consecutive 401s
+   trip an auth-halt (slow heartbeat, <code>auth_halted:true</code>, rescue portal); the
+   token is kept for forensics. Never retry-loop.</li>
+</ol>
+<h2 id="routes">Routes<a class="headerlink" href="#routes" title="Permanent link">·</a></h2>
+<table>
+<thead>
+<tr>
+<th>route</th>
+<th>when</th>
+<th>body (besides <code>deviceId</code>,<code>token</code>)</th>
+<th>reply</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST /api/devices/heartbeat</code></td>
+<td>every 30 s, ~60 s idle</td>
+<td><code>capabilities[]</code> = exactly what dispatches; <code>wantUnread:"1"</code> opt-in</td>
+<td><code>{ok}</code>; <code>unread</code> rides the beat when asked</td>
+</tr>
+<tr>
+<td><code>PUT /api/devices/relay</code></td>
+<td>poll: 5 s active, 60 s after two quiet minutes</td>
+<td><code>max:5</code></td>
+<td><code>{messages:[{id, payload:"&lt;string&gt;"}]}</code> — execute in order; unknown verb → help text</td>
+</tr>
+<tr>
+<td><code>PATCH /api/devices/relay</code></td>
+<td>one per envelope</td>
+<td><code>inReplyTo</code>, <code>payload:"&lt;string ≤ 8000 B&gt;"</code> → <code>{result[, images:[{url,format}]]}</code></td>
+<td>ack</td>
+</tr>
+<tr>
+<td><code>POST /api/media</code></td>
+<td>screenshot, voice WAV</td>
+<td><code>data:&lt;base64&gt;</code>, <code>contentType</code></td>
+<td><code>{url}</code> on <strong>plugin.tiny.technology</strong> — a different host, which matters for OTA pinning</td>
+</tr>
+<tr>
+<td><code>POST /api/devices/ask</code></td>
+<td><code>ask</code>, <code>voice</code>, AI button</td>
+<td><code>text</code> <strong>or</strong> <code>audioUrl</code>; <code>tiny:"&lt;slug&gt;"</code> when an agent is chosen</td>
+<td><code>{text, card?}</code> — the owner's <strong>full</strong> agent turn. Node runtime, not Edge (25 s first-byte 504'd long turns)</td>
+</tr>
+<tr>
+<td><code>POST /api/devices/transcript</code></td>
+<td>after every ask</td>
+<td><code>text</code>, <code>label:"sticky-ask"</code>, <code>audioUrl</code>, <code>durationS</code></td>
+<td>durable record</td>
+</tr>
+<tr>
+<td><code>POST /api/devices/event</code></td>
+<td>button tap on a card</td>
+<td><code>kind:"ui_tap"</code>, <code>card_id</code>, <code>button_id</code></td>
+<td>lands in the owner's activity feed</td>
+</tr>
+<tr>
+<td><code>POST /api/devices/messages</code></td>
+<td>messages app, <code>messages</code> verb</td>
+<td><code>op:unread\|inbox\|thread\|send</code> (+<code>with</code> / <code>to</code>,<code>body</code>)</td>
+<td>see below</td>
+</tr>
+<tr>
+<td><code>PUT /api/firmware/manifest</code></td>
+<td><code>ota</code>, boot check</td>
+<td><code>channel:"sticky-stable"</code></td>
+<td><code>{bundle:{url, sha256[, force]}}</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>status</code> exposes <code>poll_cadence</code>, so the claim is a read, not a belief. Boot
+and wake always start <em>active</em>.</p>
+<h2 id="messages-on-a-device-token">Messages on a device token<a class="headerlink" href="#messages-on-a-device-token" title="Permanent link">·</a></h2>
+<p><code>unread</code> → <code>{unread, from[]}</code> · <code>inbox</code> → threads + counts · <code>thread</code> (with
+<code>with:&lt;login&gt;</code>) → one conversation, <strong>marks read platform-wide</strong> — fetch only on
+a real human open · <code>send</code> → sends as the owner, marked <em>"via <device name>"</em>.
+The ops dispatch in-process to the existing DM handlers, so <code>send</code> inherits
+every guardrail (2000 chars, 100/day, no self-DM). A 503 is never masked as an
+empty inbox.</p>
+<h2 id="ota-three-guards-each-with-a-receipt">OTA: three guards, each with a receipt<a class="headerlink" href="#ota-three-guards-each-with-a-receipt" title="Permanent link">·</a></h2>
+<p>The manifest lists <code>files[]</code> with sha256; hosts must be on the pinned allowlist.
+The original trigger was <strong>direction-blind</strong> (<code>strcmp</code> difference, not
+<em>newer</em>): integrity verified, direction unchecked. Since 0.14.9:</p>
+<ul>
+<li><strong>install</strong> — numeric <code>ver_cmp</code>; unparseable is refused, fail closed.
+  <code>force:"1"</code> overrides and logs loudly. <code>force</code> is <em>channel state</em>, set at
+  publish and self-clearing on the next forward publish — closing a deadlock
+  where the publish rail allowed a rollback but dropped the flag the install
+  rail needed.</li>
+<li><strong>publish</strong> — the route 409s a backwards pointer unless <code>force:true</code>; the
+  publisher also proves ancestry (<a href="../release/">release rule 5</a>).</li>
+<li><strong>watch</strong> — the dashboard's <code>ota</code> opens a 30-minute watch and renders a
+  verdict: upgraded / DOWNGRADED / expired — never silence.</li>
+</ul>
+<h2 id="provisioning-portal-device-side-nicla-compatible">Provisioning portal (device-side, Nicla-compatible)<a class="headerlink" href="#provisioning-portal-device-side-nicla-compatible" title="Permanent link">·</a></h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>softAP  SSID tiny-XXXX (FNV-1a over the full MAC — a serial suffix collides), key &quot;tinysetup&quot;, 192.168.4.1
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>GET  /info   → {&quot;kind&quot;:&quot;reterminal-sticky&quot;,&quot;name&quot;,&quot;mac&quot;,&quot;version&quot;,&quot;provisioned&quot;}
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>POST /setup  {device_id, token[, api, name], networks:[{ssid,key},…]}  → merge into NVS → 200 → reboot
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>GET  /       → minimal HTML form (manual fallback)
 </span></code></pre></div>
-<h2 id="relay-poll-every-5-s-active-60-s-idle-adaptive-01414">Relay poll — every 5 s active · 60 s idle (adaptive, 0.14.14+)<a class="headerlink" href="#relay-poll-every-5-s-active-60-s-idle-adaptive-01414" title="Permanent link">·</a></h2>
-<p>Cadence is <strong>adaptive</strong> since 0.14.14: 5 s polling while <em>active</em> (an envelope, tap, or boot in
-the last 2 minutes), stretching to 60 s after two quiet minutes — cutting idle TLS handshakes
-~17k→~3.4k/day on the 750 mAh pack. Boot and wake always start ACTIVE (never wake into a 60 s
-hole), the auth-halted slow path is untouched, and status JSON exposes <code>poll_cadence</code> <strong>so the
-claim is a read, not a belief</strong>. Verification note from the bench: the observable for cadence is
-<em>probe-2 pickup delay</em>, not the field alone — the probe envelope itself is activity, so a single
-probe always reports a device it just woke up.
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>PUT /api/devices/relay
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>{&quot;deviceId&quot;:&quot;…&quot;,&quot;token&quot;:&quot;…&quot;,&quot;max&quot;:5}
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>→ {&quot;messages&quot;:[{&quot;id&quot;:&quot;env_…&quot;,&quot;payload&quot;:&quot;&lt;SERIALIZED STRING: {\&quot;type\&quot;:\&quot;invoke\&quot;,\&quot;prompt\&quot;:\&quot;…\&quot;}&gt;&quot;}]}  ⚠ payload is a STRING containing JSON (sender JSON.stringify) — parse it, then read .prompt
-</span></code></pre></div>
-Execute in order; unknown command → reply help text (never silence).</p>
-<h2 id="relay-reply-per-envelope">Relay reply — per envelope<a class="headerlink" href="#relay-reply-per-envelope" title="Permanent link">·</a></h2>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>PATCH /api/devices/relay
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>{&quot;deviceId&quot;:&quot;…&quot;,&quot;token&quot;:&quot;…&quot;,&quot;inReplyTo&quot;:&quot;env_…&quot;,&quot;payload&quot;:&quot;&lt;SERIALIZED JSON STRING ≤8000B&gt;&quot;}
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>payload string decodes to: {&quot;result&quot;:&quot;…&quot;[, &quot;images&quot;:[{&quot;url&quot;:&quot;https://…&quot;,&quot;format&quot;:&quot;bmp&quot;}]]}
-</span></code></pre></div>
-⚠ payload is a <strong>string containing JSON</strong>, not nested JSON — Nicla's serializer is the reference.</p>
-<h2 id="media-upload">Media upload<a class="headerlink" href="#media-upload" title="Permanent link">·</a></h2>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>POST /api/media
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>{&quot;deviceId&quot;:&quot;…&quot;,&quot;token&quot;:&quot;…&quot;,&quot;data&quot;:&quot;&lt;base64&gt;&quot;,&quot;contentType&quot;:&quot;image/bmp&quot; | &quot;audio/wav&quot;}
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>→ {&quot;url&quot;:&quot;https://plugin.tiny.technology/…&quot;}   (note: different host than api — matters for OTA host pinning)
-</span></code></pre></div>
-b64 of n bytes = 4·⌈n/3⌉; with 8MB PSRAM we buffer whole (≤1MB artifacts) via esp_http_client; chunked-TE streaming is the fallback for bigger.</p>
-<h2 id="transcript-durable-text">Transcript (durable text)<a class="headerlink" href="#transcript-durable-text" title="Permanent link">·</a></h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>POST /api/devices/transcript
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>{&quot;deviceId&quot;:&quot;…&quot;,&quot;token&quot;:&quot;…&quot;,&quot;text&quot;:&quot;…&quot;,&quot;label&quot;:&quot;sticky-ask&quot;,&quot;audioUrl&quot;:&quot;…&quot;,&quot;durationS&quot;:7}
-</span></code></pre></div>
-<h2 id="device-event-button-taps-owners-activity-feed">Device event (button taps → owner's activity feed)<a class="headerlink" href="#device-event-button-taps-owners-activity-feed" title="Permanent link">·</a></h2>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>POST /api/devices/event
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>{&quot;deviceId&quot;:&quot;…&quot;,&quot;token&quot;:&quot;…&quot;, …kind-specific fields}   // kind:&quot;ui_tap&quot;, card_id, button_id
-</span></code></pre></div>
-(Verify exact field envelope against app/api/devices/event/route.ts during M4 — auth pattern identical to transcript.)</p>
-<h2 id="ota-channel-pointer">OTA channel pointer<a class="headerlink" href="#ota-channel-pointer" title="Permanent link">·</a></h2>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>PUT /api/firmware/manifest
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>{&quot;deviceId&quot;:&quot;…&quot;,&quot;token&quot;:&quot;…&quot;,&quot;channel&quot;:&quot;sticky-stable&quot;}
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>→ {&quot;bundle&quot;:{&quot;url&quot;:&quot;https://…manifest.json&quot;,&quot;sha256&quot;:&quot;…&quot;}}
-</span></code></pre></div>
-Manifest → files[] each with sha256; hosts must be in the pinned allowlist (tiny.technology, plugin.tiny.technology). <strong>Downgrade refusal (0.14.9; the fix for an audited hazard):</strong> the original trigger was direction-blind (<code>strcmp</code> <em>difference</em>, not <em>newer</em>) — integrity fully verified, direction unchecked, so a stale pointer would have been installed as faithfully as a fresh one. Since 0.14.9 the device compares versions numerically (<code>MAJOR.MINOR.PATCH[-mN]</code>; unparseable = INCOMPARABLE = refuse, fail closed) and stages only when the pointer is newer — unless the bundle carries <code>force:"1"</code>, which installs and <strong>logs loudly</strong>. <code>force</code> lives as <strong>channel state</strong> (migration 0035): set at publish time, served in every bundle read, self-clearing on the next forward publish — closing a cross-guard deadlock the audit caught, where the publish rail <em>allowed</em> a forced rollback but dropped the flag the install rail needed to <em>accept</em> it: two guards that individually worked and jointly wedged. The refusal reply is an actionable sentence. The publisher's ancestry check (<a href="../release/">discipline rule 5</a>) remains in force, the <strong>publish route itself now 409s a backwards pointer</strong> (<code>force:true</code> = an intentional rollback, spelled out at publish time), and the dashboard's <code>ota</code> action opens a <strong>30-minute watch</strong>: <code>fw_before</code> is captured by a fresh probe, every parsed status receipt afterwards feeds the redeem, and the verdict is rendered — ⬆✅ upgraded, ⬆🚨 DOWNGRADED, or ⌛ expired-unredeemed, never silence. Three enforcement points (publish, install, watch), each with its own receipt.</p>
-<h2 id="apidevicesask-shipped-in-m5-full-tools-since-phase-3-gate-1"><code>/api/devices/ask</code> — shipped in M5, full tools since phase-3 gate #1<a class="headerlink" href="#apidevicesask-shipped-in-m5-full-tools-since-phase-3-gate-1" title="Permanent link">·</a></h2>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>POST /api/devices/ask
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>{&quot;deviceId&quot;:&quot;…&quot;,&quot;token&quot;:&quot;…&quot;,&quot;audioUrl&quot;:&quot;https://…&quot;} | {&quot;…&quot;,&quot;text&quot;:&quot;what&#39;s on my calendar&quot;}
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>→ {&quot;text&quot;:&quot;…&quot;, &quot;card&quot;:{…render_ui spec…}}       (transcribe when audioUrl, then owner-scoped agent turn)
-</span></code></pre></div>
-Design follows transcript/route.ts (device-token auth, no session, off IP limiter, worker resolves owner from token hash). The turn runs the owner's <strong>full agent</strong> (tools, memory, cross-device reach). Runtime note: this route (and job-run) lives on the <strong>Node runtime</strong>, not Vercel Edge — Edge's 25 s first-byte deadline on non-streaming responses 504'd every long agent turn; the worker-budget bump alone did not fix it.</p>
-<h2 id="apidevicesmessages-the-dm-rail-on-a-device-token-option-b-2026-08-26"><code>/api/devices/messages</code> — the DM rail on a device token <em>(option B, 2026-08-26)</em><a class="headerlink" href="#apidevicesmessages-the-dm-rail-on-a-device-token-option-b-2026-08-26" title="Permanent link">·</a></h2>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>POST /api/devices/messages
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>{&quot;deviceId&quot;:&quot;…&quot;,&quot;token&quot;:&quot;…&quot;,&quot;op&quot;:&quot;unread&quot;}                    → {&quot;unread&quot;:0,&quot;from&quot;:[]}
-</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>{&quot;deviceId&quot;:&quot;…&quot;,&quot;token&quot;:&quot;…&quot;,&quot;op&quot;:&quot;inbox&quot;}                     → owner&#39;s threads + unread counts
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>{&quot;deviceId&quot;:&quot;…&quot;,&quot;token&quot;:&quot;…&quot;,&quot;op&quot;:&quot;thread&quot;,&quot;with&quot;:&quot;&lt;login&gt;&quot;}   → one conversation (MARKS READ platform-wide)
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>{&quot;deviceId&quot;:&quot;…&quot;,&quot;token&quot;:&quot;…&quot;,&quot;op&quot;:&quot;send&quot;,&quot;to&quot;:&quot;…&quot;,&quot;body&quot;:&quot;…&quot;}  → sends as the owner, marked &quot;via &lt;device name&gt;&quot;
-</span></code></pre></div>
-Before this route, every message endpoint was owner-Bearer and the glass could only be a <em>face</em> for the inbox (owner-side pusher). Now the device credential reaches the rail directly — worker-side the ops dispatch <strong>in-process to the existing DM handler classes</strong>, so send inherits every guardrail by construction (2000-char cap, 100/day, no self-DM, attachment allowlist). Probe receipts on the real token: bad token → 401 with no oracle, bad recipient → 404 through the full send chain, bad op / missing <code>with</code> → 400s. 10 s bound; a 503 is never masked as an empty inbox. The read side effect of <code>thread</code> is unchanged and sacred — fetch only on a real human open. The unread badge rides the heartbeat (opt-in <code>wantUnread</code>, above), and since 0.14.7 the firmware itself speaks this route: the on-device messages app fetches inbox and threads with the device token — it shipped as grammar v1 (an id namespace, not a new card type).</p>
-<h2 id="provisioning-portal-device-side-server-nicla-compatible">Provisioning portal (device-side server, Nicla-compatible)<a class="headerlink" href="#provisioning-portal-device-side-server-nicla-compatible" title="Permanent link">·</a></h2>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>softAP  SSID tiny-XXXX (XXXX = FNV-1a over full MAC — Nicla lesson: suffix of serial collides)
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>        WPA2 key &quot;tinysetup&quot;, 192.168.4.1
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>GET  /info  → {&quot;kind&quot;:&quot;reterminal-sticky&quot;,&quot;name&quot;:…,&quot;mac&quot;:…,&quot;version&quot;:…,&quot;provisioned&quot;:bool}
-</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>POST /setup {device_id, token[, api, name], networks:[{ssid,key},…] | ssid,key}
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>        → save to NVS (merge semantics: upsert networks, scalars overwrite) → 200 → reboot
-</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>GET  /      → minimal HTML form (manual fallback)
-</span></code></pre></div>
-The same portal has <strong>two entries</strong> (since 0.14.12): <em>first boot</em> (nothing in NVS, AP only) and
-<em>rescue</em> — after a 3-strike auth-halt the live STA widens to <strong>APSTA</strong> and raises the identical
-<code>/setup</code> → merge → reboot contract, so a re-issued token reaches a bricked-auth device with no
-serial cable and iOS onboarding code unchanged. STA stays associated in rescue, so a 401 that
-was a blip self-heals with the portal still up; the glass shows SSID + steps, a fallback card
-if APSTA itself fails (the panel is never silent), and re-entry is idempotent. One audited
-hole is on the fix queue: the rescue card's text sits at 468 bytes of a 512-byte buffer —
-close enough to blank the panel in exactly the path that exists because everything else
-failed; filed by the truncation sweep, honest here until fixed.</p>
-<h2 id="m-a8-apiframes-the-remote-render-rail-dashboard-source-1-2026-08-26">M-A8 <code>/api/frames</code> — the remote render rail (dashboard, source 1) <em>(2026-08-26)</em><a class="headerlink" href="#m-a8-apiframes-the-remote-render-rail-dashboard-source-1-2026-08-26" title="Permanent link">·</a></h2>
-<p>Server-rendered animation for <code>tiny_stream_play(manifest_url, interval_s, max_frames)</code>
-(firmware/main/tiny/tiny_stream.h — the contract this shape serves). The dashboard
-rasterizes anim-grammar JSON (docs/research/EINK_ANIMATION.md §4) with Pillow and packs
-frames through the SAME dither.py packers as <code>/api/dither</code> — canvas-space bytes, the
-firmware-confirmed format. The device stays a dumb pixel-pusher.</p>
-<h3 id="post-apiframes-webauthn-session-required">POST /api/frames  <em>(WebAuthn session required)</em><a class="headerlink" href="#post-apiframes-webauthn-session-required" title="Permanent link">·</a></h3>
-<p>Body = one anim spec:
-<div class="language-json highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="p">{</span><span class="nt">&quot;anim_id&quot;</span><span class="p">:</span><span class="s2">&quot;bounce&quot;</span><span class="p">,</span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nt">&quot;mode&quot;</span><span class="p">:</span><span class="s2">&quot;1bit_partial&quot;</span><span class="p">,</span><span class="nt">&quot;frame_budget_ms&quot;</span><span class="p">:</span><span class="mi">500</span><span class="p">,</span><span class="nt">&quot;loop&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w"> </span><span class="nt">&quot;background&quot;</span><span class="p">:</span><span class="s2">&quot;white&quot;</span><span class="p">,</span>
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w"> </span><span class="nt">&quot;frames&quot;</span><span class="p">:[{</span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="s2">&quot;rect&quot;</span><span class="p">,</span><span class="nt">&quot;tile&quot;</span><span class="p">:{</span><span class="nt">&quot;x&quot;</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span><span class="nt">&quot;y&quot;</span><span class="p">:</span><span class="mi">300</span><span class="p">,</span><span class="nt">&quot;w&quot;</span><span class="p">:</span><span class="mi">80</span><span class="p">,</span><span class="nt">&quot;h&quot;</span><span class="p">:</span><span class="mi">80</span><span class="p">},</span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="s2">&quot;black&quot;</span><span class="p">},</span>
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">           </span><span class="p">{</span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="s2">&quot;blit&quot;</span><span class="p">,</span><span class="nt">&quot;tile&quot;</span><span class="p">:{</span><span class="nt">&quot;x&quot;</span><span class="p">:</span><span class="mi">40</span><span class="p">,</span><span class="nt">&quot;y&quot;</span><span class="p">:</span><span class="mi">200</span><span class="p">,</span><span class="nt">&quot;w&quot;</span><span class="p">:</span><span class="mi">48</span><span class="p">,</span><span class="nt">&quot;h&quot;</span><span class="p">:</span><span class="mi">64</span><span class="p">},</span><span class="nt">&quot;glyph&quot;</span><span class="p">:</span><span class="s2">&quot;H&quot;</span><span class="p">},</span>
-</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">           </span><span class="p">{</span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="s2">&quot;delay&quot;</span><span class="p">,</span><span class="nt">&quot;ms&quot;</span><span class="p">:</span><span class="mi">1000</span><span class="p">},</span>
-</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">           </span><span class="p">{</span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="s2">&quot;card_diff&quot;</span><span class="p">,</span><span class="nt">&quot;patch_id&quot;</span><span class="p">:</span><span class="s2">&quot;cursor_on&quot;</span><span class="p">},</span>
-</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">           </span><span class="p">{</span><span class="nt">&quot;op&quot;</span><span class="p">:</span><span class="s2">&quot;flush&quot;</span><span class="p">}],</span>
-</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w"> </span><span class="nt">&quot;patches&quot;</span><span class="p">:{</span><span class="nt">&quot;cursor_on&quot;</span><span class="p">:{</span><span class="nt">&quot;region&quot;</span><span class="p">:{</span><span class="nt">&quot;x&quot;</span><span class="p">:</span><span class="mi">150</span><span class="p">,</span><span class="nt">&quot;y&quot;</span><span class="p">:</span><span class="mi">210</span><span class="p">,</span><span class="nt">&quot;w&quot;</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span><span class="nt">&quot;h&quot;</span><span class="p">:</span><span class="mi">48</span><span class="p">},</span><span class="nt">&quot;fill&quot;</span><span class="p">:</span><span class="s2">&quot;black&quot;</span><span class="p">}}}</span>
-</span></code></pre></div>
-Semantics (server-side): the 800×480 canvas PERSISTS across ops (e-ink model); every
-paint op (<code>blit</code>/<code>rect</code>/<code>card_diff</code>) emits one frame; <code>delay</code> holds the last frame for
-<code>round(ms / frame_budget_ms)</code> extra frames (time is quantized to the one uniform
-interval, honestly); <code>flush</code> is a no-op here — refresh hygiene is DEVICE law
-(full wipe every ~20 frames unless <code>closed_loop</code>). <code>rect</code> is a server-side grammar
-superset op (solid rectangle, <code>color: black|dark|light|white</code>) so agents can compose
-shapes without shipping bitmaps. <code>card_diff</code> patches take <code>fill:"black"|"white"</code> or
-<code>bitmap_b64</code> (raw 1-bit MSB-first rows, <code>ceil(w/8)</code> B/row × h — wrong byte count is a
-422 with the arithmetic). <code>mode</code> → format: <code>1bit_partial</code>→<code>1bit</code>,
-<code>4gray_partial</code>/<code>full</code>→<code>gray4</code>. <code>loop:n&gt;1</code> materializes n repeats; <code>loop:-1</code> marks the
-manifest <code>closed_loop:true</code> and the device replays.</p>
-<p>CAPS (server-enforced, device re-enforces — server promises are not device law):
-<strong>≤120 frames · ≤60 s (count × interval) · frame_budget_ms ≥ 250</strong> (panel physics).
-Over-cap → <code>422</code> with the refusing arithmetic in <code>detail</code>. No session → <code>401</code>.
-Malformed JSON → <code>400</code>.</p>
-<p>Response = the manifest (below). <code>seq_id = sha256(canonical spec)[:16]</code> — idempotent:
-re-POSTing the same spec returns the stored manifest without re-rendering.</p>
-<h3 id="get-apiframesseq_idmanifest-public-capability-url-the-device-fetches-with-no-cookie-jar">GET /api/frames/<code>&lt;seq_id&gt;</code>/manifest  <em>(public capability URL — the device fetches with no cookie jar)</em><a class="headerlink" href="#get-apiframesseq_idmanifest-public-capability-url-the-device-fetches-with-no-cookie-jar" title="Permanent link">·</a></h3>
-<p><div class="language-json highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="p">{</span><span class="nt">&quot;seq_id&quot;</span><span class="p">:</span><span class="s2">&quot;00053e27d9b2a8c6&quot;</span><span class="p">,</span><span class="nt">&quot;anim_id&quot;</span><span class="p">:</span><span class="s2">&quot;bounce_box_test&quot;</span><span class="p">,</span>
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w"> </span><span class="nt">&quot;frames&quot;</span><span class="p">:[</span><span class="s2">&quot;/api/frames/00053e27d9b2a8c6/0.raw&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">],</span>
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w"> </span><span class="nt">&quot;previews&quot;</span><span class="p">:[</span><span class="s2">&quot;/api/frames/00053e27d9b2a8c6/0.png&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;...&quot;</span><span class="p">],</span>
-</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w"> </span><span class="nt">&quot;interval_ms&quot;</span><span class="p">:</span><span class="mi">500</span><span class="p">,</span><span class="nt">&quot;format&quot;</span><span class="p">:</span><span class="s2">&quot;1bit&quot;</span><span class="p">,</span><span class="nt">&quot;frame_bytes&quot;</span><span class="p">:</span><span class="mi">48000</span><span class="p">,</span><span class="nt">&quot;count&quot;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span>
-</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w"> </span><span class="nt">&quot;closed_loop&quot;</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="nt">&quot;duration_s&quot;</span><span class="p">:</span><span class="mf">2.5</span><span class="p">,</span>
-</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w"> </span><span class="nt">&quot;caps&quot;</span><span class="p">:{</span><span class="nt">&quot;max_frames&quot;</span><span class="p">:</span><span class="mi">120</span><span class="p">,</span><span class="nt">&quot;max_duration_s&quot;</span><span class="p">:</span><span class="mi">60</span><span class="p">},</span><span class="nt">&quot;ts&quot;</span><span class="p">:</span><span class="mf">1787721000.0</span><span class="p">}</span>
-</span></code></pre></div>
-<code>format</code> is <code>"1bit"</code> (48000 B/frame) or <code>"gray4"</code> (96000 B/frame). URLs are
-tunnel-relative; the firmware prefixes its configured dashboard host (host allowlist
-applies device-side).</p>
-<h3 id="get-apiframesseq_idnraw">GET /api/frames/<code>&lt;seq_id&gt;</code>/<code>&lt;n&gt;</code>.raw<a class="headerlink" href="#get-apiframesseq_idnraw" title="Permanent link">·</a></h3>
-<p><code>application/octet-stream</code>, <code>Content-Length</code> EXACT — 48000 (1bit) or 96000 (gray4),
-no padding: exact-size read = format check (byte-count honesty idiom). Bytes are
-canvas-space; the driver applies its own 180° + pixel-order compensation
-(dither.py header). <code>&lt;n&gt;.png</code> = grayscale preview of the same bytes.
-<code>Cache-Control: immutable</code> (content-addressed). Strict name whitelist; <code>seq_id</code> must
-be 16 hex chars — anything else is 404 before disk is touched.</p>
-<h3 id="get-apiframes-public">GET /api/frames  <em>(public)</em><a class="headerlink" href="#get-apiframes-public" title="Permanent link">·</a></h3>
-<p>Machine-readable copy of this contract (same lesson as GET /api/dither: without it the
-SPA catch-all serves index.html to a spec-hunting agent).</p>
-<p>Verified 2026-08-26 (local, live server): POST no-session→401 · contract→200 ·
-manifest→200 · 2.raw→200 CL=48000 · gray4 0.raw→200 CL=96000 · over-cap specs→422
-with arithmetic · bad seq/frame→404 · traversal→404/index (see security note).
-Independently re-verified same day by a second agent against the live server: POST
-6-frame 1bit spec→200 manifest 694 B · GET manifest→200 694 B · 0.raw→200 exactly
-48000 B · 0.png preview→200.</p>
-<p><strong>Security note (found during M-A8 verify, fixed same commit):</strong> the SPA catch-all
-<code>DIST / path</code> resolved <code>%2e%2e</code> traversal OUTSIDE dist and served any file on disk —
-proven against <code>.sticky_auth.json</code> (jwt_secret) through the local port. Fixed with
-resolve-and-prefix containment; the jwt_secret was ROTATED (sessions invalidated,
-passkey credentials kept).</p>
-<h3 id="get-duck-get-ansiseq_id-the-ansi-terminal-twin-m-a8-source-4-2026-08-26">GET /duck · GET /ansi/<code>&lt;seq_id&gt;</code> — the ANSI terminal twin <em>(M-A8 source 4, 2026-08-26)</em><a class="headerlink" href="#get-duck-get-ansiseq_id-the-ansi-terminal-twin-m-a8-source-4-2026-08-26" title="Permanent link">·</a></h3>
-<p><code>curl sticky.cagatay.my/duck</code> — the demo that markets the thesis. The SAME stored
-sequences, downsampled (800×480 → 100 cols × 30 half-block rows via Pillow, from the
-sequences' own <code>&lt;n&gt;.png</code> previews) and streamed as chunked <code>text/plain</code>: clear-screen
-escape + xterm-256 gray half-blocks (<code>▀</code>, fg=top row / bg=bottom row, repeated SGR
-codes elided) per frame, frame delay = manifest <code>interval_ms</code> (~2 fps for the duck),
-looped to the <strong>same 60 s cap</strong> the device enforces, then <code>reset + cursor-show</code> and the
-one-line signature <code>rendered by tiny — sticky.cagatay.my</code>. <strong>UNAUTHENTICATED on
-purpose</strong> — read-only marketing: it touches no device, no owner data, only
-content-addressed previews that are already capability-URL public; the POST that spends
-CPU stays session-gated. No terminal detection: it streams the same bytes to anyone
-(keep-it-simple ruling in the bounded-task brief) — a non-terminal client just sees
-escape codes. <code>/ansi/&lt;seq_id&gt;</code> twins ANY stored sequence (16-hex id or 404 before disk);
-<code>/duck</code> is a bookmark to a built-in <code>duck_waddle</code> spec rendered at startup through the
-ordinary <code>render_sequence()</code> pipeline — authored in the grammar itself using the <code>scene</code>
-compound op (<code>{op:"scene", clear:"white|black"?, shapes:[{kind:rect|ellipse,tile,color}]}</code>
-— composes many primitives into ONE frame) and the <code>ellipse</code> primitive, both added to the
-server-side grammar superset alongside <code>rect</code> and documented in <code>GET /api/frames</code>.</p>
+<p>Two entries into one contract: <em>first boot</em> (empty NVS) and <em>rescue</em> after a
+3-strike auth-halt, where the live STA widens to APSTA so a re-issued token
+reaches a bricked-auth device with no cable. One audited hole stays honest
+here until fixed: the rescue card's text sits at 468 of a 512-byte buffer.</p>
+<h2 id="apiframes-the-remote-render-rail"><code>/api/frames</code> — the remote render rail<a class="headerlink" href="#apiframes-the-remote-render-rail" title="Permanent link">·</a></h2>
+<p>The dashboard rasterizes anim-grammar JSON
+(<a href="https://github.com/cagataycali/sticky-the-reterminal/blob/main/docs/research/EINK_ANIMATION.md">research note</a>) into exact-size frames for the <code>play</code>
+verb; the device stays a dumb pixel-pusher.</p>
+<table>
+<thead>
+<tr>
+<th>route</th>
+<th>auth</th>
+<th>shape</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST /api/frames</code></td>
+<td>session</td>
+<td>anim spec → manifest. <code>seq_id = sha256(spec)[:16]</code>, idempotent. Caps: <strong>≤120 frames · ≤60 s · ≥250 ms/frame</strong>; over-cap → 422 with the arithmetic</td>
+</tr>
+<tr>
+<td><code>GET /api/frames/&lt;seq&gt;/manifest</code></td>
+<td>capability URL</td>
+<td><code>{frames[], previews[], interval_ms, format:"1bit"\|"gray4", frame_bytes, count, closed_loop, caps}</code></td>
+</tr>
+<tr>
+<td><code>GET /api/frames/&lt;seq&gt;/&lt;n&gt;.raw</code></td>
+<td>capability URL</td>
+<td><code>Content-Length</code> <strong>exact</strong> — 48 000 or 96 000 B, no padding: byte count <em>is</em> the format check. <code>&lt;n&gt;.png</code> previews the same bytes</td>
+</tr>
+<tr>
+<td><code>GET /api/frames</code></td>
+<td>public</td>
+<td>machine-readable copy of this contract</td>
+</tr>
+<tr>
+<td><code>GET /duck</code> · <code>GET /ansi/&lt;seq&gt;</code></td>
+<td>public</td>
+<td>the same frames as xterm-256 half-blocks — <code>curl sticky.cagatay.my/duck</code></td>
+</tr>
+</tbody>
+</table>
+<p>Canvas semantics: 800×480 persists across ops; each paint op emits one frame.
+On the record: the SPA catch-all once resolved <code>%2e%2e</code> outside <code>dist</code> and
+served <code>.sticky_auth.json</code>; fixed the same commit, secret rotated.</p>
 
 
 
 
 
 
+
+  
+  
 
 
 
