@@ -25,6 +25,27 @@
     }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
     steps.forEach(function (s) { so.observe(s); });
   });
+  // product shots: crossfade real card captures — 4 s dwell, hold on hover/focus, dots pick, only while on screen
+  root.querySelectorAll('[data-shots]').forEach(function (sec) {
+    var frames = sec.querySelectorAll('.frame'), dots = sec.querySelectorAll('.l-dot'), label = sec.querySelector('[data-shot-label]');
+    var i = 0, timer = null, held = false, seen = false;
+    var show = function (n) {
+      i = (n + frames.length) % frames.length;
+      frames.forEach(function (f, k) { f.classList.toggle('is-on', k === i); });
+      dots.forEach(function (d, k) { d.classList.toggle('is-on', k === i); d.setAttribute('aria-selected', k === i ? 'true' : 'false'); });
+      if (label) label.textContent = dots[i] ? dots[i].getAttribute('aria-label') : '';
+    };
+    var start = function () { stop(); if (!reduce && seen && !held) timer = setInterval(function () { show(i + 1); }, 4000); };
+    var stop = function () { if (timer) { clearInterval(timer); timer = null; } };
+    dots.forEach(function (d) { d.addEventListener('click', function () { show(+d.getAttribute('data-shot')); start(); }); });
+    sec.addEventListener('mouseenter', function () { held = true; stop(); });
+    sec.addEventListener('mouseleave', function () { held = false; start(); });
+    sec.addEventListener('focusin', function () { held = true; stop(); });
+    sec.addEventListener('focusout', function () { held = false; start(); });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) { es.forEach(function (e) { seen = e.isIntersecting; seen ? start() : stop(); }); }, { threshold: 0.25 }).observe(sec);
+    } else { seen = true; start(); }
+  });
   // hero: a slow 3D tilt as the reader scrolls away (transform only, rAF-throttled, ≤6°)
   var hero = root.querySelector('.bezel--hero');
   if (hero && !reduce) {

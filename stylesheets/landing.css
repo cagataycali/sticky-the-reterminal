@@ -74,6 +74,18 @@ esp-web-install-button { --esp-tools-button-color: var(--ink-3); --esp-tools-but
 .l-reveal.in > *:nth-child(2) { transition-delay: .12s; }
 .l-hero.l-reveal > * { opacity: 1; transform: none; transition: none; }  /* hero animates itself */
 
+/* product shots: real card captures crossfade inside the shell (4 s dwell, hover/focus holds, dots pick) */
+.bezel--shots .frame { opacity: 0; transition: opacity .8s var(--ease); }
+.bezel--shots .frame.is-on { opacity: 1; }
+.l-dots { display: flex; justify-content: center; gap: .25rem; margin-top: 1.25rem; }
+.l-dot { width: 44px; height: 44px; padding: 0; border: 0; background: none; cursor: pointer; display: grid; place-items: center; border-radius: 50%; }
+.l-dot span { width: 8px; height: 8px; border-radius: 50%; background: var(--ink-1); transition: transform .3s var(--ease), background .3s; display: block; }
+.l-dot:hover span { background: var(--ink-2); }
+.l-dot.is-on span { background: var(--ink-3); transform: scale(1.5); }
+.l-dot:focus-visible { outline: 2px solid var(--accent); outline-offset: -6px; }
+.l-shots__now { font-size: .9rem !important; } .l-shots__hint { color: var(--ink-1); }
+.l-caption a { color: var(--ink-3); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--ink-1); }
+
 /* listen: the answer types itself onto the glass, in the panel's grays */
 .css-card { position: absolute; inset: 0; padding: 5% 6%; font-family: var(--md-text-font); color: #141414; background: #fbfbf9; }
 .css-card__title { font-family: var(--md-code-font); font-size: clamp(.7rem, 1.1vw, .95rem); color: #5c5c58; border-bottom: 1px solid #b9b9b4; padding-bottom: 2%; margin-bottom: 3%; }
@@ -140,6 +152,7 @@ esp-web-install-button { --esp-tools-button-color: var(--ink-3); --esp-tools-but
   .l-pin__device { position: sticky; top: 3.2rem; z-index: 1; padding: .75rem 0; background: var(--paper); max-width: 26rem; margin: 0 auto; width: 100%; }
   .l-step { min-height: 55vh; }
   .l-h1 { font-size: clamp(2.6rem, 14vw, 4rem); }
+  .l-dots { gap: 0; margin-inline: -.5rem; } .l-dot { flex: 0 0 44px; }
   .l-limits ul, .l-spec dl { grid-template-columns: 1fr 1fr; }
   .l-limits ul { grid-template-columns: 1fr; }
 }
