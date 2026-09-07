@@ -63,16 +63,15 @@
   
   
   
-  
   <meta property="og:type" content="website" />
   <meta property="og:title" content="How I work · sticky" />
   <meta property="og:description" content="How Sticky's firmware is put together — the module map as built, the tasks that run, the voice pipeline, and the security posture." />
   <meta property="og:url" content="https://cagataycali.github.io/sticky-the-reterminal/ARCHITECTURE/" />
-  <meta property="og:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
+  <meta property="og:image" content="https://cagataycali.github.io/sticky-the-reterminal/img/home-live.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="How I work · sticky" />
   <meta name="twitter:description" content="How Sticky's firmware is put together — the module map as built, the tasks that run, the voice pipeline, and the security posture." />
-  <meta name="twitter:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
+  <meta name="twitter:image" content="https://cagataycali.github.io/sticky-the-reterminal/img/home-live.png" />
   <meta name="theme-color" content="#f3f2ee" />
   <meta name="color-scheme" content="light dark" />
 
@@ -1129,7 +1128,7 @@ Everything below describes the binary as built.</p>
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>│   │                   same shapes as Nicla → iOS app onboards unchanged     │
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>│   ├─ tiny_wifi        join + roaming list; w+/w- truth for the glance bar   │
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>│   ├─ tiny_node        heartbeat 30 s (advertises caps = dispatch, parity    │
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>│   │                   rule) · relay poll 5 s/60 s · dispatch() — all 22     │
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>│   │                   rule) · relay poll 5 s/60 s · dispatch() — all 23     │
 </span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>│   │                   verbs live HERE. 401 NEVER wipes identity: 3 strikes  │
 </span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>│   │                   over 5 min → auth-halted + rescue portal, token kept  │
 </span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>│   ├─ tiny_display     card-spec renderer → refresh-mode policy · title-bar  │
@@ -1257,7 +1256,7 @@ skips the portal by writing the same NVS blob over serial
 </ul>
 <h2 id="related-contracts">Related contracts<a class="headerlink" href="#related-contracts" title="Permanent link">·</a></h2>
 <ul>
-<li><a href="../commands/">Commands</a> — the 22 verbs and their receipts</li>
+<li><a href="../commands/">Commands</a> — the 23 verbs and their receipts</li>
 <li><a href="../cards/">Cards</a> — the render grammar and refresh policy</li>
 <li><a href="../API_CONTRACT/">API contract</a> — every HTTP route the firmware touches</li>
 <li><a href="../release/">Build &amp; release discipline</a> — the rules a shared worktree taught us</li>

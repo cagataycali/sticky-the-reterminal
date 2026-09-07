@@ -63,16 +63,15 @@
   
   
   
-  
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Recovery · sticky" />
   <meta property="og:description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device." />
   <meta property="og:url" content="https://cagataycali.github.io/sticky-the-reterminal/RECOVERY/" />
-  <meta property="og:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
+  <meta property="og:image" content="https://cagataycali.github.io/sticky-the-reterminal/img/home-live.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Recovery · sticky" />
   <meta name="twitter:description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device." />
-  <meta name="twitter:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
+  <meta name="twitter:image" content="https://cagataycali.github.io/sticky-the-reterminal/img/home-live.png" />
   <meta name="theme-color" content="#f3f2ee" />
   <meta name="color-scheme" content="light dark" />
 
@@ -1093,7 +1092,7 @@
 
 
 <h1 id="recovery-how-to-get-back-to-stock-always">RECOVERY — how to get back to stock, always<a class="headerlink" href="#recovery-how-to-get-back-to-stock-always" title="Permanent link">·</a></h1>
-<p><strong>Rule zero: the ESP32-S3 cannot be bricked by an app flash.</strong> The ROM serial bootloader lives in mask ROM. If the firmware is broken, hold the reset-hole strapping combo (or just let a bad app crash-loop — esptool can still sync during resets) and talk to <code>/dev/cu.usbmodem5C843358881</code>.</p>
+<p><strong>Rule zero: the ESP32-S3 cannot be bricked by an app flash.</strong> The ROM serial bootloader lives in mask ROM. If the firmware is broken, hold the reset-hole strapping combo (or just let a bad app crash-loop — esptool can still sync during resets) and talk to <code>$STICKY_PORT</code> (see below).</p>
 <h2 id="path-1-our-byte-exact-dump-preferred-restores-this-unit-nvssncalibration-included">Path 1 — our byte-exact dump (preferred: restores THIS unit, NVS/SN/calibration included)<a class="headerlink" href="#path-1-our-byte-exact-dump-preferred-restores-this-unit-nvssncalibration-included" title="Permanent link">·</a></h2>
 <p>Created on arrival day from the as-shipped device:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># dump (how recovery/stock-firmware-32MB.bin was made) — ~45 min at default baud</span>
@@ -1103,7 +1102,7 @@
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># restore</span>
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>esptool<span class="w"> </span>--port<span class="w"> </span><span class="nv">$STICKY_PORT</span><span class="w"> </span>--baud<span class="w"> </span><span class="m">460800</span><span class="w"> </span>write-flash<span class="w"> </span><span class="m">0</span><span class="w"> </span>stock-firmware-32MB.bin
 </span></code></pre></div>
-<p><code>$STICKY_PORT</code> is your board's serial port (<code>ls /dev/cu.usbmodem*</code>; Linux <code>/dev/ttyACM0</code>). The sha256 of my owner's dump is recorded in <code>recovery/stock-firmware-32MB.bin.sha256</code>; the 32 MB bin itself is gitignored — make your own before you flash me, it's the only copy of <em>your</em> board's factory state.</p>
+<p><code>$STICKY_PORT</code> is your board's serial port (<code>ls /dev/cu.usbmodem*</code>; Linux <code>/dev/ttyACM0</code>) — my CH343 bridge shows up as "USB Single Serial" and so do other boards, so if there is more than one candidate, unplug them rather than guess. The sha256 of my owner's dump is recorded in <code>recovery/stock-firmware-32MB.bin.sha256</code>; the 32 MB bin itself is gitignored — make your own before you flash me, it's the only copy of <em>your</em> board's factory state.</p>
 <h2 id="path-2-official-factory-image-browser-zero-tooling">Path 2 — official factory image (browser, zero tooling)<a class="headerlink" href="#path-2-official-factory-image-browser-zero-tooling" title="Permanent link">·</a></h2>
 <p>Seeed ships stock as a playground-registry integration: <strong><code>sticky-factory</code> v1.1.0</strong>, one full 32MB image at offset 0, sha256 <code>8b149c809b7c07c680a59ab5621d7bd29ca85a8c1c9e9060b0040b387b4517e4</code> (<code>recovery/factory-manifest.json</code>).</p>
 <ol>

@@ -63,16 +63,15 @@
   
   
   
-  
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Quickstart · sticky" />
   <meta property="og:description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device." />
   <meta property="og:url" content="https://cagataycali.github.io/sticky-the-reterminal/start/quickstart/" />
-  <meta property="og:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
+  <meta property="og:image" content="https://cagataycali.github.io/sticky-the-reterminal/img/home-live.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Quickstart · sticky" />
   <meta name="twitter:description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device." />
-  <meta name="twitter:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
+  <meta name="twitter:image" content="https://cagataycali.github.io/sticky-the-reterminal/img/home-live.png" />
   <meta name="theme-color" content="#f3f2ee" />
   <meta name="color-scheme" content="light dark" />
 
@@ -1173,6 +1172,11 @@ a way back.</p>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>esptool<span class="w"> </span>--port<span class="w"> </span><span class="nv">$STICKY_PORT</span><span class="w"> </span>read-flash<span class="w"> </span><span class="m">0</span><span class="w"> </span>0x2000000<span class="w"> </span>stock-firmware-32MB.bin
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>shasum<span class="w"> </span>-a<span class="w"> </span><span class="m">256</span><span class="w"> </span>stock-firmware-32MB.bin<span class="w"> </span>&gt;<span class="w"> </span>stock-firmware-32MB.bin.sha256
 </span></code></pre></div>
+<p><code>$STICKY_PORT</code> is set once here and used by every command below. My USB is a
+WCH CH343 bridge (<code>1a86:55d3</code>, "USB Single Serial") — so is an SO-101 servo
+adapter and plenty else, and USB metadata cannot tell us apart. If
+<code>ls /dev/cu.usbmodem*</code> shows more than one, unplug the others; the installer
+refuses to guess for exactly this reason.</p>
 <p>Yes, 45 minutes. I contain multitudes (32MB of them).</p>
 <h2 id="1-flash-me-5-min-nothing-to-build">1. Flash me (~5 min, nothing to build)<a class="headerlink" href="#1-flash-me-5-min-nothing-to-build" title="Permanent link">·</a></h2>
 <p>Two ways, both live. Neither needs a toolchain.</p>
@@ -1239,7 +1243,7 @@ vendor HAL is tested against.</p>
 manifest the web installer serves.</p>
 <h2 id="where-to-go-from-here">Where to go from here<a class="headerlink" href="#where-to-go-from-here" title="Permanent link">·</a></h2>
 <ul>
-<li><a href="../../commands/">Commands</a> — my full verb table, all 21</li>
+<li><a href="../../commands/">Commands</a> — my full verb table, all 23</li>
 <li><a href="../../cards/">Cards</a> — the card language, spec'd</li>
 <li><a href="../../API_CONTRACT/">API contract</a> — exact wire shapes (third-person; contracts don't do voices)</li>
 <li><a href="../../troubleshooting/">Troubleshooting</a> — every defect actually seen on

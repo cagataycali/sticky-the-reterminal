@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="The 22 verbs Sticky answers to — one line each, with what the receipt tells you.">
+        <meta name="description" content="The 23 verbs Sticky answers to — one line each, with what the receipt tells you.">
       
       
         <meta name="author" content="Cagatay Cali">
@@ -63,16 +63,15 @@
   
   
   
-  
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Commands · sticky" />
-  <meta property="og:description" content="The 22 verbs Sticky answers to — one line each, with what the receipt tells you." />
+  <meta property="og:description" content="The 23 verbs Sticky answers to — one line each, with what the receipt tells you." />
   <meta property="og:url" content="https://cagataycali.github.io/sticky-the-reterminal/commands/" />
-  <meta property="og:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
+  <meta property="og:image" content="https://cagataycali.github.io/sticky-the-reterminal/img/home-live.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Commands · sticky" />
-  <meta name="twitter:description" content="The 22 verbs Sticky answers to — one line each, with what the receipt tells you." />
-  <meta name="twitter:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
+  <meta name="twitter:description" content="The 23 verbs Sticky answers to — one line each, with what the receipt tells you." />
+  <meta name="twitter:image" content="https://cagataycali.github.io/sticky-the-reterminal/img/home-live.png" />
   <meta name="theme-color" content="#f3f2ee" />
   <meta name="color-scheme" content="light dark" />
 
@@ -468,10 +467,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#two-status-fields-that-earned-their-place" class="md-nav__link">
+  <a href="#two-status-fields-worth-knowing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Two status fields that earned their place
+        Two status fields worth knowing
       
     </span>
   </a>
@@ -1040,10 +1039,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#two-status-fields-that-earned-their-place" class="md-nav__link">
+  <a href="#two-status-fields-worth-knowing" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Two status fields that earned their place
+        Two status fields worth knowing
       
     </span>
   </a>
@@ -1095,10 +1094,10 @@
 
 
 <h1 id="commands-everything-i-answer-to">Commands — everything I answer to<a class="headerlink" href="#commands-everything-i-answer-to" title="Permanent link">·</a></h1>
-<p>Twenty-two verbs advertised in my heartbeat, each dispatched in <code>tiny_node.cpp</code>
-— I <strong>advertise exactly what I implement</strong> (one drift, below). Envelopes
-are <code>{type:"invoke", prompt:"&lt;verb&gt; [args]"}</code>; I always reply — unknown input
-gets the help string, never silence. From any tiny surface:</p>
+<p>Twenty-three verbs, each dispatched in <code>tiny_node.cpp</code>, and my heartbeat
+<strong>advertises what I implement</strong> (one drift, below). Envelopes are
+<code>{type:"invoke", prompt:"&lt;verb&gt; [args]"}</code>; I always reply — unknown input gets
+the help string, never silence. From any tiny surface:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>use_device invoke → prompt: &quot;status&quot;
 </span></code></pre></div>
 <figure class="glass">
@@ -1221,7 +1220,7 @@ gets the help string, never silence. From any tiny surface:</p>
 <tr>
 <td><code>sleep</code></td>
 <td><code>[seconds]</code></td>
-<td>reply first, goodbye card, then deep sleep at 0 mA; AI button wakes</td>
+<td>reply first, goodbye card, then deep sleep at 10&ndash;20 µA; AI button wakes</td>
 <td>ok, sent while the radio is up</td>
 </tr>
 <tr>
@@ -1252,30 +1251,31 @@ gets the help string, never silence. From any tiny surface:</p>
 </table>
 <div class="admonition warning">
 <p class="admonition-title">One drift, on the record</p>
-<p><code>sd</code> dispatches but is <strong>not</strong> in the heartbeat capability list, and the
-help string still names the 0.14-era verbs. Twenty-two advertised,
-twenty-three dispatched — the exact drift the invariant exists for. It
-stays written here until a firmware release closes it.</p>
+<p><strong>23 dispatched, 22 advertised.</strong> <code>sd</code> is missing from the heartbeat
+<code>caps[]</code> array (<code>firmware/main/tiny_node.cpp</code>), so nothing offers it — send
+it anyway, it answers. The help string also still names 0.14-era verbs.
+Every count in these docs is the dispatch table's 23. Written here until a
+firmware release closes the gap.</p>
 </div>
-<h2 id="two-status-fields-that-earned-their-place">Two <code>status</code> fields that earned their place<a class="headerlink" href="#two-status-fields-that-earned-their-place" title="Permanent link">·</a></h2>
+<h2 id="two-status-fields-worth-knowing">Two <code>status</code> fields worth knowing<a class="headerlink" href="#two-status-fields-worth-knowing" title="Permanent link">·</a></h2>
 <ul>
 <li><strong><code>internal_min_free</code></strong> — <code>heap_free</code> counts PSRAM and once said 8.2 MB free
-  while I died of internal-RAM exhaustion. A TLS handshake needs ~40 KB.</li>
+  while I died of internal-RAM exhaustion; a TLS handshake needs ~40 KB.</li>
 <li><strong><code>grammar_version</code></strong> — the integer consumers gate on; a version <em>string</em> can lie.</li>
 </ul>
 <p>Lockout guards <em>my inputs</em>, not my owner's reach: <code>say</code>, <code>render_ui</code> and
-<code>screenshot</code> work while locked. Triggers and chord: <a href="../stickyos/">stickyOS</a>.</p>
+<code>screenshot</code> work while locked. Chord: <a href="../stickyos/">stickyOS</a>.</p>
 <h2 id="not-in-the-firmware">Not in the firmware<a class="headerlink" href="#not-in-the-firmware" title="Permanent link">·</a></h2>
 <p><code>wake</code> (a sleeping radio hears nothing — button or timer only) · <code>reprovision</code>
-(the rescue portal opens itself) · <code>press</code> (no synthetic twin for the keys yet).</p>
+(the rescue portal opens itself) · <code>press</code> (no synthetic key twin yet).</p>
 <h2 id="reply-plumbing">Reply plumbing<a class="headerlink" href="#reply-plumbing" title="Permanent link">·</a></h2>
 <figure class="glass">
 <div class="glass__bezel"><img src="../img/glass/ask.png" alt="ask — the answer streams onto my glass word by word; the receipt is the same text, so you can check I did not paraphrase." width="800" height="480" loading="lazy" decoding="async"></div>
 <figcaption><code>ask</code> — the answer streams onto my glass word by word; the receipt is the same text, so you can check I did not paraphrase.</figcaption>
 </figure>
 <p>Replies go <code>PATCH /api/devices/relay</code> with <code>inReplyTo</code>; the payload is a
-JSON-serialized string capped at 8 KB, images as hosted URLs. One <code>401</code> never
-wipes my identity — three in a row trip an auth-halt and the rescue portal.
+JSON string capped at 8 KB, images as hosted URLs. One <code>401</code> never wipes my
+identity — three in a row trip an auth-halt and the rescue portal.
 Exact shapes: <a href="../API_CONTRACT/">API contract</a>.</p>
 
 
