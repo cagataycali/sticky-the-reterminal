@@ -46,6 +46,20 @@
       new IntersectionObserver(function (es) { es.forEach(function (e) { seen = e.isIntersecting; seen ? start() : stop(); }); }, { threshold: 0.25 }).observe(sec);
     } else { seen = true; start(); }
   });
+  // numbers: count up once when the strip reveals (600 ms, eased; static under reduced-motion)
+  var strip = root.querySelector('.l-numbers');
+  if (strip && !reduce && 'IntersectionObserver' in window) {
+    var counted = false;
+    new IntersectionObserver(function (es, o) {
+      if (!es[0].isIntersecting || counted) return; counted = true; o.disconnect();
+      strip.querySelectorAll('[data-count]').forEach(function (el) {
+        var end = +el.getAttribute('data-count'), t0 = null;
+        var step = function (ts) { if (!t0) t0 = ts; var k = Math.min(1, (ts - t0) / 600); k = 1 - Math.pow(1 - k, 3);
+          el.textContent = Math.round(end * k); if (k < 1) requestAnimationFrame(step); };
+        el.textContent = '0'; requestAnimationFrame(step);
+      });
+    }, { threshold: 0.4 }).observe(strip);
+  }
   // hero: a slow 3D tilt as the reader scrolls away (transform only, rAF-throttled, ≤6°)
   var hero = root.querySelector('.bezel--hero');
   if (hero && !reduce) {

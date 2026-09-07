@@ -138,6 +138,22 @@ esp-web-install-button { --esp-tools-button-color: var(--ink-3); --esp-tools-but
 .l-foot { text-align: center; padding: 3rem 1.25rem 2rem; color: var(--ink-2); font-size: .9rem; }
 .l-foot p { max-width: 60ch; margin: 0 auto; font-size: .9rem; }
 .l-foot a { color: var(--ink-3); }
+/* numbers strip: five facts, counted up once on reveal */
+.l-numbers ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; border-top: var(--hairline); padding-top: 2rem; }
+.l-numbers li { display: flex; flex-direction: column; gap: .35rem; }
+.l-numbers b { font-size: clamp(2rem, 4.2vw, 3.4rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.l-numbers li > span { font-size: .95rem; color: var(--ink-2); }
+
+/* closing install: the product's one action, on the page itself */
+.l-install { text-align: center; max-width: 46rem !important; }
+.l-install h2 { font-size: clamp(2rem, 5vw, 3.6rem); letter-spacing: -0.035em; margin: 0 0 1rem; }
+.l-install p { margin: 0 auto; }
+.l-install__row { display: flex; gap: .75rem; justify-content: center; flex-wrap: wrap; margin: 2rem 0 1.25rem; }
+.l-btn--big { padding: 1rem 1.6rem; font-size: 1.05rem; }
+.l-btn--big small { font-weight: 400; opacity: .7; margin-left: .4em; font-family: var(--md-code-font); font-size: .75em; }
+.l-install .l-fine { text-align: center; }
+.l-install .l-fine code { white-space: normal; word-break: break-all; }
+
 .l-manual { max-width: 44rem !important; border-top: var(--hairline); }
 .l-manual .md-typeset { font-size: 1.05rem; }
 .l-manual .md-typeset h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); letter-spacing: -0.02em; margin: 0 0 .75rem; }
@@ -160,6 +176,7 @@ esp-web-install-button { --esp-tools-button-color: var(--ink-3); --esp-tools-but
   .l-h1 { font-size: clamp(2.6rem, 14vw, 4rem); }
   .l-dots { gap: 0; margin-inline: -.5rem; } .l-dot { flex: 0 0 44px; }
   .l-limits ul, .l-spec dl { grid-template-columns: 1fr 1fr; }
+  .l-numbers ul { grid-template-columns: 1fr 1fr; } .l-numbers li:last-child { grid-column: span 2; }
   .l-limits ul { grid-template-columns: 1fr; }
 }
 

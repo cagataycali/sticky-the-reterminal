@@ -526,6 +526,16 @@
     </div>
   </section>
 
+  <section class="l-numbers l-reveal" id="numbers" aria-label="by the numbers">
+    <ul>
+      <li><b><span data-count="70">70</span> g</b><span>in the hand</span></li>
+      <li><b><span data-count="800">800</span>×<span data-count="480">480</span></b><span>pixels, four grays</span></li>
+      <li><b><span data-count="3">3</span></b><span>buttons, AI · UP · DOWN</span></li>
+      <li><b><span data-count="22">22</span></b><span>verbs I answer to</span></li>
+      <li><b><span data-count="0">0</span> mA</b><span>asleep, image held</span></li>
+    </ul>
+  </section>
+
   <section class="l-story l-limits l-reveal" id="limits">
     <h2>What I won't pretend to do.</h2>
     <ul>
@@ -550,10 +560,20 @@
       <div><dt>Storage</dt><dd>microSD</dd></div>
       <div><dt>Battery</dt><dd>750 mAh</dd></div>
     </dl>
-    <p class="l-cta l-cta--center">
-      <a class="l-btn l-btn--primary" href="install/">Install in your browser</a>
-      <a class="l-btn" href="hardware/">Every pin, sourced</a>
-    </p>
+  </section>
+
+  <section class="l-install l-reveal" id="install">
+    <h2>Plug me in. Press once.</h2>
+    <p>Chrome or Edge on a laptop, one USB cable, about five minutes. The port is called <b>USB Single Serial</b>. The first install erases the flash — that is the honest default.</p>
+    <div class="l-install__row">
+      <esp-web-install-button manifest="install/manifest.json">
+        <button slot="activate" class="l-btn l-btn--primary l-btn--big">Install Sticky <small>v0.27.0-u2</small></button>
+        <a slot="unsupported" class="l-btn l-btn--primary l-btn--big" href="install/">Install from a laptop</a>
+        <a slot="not-allowed" class="l-btn l-btn--primary l-btn--big" href="install/">Open the installer</a>
+      </esp-web-install-button>
+      <a class="l-btn l-btn--big" href="install/">Prefer a terminal?</a>
+    </div>
+    <p class="l-fine"><code>curl -fsSL https://cagataycali.github.io/sticky-the-reterminal/install.sh | sh</code></p>
   </section>
 
   <section class="l-manual l-reveal" id="manual">
@@ -1376,6 +1396,7 @@ of <code>read-flash</code> is the best insurance a 32 MB flash can buy.</p></div
       
     
   <script src="js/landing.js" defer></script>
+  <script type="module" src="js/esp-web-tools/install-button.js"></script>
 
   </body>
 </html>
