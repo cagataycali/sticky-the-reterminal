@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device.">
+        <meta name="description" content="Sticky's printable cases — corner bumper and two-piece wrap from one parametric OpenSCAD source; measured vs assumed ledger, validation, print settings.">
       
       
         <meta name="author" content="Cagatay Cali">
@@ -64,12 +64,12 @@
   
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Pocket case · sticky" />
-  <meta property="og:description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device." />
+  <meta property="og:description" content="Sticky's printable cases — corner bumper and two-piece wrap from one parametric OpenSCAD source; measured vs assumed ledger, validation, print settings." />
   <meta property="og:url" content="https://cagataycali.github.io/sticky-the-reterminal/case/" />
   <meta property="og:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Pocket case · sticky" />
-  <meta name="twitter:description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device." />
+  <meta name="twitter:description" content="Sticky's printable cases — corner bumper and two-piece wrap from one parametric OpenSCAD source; measured vs assumed ledger, validation, print settings." />
   <meta name="twitter:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
   <meta name="theme-color" content="#f3f2ee" />
   <meta name="color-scheme" content="light dark" />
@@ -93,7 +93,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#pocket-bumper-case" class="md-skip">
+        <a href="#case-my-printed-jacket" class="md-skip">
           Skip to content
         </a>
       
@@ -1512,6 +1512,80 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#why-a-corner-bumper-and-not-a-full-shell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why a corner bumper and not a full shell
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#measured-vs-assumed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Measured vs assumed
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Validation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#retention-and-printing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Retention and printing
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-wrap-variant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The wrap variant
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rebuild" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rebuild
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1523,6 +1597,8 @@
               
               <article class="md-content__inner md-typeset">
                 
+  <p class="sticky-budget"><span><b>~3 min</b> read</span></p>
+  
   
                   
 
@@ -1536,20 +1612,11 @@
   
 
 
-<h1 id="pocket-bumper-case">Pocket bumper case<a class="headerlink" href="#pocket-bumper-case" title="Permanent link">·</a></h1>
-<div class="admonition info">
-<p class="admonition-title">Provenance</p>
-<p>This page is <code>case/README.md</code> included verbatim — the case lane's own
-documentation, written next to the <code>.scad</code> source it describes (commit
-<code>078dec6</code>). The preview renders are copied alongside; the printable
-<code>sticky_case.stl</code> / <code>.3mf</code> and the parametric <code>sticky_case.scad</code> live in
-the repo's <code>case/</code> directory. The design answers the
-<a href="https://github.com/cagataycali/sticky-the-reterminal/blob/main/archive/docs/THINKING.md">pocket-carry directive</a>: glass never touches pocket
-contents, magnets keep working, and — the part worth copying — <strong>nothing
-is cut where nothing was measured</strong>.</p>
-</div>
-<h1 id="sticky-case-family-one-parametric-source">Sticky case family (one parametric source)<a class="headerlink" href="#sticky-case-family-one-parametric-source" title="Permanent link">·</a></h1>
-<p><strong>Variants</strong> (all from <code>sticky_case.scad</code>, selected via <code>-D variant=...</code>, rendered by <code>./render.sh</code>):</p>
+<h1 id="case-my-printed-jacket">Case — my printed jacket<a class="headerlink" href="#case-my-printed-jacket" title="Permanent link">·</a></h1>
+<p>One parametric source, <code>case/sticky_case.scad</code>, three variants selected with
+<code>-D variant=…</code> and rendered by <code>case/render.sh</code>. Design directive: I live in a
+pocket. Glass never touches pocket contents, the four N52 corner magnets keep
+working, and <strong>nothing is cut where nothing was measured.</strong></p>
 <table>
 <thead>
 <tr>
@@ -1561,246 +1628,120 @@ is cut where nothing was measured</strong>.</p>
 <tbody>
 <tr>
 <td><code>bumper</code></td>
-<td>✅ print-validated</td>
-<td><code>sticky_case_bumper.stl/.3mf</code></td>
+<td>print-validated</td>
+<td><code>sticky_case_bumper.stl</code> / <code>.3mf</code></td>
 </tr>
 <tr>
 <td><code>wrap</code></td>
-<td>✅ two-piece complete: shell + snap-on bezel (print plate = both parts)</td>
-<td><code>sticky_case_wrap.stl/.3mf</code></td>
+<td>two-piece complete: shell + snap-on bezel, one plate</td>
+<td><code>sticky_case_wrap.stl</code> / <code>.3mf</code></td>
 </tr>
 <tr>
 <td><code>dock</code></td>
-<td>📋 planned (magnet desk stand ~20°)</td>
+<td>planned — magnet desk stand, ~20°</td>
 <td>—</td>
 </tr>
 </tbody>
 </table>
-<p>Corner-bumper case for the Seeed reTerminal Sticky — pocket-first protection
-per the design directive: the glass never touches pocket contents, the four
-N52 corner magnets keep working, and <strong>nothing is cut where we could not
-measure</strong>.</p>
-<p><img alt="front" src="preview_bumper_front.png" />
-<img alt="back" src="preview_bumper_back.png" /></p>
-<h2 id="design-decision-why-a-corner-bumper-not-a-full-shell">Design decision — why a corner bumper, not a full shell<a class="headerlink" href="#design-decision-why-a-corner-bumper-not-a-full-shell" title="Permanent link">·</a></h2>
-<p>There is <strong>no authoritative mechanical source</strong> for the Sticky's edge layout:</p>
-<ul>
-<li><code>Seeed-Projects/OSHW-reTerminal-Sticky</code> — <strong>404</strong> (checked 2026-08-26)</li>
-<li>GitHub code search for a vendor STEP — <strong>no hits</strong></li>
-<li>seeedstudio.com/sticky/docs hardware-overview — dimensions + internals only,
-  <strong>no drawing, no button/USB positions</strong></li>
-</ul>
-<p>The buttons (AI/Power, Up, Down), the USB-C recovery port, the PDM mic hole
-and the buzzer port all live on the device's edges at positions we cannot
-verify. House rule: an unverified cutout is a wrong cutout. So <strong>all four
-edge middles are fully open</strong> — every edge feature stays reachable no matter
-where it actually is, USB-C recovery flashing works in-case, mic and buzzer
-are never sealed. Only the four corners are wrapped.</p>
-<p>The front face is completely unobstructed except a 0.8 mm retention lip at
-the corners — swipe-from-edge gestures survive because the lip exists only
-over the corner radii, never along the straight edges.</p>
-<h2 id="dimensions">Dimensions<a class="headerlink" href="#dimensions" title="Permanent link">·</a></h2>
-<table>
-<thead>
-<tr>
-<th>parameter</th>
-<th>value</th>
-<th>basis</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>device body</td>
-<td>106.0 × 65.5 × 7.3 mm</td>
-<td><strong>MEASURED</strong> (vendor spec, docs/hardware.md)</td>
-</tr>
-<tr>
-<td>clearance per side</td>
-<td>0.30 mm</td>
-<td>brief (0.25–0.3)</td>
-</tr>
-<tr>
-<td>cavity</td>
-<td>106.6 × 66.1 mm</td>
-<td>derived</td>
-</tr>
-<tr>
-<td>outer envelope</td>
-<td>110.6 × 70.1 × 9.3 mm (+ lanyard ear)</td>
-<td>derived</td>
-</tr>
-<tr>
-<td>wall thickness</td>
-<td>2.0 mm</td>
-<td>brief ≥1.6, upsized for pocket duty</td>
-</tr>
-<tr>
-<td>back rim</td>
-<td>6.0 mm wide × <strong>1.0 mm thick</strong></td>
-<td>magnet compromise, see below</td>
-</tr>
-<tr>
-<td>lip above glass</td>
-<td>1.0 mm</td>
-<td>brief</td>
-</tr>
-<tr>
-<td>lip inward overhang</td>
-<td>0.8 mm (corners only)</td>
-<td>retention vs. gesture tradeoff</td>
-</tr>
-<tr>
-<td>corner wrap length</td>
-<td>26 mm from each corner</td>
-<td>leaves ≥45 mm open per edge middle</td>
-</tr>
-<tr>
-<td>outer corner radius</td>
-<td>5.0 mm</td>
-<td>pocket-friendly</td>
-</tr>
-<tr>
-<td>lanyard hole</td>
-<td>⌀3.0 mm, bottom-left ear</td>
-<td>optional cord</td>
-</tr>
-</tbody>
-</table>
-<h2 id="measured-vs-assumed-ledger-bench-discipline">Measured vs. assumed ledger (bench discipline)<a class="headerlink" href="#measured-vs-assumed-ledger-bench-discipline" title="Permanent link">·</a></h2>
+<div class="grid">
+<p><img alt="bumper, front" src="preview_bumper_front.png" /></p>
+<p><img alt="bumper, back" src="preview_bumper_back.png" /></p>
+</div>
+<h2 id="why-a-corner-bumper-and-not-a-full-shell">Why a corner bumper and not a full shell<a class="headerlink" href="#why-a-corner-bumper-and-not-a-full-shell" title="Permanent link">·</a></h2>
+<p>There is no authoritative mechanical source for my edges: the vendor's OSHW
+repo returns 404, no STEP exists anywhere searchable, and the hardware
+overview gives dimensions without a drawing. My buttons, USB-C port, mic hole
+and buzzer port sit at edge positions nobody can verify. House rule: <strong>an
+unverified cutout is a wrong cutout.</strong> So all four edge middles are fully
+open — every edge feature stays reachable wherever it actually is, recovery
+flashing works in-case, mic and buzzer are never sealed. Only the corners are
+wrapped, and the 0.8 mm retention lip exists only over the corner radii, so
+swipe-from-edge gestures survive.</p>
+<h2 id="measured-vs-assumed">Measured vs assumed<a class="headerlink" href="#measured-vs-assumed" title="Permanent link">·</a></h2>
 <table>
 <thead>
 <tr>
 <th>item</th>
 <th>status</th>
-<th>detail</th>
+<th>consequence</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>body W×H×T</td>
-<td><strong>MEASURED</strong></td>
-<td>vendor spec 106 × 65.5 × 7.3, confirmed in our docs</td>
+<td>body 106 × 65.5 × 7.3 mm</td>
+<td><strong>measured</strong> (vendor spec)</td>
+<td>cavity 106.6 × 66.1 at 0.30 mm clearance</td>
 </tr>
 <tr>
 <td>body corner radius</td>
-<td><strong>ASSUMED = 4.0 mm</strong></td>
-<td>eyeballed from product photos; if the real radius differs the corner fit changes — caliper it and adjust <code>body_corner_r</code></td>
+<td><strong>assumed 4.0 mm</strong> from photos</td>
+<td>caliper it; adjust <code>body_corner_r</code></td>
 </tr>
 <tr>
-<td>button / USB / mic / buzzer edge positions</td>
-<td><strong>UNKNOWN — designed around</strong></td>
-<td>no STEP, no drawing; all edge middles left open so no cutout can be wrong</td>
+<td>button / USB / mic / buzzer positions</td>
+<td><strong>unknown, designed around</strong></td>
+<td>edge middles open</td>
 </tr>
 <tr>
-<td>magnet positions</td>
-<td><strong>ASSUMED corner zones</strong></td>
-<td>"N52 in all four corners" is spec; exact XY unknown, so the entire back is ≤1 mm or open</td>
+<td>magnet XY</td>
+<td><strong>assumed corner zones</strong></td>
+<td>whole back ≤ 1 mm PLA or open</td>
 </tr>
 <tr>
-<td>glass plane flush with body top</td>
-<td><strong>ASSUMED</strong></td>
-<td>photos show near-flush glass; lip height is measured from body top</td>
+<td>glass flush with body top</td>
+<td><strong>assumed</strong></td>
+<td>lip height measured from body top</td>
 </tr>
 </tbody>
 </table>
-<h2 id="magnet-tradeoff-stated-per-brief">Magnet tradeoff (stated, per brief)<a class="headerlink" href="#magnet-tradeoff-stated-per-brief" title="Permanent link">·</a></h2>
-<p>The back is skeletal: a 6 mm-wide, <strong>1.0 mm-thick</strong> rim plus fully open
-center. N52 magnets pull usefully through 1 mm of PLA — expect roughly
-30–50 % holding-force loss vs. bare metal contact. If wall-mount grip
-matters more than back protection, print with <code>back_rim_w</code> smaller or drop
-<code>back_t</code> to 0.6 (2–3 layers); if pocket protection matters more, this is
-the right default. The corners themselves are where the magnets sit, and
-the rim covers them with exactly the 1 mm ceiling the brief allows.</p>
-<h2 id="retention">Retention<a class="headerlink" href="#retention" title="Permanent link">·</a></h2>
+<p>Key numbers: 2.0 mm walls, outer envelope 110.6 × 70.1 × 9.3 mm, 26 mm corner
+wrap leaving ≥45 mm open per edge, 5 mm outer radius, ⌀3 mm lanyard ear.</p>
+<p><strong>The magnet tradeoff, stated.</strong> The back is a 6 mm-wide, 1.0 mm-thick rim
+around an open centre. N52 pulls usefully through 1 mm of PLA — expect 30–50 %
+holding-force loss against bare metal. If wall grip matters more than back
+protection, drop <code>back_t</code> to 0.6; for a pocket, this default is right.</p>
+<h2 id="validation">Validation<a class="headerlink" href="#validation" title="Permanent link">·</a></h2>
+<p>Checked with strands-cad: watertight single solid, 5.996 cm³, <strong>7.44 g</strong> PLA,
+<strong>0 % overhang area</strong>, 2653 mm² bed contact, centre of mass within 0.5 mm of
+centre. The brief's sanity band was 10–25 g; a skeletal corner bumper is
+simply lighter than that, and chasing the band would mean a worse design.</p>
+<h2 id="retention-and-printing">Retention and printing<a class="headerlink" href="#retention-and-printing" title="Permanent link">·</a></h2>
 <p>Snap-in, no screws: tilt one long edge under the corner lips, press the
-opposite corners down — the 0.8 mm lips flex over the body and capture the
-glass perimeter at four points. Removal: push a thumb through the open back.</p>
-<h2 id="validation-strands-cad-2026-08-26">Validation (strands-cad, 2026-08-26)<a class="headerlink" href="#validation-strands-cad-2026-08-26" title="Permanent link">·</a></h2>
-<table>
-<thead>
-<tr>
-<th>check</th>
-<th>result</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>watertight</td>
-<td>✅ <code>trimesh.is_watertight = True</code>, single solid</td>
-</tr>
-<tr>
-<td>volume</td>
-<td>5.996 cm³ (<code>stl_volume</code>)</td>
-</tr>
-<tr>
-<td>mass</td>
-<td><strong>7.44 g</strong> PLA / 7.62 g PETG @ 100 % infill (<code>stl_weight</code>)</td>
-</tr>
-<tr>
-<td>printability (<code>stl_printability</code>, X1C)</td>
-<td>fits bed ✅ · <strong>0 % overhang area</strong> · bed contact 2653 mm² · <strong>supports: no</strong></td>
-</tr>
-<tr>
-<td>inertia (<code>sim_inertia_from_stl</code>)</td>
-<td>COM ≈ (−0.5, −0.3, 3.1) mm — essentially centered</td>
-</tr>
-</tbody>
-</table>
-<p>Honesty note: the brief's sanity band was ~10–25 g; a skeletal corner
-bumper is simply lighter than that. Chasing the band would mean thickening
-the back over the magnets or closing the edges — both worse designs. 7.4 g
-is the honest mass of the right shape.</p>
-<h2 id="print-settings-suggested">Print settings (suggested)<a class="headerlink" href="#print-settings-suggested" title="Permanent link">·</a></h2>
-<ul>
-<li><strong>Orientation:</strong> back face down, exactly as the STL sits — flat, no supports</li>
-<li><strong>Material:</strong> PETG preferred (lip flexes repeatedly; PLA works, snap gently)</li>
-<li><strong>Layer:</strong> 0.16–0.20 mm · <strong>Walls:</strong> 3 · <strong>Infill:</strong> irrelevant (part is nearly all wall)</li>
-<li><strong>No brim needed</strong> (2653 mm² bed contact); no supports (0 % overhang — the
-  lip's underside is a 45° chamfer by construction)</li>
-</ul>
-<h2 id="files">Files<a class="headerlink" href="#files" title="Permanent link">·</a></h2>
-<ul>
-<li><code>sticky_case.scad</code> — parametric source (OpenSCAD); every number above is a variable</li>
-<li><code>sticky_case.stl</code> — watertight, validated</li>
-<li><code>sticky_case.3mf</code> — same geometry for the Bambu slicer</li>
-<li><code>preview_front.png</code> / <code>preview_back.png</code> — renders</li>
-</ul>
+opposite corners down. Removal: push a thumb through the open back.</p>
+<p>Print back-face down exactly as the STL sits — flat, <strong>no supports, no brim</strong>.
+PETG preferred (the lip flexes repeatedly; PLA works, snap gently). 0.16–0.20
+mm layers, 3 walls; infill is irrelevant, the part is nearly all wall.</p>
+<h2 id="the-wrap-variant">The wrap variant<a class="headerlink" href="#the-wrap-variant" title="Permanent link">·</a></h2>
+<div class="grid">
+<p><img alt="wrap, front" src="preview_wrap_front.png" /></p>
+<p><img alt="wrap, back" src="preview_wrap_back.png" /></p>
+</div>
+<p>A 1.2 mm magnet-honest solid back with 1.6 mm walls, plus a snap-on bezel
+whose skirt wraps the shell and clips into four 0.4 mm half-round grooves.
+Window 103 × 62.5 mm against an active area of ~86.5 × 51.9 mm, so the 1.5 mm
+lip stays ≥5 mm clear of touch-active glass. Cased: 112.3 × 71.8 × 10.3 mm,
+~18.8 g. Edge windows remain generous <em>assumed</em> parameters until a caliper
+session — tighten there, never guess. Both parts print on one plate, flat,
+no supports.</p>
+<p>Two pocket flags: <code>wrap_guard=true</code> adds <strong>AI-button guard rails</strong> — 1.0 mm
+proud rails so pocket fabric bridges instead of pressing the button, the
+accidental-recording defence in plastic, position-independent by design;
+<code>wrap_lanyard=true</code> adds the ear.</p>
 <h2 id="rebuild">Rebuild<a class="headerlink" href="#rebuild" title="Permanent link">·</a></h2>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>openscad<span class="w"> </span>-o<span class="w"> </span>sticky_case.stl<span class="w"> </span>sticky_case.scad
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>openscad<span class="w"> </span>-o<span class="w"> </span>sticky_case.3mf<span class="w"> </span>sticky_case.scad
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>./render.sh<span class="w">          </span><span class="c1"># all variants, STL + 3MF + previews</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>openscad<span class="w"> </span>-D<span class="w"> </span><span class="nv">variant</span><span class="o">=</span><span class="se">\&quot;</span>wrap<span class="se">\&quot;</span><span class="w"> </span>-o<span class="w"> </span>sticky_case_wrap.stl<span class="w"> </span>sticky_case.scad
 </span></code></pre></div>
-<h2 id="wrap-variant-full-wrap-11-two-piece">Wrap variant (full-wrap 1:1, two-piece)<a class="headerlink" href="#wrap-variant-full-wrap-11-two-piece" title="Permanent link">·</a></h2>
-<p>Back shell (1.2 mm magnet-honest solid back, 1.6 mm walls, 0.20 mm snug fit)
-plus a snap-on front bezel: shoebox-lid skirt wraps the shell outside
-(0.15 mm clearance) and clips into four 0.4 mm half-round grooves near the
-corners. Window opening 103 × 62.5 mm — the display's active area is
-~86.5 × 51.9 mm (800×480 @ 235 ppi), so the 1.5 mm lip stays ≥5 mm clear of
-touch-active glass. 45° chamfered window edge. Cased device: 112.3 × 71.8 ×
-10.3 mm. Edge windows remain generous ASSUMED parameters (<code>win_bottom/top/
-left/right</code>) until a caliper session — tighten there, never guess.</p>
-<p>Print: both parts ship on one plate (shell upright, bezel face-down), flat,
-no supports — snap bumps/grooves are ≤0.5 mm half-rounds, self-supporting.
-~18.8 g PLA total.</p>
-<h3 id="pocket-refinements-phase-2-flags">Pocket refinements (phase 2, flags)<a class="headerlink" href="#pocket-refinements-phase-2-flags" title="Permanent link">·</a></h3>
-<ul>
-<li><code>wrap_guard=true</code> — <strong>AI-button guard rails</strong> (the P-1 accidental-recording
-  defense in plastic): rounded rails flanking + underlining the right-edge
-  button window, 1.0 mm proud. Pocket fabric bridges on the rails and the
-  bezel skirt (itself 1.35 mm proud = the top rail) instead of pressing the
-  recessed buttons — deflection to reach a button face goes from ~1.6 mm to<blockquote>
-<p>2.6 mm. Position-independent, so it needs no caliper data. Deliberate
-  press with a fingertip still lands easily.</p>
-</blockquote>
-</li>
-<li><code>wrap_lanyard=true</code> — lanyard ear (⌀3 mm hole) on the shell's bottom-left
-  corner, below the skirt line.</li>
-</ul>
+<p>The design brief it answers is the pocket-carry directive in
+<a href="https://github.com/cagataycali/sticky-the-reterminal/blob/main/archive/docs/THINKING.md">archive/docs/THINKING.md</a>.</p>
 
 
 
 
 
 
+
+  
+  
 
 
 
