@@ -145,7 +145,7 @@
 /* ---- .glass: a capture inside the same device bezel the landing draws (landing.css .bezel), self-contained so
    inner pages never import landing.css. Body 106 × 65.5 mm; the screen inset is the real panel window.
    The <img> carries width/height so the box is reserved before the bytes arrive — no layout shift. ---- */
-.md-typeset figure.glass { margin: 1.6em 0 1.8em; padding: 0; max-width: 100%; }
+.md-typeset figure.glass { display: block; width: 100%; max-width: 100%; margin: 1.6em 0 1.8em; padding: 0; text-align: left; }
 .md-typeset .glass__bezel { position: relative; width: 100%; aspect-ratio: 106 / 65.5; border-radius: 7.5% / 12%;
   background: #f6f5f1; border: 1px solid #d8d7d2;
   box-shadow: 0 1px 0 #fff inset, 0 30px 60px -30px rgba(20,20,20,.35), 0 8px 20px -12px rgba(20,20,20,.25); }
@@ -164,14 +164,14 @@
   margin: .7em .2em 0; text-align: left; max-width: none; }
 .md-typeset .glass > figcaption code { font-style: normal; }
 /* standing on the desk: portrait captures (480 × 800) */
-.md-typeset figure.glass--portrait { max-width: 17rem; margin-left: auto; margin-right: auto; }
+.md-typeset figure.glass--portrait { width: 17rem; max-width: 100%; margin-left: auto; margin-right: auto; }
 .md-typeset .glass--portrait .glass__bezel { aspect-ratio: 65.5 / 106; border-radius: 12% / 7.5%; }
 .md-typeset .glass--portrait .glass__bezel::before, .md-typeset .glass--portrait .glass__bezel::after { display: none; }
 .md-typeset .glass--portrait .glass__bezel > img { left: 10.3%; top: 9.4%; width: 79.4%; height: 81.2%; }
 /* several captures side by side: 2-up from tablet width, stacked on a phone */
 .md-typeset .glass-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.4rem 1.6rem; margin: 1.6em 0 1.8em; }
 .md-typeset .glass-grid > figure.glass { margin: 0; }
-.md-typeset .glass-grid > figure.glass--portrait { max-width: none; }
+.md-typeset .glass-grid > figure.glass--portrait { width: auto; }
 .md-typeset .glass-grid--portrait { grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); max-width: 30rem; margin-left: auto; margin-right: auto; }
 
 /* ---- lists and task lists ---- */
