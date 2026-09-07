@@ -103,6 +103,8 @@
   background: color-mix(in srgb, var(--paper) 86%, transparent); -webkit-backdrop-filter: saturate(1.2) blur(12px); backdrop-filter: saturate(1.2) blur(12px);
   color: var(--ink-3); transition: none; }
 @supports not (background: color-mix(in srgb, red 50%, transparent)) { .sk-header { background: var(--paper); } }
+/* S6: at night a white e-ink capture sliding under a 14 %-clear bar blooms through as a grey slab — near-opaque in slate, the blur still softens edges */
+[data-md-color-scheme="slate"] .sk-header { background: color-mix(in srgb, var(--paper) 95%, transparent); }
 .sk-bar { display: flex; align-items: center; gap: 1.2rem; max-width: 72rem; margin: 0 auto; padding: 0 1.25rem; height: 2.8rem; }
 .sk-wordmark { font-weight: 650; font-size: .95rem; letter-spacing: -.02em; color: var(--ink-3); text-decoration: none; line-height: 1; padding: .3rem 0; }
 .sk-wordmark:hover, .sk-wordmark:focus-visible { color: var(--ink-3); }
