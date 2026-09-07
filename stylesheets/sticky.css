@@ -1,0 +1,167 @@
+/* sticky.css — the site should feel like the device.
+   Paper background, the panel's four grays as the type ramp, one accent (cyan, sparingly),
+   hairline rules, no gradients. Fonts self-hosted in docs/fonts (OFL), preloaded in overrides/main.html. */
+
+@font-face { font-family: "Inter"; font-style: normal; font-weight: 100 900; font-display: swap;
+  src: url("../fonts/inter-latin.woff2") format("woff2"); }
+@font-face { font-family: "JetBrains Mono"; font-style: normal; font-weight: 100 800; font-display: swap;
+  src: url("../fonts/jetbrains-mono-latin.woff2") format("woff2"); }
+
+:root {
+  /* the 2-bit panel: white · light gray · dark gray · black */
+  --ink-0: #fbfbf9;
+  --ink-1: #b9b9b4;
+  --ink-2: #5c5c58;
+  --ink-3: #141414;
+  --paper: #f3f2ee;
+  --accent: #0e8fa8;            /* cyan, the only colour on the page */
+  --hairline: 1px solid var(--ink-1);
+  --md-text-font: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --md-code-font: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* ---- light = paper ---- */
+[data-md-color-scheme="default"] {
+  --md-default-bg-color: var(--paper);
+  --md-default-fg-color: var(--ink-3);
+  --md-default-fg-color--light: var(--ink-2);
+  --md-default-fg-color--lighter: var(--ink-1);
+  --md-default-fg-color--lightest: #e6e5e0;
+  --md-primary-fg-color: var(--paper);
+  --md-primary-bg-color: var(--ink-3);
+  --md-primary-bg-color--light: var(--ink-2);
+  --md-accent-fg-color: var(--accent);
+  --md-accent-fg-color--transparent: rgba(14,143,168,.08);
+  --md-typeset-a-color: var(--ink-3);
+  --md-code-bg-color: #eae9e4;
+  --md-code-fg-color: var(--ink-3);
+  --md-footer-bg-color: var(--paper);
+  --md-footer-bg-color--dark: var(--paper);
+  --md-footer-fg-color: var(--ink-2);
+  --md-footer-fg-color--light: var(--ink-2);
+  --md-footer-fg-color--lighter: var(--ink-1);
+  --md-admonition-fg-color: var(--ink-3);
+  --md-typeset-table-color: var(--ink-1);
+  --md-typeset-kbd-color: #eae9e4;
+  --md-typeset-kbd-accent-color: #fff;
+  --md-typeset-kbd-border-color: var(--ink-1);
+}
+/* ---- dark = slate, the glass at night ---- */
+[data-md-color-scheme="slate"] {
+  --paper: #15171a;
+  --ink-0: #1d1f23;
+  --ink-1: #4d4f54;
+  --ink-2: #a2a39f;
+  --ink-3: #ecebe6;
+  --accent: #4cc2d8;
+  --md-default-bg-color: var(--paper);
+  --md-default-fg-color: var(--ink-3);
+  --md-default-fg-color--light: var(--ink-2);
+  --md-default-fg-color--lighter: var(--ink-1);
+  --md-default-fg-color--lightest: #24262b;
+  --md-primary-fg-color: var(--paper);
+  --md-primary-bg-color: var(--ink-3);
+  --md-primary-bg-color--light: var(--ink-2);
+  --md-accent-fg-color: var(--accent);
+  --md-accent-fg-color--transparent: rgba(76,194,216,.1);
+  --md-typeset-a-color: var(--ink-3);
+  --md-code-bg-color: #1e2024;
+  --md-code-fg-color: var(--ink-3);
+  --md-footer-bg-color: var(--paper);
+  --md-footer-bg-color--dark: var(--paper);
+  --md-footer-fg-color: var(--ink-2);
+  --md-footer-fg-color--light: var(--ink-2);
+  --md-footer-fg-color--lighter: var(--ink-1);
+  --md-typeset-table-color: var(--ink-1);
+}
+
+/* ---- chrome: header and tabs sit on the paper, separated by a hairline ---- */
+.md-header { background: var(--md-default-bg-color); color: var(--md-default-fg-color); box-shadow: none; border-bottom: var(--hairline); }
+.md-header__button.md-logo { display: none; }
+.md-header__title { font-weight: 600; letter-spacing: -.01em; }
+.md-header__topic:first-child { font-weight: 600; }
+.md-search__form { background: var(--md-code-bg-color); border-radius: .2rem; }
+.md-search__input::placeholder, .md-search__icon { color: var(--md-default-fg-color--light); }
+.md-tabs { background: var(--md-default-bg-color); color: var(--md-default-fg-color); border-bottom: var(--hairline); }
+.md-tabs__link { font-size: .68rem; opacity: 1; color: var(--md-default-fg-color--light); }
+.md-tabs__link--active, .md-tabs__link:hover { color: var(--md-default-fg-color); }
+.md-tabs__item--active .md-tabs__link { box-shadow: inset 0 -2px 0 var(--accent); }
+.md-footer, .md-footer-meta { border-top: var(--hairline); }
+.md-footer__inner { padding-top: .6rem; }
+.md-footer__title { font-size: .7rem; }
+.md-copyright { font-size: .6rem; }
+.md-nav__title, .md-nav__item--section > .md-nav__link { font-size: .64rem; letter-spacing: .06em; text-transform: uppercase; color: var(--md-default-fg-color--light); }
+.md-nav__link--active, .md-nav__link:hover { color: var(--accent); }
+.md-sidebar--secondary .md-nav__link--active { color: var(--accent); }
+.md-progress { background: var(--accent); }
+
+/* ---- type: a magazine ramp, generous leading ---- */
+.md-typeset { font-size: .82rem; line-height: 1.65; }
+.md-typeset h1 { font-weight: 650; letter-spacing: -.025em; color: var(--md-default-fg-color); font-size: 2.1em; margin-bottom: .6em; }
+.md-typeset h2 { font-weight: 600; letter-spacing: -.015em; font-size: 1.35em; margin-top: 2.2em; padding-top: 1.1em; border-top: var(--hairline); }
+.md-typeset h3 { font-weight: 600; font-size: 1.05em; }
+.md-typeset h1 + p, .md-typeset h1 + p > em { font-size: 1.02em; color: var(--md-default-fg-color--light); }
+.md-typeset a { color: var(--md-typeset-a-color); text-decoration: underline; text-decoration-color: var(--ink-1); text-underline-offset: .18em; text-decoration-thickness: 1px; }
+.md-typeset a:hover, .md-typeset a:focus { color: var(--accent); text-decoration-color: var(--accent); }
+.md-typeset code { font-size: .86em; border-radius: .15rem; padding: .05em .35em; }
+.md-typeset pre > code { font-size: .74rem; line-height: 1.55; }
+.md-typeset .highlight, .md-typeset pre { border: var(--hairline); border-radius: .2rem; }
+.md-typeset hr { border-bottom: var(--hairline); }
+.md-typeset strong { font-weight: 600; }
+.md-typeset kbd { font-family: var(--md-code-font); border-radius: .15rem; box-shadow: 0 1px 0 var(--ink-1); }
+.headerlink { color: var(--ink-1) !important; }
+
+/* ---- tables: hairlines only ---- */
+.md-typeset table:not([class]) { font-size: .72rem; border: 0; border-top: 2px solid var(--md-default-fg-color); box-shadow: none; border-radius: 0; }
+.md-typeset table:not([class]) th { font-weight: 600; background: transparent; border-bottom: var(--hairline); color: var(--md-default-fg-color); }
+.md-typeset table:not([class]) td { border-top: var(--hairline); vertical-align: top; }
+.md-typeset table:not([class]) tr:hover { background: transparent; box-shadow: none; }
+
+/* ---- admonitions echo the card grammar: a flat card, title in mono caps, one hairline, no colour flood ---- */
+.md-typeset .admonition, .md-typeset details {
+  border: var(--hairline); border-left-width: 1px; border-radius: .25rem; box-shadow: none;
+  background: var(--ink-0); font-size: .76rem; margin: 1.4em 0;
+}
+.md-typeset .admonition-title, .md-typeset summary {
+  background: transparent !important; font-family: var(--md-code-font); font-weight: 500; font-size: .66rem;
+  letter-spacing: .08em; text-transform: uppercase; color: var(--md-default-fg-color--light);
+  border-bottom: var(--hairline); padding-left: 2.2rem; margin: 0;
+}
+.md-typeset .admonition-title::before, .md-typeset summary::before { background-color: var(--md-default-fg-color--light) !important; }
+.md-typeset .admonition.warning, .md-typeset .admonition.danger, .md-typeset .admonition.tip, .md-typeset .admonition.note,
+.md-typeset .admonition.info, .md-typeset .admonition.example, .md-typeset .admonition.quote, .md-typeset .admonition.success,
+.md-typeset .admonition.question, .md-typeset .admonition.abstract, .md-typeset .admonition.failure, .md-typeset .admonition.bug { border-color: var(--ink-1); }
+.md-typeset .admonition.warning > .admonition-title::before, .md-typeset .admonition.danger > .admonition-title::before { background-color: var(--accent) !important; }
+.md-typeset .admonition.warning > .admonition-title, .md-typeset .admonition.danger > .admonition-title { color: var(--accent); }
+
+/* ---- imagery: only real framebuffers. Frame them like the glass — thin bezel, soft corner ---- */
+.md-typeset img { border: var(--hairline); border-radius: .35rem; background: #fff; padding: .25rem; max-width: 100%; }
+.md-typeset img[src$=".svg"] { border: 0; background: transparent; padding: 0; }
+.md-typeset p > img + em, .md-typeset img + em { display: block; font-size: .7rem; color: var(--md-default-fg-color--light); margin-top: .4em; }
+
+/* ---- lists and task lists ---- */
+.md-typeset ul li::marker { color: var(--ink-1); }
+.md-typeset .task-list-indicator::before { background-color: var(--ink-1); }
+.md-typeset [type=checkbox]:checked + .task-list-indicator::before { background-color: var(--accent); }
+
+/* ---- code copy button, tabs ---- */
+.md-clipboard { color: var(--ink-1); }
+.md-typeset .tabbed-labels > label { font-size: .7rem; }
+.md-typeset .tabbed-set > input:checked + .tabbed-labels > label, .md-typeset .tabbed-labels--linked > label { color: var(--md-default-fg-color); }
+.md-typeset .tabbed-set .tabbed-labels::before { background: var(--accent); }
+
+/* ---- reading budget strip (set per page via front matter, rendered in overrides/main.html) ---- */
+.sticky-budget { font-family: var(--md-code-font); font-size: .62rem; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--md-default-fg-color--light); margin: 0 0 1.2rem; display: flex; gap: 1.2rem; flex-wrap: wrap; }
+.sticky-budget b { color: var(--accent); font-weight: 500; }
+
+/* ---- motion: e-ink does not animate, and neither should the manual for people who asked it not to ---- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+}
+@media (max-width: 44rem) {
+  .md-typeset { font-size: .78rem; }
+  .md-typeset h1 { font-size: 1.7em; }
+  .md-typeset pre > code { font-size: .68rem; }
+}
+@media print { .md-header, .md-tabs, .md-sidebar, .md-footer, .md-top { display: none !important; } .md-typeset a { text-decoration: none; } }
