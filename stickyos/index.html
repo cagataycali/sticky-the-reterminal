@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device.">
+        <meta name="description" content="stickyOS — the on-device shell: page ring, gestures, pocket lock, title-bar cluster, and DMs on the glass.">
       
       
         <meta name="author" content="Cagatay Cali">
@@ -64,12 +64,12 @@
   
   <meta property="og:type" content="website" />
   <meta property="og:title" content="stickyOS · sticky" />
-  <meta property="og:description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device." />
+  <meta property="og:description" content="stickyOS — the on-device shell: page ring, gestures, pocket lock, title-bar cluster, and DMs on the glass." />
   <meta property="og:url" content="https://cagataycali.github.io/sticky-the-reterminal/stickyos/" />
   <meta property="og:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="stickyOS · sticky" />
-  <meta name="twitter:description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device." />
+  <meta name="twitter:description" content="stickyOS — the on-device shell: page ring, gestures, pocket lock, title-bar cluster, and DMs on the glass." />
   <meta name="twitter:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
   <meta name="theme-color" content="#f3f2ee" />
   <meta name="color-scheme" content="light dark" />
@@ -766,10 +766,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#seen-on-glass-portrait" class="md-nav__link">
+  <a href="#seen-on-glass" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Seen on glass: portrait
+        Seen on glass
       
     </span>
   </a>
@@ -1601,10 +1601,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#seen-on-glass-portrait" class="md-nav__link">
+  <a href="#seen-on-glass" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Seen on glass: portrait
+        Seen on glass
       
     </span>
   </a>
@@ -1662,6 +1662,8 @@
               
               <article class="md-content__inner md-typeset">
                 
+  <p class="sticky-budget"><span><b>~3 min</b> read</span></p>
+  
   
                   
 
@@ -1677,9 +1679,8 @@
 
 <h1 id="stickyos-my-little-shell">stickyOS — my little shell<a class="headerlink" href="#stickyos-my-little-shell" title="Permanent link">·</a></h1>
 <p>I'm not just a remote-controlled panel. I have a shell of my own — pages,
-navigation, a settings app, a keyboard on e-ink — and it all works with
-the network gone. Pages are local card specs with local tap handlers.
-Navigation never touches Wi-Fi. That's the phone feel.</p>
+navigation, settings, a keyboard on e-ink — and it works with the network
+gone. That's the phone feel.</p>
 <h2 id="the-pages">The pages<a class="headerlink" href="#the-pages" title="Permanent link">·</a></h2>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>home  →  status  →  sensors  →  settings  →  (ring wraps)
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>                                   ├─ wifi       (scan · join, on-eink keyboard)
@@ -1697,31 +1698,31 @@ Navigation never touches Wi-Fi. That's the phone feel.</p>
 <tbody>
 <tr>
 <td><strong>home</strong></td>
-<td>the agent UI. A conversation canvas, a <em>"Message tiny…"</em> bar, a mic zone, gear and inbox in the corners. When you ask me something, the answer <strong>streams onto home and stays</strong> — <code>(( listening ))</code>, <code>(( thinking ))</code>, then words arriving with tail-follow. No separate chat screen. Home is the conversation.</td>
+<td>the agent UI: a conversation canvas, a <em>"Message tiny…"</em> bar, a mic zone, gear and inbox in the corners. Answers <strong>stream onto home and stay</strong> — <code>(( listening ))</code>, <code>(( thinking ))</code>, then words. Home is the conversation.</td>
 </tr>
 <tr>
 <td><strong>status</strong></td>
-<td>fw, Wi-Fi, RSSI, heap, battery — same data as my <code>status</code> verb</td>
+<td>the same data as my <code>status</code> verb</td>
 </tr>
 <tr>
 <td><strong>sensors</strong></td>
-<td>temperature, humidity, orientation, clock, gauge — live I²C reads, not cached numbers</td>
+<td>temperature, humidity, orientation, clock, gauge — live I²C reads</td>
 </tr>
 <tr>
 <td><strong>settings</strong></td>
-<td>who I am, my network, my firmware — scrollable, with silent mode for my buzzer</td>
+<td>who I am, my network, my firmware, silent mode</td>
 </tr>
 <tr>
 <td><strong>wifi</strong></td>
-<td>scan results as a tappable menu → join flow with the e-ink keyboard</td>
+<td>scan → join with the e-ink keyboard</td>
 </tr>
 <tr>
 <td><strong>bluetooth</strong></td>
-<td>nearby BLE devices. I can <em>see</em> them, not pair with them, and the page says so.</td>
+<td>nearby BLE devices — I can <em>see</em> them, not pair, and the page says so</td>
 </tr>
 </tbody>
 </table>
-<p>Navigation is a stack: opening pushes, back pops, the bottom is always home.</p>
+<p>Navigation is a stack; the bottom is always home.</p>
 <h2 id="how-you-drive-me">How you drive me<a class="headerlink" href="#how-you-drive-me" title="Permanent link">·</a></h2>
 <table>
 <thead>
@@ -1737,100 +1738,81 @@ Navigation never touches Wi-Fi. That's the phone feel.</p>
 </tr>
 <tr>
 <td><strong>vertical swipe</strong></td>
-<td>scroll, rotation-aware, natural direction</td>
+<td>scroll, rotation-aware</td>
 </tr>
 <tr>
 <td><strong>horizontal swipe</strong></td>
-<td>page turn — left is next, right is prev. On a pushed card, right pops back to where you came from. A draft outranks a gesture: I won't eat unsent words.</td>
+<td>page turn — left next, right prev; on a pushed card, right pops back. A draft outranks a gesture: I won't eat unsent words</td>
 </tr>
 <tr>
 <td><strong>edge gestures</strong></td>
-<td>swipe up from my bottom edge = home, from anywhere. From my left edge = back. The accept blip fires <em>before</em> the render — on e-ink you feel the ack before you can see it.</td>
+<td>up from the bottom edge = home; from the left edge = back. The blip fires <em>before</em> the render — you feel the ack before you see it</td>
 </tr>
 <tr>
-<td><strong>AI button, press</strong></td>
-<td>ask tiny by voice</td>
-</tr>
-<tr>
-<td><strong>AI button, long-press</strong></td>
-<td>home key</td>
+<td><strong>AI button</strong></td>
+<td>press: ask tiny by voice · long-press: home</td>
 </tr>
 <tr>
 <td><strong>turn me sideways</strong></td>
-<td>my UI turns with me (IMU). I wait for the accelerometer to settle first — a visible 600ms refresh must never chase a wobble. <code>rotate 90</code> holds, <code>rotate auto</code> releases.</td>
+<td>the UI turns with me (IMU) once the accelerometer settles. <code>rotate 90</code> holds, <code>rotate auto</code> releases</td>
 </tr>
 <tr>
-<td><strong>UP+DOWN held 1s</strong></td>
-<td>the unlock chord — the only thing I answer when pocket-locked</td>
+<td><strong>UP+DOWN held 1 s</strong></td>
+<td>the unlock chord — the only input I answer when pocket-locked</td>
 </tr>
 </tbody>
 </table>
-<p><strong>The pocket lock.</strong> Face-down for 3 seconds, or walking with no input, I
-lock myself: touch discarded, AI button refused with a felt double-blip,
-mic dead at the capture funnel. Fabric cannot make me record you. The
-chord unlocks. This one is safety, not polish.</p>
-<p><strong>The title bar</strong> carries a glance cluster: time, battery, Wi-Fi, unread
-count, <code>[L]</code> when locked. Each part earns its place — the clock only shows
-once SNTP has actually synced, the battery only when the gauge answered.
-On a pocket device, <code>w-</code> (no Wi-Fi) is the load-bearing state: it means
-"answers may be stale," and I'd rather tell you than let you guess.</p>
-<h3 id="seen-on-glass-portrait">Seen on glass: portrait<a class="headerlink" href="#seen-on-glass-portrait" title="Permanent link">·</a></h3>
-<p><img alt="home in portrait — captured live off my framebuffer" src="../img/sticky-home-portrait.png" width="360" /></p>
-<p>And the same moment in raw panel space — sideways to a human, but exactly
-the coordinate system <code>tap &lt;x&gt; &lt;y&gt;</code> speaks:</p>
-<p><img alt="the same frame in panel space" src="../img/glass-home-panelspace.png" width="480" /></p>
+<p><strong>The pocket lock.</strong> Face-down 3 s, or walking with no input, I lock
+myself: touch discarded, AI button refused with a double-blip, mic dead at
+the capture funnel. Fabric cannot make me record you. Safety, not polish.</p>
+<p><strong>The title bar</strong> is a glance cluster: time, battery, Wi-Fi, unread, <code>[L]</code>
+when locked. The clock shows only once SNTP has synced, the battery only
+when the gauge answered. <code>w-</code> (no Wi-Fi) means "answers may be stale" — I'd
+rather tell you than let you guess.</p>
+<h3 id="seen-on-glass">Seen on glass<a class="headerlink" href="#seen-on-glass" title="Permanent link">·</a></h3>
+<p><img alt="home in portrait — captured live off my framebuffer" src="../img/sticky-home-portrait.png" width="360" />
+<img alt="the same frame in raw panel space — the coordinates tap &lt;x&gt; &lt;y&gt; speaks" src="../img/glass-home-panelspace.png" width="480" /></p>
+<p><em>Left: portrait, as a human sees it. Right: the same frame in panel space,
+the coordinates <code>tap &lt;x&gt; &lt;y&gt;</code> speaks.</em></p>
 <h2 id="the-parity-rule">The parity rule<a class="headerlink" href="#the-parity-rule" title="Permanent link">·</a></h2>
-<p>Every tap path has a relay twin — <code>page home|status|sensors|settings|wifi|ble|back|next|prev</code> —
-so the agent can walk my UI exactly like a finger can, and every reply
-carries the resulting <code>card_id</code> as a receipt. Nothing is finger-only.
-Nothing is agent-only.</p>
+<p>Every tap path has a relay twin — <code>page home|status|…|back|next|prev</code> — so
+the agent can walk my UI like a finger, and every reply carries the resulting
+<code>card_id</code>. Nothing is finger-only. Nothing is agent-only.</p>
 <h2 id="provenance-discipline">Provenance discipline<a class="headerlink" href="#provenance-discipline" title="Permanent link">·</a></h2>
-<p>A field must be right about its own provenance. My rules:</p>
-<ul>
-<li>my clock names its source (<code>sntp</code> or <code>rtc</code>) — an unlabeled wrong-zone clock is a lie</li>
-<li>my gyro is really read (powered up, sampled, powered down) — never a cached zero</li>
-<li>a gauge that didn't answer reports <code>null</code>, not <code>false</code> — "not charging" is a claim</li>
-<li>every new card layout gets screenshotted on real glass before it ships</li>
-</ul>
+<p>A field must be right about its own provenance: my clock names its source
+(<code>sntp</code> or <code>rtc</code>); my gyro is really read, never a cached zero; a gauge that
+didn't answer reports <code>null</code>, not <code>false</code>.</p>
 <h2 id="messages-on-the-glass">Messages on the glass<a class="headerlink" href="#messages-on-the-glass" title="Permanent link">·</a></h2>
-<p>My owner's DMs render on my panel: inbox with unread counts, threads, and
-replies typed on my e-ink keyboard. I fetch them with <strong>my own token</strong> —
-no phone, no owner-side process in the loop.</p>
-<p>The parts I'm proud of:</p>
+<p>My owner's DMs render on my panel: inbox with unread counts, threads,
+replies typed on my e-ink keyboard. I fetch them with <strong>my own token</strong> — no
+phone in the loop.</p>
 <ul>
-<li><strong>The badge costs nothing.</strong> The unread count rides the heartbeat I
-  already send. No extra polling, and home only re-renders when the number
-  actually changes — one refresh per change, zero per beat.</li>
-<li><strong>The read receipt is sacred.</strong> Opening a thread marks it read
-  platform-wide. So I only fetch a thread when a human taps its row —
-  polling uses read-only forms. Your phone badge stays honest.</li>
-<li><strong>Stateless by design.</strong> A thread row's button id <em>is</em> its destination.
-  No card needs to remember what's on the glass. Corollary we learned the
-  hard way: a clipped login is not a truncated string, it's a <strong>wrong
-  recipient</strong> — so an id that won't fit gets omitted, never truncated.</li>
-<li><strong>Provenance declared.</strong> Anything sent from my glass is marked
-  <em>"via sticky"</em> — the device sent it, not my owner's thumb.</li>
-<li><strong>Names survive the panel.</strong> My font grew twelve hand-drawn 5×7 glyphs —
-  çğıöşü ÇĞİÖŞÜ — because my owner's name is Çağatay and for two firmware
-  generations I rendered it "Cagatay". The docs claimed otherwise twice
-  before the glass proved it
-  (<a href="https://plugin.tiny.technology/media/4010f70b-3ba6-472f-9a88-985deabcdf74.png">the receipt</a>).
-  Now it renders as written. Other diacritics fold to their base letters
-  (é→e), emoji are stripped as tone rather than shown as <code>?</code>, and malformed
-  UTF-8 degrades politely.</li>
-<li><strong>Human strings get defused.</strong> Button labels written by humans are never
-  substring-matched into local actions — a correspondent named "Noble"
-  must not be able to press my BLE rescan.</li>
+<li><strong>The badge costs nothing.</strong> The unread count rides the heartbeat I already
+  send; home re-renders only when it changes.</li>
+<li><strong>The read receipt is sacred.</strong> Opening a thread marks it read platform-wide,
+  so I fetch one only when a human taps its row.</li>
+<li><strong>Stateless by design.</strong> A row's button id <em>is</em> its destination. A login
+  that won't fit is omitted, never truncated — a clipped login is a <strong>wrong
+  recipient</strong>.</li>
+<li><strong>Provenance declared.</strong> Anything sent from my glass says <em>"via sticky"</em>.</li>
+<li><strong>Names survive the panel.</strong> Twelve hand-drawn 5×7 glyphs — çğıöşü ÇĞİÖŞÜ —
+  because my owner is Çağatay and for two firmware generations I wrote
+  "Cagatay" (<a href="https://plugin.tiny.technology/media/4010f70b-3ba6-472f-9a88-985deabcdf74.png">receipt</a>).</li>
+<li><strong>Human strings get defused.</strong> Labels are never substring-matched into
+  local actions — a correspondent named "Noble" can't press my BLE rescan.</li>
 </ul>
-<p>The deep history — every bug, every retraction, every receipt — lives in
-the <a href="https://github.com/cagataycali/sticky-the-reterminal/blob/main/archive/docs/JOURNAL.md">journal</a>
-and the <a href="../UX_SPEC/">UX spec</a>. This page keeps the rules; those keep the scars.</p>
+<p>This page keeps the rules; the
+<a href="https://github.com/cagataycali/sticky-the-reterminal/blob/main/archive/docs/JOURNAL.md">journal</a>
+and the <a href="../UX_SPEC/">UX spec</a> keep the scars.</p>
 
 
 
 
 
 
+
+  
+  
 
 
 

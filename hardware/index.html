@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device.">
+        <meta name="description" content="Sticky's body pin by pin — ESP32-S3, 800×480 e-ink, GT911 touch, sensors, power path — verified against the running firmware.">
       
       
         <meta name="author" content="Cagatay Cali">
@@ -64,12 +64,12 @@
   
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Body · sticky" />
-  <meta property="og:description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device." />
+  <meta property="og:description" content="Sticky's body pin by pin — ESP32-S3, 800×480 e-ink, GT911 touch, sensors, power path — verified against the running firmware." />
   <meta property="og:url" content="https://cagataycali.github.io/sticky-the-reterminal/hardware/" />
   <meta property="og:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Body · sticky" />
-  <meta name="twitter:description" content="sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device." />
+  <meta name="twitter:description" content="Sticky's body pin by pin — ESP32-S3, 800×480 e-ink, GT911 touch, sensors, power path — verified against the running firmware." />
   <meta name="twitter:image" content="https://cagataycali.github.io/sticky-the-reterminal//img/home-live.png" />
   <meta name="theme-color" content="#f3f2ee" />
   <meta name="color-scheme" content="light dark" />
@@ -1684,6 +1684,8 @@
               
               <article class="md-content__inner md-typeset">
                 
+  <p class="sticky-budget"><span><b>~3 min</b> read</span></p>
+  
   
                   
 
@@ -1700,8 +1702,8 @@
 <h1 id="hardware-my-body">Hardware — my body<a class="headerlink" href="#hardware-my-body" title="Permanent link">·</a></h1>
 <p>106 × 65.5 × 7.3 mm. 70 grams. IP40. N52 magnets in all four corners, so I
 hold onto fridges and filing cabinets through my own
-<a href="../case/">printed case</a>. Everything below is measured or read from
-sources, not from a brochure.</p>
+<a href="../case/">printed case</a>. Everything below is read from sources or
+the running silicon, not a brochure.</p>
 <p><img alt="my body, annotated" src="../assets/body.svg" /></p>
 <table>
 <thead>
@@ -1750,11 +1752,10 @@ sources, not from a brochure.</p>
 </tbody>
 </table>
 <h2 id="pin-map">Pin map<a class="headerlink" href="#pin-map" title="Permanent link">·</a></h2>
-<p>My pins, verified against three independent sources: the official
-hardware-overview docs, the community <code>reterminal-sticky-2048</code> production
-source, and my own running firmware's <code>pin_config.h</code> — which agrees
-pin-for-pin and contributed the two power-path pins the others omit.
-When sources disagreed, the running silicon won.</p>
+<p>Verified against three sources — Seeed's hardware overview, the community
+<code>reterminal-sticky-2048</code> source, and my own <code>pin_config.h</code>, which agrees
+pin-for-pin and adds the two power-path pins the others omit. When sources
+disagreed, the running silicon won.</p>
 <h3 id="display-spi2-ssd1677-controller-800480-landscape-native">Display — SPI2 (SSD1677 controller, 800×480 landscape native)<a class="headerlink" href="#display-spi2-ssd1677-controller-800480-landscape-native" title="Permanent link">·</a></h3>
 <table>
 <thead>
@@ -1800,7 +1801,7 @@ When sources disagreed, the running silicon won.</p>
 </table>
 <div class="admonition warning">
 <p class="admonition-title">microSD shares SPI2</p>
-<p>microSD CS is <strong>GPIO8</strong> on the same bus (card power enable <strong>GPIO10</strong>) — never drive it concurrently with a display transfer. Cards must be FAT32/exFAT with MBR; fonts ship as <code>fonts/*.fpack</code>. Hot-insert is supported.</p>
+<p>microSD CS is <strong>GPIO8</strong> on the same bus (card power <strong>GPIO10</strong>) — never drive it during a display transfer. FAT32/exFAT with MBR; hot-insert supported.</p>
 </div>
 <h3 id="touch-gt911-on-i2c0">Touch — GT911 on I²C0<a class="headerlink" href="#touch-gt911-on-i2c0" title="Permanent link">·</a></h3>
 <table>
@@ -1925,49 +1926,21 @@ When sources disagreed, the running silicon won.</p>
 </table>
 <div class="admonition bug">
 <p class="admonition-title">Deep-sleep mic deafness (known silicon gotcha)</p>
-<p>After a deep-sleep wake, the ESP32-S3 pin mux reclaims GPIO19/20 for native USB-Serial-JTAG, muting the PDM mic (every post-sleep capture returns nothing). Fix, applied in <code>tiny_boot</code> before I²S init: clear <code>USB_SERIAL_JTAG.conf0.usb_pad_enable</code>, <code>gpio_reset_pin(19/20)</code>, and clean-cycle the mic rail (GPIO38 low 150 ms).</p>
+<p>After a deep-sleep wake the ESP32-S3 pin mux reclaims GPIO19/20 for USB-Serial-JTAG, muting the PDM mic. Fix in <code>tiny_boot</code>, before I²S init: clear <code>USB_SERIAL_JTAG.conf0.usb_pad_enable</code>, <code>gpio_reset_pin(19/20)</code>, cycle the mic rail (GPIO38 low 150 ms).</p>
 </div>
 <h2 id="display-refresh-modes">Display refresh modes<a class="headerlink" href="#display-refresh-modes" title="Permanent link">·</a></h2>
-<p>The vendor HAL exposes three refresh APIs (with 180° rotation handled in the driver):</p>
-<table>
-<thead>
-<tr>
-<th>mode</th>
-<th>speed</th>
-<th>use</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>4-gray full</td>
-<td>slowest, prettiest</td>
-<td>photo-grade cards (<code>gray4:true</code>)</td>
-</tr>
-<tr>
-<td>monochrome full</td>
-<td>~600 ms class</td>
-<td>text / list / kv / qr / menu / keyboard / buttons cards</td>
-</tr>
-<tr>
-<td>partial</td>
-<td>fastest, some ghosting</td>
-<td>status-bar clock, frame sequences</td>
-</tr>
-</tbody>
-</table>
-<p>Firmware policy: minimum 1.5 s between refreshes, bursts coalesced (queue, render last).</p>
+<p>Three vendor HAL paths — 4-gray full (slowest, prettiest), monochrome full
+(~600 ms), partial (fastest, ghosts). Which card uses which, and the 1.5 s
+coalescing rule, are in <a href="../cards/#refresh-policy">Cards → refresh policy</a>.</p>
 <h2 id="what-this-body-cannot-do">What this body cannot do<a class="headerlink" href="#what-this-body-cannot-do" title="Permanent link">·</a></h2>
 <ul>
-<li><strong>No speaker.</strong> GPIO48 drives a magnetic buzzer via LEDC PWM. I chime and
-  play melodies happily; intelligible speech is not in my anatomy — an
-  experiment track for PCM-via-PWM exists, measured not promised. Voice
-  <em>input</em> is first-class: mic → WAV → backend.</li>
-<li><strong>No video.</strong> My full refresh is 1–2 seconds of physics (partial gets to
-  ~300–500 ms, with ghosting). "Stream" means frames at time-lapse cadence —
-  perfect for printer progress or a sensor chart, never for smooth motion.</li>
-<li><strong>No LAN server.</strong> I'm a client — I poll for my work; nothing needs to
-  reach me behind NAT. The provisioning portal is the one exception, and it
-  exists only until my Wi-Fi is configured.</li>
+<li><strong>No speaker.</strong> GPIO48 drives a magnetic buzzer via LEDC PWM: chimes and
+  melodies, not speech. Voice <em>input</em> is first-class: mic → WAV → backend.</li>
+<li><strong>No video.</strong> Full refresh is 1–2 s of physics; partial reaches ~300–500 ms
+  with ghosting. "Stream" means time-lapse cadence, never smooth motion.</li>
+<li><strong>No LAN server.</strong> I'm a client and poll for my work; nothing reaches me
+  behind NAT. The provisioning portal is the one exception, alive only until
+  Wi-Fi is configured.</li>
 </ul>
 
 
@@ -1975,6 +1948,9 @@ When sources disagreed, the running silicon won.</p>
 
 
 
+
+  
+  
 
 
 
