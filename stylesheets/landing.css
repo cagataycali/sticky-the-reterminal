@@ -23,7 +23,7 @@ esp-web-install-button { --esp-tools-button-color: var(--ink-3); --esp-tools-but
 .l-fine { font-size: .9rem !important; color: var(--ink-2); max-width: none !important; }
 .l-fine code { white-space: normal; overflow-wrap: normal; word-break: keep-all; display: block; max-width: max-content; box-sizing: border-box; font-size: .76rem; line-height: 1.5; padding: .55em .8em; margin-top: .5rem; border-radius: 10px; }
 .l-fine__phone { display: none; }
-.l-caption { font-size: .85rem !important; text-align: center; margin: .9rem auto 0; max-width: 40ch !important; }
+.l-caption { font-size: .85rem !important; text-align: center; margin: 1.5rem auto 0; max-width: 40ch !important; }
 .l-btn { display: inline-block; padding: .8em 1.4em; border-radius: 999px; border: 1.5px solid var(--ink-3); color: var(--ink-3); font-weight: 600; text-decoration: none; margin: 0 .5rem .5rem 0; transition: transform .25s var(--ease), background .25s; }
 .l-btn:hover { transform: translateY(-1px); }
 .l-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
@@ -90,9 +90,17 @@ esp-web-install-button { --esp-tools-button-color: var(--ink-3); --esp-tools-but
 .l-dark .bezel { border-color: #b8b7b1; box-shadow: 0 1px 0 #fff inset, 0 40px 80px -30px rgba(0,0,0,.9); }  /* lit shell in a dark room: the point of the section */
 [data-md-color-scheme="slate"] .l-dark::before { background: #0d0e10; }
 
-/* pocket: a little tilt as it comes in */
-.l-device--tilt .bezel { transform: rotate(-6deg); transition: transform 1.2s var(--ease); }
-.l-reveal.in .l-device--tilt .bezel { transform: rotate(-2deg); }
+/* pocket: the device stands up. The bezel turns −90° (a landscape box, so the column gets 21 % vertical air = (W−H)/2)
+   and the glass crossfades from the flat capture to the real portrait one (480×800, drawn rotated +90° so it reads
+   upright once the shell has turned). Transform/opacity only. */
+.l-device--turn { padding: 21% 0; }
+.bezel--pocket { transform: rotate(-6deg); transition: transform 1.4s var(--ease); }
+.l-reveal.in .bezel--pocket { transform: rotate(-90deg); }
+.bezel--pocket .frame { transition: opacity .7s var(--ease) .45s; }
+.bezel--pocket .frame--land { opacity: 1; }
+.bezel--pocket .frame--port { inset: auto; left: 20%; top: -33.333%; width: 60%; height: 166.667%; transform: rotate(90deg); opacity: 0; }
+.l-reveal.in .bezel--pocket .frame--land { opacity: 0; }
+.l-reveal.in .bezel--pocket .frame--port { opacity: 1; }
 
 /* ota */
 .ota-steps { display: grid; gap: 1rem; max-width: 34rem; margin: 0 auto; }
@@ -140,6 +148,7 @@ esp-web-install-button { --esp-tools-button-color: var(--ink-3); --esp-tools-but
 @media (prefers-reduced-motion: reduce) {
   .landing *, .landing *::before { animation: none !important; transition: none !important; }
   .l-hero .l-h1 span, .l-hero .l-lead, .l-hero .l-cta, .l-hero .l-fine, .l-hero .l-device, .l-reveal > *, .ota-step, .type-line { opacity: 1 !important; transform: none !important; }
+  .bezel--pocket { transform: rotate(-90deg) !important; } .bezel--pocket .frame--land { opacity: 0 !important; } .bezel--pocket .frame--port { opacity: 1 !important; transform: rotate(90deg) !important; }
   .l-dark::before { opacity: 1; } .l-dark h2 { color: #ecebe6; } .l-dark p { color: #a2a39f; }
 }
 
