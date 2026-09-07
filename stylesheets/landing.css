@@ -31,8 +31,12 @@ esp-web-install-button { --esp-tools-button-color: var(--ink-3); --esp-tools-but
 .l-btn--primary:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
 .l-cta--center { text-align: center; max-width: none !important; margin-top: 2rem; }
 
+/* hero — the bezel sits in a 3D stage; landing.js writes --rx/--ry from scroll (≤6°), CSS does the easing */
+.l-hero .l-device { perspective: 1400px; }
+.bezel--hero { transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .5s var(--ease); transform-style: preserve-3d; }
+
 /* hero */
-.l-hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 3rem; align-items: center; min-height: calc(100vh - 6rem); }
+.l-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 3rem; align-items: center; min-height: calc(100vh - 6rem); }
 .l-hero > *, .l-split > *, .l-pin > * { min-width: 0; }
 .l-hero .l-h1 span { opacity: 0; transform: translateY(.35em); animation: rise var(--dur) var(--ease) forwards; }
 .l-hero .l-h1 span:nth-child(2) { animation-delay: .15s; }
@@ -45,13 +49,13 @@ esp-web-install-button { --esp-tools-button-color: var(--ink-3); --esp-tools-but
 /* the device: 106 × 65.5 mm body (will-change: transform-only animation), 3.97" 800×480 panel, four corner magnets, three buttons on the top edge */
 .bezel { position: relative; width: 100%; aspect-ratio: 106 / 65.5; border-radius: 22px; will-change: transform; background: #f6f5f1; border: 1px solid #d8d7d2;
   box-shadow: 0 1px 0 #fff inset, 0 30px 60px -30px rgba(20,20,20,.35), 0 8px 20px -12px rgba(20,20,20,.25); }
-[data-md-color-scheme="slate"] .bezel { background: #24272c; border-color: #3a3d43; box-shadow: 0 1px 0 rgba(255,255,255,.06) inset, 0 30px 60px -30px rgba(0,0,0,.8); }
+[data-md-color-scheme="slate"] .bezel { border-color: #b8b7b1; box-shadow: 0 1px 0 #fff inset, 0 40px 80px -30px rgba(0,0,0,.9), 0 8px 24px -12px rgba(0,0,0,.7); }  /* the shell IS white — dark mode only deepens the room */
 .bezel .screen { position: absolute; left: 9.4%; right: 9.4%; top: 10.3%; bottom: 10.3%; overflow: hidden; border-radius: 3px; background: #e9e8e2; box-shadow: 0 0 0 1px rgba(0,0,0,.08) inset; }
 .bezel .glass { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; filter: contrast(1.02); }
 .bezel .magnet { position: absolute; width: 4.2%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #cfcecb, #9a9995); opacity: .55; }
 .bezel .magnet.tl { left: 2.4%; top: 4%; } .bezel .magnet.tr { right: 2.4%; top: 4%; } .bezel .magnet.bl { left: 2.4%; bottom: 4%; } .bezel .magnet.br { right: 2.4%; bottom: 4%; }
 .bezel .btn-ai, .bezel .btn-up, .bezel .btn-down { position: absolute; top: -2.2%; height: 2.4%; border-radius: 2px 2px 0 0; background: #c9c8c3; }
-[data-md-color-scheme="slate"] .bezel .btn-ai, [data-md-color-scheme="slate"] .bezel .btn-up, [data-md-color-scheme="slate"] .bezel .btn-down { background: #3a3d43; }
+[data-md-color-scheme="slate"] .bezel .btn-ai, [data-md-color-scheme="slate"] .bezel .btn-up, [data-md-color-scheme="slate"] .bezel .btn-down { background: #b8b7b1; }
 .bezel .btn-ai { left: 12%; width: 9%; } .bezel .btn-up { right: 22%; width: 6%; } .bezel .btn-down { right: 13%; width: 6%; }
 
 /* pinned story: device sticks, steps scroll, frames crossfade */
@@ -83,7 +87,7 @@ esp-web-install-button { --esp-tools-button-color: var(--ink-3); --esp-tools-but
 .l-dark::before { content: ""; position: absolute; inset: 0 -50vw; background: #15171a; z-index: -1; opacity: 0; transition: opacity 1s var(--ease); }
 .l-dark.in::before { opacity: 1; }
 .l-dark.in h2 { color: #ecebe6; } .l-dark.in p { color: #a2a39f; } .l-dark.in code { background: #1d1f23; border-color: #4d4f54; color: #ecebe6; }
-.l-dark .bezel { background: #24272c; border-color: #3a3d43; }
+.l-dark .bezel { border-color: #b8b7b1; box-shadow: 0 1px 0 #fff inset, 0 40px 80px -30px rgba(0,0,0,.9); }  /* lit shell in a dark room: the point of the section */
 [data-md-color-scheme="slate"] .l-dark::before { background: #0d0e10; }
 
 /* pocket: a little tilt as it comes in */

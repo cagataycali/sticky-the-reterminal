@@ -25,4 +25,17 @@
     }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
     steps.forEach(function (s) { so.observe(s); });
   });
+  // hero: a slow 3D tilt as the reader scrolls away (transform only, rAF-throttled, ≤6°)
+  var hero = root.querySelector('.bezel--hero');
+  if (hero && !reduce) {
+    var tilting = false;
+    var tilt = function () {
+      tilting = false;
+      var p = Math.min(1, Math.max(0, window.scrollY / (window.innerHeight * 0.9)));
+      hero.style.setProperty('--rx', (p * 6).toFixed(2) + 'deg');
+      hero.style.setProperty('--ry', (p * -4).toFixed(2) + 'deg');
+    };
+    window.addEventListener('scroll', function () { if (!tilting) { tilting = true; requestAnimationFrame(tilt); } }, { passive: true });
+    tilt();
+  }
 })();
