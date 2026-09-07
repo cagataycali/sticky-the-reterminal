@@ -278,6 +278,35 @@
 .sk-header ~ .md-container .md-typeset .tabbed-content { padding-top: .6rem; }
 .sk-header ~ .md-container .md-typeset img:not(.glass img) { border-radius: 14px; }
 
+/* ==== S4 · the footer. One hairline, the pager, a quiet meta row — the same column as the prose. ==== */
+.sk-footer { background: var(--paper); color: var(--ink-2); border-top: var(--hairline); margin-top: clamp(3rem, 8vh, 5rem); }
+.sk-footer__inner { max-width: 42rem; margin: 0 auto; padding: 0 1.25rem 3rem; }
+.sk-footer__pager { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding: 1.6rem 0; border-bottom: var(--hairline); }
+.sk-pager { display: flex; flex-direction: column; gap: .3rem; text-decoration: none; color: var(--ink-3); min-width: 0; }
+.sk-pager--next { text-align: right; align-items: flex-end; }
+.sk-pager__label { font-family: var(--md-code-font); font-size: .6rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); }
+.sk-pager__title { font-size: 1rem; font-weight: 600; letter-spacing: -.01em; line-height: 1.25; transition: color .2s; }
+.sk-pager--prev .sk-pager__title::before { content: "← "; color: var(--ink-1); }
+.sk-pager--next .sk-pager__title::after { content: " →"; color: var(--ink-1); }
+.sk-pager:hover .sk-pager__title, .sk-pager:focus-visible .sk-pager__title { color: var(--accent); }
+.sk-pager:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+.sk-footer__meta { display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem; padding: 2rem 0 1.2rem; }
+.sk-footer__brand { max-width: 22rem; }
+.sk-footer__brand .sk-wordmark { display: inline-block; margin-bottom: .5rem; }
+.sk-footer__brand p { margin: 0; font-size: .78rem; line-height: 1.5; color: var(--ink-2); }
+.sk-footer__links { list-style: none; margin: 0; padding: .1rem 0 0; display: flex; flex-direction: column; gap: .45rem; text-align: right; }
+.sk-footer__links a { font-size: .78rem; color: var(--ink-3); text-decoration: none; transition: color .2s; }
+.sk-footer__links a:hover, .sk-footer__links a:focus-visible { color: var(--accent); }
+.sk-footer__credit { margin: 0; padding-top: 1.2rem; border-top: var(--hairline); font-family: var(--md-code-font); font-size: .6rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); }
+@media screen and (max-width: 44rem) {
+  .sk-footer__inner { padding: 0 1rem 2.5rem; }
+  .sk-footer__pager { padding: 1.2rem 0; gap: .8rem; }
+  .sk-pager__title { font-size: .9rem; }
+  .sk-footer__meta { flex-direction: column; gap: 1.4rem; padding: 1.6rem 0 1.2rem; }
+  .sk-footer__links { flex-direction: row; flex-wrap: wrap; gap: .5rem 1.2rem; text-align: left; }
+}
+@media print { .sk-footer { display: none !important; } }
+
 /* ---- type: a magazine ramp, generous leading ---- */
 .md-typeset { font-size: .82rem; line-height: 1.65; }
 .md-typeset h1 { font-weight: 650; letter-spacing: -.025em; color: var(--md-default-fg-color); font-size: 2.1em; margin-bottom: .6em; }
