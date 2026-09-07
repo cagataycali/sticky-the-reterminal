@@ -1042,8 +1042,6 @@
       
         
       
-        
-      
     
     
     
@@ -1123,34 +1121,6 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../THINKING/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Thinking (what stickyOS is)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
     
     
       
@@ -1175,10 +1145,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
         
           
-          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
             
   
   
@@ -1196,8 +1166,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1466,17 +1436,44 @@ documentation, written next to the <code>.scad</code> source it describes (commi
 <code>078dec6</code>). The preview renders are copied alongside; the printable
 <code>sticky_case.stl</code> / <code>.3mf</code> and the parametric <code>sticky_case.scad</code> live in
 the repo's <code>case/</code> directory. The design answers the
-<a href="../THINKING/">pocket-carry directive</a>: glass never touches pocket
+<a href="https://github.com/cagataycali/sticky-the-reterminal/blob/main/archive/docs/THINKING.md">pocket-carry directive</a>: glass never touches pocket
 contents, magnets keep working, and — the part worth copying — <strong>nothing
 is cut where nothing was measured</strong>.</p>
 </div>
-<h1 id="sticky-pocket-bumper-case">Sticky pocket bumper case<a class="headerlink" href="#sticky-pocket-bumper-case" title="Permanent link">·</a></h1>
+<h1 id="sticky-case-family-one-parametric-source">Sticky case family (one parametric source)<a class="headerlink" href="#sticky-case-family-one-parametric-source" title="Permanent link">·</a></h1>
+<p><strong>Variants</strong> (all from <code>sticky_case.scad</code>, selected via <code>-D variant=...</code>, rendered by <code>./render.sh</code>):</p>
+<table>
+<thead>
+<tr>
+<th>variant</th>
+<th>status</th>
+<th>files</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>bumper</code></td>
+<td>✅ print-validated</td>
+<td><code>sticky_case_bumper.stl/.3mf</code></td>
+</tr>
+<tr>
+<td><code>wrap</code></td>
+<td>✅ two-piece complete: shell + snap-on bezel (print plate = both parts)</td>
+<td><code>sticky_case_wrap.stl/.3mf</code></td>
+</tr>
+<tr>
+<td><code>dock</code></td>
+<td>📋 planned (magnet desk stand ~20°)</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
 <p>Corner-bumper case for the Seeed reTerminal Sticky — pocket-first protection
 per the design directive: the glass never touches pocket contents, the four
 N52 corner magnets keep working, and <strong>nothing is cut where we could not
 measure</strong>.</p>
-<p><img alt="front" src="preview_front.png" />
-<img alt="back" src="preview_back.png" /></p>
+<p><img alt="front" src="preview_bumper_front.png" />
+<img alt="back" src="preview_bumper_back.png" /></p>
 <h2 id="design-decision-why-a-corner-bumper-not-a-full-shell">Design decision — why a corner bumper, not a full shell<a class="headerlink" href="#design-decision-why-a-corner-bumper-not-a-full-shell" title="Permanent link">·</a></h2>
 <p>There is <strong>no authoritative mechanical source</strong> for the Sticky's edge layout:</p>
 <ul>
@@ -1664,6 +1661,32 @@ is the honest mass of the right shape.</p>
 <div class="language-sh highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>openscad<span class="w"> </span>-o<span class="w"> </span>sticky_case.stl<span class="w"> </span>sticky_case.scad
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>openscad<span class="w"> </span>-o<span class="w"> </span>sticky_case.3mf<span class="w"> </span>sticky_case.scad
 </span></code></pre></div>
+<h2 id="wrap-variant-full-wrap-11-two-piece">Wrap variant (full-wrap 1:1, two-piece)<a class="headerlink" href="#wrap-variant-full-wrap-11-two-piece" title="Permanent link">·</a></h2>
+<p>Back shell (1.2 mm magnet-honest solid back, 1.6 mm walls, 0.20 mm snug fit)
+plus a snap-on front bezel: shoebox-lid skirt wraps the shell outside
+(0.15 mm clearance) and clips into four 0.4 mm half-round grooves near the
+corners. Window opening 103 × 62.5 mm — the display's active area is
+~86.5 × 51.9 mm (800×480 @ 235 ppi), so the 1.5 mm lip stays ≥5 mm clear of
+touch-active glass. 45° chamfered window edge. Cased device: 112.3 × 71.8 ×
+10.3 mm. Edge windows remain generous ASSUMED parameters (<code>win_bottom/top/
+left/right</code>) until a caliper session — tighten there, never guess.</p>
+<p>Print: both parts ship on one plate (shell upright, bezel face-down), flat,
+no supports — snap bumps/grooves are ≤0.5 mm half-rounds, self-supporting.
+~18.8 g PLA total.</p>
+<h3 id="pocket-refinements-phase-2-flags">Pocket refinements (phase 2, flags)<a class="headerlink" href="#pocket-refinements-phase-2-flags" title="Permanent link">·</a></h3>
+<ul>
+<li><code>wrap_guard=true</code> — <strong>AI-button guard rails</strong> (the P-1 accidental-recording
+  defense in plastic): rounded rails flanking + underlining the right-edge
+  button window, 1.0 mm proud. Pocket fabric bridges on the rails and the
+  bezel skirt (itself 1.35 mm proud = the top rail) instead of pressing the
+  recessed buttons — deflection to reach a button face goes from ~1.6 mm to<blockquote>
+<p>2.6 mm. Position-independent, so it needs no caliper data. Deliberate
+  press with a fingertip still lands easily.</p>
+</blockquote>
+</li>
+<li><code>wrap_lanyard=true</code> — lanyard ear (⌀3 mm hole) on the shell's bottom-left
+  corner, below the skirt line.</li>
+</ul>
 
 
 

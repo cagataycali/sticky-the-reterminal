@@ -1037,8 +1037,6 @@
       
         
       
-        
-      
     
     
     
@@ -1118,34 +1116,6 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../THINKING/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Thinking (what stickyOS is)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
     
     
       
@@ -1170,10 +1140,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
         
           
-          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
             
   
   
@@ -1191,8 +1161,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1920,7 +1890,7 @@ sideways. All <code>/api/*</code> routes require the session JWT (cookie or Bear
 </tr>
 <tr>
 <td><code>POST /api/frames</code> → <code>GET /api/frames/{seq_id}/{manifest,n.raw,n.png}</code></td>
-<td><strong>anim rail (M-A8's backend half)</strong>: anim-grammar JSON in (<code>EINK_ANIMATION.md</code> §4 — ops <code>blit/rect/card_diff/delay/flush</code>, canvas persists across ops, each paint op emits one frame) → Pillow rasterize → manifest + exact-size frames (<code>0.raw</code> = 48 000 B for 1-bit, receipt-verified) shaped for the firmware's <code>tiny_stream_play(manifest_url, interval_s, max_frames)</code> contract — a header-only declaration for one day (this page said so, citing what headers-without-implementation cost this repo), then <strong>implemented in 0.19.1</strong> as the <a href="../commands/#play-manifest_url-interval_s-max_frames--play-stop-since-0191-grammar-v8"><code>play</code> verb</a>: the rail rendered to the written contract, and the firmware's half arrived to meet a spec that already had receipts waiting. <code>POST /api/frames/{seq_id}/play</code> composes the whole path in one click — mirror the manifest + frames through the media host (cached, so a re-play doesn't re-upload) and send the <code>play</code> invoke; answers <strong>501 when the firmware predates the verb</strong> rather than pretending. <em>(The mirror was built as an allowlist bridge; the allowlist turned out not to exist — see the <a href="../commands/#play-manifest_url-interval_s-max_frames--play-stop-since-0191-grammar-v8"><code>play</code> correction, chapter 3</a>. The route stays: cached media URLs are still the sturdier fetch target, and one click is one click.)</em> The mirror itself is <strong>proven byte-identical</strong> (<code>cmp</code>: 48 000 B, IDENTICAL against the local rail); the duck still hasn't truly painted — take 2 reached the blit and painted white, since convicted as an unpinned rotation (the image card pins landscape, <code>blit_1bit</code> didn't; fixed in 0.19.4 — <a href="../commands/#play-manifest_url-interval_s-max_frames--play-stop-since-0191-grammar-v8">chapters 4–6</a>). The formal M-A8 verdict rides the <code>play status</code> testimony. Caps enforced server-side <em>and</em> re-enforced on device (120 frames / 60 s; refusals carry the arithmetic). POST needs the session; the GETs are capability URLs like the image rail. <code>GET /api/frames</code> = public contract. <strong>The rail has four sources, all converging on the same validator → store → manifest → <code>play</code> path:</strong> hand-written anim-grammar JSON (above); <code>POST /api/frames/prompt</code> — <em>"a ball bouncing left to right"</em> → a Bedrock haiku turn taught the exact grammar, judged by the validator itself (one <code>SpecError</code> repair turn fed back verbatim, then an honest 422 carrying the last refusal; boto3/creds failures answer <strong>502 with the name</strong>, never a blind 500); <code>POST /api/frames/video</code> — ffmpeg-sampled clip with the honest contract <em>in the docstring</em>: this is a <strong>time-lapse at e-ink cadence (≥250 ms/frame), never smooth motion — the panel physically cannot</strong> (long clips sample evenly across their duration rather than truncating); and the ANSI twin below</td>
+<td><strong>anim rail (M-A8's backend half)</strong>: anim-grammar JSON in (<code>EINK_ANIMATION.md</code> §4 — ops <code>blit/rect/card_diff/delay/flush</code>, canvas persists across ops, each paint op emits one frame) → Pillow rasterize → manifest + exact-size frames (<code>0.raw</code> = 48 000 B for 1-bit, receipt-verified) shaped for the firmware's <code>tiny_stream_play(manifest_url, interval_s, max_frames)</code> contract — a header-only declaration for one day (this page said so, citing what headers-without-implementation cost this repo), then <strong>implemented in 0.19.1</strong> as the <a href="../commands/#play"><code>play</code> verb</a>: the rail rendered to the written contract, and the firmware's half arrived to meet a spec that already had receipts waiting. <code>POST /api/frames/{seq_id}/play</code> composes the whole path in one click — mirror the manifest + frames through the media host (cached, so a re-play doesn't re-upload) and send the <code>play</code> invoke; answers <strong>501 when the firmware predates the verb</strong> rather than pretending. <em>(The mirror was built as an allowlist bridge; the allowlist turned out not to exist — see the <a href="../commands/#play"><code>play</code> correction, chapter 3</a>. The route stays: cached media URLs are still the sturdier fetch target, and one click is one click.)</em> The mirror itself is <strong>proven byte-identical</strong> (<code>cmp</code>: 48 000 B, IDENTICAL against the local rail); the duck still hasn't truly painted — take 2 reached the blit and painted white, since convicted as an unpinned rotation (the image card pins landscape, <code>blit_1bit</code> didn't; fixed in 0.19.4 — <a href="../commands/#play">chapters 4–6</a>). The formal M-A8 verdict rides the <code>play status</code> testimony. Caps enforced server-side <em>and</em> re-enforced on device (120 frames / 60 s; refusals carry the arithmetic). POST needs the session; the GETs are capability URLs like the image rail. <code>GET /api/frames</code> = public contract. <strong>The rail has four sources, all converging on the same validator → store → manifest → <code>play</code> path:</strong> hand-written anim-grammar JSON (above); <code>POST /api/frames/prompt</code> — <em>"a ball bouncing left to right"</em> → a Bedrock haiku turn taught the exact grammar, judged by the validator itself (one <code>SpecError</code> repair turn fed back verbatim, then an honest 422 carrying the last refusal; boto3/creds failures answer <strong>502 with the name</strong>, never a blind 500); <code>POST /api/frames/video</code> — ffmpeg-sampled clip with the honest contract <em>in the docstring</em>: this is a <strong>time-lapse at e-ink cadence (≥250 ms/frame), never smooth motion — the panel physically cannot</strong> (long clips sample evenly across their duration rather than truncating); and the ANSI twin below</td>
 </tr>
 <tr>
 <td><code>GET /duck</code> · <code>GET /ansi/{seq_id}</code></td>

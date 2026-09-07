@@ -1035,8 +1035,6 @@
       
         
       
-        
-      
     
     
     
@@ -1116,34 +1114,6 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../THINKING/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Thinking (what stickyOS is)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
     
     
       
@@ -1168,10 +1138,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
         
           
-          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
             
   
   
@@ -1189,8 +1159,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1732,7 +1702,7 @@
 <ul>
 <li><strong>Never</strong> flash before <code>recovery/stock-firmware-32MB.bin</code> + <code>.sha256</code> exist and match (M0 includes verifying the dump that is currently being read).</li>
 <li>Prefer 460800 baud for writes; on "serial noise/corruption" drop to 115200. Never two esptool/monitor processes on the port at once.</li>
-<li>Commit per green step; push per milestone; journal decisions in <code>docs/JOURNAL.md</code>.</li>
+<li>Commit per green step; push per milestone; journal decisions in <code>archive/docs/JOURNAL.md</code>.</li>
 <li>Vendor sources are read-only reference — adaptations are COPIES into <code>firmware/</code>.</li>
 <li>Anything touching ~/tinyai-id (the <code>/api/devices/ask</code> route) gets its own branch + cagatay review before deploy; the firmware must keep its fallback path.</li>
 </ul>
@@ -1790,7 +1760,7 @@
 <ul>
 <li>watch worker journal each pass; unstick (kill stale port holders, retry builds), enforce gates</li>
 <li>verify commits are pushed; escalate to cagatay (use_notify) on: gate failure ×2, any flash-erase beyond app partitions, anything touching tinyai-id deploy</li>
-<li>keep <code>docs/JOURNAL.md</code> honest — every gate needs evidence (measurement, photo, or transcript), not assertion</li>
+<li>keep <code>archive/docs/JOURNAL.md</code> honest — every gate needs evidence (measurement, photo, or transcript), not assertion</li>
 </ul>
 
 

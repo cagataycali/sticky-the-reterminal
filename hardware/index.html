@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#hardware" class="md-skip">
+        <a href="#hardware-my-body" class="md-skip">
           Skip to content
         </a>
       
@@ -1077,10 +1077,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#honesty-notes-what-this-hardware-cannot-do" class="md-nav__link">
+  <a href="#what-this-body-cannot-do" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Honesty notes — what this hardware cannot do
+        What this body cannot do
       
     </span>
   </a>
@@ -1172,8 +1172,6 @@
       
         
       
-        
-      
     
     
     
@@ -1253,34 +1251,6 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../THINKING/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Thinking (what stickyOS is)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
     
     
       
@@ -1305,10 +1275,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
         
           
-          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
             
   
   
@@ -1326,8 +1296,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1644,10 +1614,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#honesty-notes-what-this-hardware-cannot-do" class="md-nav__link">
+  <a href="#what-this-body-cannot-do" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Honesty notes — what this hardware cannot do
+        What this body cannot do
       
     </span>
   </a>
@@ -1679,8 +1649,12 @@
   
 
 
-<h1 id="hardware">Hardware<a class="headerlink" href="#hardware" title="Permanent link">·</a></h1>
-<p>Seeed <strong>reTerminal Sticky</strong> — 106 × 65.5 × 7.3 mm, 70 g, IP40, N52 magnets in all four corners. 750 mAh battery. A printable <a href="../case/">pocket bumper case</a> exists — corner-wrap design that leaves every edge middle open, because no vendor STEP exists and an unverified cutout is a wrong cutout.</p>
+<h1 id="hardware-my-body">Hardware — my body<a class="headerlink" href="#hardware-my-body" title="Permanent link">·</a></h1>
+<p>106 × 65.5 × 7.3 mm. 70 grams. IP40. N52 magnets in all four corners, so I
+hold onto fridges and filing cabinets through my own
+<a href="../case/">printed case</a>. Everything below is measured or read from
+sources, not from a brochure.</p>
+<p><img alt="my body, annotated" src="../assets/body.svg" /></p>
 <table>
 <thead>
 <tr>
@@ -1706,16 +1680,20 @@
 <td>SHT40 (temp/RH), LSM6DS3TR-C IMU, PCF8563 RTC, BQ27220 fuel gauge</td>
 </tr>
 <tr>
+<td>Battery</td>
+<td>750 mAh</td>
+</tr>
+<tr>
 <td>Audio in</td>
 <td>PDM microphone</td>
 </tr>
 <tr>
 <td>Audio out</td>
-<td>magnetic buzzer on PWM</td>
+<td>magnetic buzzer on PWM — chimes, not speech</td>
 </tr>
 <tr>
 <td>USB</td>
-<td>USB-C, CH343 serial — on cagatay-mac: <code>/dev/cu.usbmodem5C843358881</code></td>
+<td>USB-C, CH343 serial — recovery only; I update myself over the air</td>
 </tr>
 <tr>
 <td>SDK</td>
@@ -1724,7 +1702,11 @@
 </tbody>
 </table>
 <h2 id="pin-map">Pin map<a class="headerlink" href="#pin-map" title="Permanent link">·</a></h2>
-<p>Verified against <strong>three independent sources</strong>: the official hardware-overview docs, the community <code>reterminal-sticky-2048</code> production source, and — as of this audit — the running firmware's own <code>pin_config.h</code>, which agrees pin-for-pin with everything below and contributed the two power-path pins the other sources omit.</p>
+<p>My pins, verified against three independent sources: the official
+hardware-overview docs, the community <code>reterminal-sticky-2048</code> production
+source, and my own running firmware's <code>pin_config.h</code> — which agrees
+pin-for-pin and contributed the two power-path pins the others omit.
+When sources disagreed, the running silicon won.</p>
 <h3 id="display-spi2-ssd1677-controller-800480-landscape-native">Display — SPI2 (SSD1677 controller, 800×480 landscape native)<a class="headerlink" href="#display-spi2-ssd1677-controller-800480-landscape-native" title="Permanent link">·</a></h3>
 <table>
 <thead>
@@ -1926,11 +1908,18 @@
 </tbody>
 </table>
 <p>Firmware policy: minimum 1.5 s between refreshes, bursts coalesced (queue, render last).</p>
-<h2 id="honesty-notes-what-this-hardware-cannot-do">Honesty notes — what this hardware cannot do<a class="headerlink" href="#honesty-notes-what-this-hardware-cannot-do" title="Permanent link">·</a></h2>
+<h2 id="what-this-body-cannot-do">What this body cannot do<a class="headerlink" href="#what-this-body-cannot-do" title="Permanent link">·</a></h2>
 <ul>
-<li><strong>No speaker.</strong> GPIO48 drives a magnetic buzzer via LEDC PWM. Chimes and melodies are first-class; intelligible speech is not achievable — an experiment track for 8-bit PCM-via-PWM exists, measured not promised. Voice <em>input</em> is fully supported (PDM mic → WAV → backend).</li>
-<li><strong>No video.</strong> E-ink full refresh is physically 1–2 s (partial ~300–500 ms with ghosting). "Stream" means sequential frames at time-lapse cadence — perfect for printer progress or a live sensor chart, never for smooth motion.</li>
-<li><strong>No LAN server.</strong> The device is a <em>client</em> — it polls the relay; nothing needs to reach it behind NAT (the provisioning portal is the one exception, and it exists only until Wi-Fi is configured).</li>
+<li><strong>No speaker.</strong> GPIO48 drives a magnetic buzzer via LEDC PWM. I chime and
+  play melodies happily; intelligible speech is not in my anatomy — an
+  experiment track for PCM-via-PWM exists, measured not promised. Voice
+  <em>input</em> is first-class: mic → WAV → backend.</li>
+<li><strong>No video.</strong> My full refresh is 1–2 seconds of physics (partial gets to
+  ~300–500 ms, with ghosting). "Stream" means frames at time-lapse cadence —
+  perfect for printer progress or a sensor chart, never for smooth motion.</li>
+<li><strong>No LAN server.</strong> I'm a client — I poll for my work; nothing needs to
+  reach me behind NAT. The provisioning portal is the one exception, and it
+  exists only until my Wi-Fi is configured.</li>
 </ul>
 
 

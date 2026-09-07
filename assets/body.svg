@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 340" font-family="Inter, -apple-system, sans-serif">
+  <defs>
+    <style>
+      .wire { stroke:#8a8a8a; stroke-width:1.5; fill:none; }
+      .lbl  { fill:#8a8a8a; font-size:12px; }
+      .sub  { fill:#8a8a8a; font-size:10px; opacity:.75; }
+      .cy   { stroke:#00b8c8; stroke-width:1.5; fill:none; }
+      .cylbl{ fill:#00b8c8; font-size:12px; font-weight:600; }
+      .mag  { fill:#8a8a8a; opacity:.5; }
+    </style>
+  </defs>
+
+  <!-- body: 106 x 65.5 mm, landscape -->
+  <rect x="170" y="60" width="360" height="222" rx="14" class="wire" stroke-width="2.5"/>
+
+  <!-- e-ink glass -->
+  <rect x="192" y="80" width="316" height="182" rx="3" class="wire"/>
+  <text x="350" y="164" text-anchor="middle" class="lbl">800 × 480 · 4-gray e-ink</text>
+  <text x="350" y="182" text-anchor="middle" class="sub">GT911 touch on top</text>
+
+  <!-- magnets -->
+  <circle cx="186" cy="76" r="5" class="mag"/>
+  <circle cx="514" cy="76" r="5" class="mag"/>
+  <circle cx="186" cy="266" r="5" class="mag"/>
+  <circle cx="514" cy="266" r="5" class="mag"/>
+  <line x1="514" y1="76" x2="580" y2="46" class="wire"/>
+  <text x="586" y="43" class="lbl">N52 magnets ×4</text>
+  <text x="586" y="57" class="sub">grip through the case</text>
+
+  <!-- buttons on left edge -->
+  <rect x="160" y="96"  width="10" height="34" rx="3" class="cy"/>
+  <rect x="160" y="150" width="10" height="26" rx="3" class="cy"/>
+  <rect x="160" y="192" width="10" height="26" rx="3" class="cy"/>
+  <line x1="158" y1="113" x2="92" y2="113" class="cy"/>
+  <text x="86" y="103" text-anchor="end" class="cylbl">AI / power · GPIO4</text>
+  <text x="86" y="117" text-anchor="end" class="sub">press = ask · hold = home</text>
+  <text x="86" y="129" text-anchor="end" class="sub">EXT1 deep-sleep wake</text>
+  <line x1="158" y1="163" x2="112" y2="163" class="cy"/>
+  <text x="106" y="167" text-anchor="end" class="cylbl">UP · GPIO5</text>
+  <line x1="158" y1="205" x2="112" y2="205" class="cy"/>
+  <text x="106" y="209" text-anchor="end" class="cylbl">DOWN · GPIO6</text>
+  <text x="106" y="228" text-anchor="end" class="sub">UP+DOWN 1s = unlock chord</text>
+
+  <!-- USB bottom -->
+  <rect x="330" y="282" width="40" height="10" rx="4" class="cy"/>
+  <line x1="350" y1="294" x2="350" y2="316" class="cy"/>
+  <text x="350" y="330" text-anchor="middle" class="cylbl">USB-C · TX43/RX44 — recovery only, I update OTA</text>
+
+  <!-- mic + buzzer callouts right -->
+  <circle cx="470" cy="70" r="3" class="cy"/>
+  <line x1="474" y1="68" x2="580" y2="88" class="cy"/>
+  <text x="586" y="85" class="cylbl">PDM mic · 19/20</text>
+  <text x="586" y="99" class="sub">rail-switched · locked = dead</text>
+
+  <circle cx="500" cy="276" r="4" class="cy"/>
+  <line x1="505" y1="276" x2="580" y2="256" class="cy"/>
+  <text x="586" y="252" class="cylbl">buzzer · GPIO48</text>
+  <text x="586" y="266" class="sub">chimes, not speech</text>
+
+  <!-- inside note -->
+  <text x="20" y="300" class="sub">inside: ESP32-S3 · 8MB PSRAM · 32MB flash · SHT40 · IMU · RTC · gauge · 750mAh</text>
+  <text x="20" y="316" class="sub">106 × 65.5 × 7.3 mm · 70 g · IP40</text>
+</svg>

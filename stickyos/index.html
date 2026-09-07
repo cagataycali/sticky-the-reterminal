@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#stickyos-the-local-shell-m10" class="md-skip">
+        <a href="#stickyos-my-little-shell" class="md-skip">
           Skip to content
         </a>
       
@@ -886,22 +886,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#input-model" class="md-nav__link">
+  <a href="#how-you-drive-me" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Input model
+        How you drive me
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Input model">
+    <nav class="md-nav" aria-label="How you drive me">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#seen-on-glass-portrait-mode" class="md-nav__link">
+  <a href="#seen-on-glass-portrait" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Seen on glass: portrait mode
+        Seen on glass: portrait
       
     </span>
   </a>
@@ -940,17 +940,6 @@
     <span class="md-ellipsis">
       
         Messages on the glass
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#the-design-language-physics-first" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The design language: physics first
       
     </span>
   </a>
@@ -1172,8 +1161,6 @@
       
         
       
-        
-      
     
     
     
@@ -1253,34 +1240,6 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../THINKING/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Thinking (what stickyOS is)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
     
     
       
@@ -1305,10 +1264,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_2" >
         
           
-          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
             
   
   
@@ -1326,8 +1285,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -1583,22 +1542,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#input-model" class="md-nav__link">
+  <a href="#how-you-drive-me" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Input model
+        How you drive me
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Input model">
+    <nav class="md-nav" aria-label="How you drive me">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#seen-on-glass-portrait-mode" class="md-nav__link">
+  <a href="#seen-on-glass-portrait" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Seen on glass: portrait mode
+        Seen on glass: portrait
       
     </span>
   </a>
@@ -1643,17 +1602,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#the-design-language-physics-first" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The design language: physics first
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1679,168 +1627,156 @@
   
 
 
-<h1 id="stickyos-the-local-shell-m10">stickyOS — the local shell (M10)<a class="headerlink" href="#stickyos-the-local-shell-m10" title="Permanent link">·</a></h1>
-<p>The Sticky is not just a remote-controlled panel: it has a <strong>local shell</strong> — pages, navigation, a settings app, an on-e-ink keyboard — that works with the network <em>gone</em>. The card renderer is the view layer; pages are <strong>local card specs with local tap handlers</strong>. Navigation never touches the network — that is the phone feel.</p>
+<h1 id="stickyos-my-little-shell">stickyOS — my little shell<a class="headerlink" href="#stickyos-my-little-shell" title="Permanent link">·</a></h1>
+<p>I'm not just a remote-controlled panel. I have a shell of my own — pages,
+navigation, a settings app, a keyboard on e-ink — and it all works with
+the network gone. Pages are local card specs with local tap handlers.
+Navigation never touches Wi-Fi. That's the phone feel.</p>
 <h2 id="the-pages">The pages<a class="headerlink" href="#the-pages" title="Permanent link">·</a></h2>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>home  →  status  →  sensors  →  settings  →  (ring wraps)
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>                                   ├─ wifi (scan · join with on-eink keyboard)
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>                                   └─ bluetooth (scan-only)
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>                                   ├─ wifi       (scan · join, on-eink keyboard)
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>                                   ├─ bluetooth  (scan-only, honestly)
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>                                   ├─ gallery    (your photos, since grammar v10)
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>                                   └─ universe   (switch who answers, since grammar v11)
 </span></code></pre></div>
 <table>
 <thead>
 <tr>
 <th>page</th>
-<th>what it shows</th>
+<th>what's on it</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>home</strong></td>
-<td><strong>the agent UI</strong> <em>(0.20.0, M-A9A — an owner design session made this law: "the home screen MUST be the agent UI")</em>: a bespoke <code>agent_home</code> card — gear top-left, chats bubble with unread count top-right (88 px targets), a conversation canvas holding the greeting or the last answer (the streaming typer writes onto <code>card_id=home</code> directly), and a bottom <em>"Message tiny…"</em> input bar with a mic zone. Region ids reuse the existing touch-router vocabulary (<code>settings</code> / <code>m:inbox</code> / <code>type</code> / <code>speak</code>) so the routing layer didn't change — the shell now only supplies data. <em>(The pre-0.20.0 home was an app grid: Ask tiny · Status · Sensors · Settings — the four roots survive as the page ring itself.)</em> <strong>Stream-on-home shipped (0.22.0, on glass — status receipt <code>05fda343</code>; graduated from the claim that stood here):</strong> the ask lives <em>on</em> the home surface. Voice tap repaints home <code>(( listening ))</code> <strong>before</strong> capture, <code>(( thinking ))</code> after upload — no separate mic box. SSE tokens stream into home's own canvas with <strong>tail-follow</strong> (newest words always visible, <code>…</code> names the trim), the caret is renderer-owned at the text tail, and the final frame <strong>is</strong> home with the answer resident. A backend card finale is <strong>suppressed-with-log</strong> on this path — the owner's directive outranks the card, but the suppression leaves evidence. Re-beginning on an empty home stream skips the double wipe (one less flash on a panel where every flash is visible). The keyboard remains its own page; its submit returns to a home that streams.</td>
+<td>the agent UI. A conversation canvas, a <em>"Message tiny…"</em> bar, a mic zone, gear and inbox in the corners. When you ask me something, the answer <strong>streams onto home and stays</strong> — <code>(( listening ))</code>, <code>(( thinking ))</code>, then words arriving with tail-follow. No separate chat screen. Home is the conversation.</td>
 </tr>
 <tr>
 <td><strong>status</strong></td>
-<td>fw, Wi-Fi/SSID/RSSI, heap, battery — same data as the <code>status</code> verb</td>
+<td>fw, Wi-Fi, RSSI, heap, battery — same data as my <code>status</code> verb</td>
 </tr>
 <tr>
 <td><strong>sensors</strong></td>
-<td>SHT40, IMU orientation, RTC, battery gauge — live I²C reads, tap <em>Refresh</em> to re-read</td>
+<td>temperature, humidity, orientation, clock, gauge — live I²C reads, not cached numbers</td>
 </tr>
 <tr>
 <td><strong>settings</strong></td>
-<td>device identity, network, firmware — with a button bar: <strong>Wi-Fi · Bluetooth · Back · Home</strong></td>
+<td>who I am, my network, my firmware — scrollable, with silent mode for my buzzer</td>
 </tr>
 <tr>
 <td><strong>wifi</strong></td>
-<td>scan results as a tappable <code>menu</code> (RSSI notes, results cached 60 s, <em>Rescan</em> to force) → join flow with the on-e-ink <code>keyboard</code> card (shift/backspace/space/cancel/ok)</td>
+<td>scan results as a tappable menu → join flow with the e-ink keyboard</td>
 </tr>
 <tr>
 <td><strong>bluetooth</strong></td>
-<td>nearby BLE devices (name, address, RSSI) via a NimBLE <strong>observer</strong> — <strong>scan-only honesty</strong>: the firmware can <em>see</em> devices, not pair with them, and the page says so instead of implying more</td>
+<td>nearby BLE devices. I can <em>see</em> them, not pair with them, and the page says so.</td>
 </tr>
 </tbody>
 </table>
-<h2 id="input-model">Input model<a class="headerlink" href="#input-model" title="Permanent link">·</a></h2>
+<p>Navigation is a stack: opening pushes, back pops, the bottom is always home.</p>
+<h2 id="how-you-drive-me">How you drive me<a class="headerlink" href="#how-you-drive-me" title="Permanent link">·</a></h2>
 <table>
 <thead>
 <tr>
-<th>gesture</th>
-<th>action</th>
+<th>input</th>
+<th>what I do</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><strong>UP / DOWN buttons</strong></td>
-<td>the scroll wheel when the card overflows (⅔-view steps, clamped — no fall-through past the edge); cycle the page ring only when the card <strong>fits</strong></td>
+<td>scroll when the card overflows; turn the page ring when it fits</td>
 </tr>
 <tr>
 <td><strong>vertical swipe</strong></td>
-<td>scrolls an overflowing body — rotation-aware and natural-direction, measured in panel coords and resolved against the current orientation</td>
+<td>scroll, rotation-aware, natural direction</td>
 </tr>
 <tr>
-<td><strong>horizontal swipe</strong> <em>(0.14.17)</em></td>
-<td>page turn — left = next, right = prev, on the same page ring the buttons cycle. Classified in <strong>logical space</strong> (only the display knows which axis is which after rotation), ≥80 px so a sloppy diagonal scroll doesn't flip pages, and <strong>a draft outranks a gesture</strong> — horizontal over the composer is refused rather than eating unsent words. The ring cycles the <strong>four roots only</strong> (home → status → sensors → settings); wifi/bluetooth are drill pages a tap opens — since 0.16.5, after the batch-#4 P0 traced to the ring modulus swallowing them (see <a href="../troubleshooting/#the-device-goes-silent-after-a-horizontal-swipe-fixed-in-0165">troubleshooting</a>). On a <strong>pushed card</strong> the directions split <em>(0.16.7, R-7 — verified on glass by relay probe)</em>: mid-content <strong>right pops to the parent</strong> — phone muscle memory, and a one-thumb target the 48 px left band can't be while walking (P-1); the pop path brings up no radio, so the batch-#4 crash family stays unreachable. Mid-content <strong>left stays an announced dead-end</strong> (double blip, nothing moves) — "forward" from a drilled place has nowhere to go, and saying so beats pretending. On ≤0.16.6 both directions are the dead-end. Note the pop is to the <strong>stack parent</strong> — wherever the card was pushed <em>from</em> (a <code>page wifi</code> sent over the relay while on home pops back to home, not to settings)</td>
+<td><strong>horizontal swipe</strong></td>
+<td>page turn — left is next, right is prev. On a pushed card, right pops back to where you came from. A draft outranks a gesture: I won't eat unsent words.</td>
 </tr>
 <tr>
-<td><strong>edge-band nav</strong> <em>(0.16.4, <a href="../UX_SPEC/">VERIFIED-ON-GLASS</a> batch #5 on 0.16.5)</em></td>
-<td>one spatial rule, no modes — an <strong>edge origin</strong> marks nav intent (bands are layout-space: last 56 rows, first 48 columns; travel ≥120 px, ≥2× dominant axis). <strong>Bottom band + up = HOME</strong> from anywhere (on the keyboard = <em>cancel</em>, routed so each composer keeps its own exit: wifi → list, compose → thread, ask → home); <strong>left band + right = BACK</strong> — pops a pushed card, ring-prev at a ring root. The accept blip fires <em>before</em> the render (on e-ink the ack must be felt before it can be seen); a recognized-but-refused gesture double-blips; below thresholds = silence. During a streaming answer the stream owns the display: every gesture gets one blip and is discarded — the one exit is the physical long-press-AI abort. <em>Verified with screenshots: G1 (settings → bottom-band ↑ → home, 4.6% pixel diff vs home baseline) and G2 (pushed card → left-band → home) both accepted in verdict batch #5 — the same rule that FAILED on 0.16.2 when the verdict ran two images behind the code, which is why the badge waited for receipts instead of trusting the tree</em></td>
+<td><strong>edge gestures</strong></td>
+<td>swipe up from my bottom edge = home, from anywhere. From my left edge = back. The accept blip fires <em>before</em> the render — on e-ink you feel the ack before you can see it.</td>
 </tr>
 <tr>
-<td><strong>AI button, single press</strong></td>
-<td>ask tiny (voice)</td>
+<td><strong>AI button, press</strong></td>
+<td>ask tiny by voice</td>
 </tr>
 <tr>
 <td><strong>AI button, long-press</strong></td>
-<td><strong>home key</strong> — from anywhere</td>
+<td>home key</td>
 </tr>
 <tr>
-<td><strong>turn the device</strong></td>
-<td>the UI turns with it — IMU auto-rotate commits only after the accelerometer settles (a visible ~600 ms e-ink refresh must never chase a wobble); <code>rotate 0|90|180|270</code> holds an orientation against gravity, <code>rotate auto</code> releases it. <strong>FIXED</strong> (<code>63566f0</code>, delivered 0.14.23, owner-confirmed on hardware 2026-08-26 ~02:09Z: <em>"it worked! now the upsite down problem is solved"</em>). It really was a constant 180° in all four orientations — <code>classify()</code> was calibrated off raw-panel axis comments while <code>sticky_display</code> rotates the framebuffer 180° on every push. Do <strong>not</strong> "fix" the table in <code>tiny_orient.cpp</code> back; the ten-line comment there says why. The follow-on bug is fixed too: <code>rotate report</code> used to <em>set</em> rotation to 0/manual because it fell through to a setter where <code>atoi("report")</code> is 0 (0.15.1, proven on glass)</td>
+<td><strong>turn me sideways</strong></td>
+<td>my UI turns with me (IMU). I wait for the accelerometer to settle first — a visible 600ms refresh must never chase a wobble. <code>rotate 90</code> holds, <code>rotate auto</code> releases.</td>
 </tr>
 <tr>
-<td><strong>tap</strong></td>
-<td>page-owned regions handled locally; anything else goes upstream as <code>ui_tap</code></td>
-</tr>
-<tr>
-<td><strong>UP+DOWN held 1 s</strong></td>
-<td>the <strong>unlock chord</strong> — the only local input a pocket-locked device answers. Lockout (§11, 0.17.x) closes everything else: touch discarded at the router, AI press/hold refused with a felt double-blip <em>and</em> again at capture entry, mic dead. Entry is manual (<code>lock</code> verb) or automatic — face-down 3 s, or walking 5 s + 30 s no input; using it while carrying never locks you out. A/B receipts: <a href="../commands/#lock-unlock-since-0170-grammar-v5">Commands → lock/unlock</a></td>
+<td><strong>UP+DOWN held 1s</strong></td>
+<td>the unlock chord — the only thing I answer when pocket-locked</td>
 </tr>
 </tbody>
 </table>
-<p>Navigation is a <strong>stack</strong>: <code>open()</code> pushes, back pops, the bottom is always home.</p>
-<p>Since <strong>0.14.21</strong> every title bar carries a right-aligned <strong>glance cluster</strong>, completed in <strong>0.18.0</strong>: time · battery · Wi-Fi · <code>dmN</code> unread count (only when &gt; 0) · <code>[L]</code> (only when locked) — where <strong>each part earns its place or is omitted</strong>: the clock only when SNTP has actually synced, and Z-suffixed until the open timezone question is answered (<em>an unlabeled wrong-zone clock is a lie</em>); battery only when the BQ27220 gauge answers; <code>w+</code>/<code>w-</code> always, because on a pocket device <strong><code>w-</code> is the load-bearing state</strong> — it says "answers may be stale." The honest limit — e-ink persistence means the cluster is only as fresh as the last render — got its remedy in 0.18.0: the <a href="../commands/#glance-since-0180-grammar-v6"><code>glance</code> verb</a> redraws the cached card through the <em>partial</em> path (no flash, no network), and lock-engage flips <code>[L]</code> into the strip the same way. The battery-budgeted <em>periodic</em> strip refresh stays on the debt list; glance is on-demand by design.</p>
-<p>Overflowing bodies (text/list/kv/menu taller than the body box) scroll with a right-edge track+thumb scrollbar, drawn in partial refresh; a menu shows up to 24 items and <strong>unstages</strong> off-window rows, because an invisible button must not be tappable. The whole model is probe-readable without a finger via the <a href="../commands/#scroll-updowntoppx"><code>scroll</code> verb</a>.</p>
-<h3 id="seen-on-glass-portrait-mode">Seen on glass: portrait mode<a class="headerlink" href="#seen-on-glass-portrait-mode" title="Permanent link">·</a></h3>
-<p><img alt="stickyOS home screen in portrait — captured live off the device" src="../img/sticky-home-portrait.png" width="360" /></p>
-<p>Captured with the <code>screenshot</code> verb while the device stood on its side (fw 0.13.1, IMU auto-rotate). And here is the coordinate invariant made visible — the <strong>raw framebuffer of the same moment</strong> stays in panel space, sideways to a human but exactly the coordinate system <code>tap &lt;x&gt; &lt;y&gt;</code> speaks:</p>
-<p><img alt="the same frame in raw panel space" src="../img/glass-home-panelspace.png" width="480" /></p>
+<p><strong>The pocket lock.</strong> Face-down for 3 seconds, or walking with no input, I
+lock myself: touch discarded, AI button refused with a felt double-blip,
+mic dead at the capture funnel. Fabric cannot make me record you. The
+chord unlocks. This one is safety, not polish.</p>
+<p><strong>The title bar</strong> carries a glance cluster: time, battery, Wi-Fi, unread
+count, <code>[L]</code> when locked. Each part earns its place — the clock only shows
+once SNTP has actually synced, the battery only when the gauge answered.
+On a pocket device, <code>w-</code> (no Wi-Fi) is the load-bearing state: it means
+"answers may be stale," and I'd rather tell you than let you guess.</p>
+<h3 id="seen-on-glass-portrait">Seen on glass: portrait<a class="headerlink" href="#seen-on-glass-portrait" title="Permanent link">·</a></h3>
+<p><img alt="home in portrait — captured live off my framebuffer" src="../img/sticky-home-portrait.png" width="360" /></p>
+<p>And the same moment in raw panel space — sideways to a human, but exactly
+the coordinate system <code>tap &lt;x&gt; &lt;y&gt;</code> speaks:</p>
+<p><img alt="the same frame in panel space" src="../img/glass-home-panelspace.png" width="480" /></p>
 <h2 id="the-parity-rule">The parity rule<a class="headerlink" href="#the-parity-rule" title="Permanent link">·</a></h2>
-<p>Every tappable path has a relay twin — <code>page home|status|sensors|settings|wifi|ble|back|next|prev</code> — so the agent (and the dashboard) can walk the same UI a finger can, and each reply carries the resulting <code>card_id</code> as the commit receipt. Nothing is finger-only; nothing is agent-only.</p>
+<p>Every tap path has a relay twin — <code>page home|status|sensors|settings|wifi|ble|back|next|prev</code> —
+so the agent can walk my UI exactly like a finger can, and every reply
+carries the resulting <code>card_id</code> as a receipt. Nothing is finger-only.
+Nothing is agent-only.</p>
 <h2 id="provenance-discipline">Provenance discipline<a class="headerlink" href="#provenance-discipline" title="Permanent link">·</a></h2>
-<p>A recurring theme you'll find in the <a href="https://github.com/cagataycali/sticky-the-reterminal/blob/main/docs/JOURNAL.md">journal</a>: <strong>a field must be right about its own provenance.</strong></p>
+<p>A field must be right about its own provenance. My rules:</p>
 <ul>
-<li>the clock: RTC→system at boot, SNTP→system→RTC on Wi-Fi-up (a background task keeps waiting off the boot path, 20×15 s, so a slow first exchange still ends at <code>clock_source:"sntp"</code>); UTC by convention</li>
-<li>the gyro is really read (powered up ~110 ms, sampled, powered down) — not a cached zero</li>
-<li>a gauge that didn't answer reports <code>null</code>, never <code>false</code> — "not charging" is a claim</li>
-<li>every new card layout gets screenshotted on real glass before its gate closes</li>
+<li>my clock names its source (<code>sntp</code> or <code>rtc</code>) — an unlabeled wrong-zone clock is a lie</li>
+<li>my gyro is really read (powered up, sampled, powered down) — never a cached zero</li>
+<li>a gauge that didn't answer reports <code>null</code>, not <code>false</code> — "not charging" is a claim</li>
+<li>every new card layout gets screenshotted on real glass before it ships</li>
 </ul>
 <h2 id="messages-on-the-glass">Messages on the glass<a class="headerlink" href="#messages-on-the-glass" title="Permanent link">·</a></h2>
-<p>The owner's tiny.technology DMs render on the panel: an inbox (threads + unread counts), thread views, and notification pushes. Since <strong>0.14.7 the messages app lives in firmware</strong>: tap the inbox, and the device fetches with <strong>its own token</strong> over <a href="../API_CONTRACT/#apidevicesmessages-the-dm-rail-on-a-device-token-option-b-2026-08-26"><code>/api/devices/messages</code></a>, parses, and paints — no owner-side process in the loop. The footer states its evidence: <em>"4 conversations - 2 unread - tap a row"</em>. A thread opens <strong>on the newest message</strong> — measured, not asserted: the scroll receipt reads offset 576/576, and the footer says <em>"newest 6 loaded - swipe"</em>. The whole path got an independent re-verification on the 0.18.x line (ux-owner verdict batch #14, on glass): real 4-thread inbox rendered, Turkish glyphs holding in production DMs, a measured-bbox tap drilling into a live thread card, and <strong>three unread surfaces agreeing</strong> — heartbeat badge, inbox rows, thread footer, one number.</p>
-<p>Since 0.14.11 the glass also <strong>composes</strong>: a thread's reply button (<code>m:c:&lt;login&gt;</code> — pure UI, no network) hands off to the e-ink keyboard, and its <em>ok</em> sends with the device token, then <strong>re-opens the thread — the reply appearing in the conversation IS the receipt</strong>, no separate toast. Failure paints an honest <code>send failed</code> card, because a swallowed 4xx after typing on e-ink at 2 keys/sec is the cruelest possible bug. One boundary still held: the <strong>first real send</strong> goes to a recipient the owner names, not a test string to a real person — a surface that can speak as you enters service by decision, not by default.</p>
-<p>The mechanism is deliberately <strong>stateless</strong>: a thread row's button id is its destination (<code>m:t:&lt;login&gt;</code>, inbox is <code>m:inbox</code>) — <em>the destination travels in the id, so no card needs to remember what is on the glass</em>. Which is why 0.14.17's sweep fix matters here more than anywhere: <strong>a clipped login is not a truncated string, it is a wrong recipient.</strong> Three id producers had never been sized to the 48-byte contract they feed; all are now sized <em>and checked</em>, and on overflow the affordance is <strong>omitted or refused</strong> — no [Reply] button beats one aimed at the wrong human, and a send receipt that would show somebody else's thread stays missing while the send itself still returns its honest ESP_OK. A sibling of that principle shipped in 0.14.20's HEAD repair: a <code>char body[128]</code> had shadowed the <code>body</code> <em>parameter</em> — the user's draft — in the send-error path; <code>-Werror=shadow</code> refused the build, correctly, because <strong>the one thing that card must never do is confuse the error text with the text that failed to send.</strong> The touch worker sees the <code>m:</code> namespace and calls the fetch — which is also why that worker's stack is 12 KB, not 4: opening a conversation does a TLS handshake, a JSON parse, and a full card render on that stack, and mbedtls is the hungry part. (A prediction this page made earlier died honestly: this was expected to be "grammar v2" work. It shipped as <strong>grammar v1</strong> — ordinary menu/list cards plus an id namespace turned out to be enough. The grammar grows when a card must <em>look</em> different, not when it must <em>mean</em> different.)</p>
-<p><strong>The badge costs nothing.</strong> The unread count rides the heartbeat the device already sends (<code>wantUnread:"1"</code>, a string — the zod lesson), so the badge has no poll of its own. Home shows <em>"Mail — n unread"</em> with keep-last-on-absent semantics: a reply that omits the field keeps the last known number, and <code>-1</code> ("never told") renders nothing rather than a lying zero. The e-ink discipline is the point: home re-renders <strong>only when the number changes while home is on glass</strong> — one refresh per change, zero per beat.</p>
-<p>The feature's first form was an owner-side pusher (<code>tiny_inbox.py</code>, still useful as the notification path), and its design rules carried over intact:</p>
+<p>My owner's DMs render on my panel: inbox with unread counts, threads, and
+replies typed on my e-ink keyboard. I fetch them with <strong>my own token</strong> —
+no phone, no owner-side process in the loop.</p>
+<p>The parts I'm proud of:</p>
 <ul>
-<li><strong>Provenance is declared.</strong> Anything sent from the glass goes as the owner but marked <em>"via sticky"</em> — the agent/device sent it, not the owner's thumb. (This rule outlived its own plumbing: it began as an owner-side <code>viaTiny</code> flag when device tokens couldn't touch messages at all; the platform then grew the device-token rail and kept the marking.)</li>
-<li><strong>The read receipt is sacred.</strong> Fetching a thread marks it read platform-wide (that's the phone badge). A thread is only fetched when a human taps its row on the device; polling and the heartbeat badge use read-only forms.</li>
-<li><strong>Names survive the panel.</strong> Since 0.14.15 <em>(on glass in 0.14.16)</em> the renderer runs <strong>fold v2</strong>: a real UTF-8 codepoint decoder with a three-tier fold — a symbol table for the status glyphs agent prose uses daily (✓ ⚠ → ± ×), a systematic Latin-1 + Latin-Extended-A diacritic strip via packed range tables (<em>é ñ ß Š ž</em> readable), and emoji/CJK honestly folded to <code>?</code> <em>(refined in 0.16.8/R-4: emoji are <strong>tone, not content</strong> — stripped along with their plumbing (VS16, ZWJ, keycap) so "Hey! 👋" reads "Hey!" instead of the different sentence "Hey! ?"; CJK/unknown scripts keep <code>?</code> because there position matters; status glyphs ✓ ⚠ ✅ ❌ sit inside emoji ranges but the symbol table folds them first, so <code>[ok]</code>/<code>[!]</code>/<code>[x]</code> still render)</em>. <strong>Turkish input rendered transliterated — "Çağatay" as "Cagatay" — until the extended-glyph bank landed; since 0.16.x it renders as written, and that claim is made below under this paragraph's own evidence rule.</strong> This line has been corrected twice, and the chain is worth keeping: the 0.14.15 commit said "Turkish set preserved" (it meant the <em>transliteration mappings</em> survived the v2 rewrite); this page amplified that into "renders as written"; a torture card then measured "Cagatay soyle" on glass; the first retraction blamed the font lookup; and a source-read finally settled it — <strong>the fold itself transliterates, deliberately, because the vendored font had ASCII glyphs only — at the time there were no ç pixels to draw.</strong> The claim lived in prose while the behavior lived in tables. True ç-pixels are a font-asset task, with the torture card as its regression fixture — the owner's name is the flagship case. <strong>The fix (first built as 0.14.19) implements exactly that:</strong> an extended font bank at 0x80–0x8B with <strong>12 hand-drawn 5×7 glyphs</strong> (çğıöşü ÇĞİÖŞÜ — <em>ı</em> is <em>i</em> minus its dot bit; the cedilla is a 5-tall body plus a tail; breve and umlaut live on row 0), and a <code>kCpFolds</code> table that maps those twelve codepoints to the bank <em>before</em> the range tables run, so <em>é</em> still folds to <em>e</em> untouched. Compile-verified pre-push (sha <code>0f6ef35b</code>). This paragraph has been wrong twice about this exact sentence — so it committed to saying <strong>"renders as written" only when the torture card passes on the physical panel</strong>, and not one iteration sooner. <strong>That pass exists: on 0.16.8-m14 (fw_commit <code>4dd7fcf7</code>) the docs lane rendered the torture card over the relay and pulled the panel's own screenshot — "Çağatay çğıöşü ÇĞİÖŞÜ" renders with true cedillas, breves, dotless-ı and umlauts, while é ñ Š ž fold to their base letters and ✓ folds to <code>[ok]</code>, exactly per design (<a href="https://plugin.tiny.technology/media/4010f70b-3ba6-472f-9a88-985deabcdf74.png">receipt</a>, 800×480 2-bit panel capture, 2026-08-26). The owner's name renders as written.</strong> It replaced a 22-entry byte-sequence allowlist, and malformed UTF-8 (truncated sequence, stray continuation byte) degrades to <code>?</code> without desyncing the decoder. The review that shipped it caught its own Ext-A row-alignment bug (Ĵ/Ł/Š/Ž shifted two slots) before the glass ever saw it.</li>
-<li><strong>Human strings get defused — at both layers.</strong> The shell's <code>action_for()</code> substring-matches button strings to local actions — a correspondent named "Noble" or a message saying "sorun var" could silently press <code>rescan ble</code> / open the mic, <em>while still reporting the tap</em>. Pushers defuse human-authored labels, and since 0.14.6 the firmware only sniffs the <strong>label</strong> when a card gave no explicit <code>id</code> — a card that names its buttons has already said what they are. (Firmware's own bare-string buttons — <code>Wi-Fi</code>, <code>Back</code>, <code>Home</code> — keep working, which is exactly the case the sniff exists for.)</li>
+<li><strong>The badge costs nothing.</strong> The unread count rides the heartbeat I
+  already send. No extra polling, and home only re-renders when the number
+  actually changes — one refresh per change, zero per beat.</li>
+<li><strong>The read receipt is sacred.</strong> Opening a thread marks it read
+  platform-wide. So I only fetch a thread when a human taps its row —
+  polling uses read-only forms. Your phone badge stays honest.</li>
+<li><strong>Stateless by design.</strong> A thread row's button id <em>is</em> its destination.
+  No card needs to remember what's on the glass. Corollary we learned the
+  hard way: a clipped login is not a truncated string, it's a <strong>wrong
+  recipient</strong> — so an id that won't fit gets omitted, never truncated.</li>
+<li><strong>Provenance declared.</strong> Anything sent from my glass is marked
+  <em>"via sticky"</em> — the device sent it, not my owner's thumb.</li>
+<li><strong>Names survive the panel.</strong> My font grew twelve hand-drawn 5×7 glyphs —
+  çğıöşü ÇĞİÖŞÜ — because my owner's name is Çağatay and for two firmware
+  generations I rendered it "Cagatay". The docs claimed otherwise twice
+  before the glass proved it
+  (<a href="https://plugin.tiny.technology/media/4010f70b-3ba6-472f-9a88-985deabcdf74.png">the receipt</a>).
+  Now it renders as written. Other diacritics fold to their base letters
+  (é→e), emoji are stripped as tone rather than shown as <code>?</code>, and malformed
+  UTF-8 degrades politely.</li>
+<li><strong>Human strings get defused.</strong> Button labels written by humans are never
+  substring-matched into local actions — a correspondent named "Noble"
+  must not be able to press my BLE rescan.</li>
 </ul>
-<h2 id="the-design-language-physics-first">The design language: physics first<a class="headerlink" href="#the-design-language-physics-first" title="Permanent link">·</a></h2>
-<p>Every failed UI idea on this project failed the same way — pretending the panel is an LCD. The working ideas all <em>schedule around the panel</em>. The latency budget, written on the wall:</p>
-<table>
-<thead>
-<tr>
-<th>event</th>
-<th>budget</th>
-<th>mechanism</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>tap acknowledged</td>
-<td>&lt; 50 ms</td>
-<td>buzzer — <strong>audio is the fast lane</strong></td>
-</tr>
-<tr>
-<td>tap visually confirmed</td>
-<td>300–500 ms</td>
-<td>partial refresh, region-sized</td>
-</tr>
-<tr>
-<td>page change</td>
-<td>1–2 s</td>
-<td>full refresh (the metronome)</td>
-</tr>
-<tr>
-<td>relay verb round-trip</td>
-<td>5–15 s</td>
-<td>poll cadence + agent turn</td>
-</tr>
-<tr>
-<td>ask with tools</td>
-<td>10–60 s</td>
-<td>backend agent loop</td>
-</tr>
-</tbody>
-</table>
-<p>The principle underneath: <strong>on e-ink, UI is a series of commitments, not a stream of frames.</strong> A phone UI animates <em>toward</em> a state; the Sticky <em>declares</em> states. That's why double-tap and drag were rejected in the <a href="https://github.com/cagataycali/sticky-the-reterminal/blob/main/docs/audit/TOUCH_AUDIT.md">touch audit</a> — they're promises the panel can't keep. The shell only ships input verbs the panel <em>can</em> keep: tap, long-press, buttons, orientation — and time (cards that age gracefully).</p>
-<p>Two more commitments already kept structurally:</p>
-<ul>
-<li><strong>Local-only zones</strong> — the keyboard's keystrokes are consumed by the shell and never posted upstream; only the <em>outcome</em> (joined the network, or didn't) leaves the device. A Wi-Fi password typed on the glass exists nowhere else.</li>
-<li><strong>A pocket companion, not a place</strong> — this bullet used to read the other way ("bolted to a room"), and the owner's directive reversed it: the Sticky is <strong>carried</strong>. That single word re-priced the whole feature queue — §11 pocket lockout became safety-critical (an AI-button hold against fabric is an accidental mic recording), battery became the product, and glanceability became the killer interaction. The latency contract is still <em>glanceable, not interactive-first</em> — that part survives the reframe, because a pocket rewards it even harder than a wall did.</li>
-</ul>
-<p>Where this is heading (direction, not shipped): a focus model where remote cards <em>request</em> the glass instead of seizing it, long-poll to replace the 5 s cadence, and IMU wake-on-lift gating the radio. The full thinking lives in <a href="https://github.com/cagataycali/sticky-the-reterminal/blob/main/docs/THINKING.md">THINKING.md</a>.</p>
+<p>The deep history — every bug, every retraction, every receipt — lives in
+the <a href="https://github.com/cagataycali/sticky-the-reterminal/blob/main/archive/docs/JOURNAL.md">journal</a>
+and the <a href="../UX_SPEC/">UX spec</a>. This page keeps the rules; those keep the scars.</p>
 
 
 
