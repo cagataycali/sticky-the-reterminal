@@ -162,6 +162,59 @@
 .md-overlay { background: rgba(20,20,20,.35); }
 [data-md-color-scheme="slate"] .md-overlay { background: rgba(0,0,0,.6); }
 
+/* ==== S2 · the reading column. Scoped to pages wearing the bar (`.sk-header ~ .md-container`) so Home's manual
+   block keeps Material's ramp until LANDING-2 adopts the shell. One centred 42 rem prose column (≈70ch at 1.05 rem),
+   the TOC to its right on wide screens, the landing's type scale and section rhythm. ==== */
+.sk-header ~ .md-container .md-main__inner { max-width: none; margin: 0; padding: 0; display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 42rem) minmax(0, 1fr); column-gap: 0; align-items: start; }
+.sk-header ~ .md-container .md-content { grid-column: 2; max-width: none; padding: clamp(1.5rem, 5vh, 3rem) 1.25rem 3rem; }
+.sk-header ~ .md-container .md-content__inner { margin: 0; padding: 0; }
+.sk-header ~ .md-container .md-content__inner::before { display: none; }
+.sk-header ~ .md-container .md-content__button { display: none; }   /* the footer carries the GitHub link; no edit pencil on the page */
+.sk-header ~ .md-container .md-sidebar--secondary { display: none; grid-column: 3; justify-self: start; width: 12rem; margin-left: 2.5rem;
+  padding: clamp(1.5rem, 5vh, 3rem) 0 0; position: sticky; top: 2.8rem; }
+@media screen and (min-width: 76.25em) { .sk-header ~ .md-container .md-sidebar--secondary { display: block; } }
+@media screen and (max-width: 76.1875em) { .sk-header ~ .md-container .md-sidebar--primary { grid-column: 1 / -1; } }
+/* the TOC: a quiet ink-2 list, the current section marked by a cyan hairline */
+.sk-toc .md-nav__title { font-size: .6rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); font-weight: 500; padding: 0 0 .6rem .75rem; }
+.sk-toc .md-nav__title .md-nav__icon { display: none; }
+.sk-toc .md-nav__list { border-left: var(--hairline); }
+.sk-toc .md-nav__item { padding: 0; }
+.sk-toc .md-nav__link { font-size: .7rem; line-height: 1.4; color: var(--ink-2); margin: 0; padding: .3rem 0 .3rem .75rem; margin-left: -1px; border-left: 2px solid transparent; transition: color .2s, border-color .2s; }
+.sk-toc .md-nav__link:hover { color: var(--ink-3); }
+.sk-toc .md-nav__link--active { color: var(--ink-3); border-left-color: var(--accent); }
+.sk-toc .md-nav__link .md-ellipsis { white-space: normal; }
+.sk-toc .md-nav__item .md-nav__item .md-nav__link { padding-left: 1.5rem; font-size: .66rem; }
+/* type scale — the landing's, read at a desk */
+.sk-header ~ .md-container .md-typeset { font-size: 1.05rem; line-height: 1.55; color: var(--ink-3); }
+.sk-header ~ .md-container .md-typeset h1 { font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 700; letter-spacing: -.03em; line-height: 1.02; margin: .4rem 0 .7rem; color: var(--ink-3); }
+.sk-header ~ .md-container .md-typeset h1 + p, .sk-header ~ .md-container .md-typeset h1 + p > em { font-size: clamp(1.15rem, 1.5vw, 1.35rem); line-height: 1.4; color: var(--ink-2); font-style: normal; margin-bottom: 1.6rem; }
+.sk-header ~ .md-container .md-typeset h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 650; letter-spacing: -.025em; line-height: 1.12; color: var(--ink-3);
+  margin: 0 0 .8rem; padding-top: clamp(2.5rem, 6vh, 4rem); border-top: var(--hairline); }
+.sk-header ~ .md-container .md-typeset h2:not(:first-child) { margin-top: clamp(2.5rem, 6vh, 4rem); }
+.sk-header ~ .md-container .md-typeset h3 { font-size: 1.15rem; font-weight: 600; letter-spacing: -.01em; margin: 2rem 0 .6rem; }
+.sk-header ~ .md-container .md-typeset h4 { font-size: 1rem; font-weight: 600; margin: 1.6rem 0 .5rem; }
+.sk-header ~ .md-container .md-typeset p, .sk-header ~ .md-container .md-typeset ul, .sk-header ~ .md-container .md-typeset ol, .sk-header ~ .md-container .md-typeset dl { margin: 0 0 1rem; }
+.sk-header ~ .md-container .md-typeset li { margin-bottom: .35rem; }
+.sk-header ~ .md-container .md-typeset .headerlink { font-size: .7em; margin-left: .35em; }
+.sk-header ~ .md-container .md-typeset code { font-size: .82em; }
+.sk-header ~ .md-container .md-typeset pre > code { font-size: .78rem; line-height: 1.6; }
+.sk-header ~ .md-container .md-typeset table:not([class]) { font-size: .8rem; }
+.sk-header ~ .md-container .md-typeset .admonition, .sk-header ~ .md-container .md-typeset details { font-size: .9rem; }
+.sk-header ~ .md-container .md-typeset .glass > figcaption { font-size: .8rem; }
+.sk-header ~ .md-container .sticky-budget { font-size: .62rem; margin: 0 0 .8rem; }
+/* phone: the same column, the phone's measure */
+@media screen and (max-width: 44rem) {
+  .sk-header ~ .md-container .md-content { padding: 1.4rem 1rem 2.5rem; }
+  .sk-header ~ .md-container .md-typeset { font-size: .95rem; line-height: 1.5; }
+  .sk-header ~ .md-container .md-typeset h1 { font-size: 2.2rem; }
+  .sk-header ~ .md-container .md-typeset h1 + p { font-size: 1.1rem; }
+  .sk-header ~ .md-container .md-typeset h2 { font-size: 1.55rem; padding-top: 2.2rem; }
+  .sk-header ~ .md-container .md-typeset h2:not(:first-child) { margin-top: 2.2rem; }
+  .sk-header ~ .md-container .md-typeset pre > code { font-size: .72rem; }
+  .sk-header ~ .md-container .md-typeset table:not([class]) { font-size: .74rem; }
+}
+
 /* ---- type: a magazine ramp, generous leading ---- */
 .md-typeset { font-size: .82rem; line-height: 1.65; }
 .md-typeset h1 { font-weight: 650; letter-spacing: -.025em; color: var(--md-default-fg-color); font-size: 2.1em; margin-bottom: .6em; }
