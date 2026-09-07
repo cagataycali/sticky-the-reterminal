@@ -86,13 +86,19 @@ esp-web-install-button { --esp-tools-button-color: var(--ink-3); --esp-tools-but
 .l-shots__now { font-size: .9rem !important; } .l-shots__hint { color: var(--ink-1); }
 .l-caption a { color: var(--ink-3); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--ink-1); }
 
-/* listen: the answer types itself onto the glass, in the panel's grays */
-.css-card { position: absolute; inset: 0; padding: 5% 6%; font-family: var(--md-text-font); color: #141414; background: #fbfbf9; }
-.css-card__title { font-family: var(--md-code-font); font-size: clamp(.7rem, 1.1vw, .95rem); color: #5c5c58; border-bottom: 1px solid #b9b9b4; padding-bottom: 2%; margin-bottom: 3%; }
-.type-line { font-size: clamp(.8rem, 1.5vw, 1.25rem) !important; line-height: 1.35; margin: 0 0 3% !important; color: #141414 !important; max-width: 90% !important; opacity: 0; transform: translateY(4px); }
-.type-line--a { color: #5c5c58 !important; margin-left: 8% !important; }
-.in .type-line { animation: paint .5s steps(3) forwards; animation-delay: calc(.4s + var(--i) * .55s); }
-@keyframes paint { to { opacity: 1; transform: none; } }
+/* listen: the glass listens (five bars breathe over the home page), then the real ask capture paints in */
+.bezel--listen .frame { transition: opacity .9s var(--ease); }
+.bezel--listen .frame--idle { opacity: 1; } .bezel--listen .frame--ask { opacity: 0; }
+.in .bezel--listen .frame--idle { opacity: 0; transition-delay: 2.1s; }
+.in .bezel--listen .frame--ask { opacity: 1; transition-delay: 2.1s; }
+.mic { position: absolute; left: 50%; bottom: 14%; transform: translateX(-50%); display: flex; gap: 12%; align-items: center; height: 14%; width: 11%; opacity: 0; transition: opacity .4s var(--ease); }
+.mic i { flex: 1; height: 100%; border-radius: 999px; background: #141414; transform: scaleY(.2); transform-origin: center; }
+.in .mic { opacity: 1; animation: mic-out .5s var(--ease) 2s forwards; }
+.in .mic i { animation: mic-bar 1s ease-in-out infinite alternate; }
+.in .mic i:nth-child(2) { animation-delay: .12s; } .in .mic i:nth-child(3) { animation-delay: .24s; }
+.in .mic i:nth-child(4) { animation-delay: .36s; } .in .mic i:nth-child(5) { animation-delay: .48s; }
+@keyframes mic-bar { from { transform: scaleY(.2); } to { transform: scaleY(1); } }
+@keyframes mic-out { to { opacity: 0; } }
 
 /* sleep: the page dims, the glass stays */
 .l-dark { position: relative; }
@@ -160,7 +166,8 @@ esp-web-install-button { --esp-tools-button-color: var(--ink-3); --esp-tools-but
 /* reduced motion: everything static, everything visible */
 @media (prefers-reduced-motion: reduce) {
   .landing *, .landing *::before { animation: none !important; transition: none !important; }
-  .l-hero .l-h1 span, .l-hero .l-lead, .l-hero .l-cta, .l-hero .l-fine, .l-hero .l-device, .l-reveal > *, .ota-step, .type-line { opacity: 1 !important; transform: none !important; }
+  .l-hero .l-h1 span, .l-hero .l-lead, .l-hero .l-cta, .l-hero .l-fine, .l-hero .l-device, .l-reveal > *, .ota-step { opacity: 1 !important; transform: none !important; }
+  .mic { display: none; } .bezel--listen .frame--idle { opacity: 0 !important; } .bezel--listen .frame--ask { opacity: 1 !important; transition: none !important; }
   .bezel--pocket { transform: rotate(-90deg) !important; } .bezel--pocket .frame--land { opacity: 0 !important; } .bezel--pocket .frame--port { opacity: 1 !important; transform: rotate(90deg) !important; }
   .l-dark::before { opacity: 1; } .l-dark h2 { color: #ecebe6; } .l-dark p { color: #a2a39f; }
 }
