@@ -1547,18 +1547,34 @@ with the next card. The screen is a conversation.</p>
 blank panel. A card without an id gets a stable one hashed from its content
 (<code>auto-xxxxxxxx</code>), so receipts always correlate. Text past the fold ends in
 a visible <code>[cut]</code>.</p>
+<figure class="glass">
+<div class="glass__bezel"><img src="img/glass/card-text.png" alt="A text card with a footer and two buttons — each button is a touch region that answers upstream as ui_tap." width="800" height="480" loading="lazy" decoding="async"></div>
+<figcaption>A `text` card with a footer and two buttons — each button is a touch region that answers upstream as `ui_tap`.</figcaption>
+</figure>
 <h3 id="list">list<a class="headerlink" href="#list" title="Permanent link">·</a></h3>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;list&quot;</span><span class="p">,</span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Groceries&quot;</span><span class="p">,</span><span class="nt">&quot;items&quot;</span><span class="p">:[</span><span class="s2">&quot;milk&quot;</span><span class="p">,</span><span class="s2">&quot;eggs&quot;</span><span class="p">,</span><span class="s2">&quot;bread&quot;</span><span class="p">]}</span>
 </span></code></pre></div>
+<figure class="glass">
+<div class="glass__bezel"><img src="img/glass/card-list.png" alt="A list of seven — long items wrap, the footer stays pinned." width="800" height="480" loading="lazy" decoding="async"></div>
+<figcaption>A `list` of seven — long items wrap, the footer stays pinned.</figcaption>
+</figure>
 <h3 id="kv">kv<a class="headerlink" href="#kv" title="Permanent link">·</a></h3>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;kv&quot;</span><span class="p">,</span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Status&quot;</span><span class="p">,</span><span class="nt">&quot;rows&quot;</span><span class="p">:{</span><span class="nt">&quot;in&quot;</span><span class="p">:</span><span class="s2">&quot;19:30&quot;</span><span class="p">,</span><span class="nt">&quot;battery&quot;</span><span class="p">:</span><span class="s2">&quot;84%&quot;</span><span class="p">}}</span>
 </span></code></pre></div>
 <p><code>rows</code> takes an object or ordered <code>[["k","v"],…]</code> pairs.</p>
+<figure class="glass">
+<div class="glass__bezel"><img src="img/glass/card-kv.png" alt="A kv card with live Open-Meteo numbers — keys in gray, values in black, one hairline per row." width="800" height="480" loading="lazy" decoding="async"></div>
+<figcaption>A `kv` card with live Open-Meteo numbers — keys in gray, values in black, one hairline per row.</figcaption>
+</figure>
 <h3 id="composite">composite<a class="headerlink" href="#composite" title="Permanent link">·</a></h3>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;composite&quot;</span><span class="p">,</span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Morning&quot;</span><span class="p">,</span><span class="nt">&quot;parts&quot;</span><span class="p">:[{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;kv&quot;</span><span class="p">},{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;list&quot;</span><span class="p">}]}</span>
 </span></code></pre></div>
 <p>Up to 4 parts sharing the body evenly. More than that is illegible at my
 glyph size, so I refuse rather than squint.</p>
+<figure class="glass">
+<div class="glass__bezel"><img src="img/glass/card-composite.png" alt="A composite of a kv and a list sharing the body — two parts, one footer." width="800" height="480" loading="lazy" decoding="async"></div>
+<figcaption>A `composite` of a `kv` and a `list` sharing the body — two parts, one footer.</figcaption>
+</figure>
 <h3 id="qr">qr<a class="headerlink" href="#qr" title="Permanent link">·</a></h3>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;qr&quot;</span><span class="p">,</span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="s2">&quot;WIFI:S:tiny-1a2b;T:WPA;P:tinysetup;;&quot;</span><span class="p">,</span><span class="nt">&quot;caption&quot;</span><span class="p">:</span><span class="s2">&quot;scan to join&quot;</span><span class="p">}</span>
 </span></code></pre></div>
@@ -1567,12 +1583,20 @@ part of setup. An unscannable QR looks exactly like a scannable one, so:
 below 3 px per module I say how much room the symbol needed instead of
 painting a decorative square, and text over the version cap gets its byte
 count named, not encoded wrong.</p>
+<figure class="glass">
+<div class="glass__bezel"><img src="img/glass/card-qr.png" alt="A qr card at 3+ px per module — this one scans; when one would not, I say so instead of painting it." width="800" height="480" loading="lazy" decoding="async"></div>
+<figcaption>A `qr` card at 3+ px per module — this one scans; when one would not, I say so instead of painting it.</figcaption>
+</figure>
 <h3 id="chart">chart<a class="headerlink" href="#chart" title="Permanent link">·</a></h3>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;chart&quot;</span><span class="p">,</span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Battery&quot;</span><span class="p">,</span><span class="nt">&quot;data&quot;</span><span class="p">:[</span><span class="mi">92</span><span class="p">,</span><span class="mi">90</span><span class="p">,</span><span class="mi">88</span><span class="p">,</span><span class="mi">85</span><span class="p">,</span><span class="mi">84</span><span class="p">],</span><span class="nt">&quot;style&quot;</span><span class="p">:</span><span class="s2">&quot;line&quot;</span><span class="p">,</span><span class="nt">&quot;y_min&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">&quot;y_max&quot;</span><span class="p">:</span><span class="mi">100</span><span class="p">}</span>
 </span></code></pre></div>
 <p>Line or bar, scale drawn on the axis — a chart that hides its scale is a
 mood, not a measurement. E-ink tuning: 2 px stroke (1 px ghosts), 160-point
 cap. Fewer than 2 points gets an honest void.</p>
+<figure class="glass">
+<div class="glass__bezel"><img src="img/glass/card-chart.png" alt="A chart of 24 hourly points with its y-axis drawn — 15 to 30 °C, not autoscaled to look dramatic." width="800" height="480" loading="lazy" decoding="async"></div>
+<figcaption>A `chart` of 24 hourly points with its y-axis drawn — 15 to 30 °C, not autoscaled to look dramatic.</figcaption>
+</figure>
 <h3 id="chat">chat<a class="headerlink" href="#chat" title="Permanent link">·</a></h3>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;chat&quot;</span><span class="p">,</span><span class="nt">&quot;card_id&quot;</span><span class="p">:</span><span class="s2">&quot;ask&quot;</span><span class="p">,</span><span class="nt">&quot;messages&quot;</span><span class="p">:[</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="p">{</span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="s2">&quot;user&quot;</span><span class="p">,</span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="s2">&quot;what&#39;s the weather&quot;</span><span class="p">},</span>
@@ -1583,17 +1607,29 @@ cap. Fewer than 2 points gets an honest void.</p>
 agent's outlined and left. A streamed <code>ask</code> renders as this automatically —
 the answer types itself in at ≤2 Hz partial refresh, then settles with one
 full refresh. "Yes." is a chip, not a banner.</p>
+<figure class="glass">
+<div class="glass__bezel"><img src="img/glass/card-chat.png" alt="A chat card — your turns filled and right-aligned, mine outlined on the left." width="800" height="480" loading="lazy" decoding="async"></div>
+<figcaption>A `chat` card — your turns filled and right-aligned, mine outlined on the left.</figcaption>
+</figure>
 <h3 id="image">image<a class="headerlink" href="#image" title="Permanent link">·</a></h3>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;image&quot;</span><span class="p">,</span><span class="nt">&quot;card_id&quot;</span><span class="p">:</span><span class="s2">&quot;my-frame&quot;</span><span class="p">,</span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="s2">&quot;https://…/portrait_1bit.bin&quot;</span><span class="p">}</span>
 </span></code></pre></div>
 <p>Server-rendered pixels: the backend dithers, I fetch the exact-size raw
 frame and blit it. First frame screenshotted back and diffed against the
 server's preview: <strong>0 of 384,000 pixels differed.</strong> Gate on <code>grammar_version &gt;= 7</code>.</p>
+<figure class="glass">
+<div class="glass__bezel"><img src="img/glass/card-image.png" alt="An image card — frame 0 of a server-dithered duck; the screenshot diffed pixel-identical against the server's preview." width="800" height="480" loading="lazy" decoding="async"></div>
+<figcaption>An `image` card — frame 0 of a server-dithered duck; the screenshot diffed pixel-identical against the server's preview.</figcaption>
+</figure>
 <h3 id="keyboard-menu-my-own-pages-use-these">keyboard · menu <em>(my own pages use these)</em><a class="headerlink" href="#keyboard-menu-my-own-pages-use-these" title="Permanent link">·</a></h3>
 <p>The e-ink keyboard (letters + <code>?123</code> plane; filled key faces, because
 outlines ghost on partial refresh) and tappable menu rows with right-aligned
 notes. A menu shows up to 24 items and unstages rows that scroll out of view
 — an invisible button must not be tappable.</p>
+<figure class="glass">
+<div class="glass__bezel"><img src="img/glass/card-menu.png" alt="A menu — tappable rows with right-aligned notes; each row carries its own id." width="800" height="480" loading="lazy" decoding="async"></div>
+<figcaption>A `menu` — tappable rows with right-aligned notes; each row carries its own id.</figcaption>
+</figure>
 <h3 id="priority">priority<a class="headerlink" href="#priority" title="Permanent link">·</a></h3>
 <p>Any card may declare <code>"priority":"alert"</code> — today a <code>!</code> prefix on the
 title, parsed now so senders can declare intent before the notification

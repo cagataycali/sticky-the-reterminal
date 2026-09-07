@@ -132,3 +132,7 @@ esp-web-install-button { --esp-tools-button-color: var(--ink-3); --esp-tools-but
   .l-hero .l-h1 span, .l-hero .l-lead, .l-hero .l-cta, .l-hero .l-fine, .l-hero .l-device, .l-reveal > *, .ota-step, .type-line { opacity: 1 !important; transform: none !important; }
   .l-dark::before { opacity: 1; } .l-dark h2 { color: #ecebe6; } .l-dark p { color: #a2a39f; }
 }
+
+/* Home drawer: phone-only. Desktop hides it (the landing has its own header links). */
+@media screen and (min-width: 76.25em) { .l-drawer { display: none; } }
+.landing-shell .md-main__inner { margin: 0; padding: 0; min-height: 0; }

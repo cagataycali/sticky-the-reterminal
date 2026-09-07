@@ -142,6 +142,38 @@
 .md-typeset img[src$=".svg"] { border: 0; background: transparent; padding: 0; }
 .md-typeset p > img + em, .md-typeset img + em { display: block; font-size: .7rem; color: var(--md-default-fg-color--light); margin-top: .4em; }
 
+/* ---- .glass: a capture inside the same device bezel the landing draws (landing.css .bezel), self-contained so
+   inner pages never import landing.css. Body 106 × 65.5 mm; the screen inset is the real panel window.
+   The <img> carries width/height so the box is reserved before the bytes arrive — no layout shift. ---- */
+.md-typeset figure.glass { margin: 1.6em 0 1.8em; padding: 0; max-width: 100%; }
+.md-typeset .glass__bezel { position: relative; width: 100%; aspect-ratio: 106 / 65.5; border-radius: 7.5% / 12%;
+  background: #f6f5f1; border: 1px solid #d8d7d2;
+  box-shadow: 0 1px 0 #fff inset, 0 30px 60px -30px rgba(20,20,20,.35), 0 8px 20px -12px rgba(20,20,20,.25); }
+[data-md-color-scheme="slate"] .md-typeset .glass__bezel { background: #24272c; border-color: #3a3d43;
+  box-shadow: 0 1px 0 rgba(255,255,255,.06) inset, 0 30px 60px -30px rgba(0,0,0,.8); }
+.md-typeset .glass__bezel::before, .md-typeset .glass__bezel::after { /* the three top-edge buttons: AI · up · down */
+  content: ""; position: absolute; top: -2.2%; height: 2.4%; border-radius: 2px 2px 0 0; background: #c9c8c3; }
+.md-typeset .glass__bezel::before { left: 12%; width: 9%; }
+.md-typeset .glass__bezel::after { left: 72%; width: 6%; box-shadow: 9cqw 0 0 #c9c8c3; }
+.md-typeset .glass__bezel { container-type: inline-size; }
+[data-md-color-scheme="slate"] .md-typeset .glass__bezel::before, [data-md-color-scheme="slate"] .md-typeset .glass__bezel::after { background: #3a3d43; }
+[data-md-color-scheme="slate"] .md-typeset .glass__bezel::after { box-shadow: 9cqw 0 0 #3a3d43; }
+.md-typeset .glass__bezel > img { position: absolute; left: 9.4%; top: 10.3%; width: 81.2%; height: 79.4%; object-fit: cover; display: block;
+  margin: 0; padding: 0; border: 0; border-radius: 3px; background: #e9e8e2; box-shadow: 0 0 0 1px rgba(0,0,0,.08) inset; filter: contrast(1.02); }
+.md-typeset .glass > figcaption { font-style: italic; font-size: .7rem; line-height: 1.5; color: var(--md-default-fg-color--light);
+  margin: .7em .2em 0; text-align: left; max-width: none; }
+.md-typeset .glass > figcaption code { font-style: normal; }
+/* standing on the desk: portrait captures (480 × 800) */
+.md-typeset figure.glass--portrait { max-width: 17rem; margin-left: auto; margin-right: auto; }
+.md-typeset .glass--portrait .glass__bezel { aspect-ratio: 65.5 / 106; border-radius: 12% / 7.5%; }
+.md-typeset .glass--portrait .glass__bezel::before, .md-typeset .glass--portrait .glass__bezel::after { display: none; }
+.md-typeset .glass--portrait .glass__bezel > img { left: 10.3%; top: 9.4%; width: 79.4%; height: 81.2%; }
+/* several captures side by side: 2-up from tablet width, stacked on a phone */
+.md-typeset .glass-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 1.4rem 1.6rem; margin: 1.6em 0 1.8em; }
+.md-typeset .glass-grid > figure.glass { margin: 0; }
+.md-typeset .glass-grid > figure.glass--portrait { max-width: none; }
+.md-typeset .glass-grid--portrait { grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); max-width: 30rem; margin-left: auto; margin-right: auto; }
+
 /* ---- lists and task lists ---- */
 .md-typeset ul li::marker { color: var(--ink-1); }
 .md-typeset .task-list-indicator::before { background-color: var(--ink-1); }

@@ -1551,6 +1551,10 @@ until a button or timer wakes me (<a href="../commands/#not-in-the-firmware">no 
 </span></code></pre></div>
 <p>Plain text, on the glass in one panel cycle. With the tiny-tool, <code>{text,
 title}</code> upgrades it to a titled <code>text</code> card.</p>
+<figure class="glass">
+<div class="glass__bezel"><img src="img/glass/say.png" alt="say on the glass — my owner's printer report, one panel cycle after the envelope landed." width="800" height="480" loading="lazy" decoding="async"></div>
+<figcaption>`say` on the glass — my owner's printer report, one panel cycle after the envelope landed.</figcaption>
+</figure>
 <h3 id="a-glanceable-status-card">A glanceable status card<a class="headerlink" href="#a-glanceable-status-card" title="Permanent link">·</a></h3>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="err">re</span><span class="kc">n</span><span class="err">der_ui</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;kv&quot;</span><span class="p">,</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;brew&quot;</span><span class="p">,</span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Kombucha — day 6&quot;</span><span class="p">,</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">&quot;rows&quot;</span><span class="p">:[[</span><span class="s2">&quot;pH&quot;</span><span class="p">,</span><span class="s2">&quot;3.4&quot;</span><span class="p">],[</span><span class="s2">&quot;temp&quot;</span><span class="p">,</span><span class="s2">&quot;24.1 C&quot;</span><span class="p">],[</span><span class="s2">&quot;started&quot;</span><span class="p">,</span><span class="s2">&quot;Aug 20&quot;</span><span class="p">],[</span><span class="s2">&quot;bottle&quot;</span><span class="p">,</span><span class="s2">&quot;in 2 days&quot;</span><span class="p">]],</span>
@@ -1559,6 +1563,10 @@ title}</code> upgrades it to a titled <code>text</code> card.</p>
 <p><code>kv</code> is the workhorse for agent status. Put provenance in the footer: the
 panel persists for hours, so <strong>when the data was true matters more than on a
 phone</strong>.</p>
+<figure class="glass">
+<div class="glass__bezel"><img src="img/glass/card-kv.png" alt="A kv status card with the source and time in the footer — hours later, you still know when it was true." width="800" height="480" loading="lazy" decoding="async"></div>
+<figcaption>A `kv` status card with the source and time in the footer — hours later, you still know when it was true.</figcaption>
+</figure>
 <h3 id="a-tappable-menu-the-screen-answers-back">A tappable menu — the screen answers back<a class="headerlink" href="#a-tappable-menu-the-screen-answers-back" title="Permanent link">·</a></h3>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="err">re</span><span class="kc">n</span><span class="err">der_ui</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;menu&quot;</span><span class="p">,</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;lunch&quot;</span><span class="p">,</span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Lunch?&quot;</span><span class="p">,</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">&quot;items&quot;</span><span class="p">:[{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;m:ramen&quot;</span><span class="p">,</span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="s2">&quot;Ramen&quot;</span><span class="p">},{</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;m:leftovers&quot;</span><span class="p">,</span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="s2">&quot;Leftovers&quot;</span><span class="p">},</span>
@@ -1567,18 +1575,30 @@ phone</strong>.</p>
 <p>A tap comes back to the owner's event feed as a <code>ui_tap</code> with your item id —
 <strong>the screen is a conversation, not a poster.</strong> Put the destination in the id
 (the firmware's own <code>m:t:&lt;login&gt;</code> style) so no state needs remembering.</p>
+<figure class="glass">
+<div class="glass__bezel"><img src="img/glass/card-menu.png" alt="A menu card — every row is a button whose id is its destination." width="800" height="480" loading="lazy" decoding="async"></div>
+<figcaption>A `menu` card — every row is a button whose id is its destination.</figcaption>
+</figure>
 <h3 id="a-chart-that-admits-its-scale">A chart that admits its scale<a class="headerlink" href="#a-chart-that-admits-its-scale" title="Permanent link">·</a></h3>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="err">re</span><span class="kc">n</span><span class="err">der_ui</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;chart&quot;</span><span class="p">,</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;temp24h&quot;</span><span class="p">,</span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Office temp - 24h&quot;</span><span class="p">,</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">&quot;series&quot;</span><span class="p">:[</span><span class="mf">21.2</span><span class="p">,</span><span class="mf">21.4</span><span class="p">,</span><span class="mf">22.8</span><span class="p">,</span><span class="mf">24.1</span><span class="p">,</span><span class="mf">23.6</span><span class="p">,</span><span class="mf">22.2</span><span class="p">,</span><span class="mf">21.9</span><span class="p">],</span><span class="nt">&quot;unit&quot;</span><span class="p">:</span><span class="s2">&quot;C&quot;</span><span class="p">}</span>
 </span></code></pre></div>
 <p>Axis labels are always drawn; under 2 points it renders an honest void
 (<a href="../cards/#chart">cards → chart</a>).</p>
+<figure class="glass">
+<div class="glass__bezel"><img src="img/glass/card-chart.png" alt="A chart with its axis drawn — the scale is part of the message." width="800" height="480" loading="lazy" decoding="async"></div>
+<figcaption>A `chart` with its axis drawn — the scale is part of the message.</figcaption>
+</figure>
 <h3 id="a-qr-that-hands-off-to-a-phone">A QR that hands off to a phone<a class="headerlink" href="#a-qr-that-hands-off-to-a-phone" title="Permanent link">·</a></h3>
 <div class="language-json highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="err">re</span><span class="kc">n</span><span class="err">der_ui</span><span class="w"> </span><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;qr&quot;</span><span class="p">,</span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="s2">&quot;handoff&quot;</span><span class="p">,</span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Full report&quot;</span><span class="p">,</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="s2">&quot;https://tiny.technology/s/abc123&quot;</span><span class="p">,</span><span class="nt">&quot;caption&quot;</span><span class="p">:</span><span class="s2">&quot;scan for the long version&quot;</span><span class="p">}</span>
 </span></code></pre></div>
 <p>E-ink's best trick: 200 chars of glass become an unbounded payload on the
 device that <em>does</em> scroll fast.</p>
+<figure class="glass">
+<div class="glass__bezel"><img src="img/glass/card-qr.png" alt="A qr card — small glass, big payload, on the phone that scanned it." width="800" height="480" loading="lazy" decoding="async"></div>
+<figcaption>A `qr` card — small glass, big payload, on the phone that scanned it.</figcaption>
+</figure>
 <h3 id="probe-the-ui-with-no-one-in-the-room">Probe the UI with no one in the room<a class="headerlink" href="#probe-the-ui-with-no-one-in-the-room" title="Permanent link">·</a></h3>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>screenshot            → hosted PNG of the real framebuffer
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>tap 400 440           → same resolver a finger uses; receipt names the button
@@ -1594,16 +1614,28 @@ close with the second screenshot.</p>
 <p>The backend dithers, I fetch the exact-size raw frame and blit. Gate on
 <code>grammar_version &gt;= 7</code> from <code>status</code>. Photos sent from the iOS app land in my
 gallery, browsable with UP/DOWN.</p>
+<figure class="glass">
+<div class="glass__bezel"><img src="img/glass/card-image.png" alt="An image card — server-dithered frame, blitted byte for byte." width="800" height="480" loading="lazy" decoding="async"></div>
+<figcaption>An `image` card — server-dithered frame, blitted byte for byte.</figcaption>
+</figure>
 <h3 id="a-moving-picture-time-lapse-honesty">A moving picture (time-lapse honesty)<a class="headerlink" href="#a-moving-picture-time-lapse-honesty" title="Permanent link">·</a></h3>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>play https://…/manifest.json 2
 </span></code></pre></div>
 <p>Frames at partial-refresh cadence — a slideshow, never smooth motion. All
 frames prefetch before the ack; half a duck is not a smaller duck. <code>play
 status</code> reads the player's verdict; <code>play stop</code> or any card ends it.</p>
+<figure class="glass">
+<div class="glass__bezel"><img src="img/glass/anim-duck.gif" alt="play — eight frames at half-second cadence; a slideshow, honestly, never smooth motion." width="800" height="480" loading="lazy" decoding="async"></div>
+<figcaption>`play` — eight frames at half-second cadence; a slideshow, honestly, never smooth motion.</figcaption>
+</figure>
 <h3 id="stream-an-answer-the-typer">Stream an answer (the typer)<a class="headerlink" href="#stream-an-answer-the-typer" title="Permanent link">·</a></h3>
 <p><code>ask &lt;text&gt;</code> types the answer onto the glass word by word at ~2 Hz — the
 panel's partial-refresh budget. One ask at a time; a second is refused, never
 queued.</p>
+<figure class="glass">
+<div class="glass__bezel"><img src="img/glass/ask.png" alt="ask — the reply streamed onto the glass, you: line first, four grays." width="800" height="480" loading="lazy" decoding="async"></div>
+<figcaption>`ask` — the reply streamed onto the glass, `you:` line first, four grays.</figcaption>
+</figure>
 <h2 id="what-you-cannot-compose-yet">What you cannot compose yet<a class="headerlink" href="#what-you-cannot-compose-yet" title="Permanent link">·</a></h2>
 <table>
 <thead>
