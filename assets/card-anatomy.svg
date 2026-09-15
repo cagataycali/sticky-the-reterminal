@@ -1,51 +1,77 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 360" font-family="Inter, -apple-system, sans-serif">
-  <defs>
-    <style>
-      .wire { stroke:#8a8a8a; stroke-width:1.5; fill:none; }
-      .lbl  { fill:#8a8a8a; font-size:13px; }
-      .sub  { fill:#8a8a8a; font-size:10px; opacity:.75; }
-      .cy   { stroke:#00b8c8; stroke-width:1.5; fill:none; }
-      .cylbl{ fill:#00b8c8; font-size:12px; font-weight:600; }
-    </style>
-  </defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 330" class="sk-diagram__svg sk-ca" role="img" aria-labelledby="sk-ca-title sk-ca-desc">
+  <title id="sk-ca-title">Anatomy of a card</title>
+  <desc id="sk-ca-desc">A card on the glass has four bands: a title bar with the glance cluster (clock, battery, Wi-Fi), a body that wraps and scrolls, up to four buttons that answer upstream as ui_tap, and a footer carrying the card id. A tap on Done becomes ui_tap card_id dinner button_id done, reaches the owner's activity feed, and the agent answers with the next card.</desc>
+  <!-- Inlined into cards.md (pymdownx.snippets). Page ink/accent via CSS vars; <g class="co"> bands stage in top to bottom
+       (sticky.css). Fallback hexes = paper scheme for anyone opening the file alone. -->
+  <style>
+    .sk-ca { font-family: var(--md-text-font, Inter, system-ui, sans-serif); }
+    .sk-ca .panel { fill: #fff; stroke: var(--ink-3, #141414); stroke-width: 2; }
+    .sk-ca .ink { fill: #141414; font-size: 13px; }
+    .sk-ca .ink-dim { fill: #6b6b66; font-size: 10px; }
+    .sk-ca .glass-line { stroke: #141414; stroke-width: 1.5; }
+    .sk-ca .btn { fill: none; stroke: #141414; stroke-width: 1.5; }
+    .sk-ca .band { fill: var(--accent, #0e8fa8); fill-opacity: .08; stroke: var(--accent, #0e8fa8); stroke-width: 1.25; stroke-dasharray: 3 3; }
+    .sk-ca .lead { stroke: var(--accent, #0e8fa8); stroke-width: 1.25; fill: none; }
+    .sk-ca .lbl { fill: var(--accent, #0e8fa8); font-size: 13px; font-weight: 650; }
+    .sk-ca .sub { fill: var(--ink-2, #5c5c58); font-size: 11px; }
+    .sk-ca .mono { font-family: var(--md-code-font, ui-monospace, monospace); font-size: 11px; fill: var(--ink-3, #141414); }
+    .sk-ca .chip { fill: none; stroke: var(--ink-3, #141414); stroke-width: 1.5; }
+    .sk-ca .chip-t { fill: var(--ink-3, #141414); font-size: 11px; }
+    .sk-ca .say { fill: var(--ink-3, #141414); font-size: 13px; font-weight: 650; letter-spacing: -.01em; }
+  </style>
 
-  <!-- panel -->
-  <rect x="30" y="20" width="360" height="216" rx="6" class="wire" stroke-width="2.5"/>
+  <!-- the glass: a real card as it paints, 4:2.4 -->
+  <g class="co">
+    <rect x="16" y="16" width="380" height="228" rx="6" class="panel"/>
+    <text x="30" y="40" class="ink" font-weight="600">Dinner</text>
+    <text x="300" y="40" class="ink-dim">19:04 · 84% · w+</text>
+    <line x1="30" y1="50" x2="382" y2="50" class="glass-line"/>
+    <text x="30" y="78" class="ink">Back at 19:30.</text>
+    <text x="30" y="98" class="ink">Pizza in the fridge.</text>
+    <rect x="30" y="170" width="166" height="30" rx="6" class="btn"/>
+    <text x="113" y="190" text-anchor="middle" class="ink">Done</text>
+    <rect x="216" y="170" width="166" height="30" rx="6" class="btn"/>
+    <text x="299" y="190" text-anchor="middle" class="ink">Later</text>
+    <text x="30" y="230" class="ink-dim">from tiny · card_id=dinner</text>
+  </g>
 
-  <!-- title bar -->
-  <rect x="42" y="32" width="336" height="30" class="cy"/>
-  <text x="52" y="52" class="lbl">Dinner</text>
-  <text x="300" y="52" class="sub">19:04 · 84% · w+</text>
-  <line x1="378" y1="47" x2="470" y2="47" class="cy"/>
-  <text x="476" y="44" class="cylbl">title</text>
-  <text x="476" y="58" class="sub">+ glance cluster</text>
+  <!-- title band -->
+  <g class="co">
+    <rect x="24" y="24" width="364" height="30" class="band"/>
+    <line x1="388" y1="39" x2="430" y2="39" class="lead"/>
+    <text x="436" y="36" class="lbl">title</text>
+    <text x="436" y="50" class="sub">+ glance cluster: clock · battery · Wi-Fi</text>
+  </g>
+  <!-- body band -->
+  <g class="co">
+    <rect x="24" y="60" width="364" height="100" class="band"/>
+    <line x1="388" y1="110" x2="430" y2="110" class="lead"/>
+    <text x="436" y="107" class="lbl">body</text>
+    <text x="436" y="121" class="sub">wraps · scrolls · [cut] past the fold</text>
+  </g>
+  <!-- buttons band -->
+  <g class="co">
+    <rect x="24" y="164" width="364" height="42" class="band"/>
+    <line x1="388" y1="185" x2="430" y2="185" class="lead"/>
+    <text x="436" y="182" class="lbl">buttons</text>
+    <text x="436" y="196" class="sub">≤ 4 · each one a touch region</text>
+  </g>
+  <!-- footer band -->
+  <g class="co">
+    <rect x="24" y="214" width="364" height="24" class="band"/>
+    <line x1="388" y1="226" x2="430" y2="226" class="lead"/>
+    <text x="436" y="223" class="lbl">footer</text>
+    <text x="436" y="237" class="sub">card_id comes back in every receipt</text>
+  </g>
 
-  <!-- body -->
-  <rect x="42" y="70" width="336" height="96" class="cy"/>
-  <text x="52" y="92" class="lbl">Back at 19:30.</text>
-  <text x="52" y="110" class="lbl">Pizza in the fridge.</text>
-  <line x1="378" y1="118" x2="470" y2="118" class="cy"/>
-  <text x="476" y="115" class="cylbl">body</text>
-  <text x="476" y="129" class="sub">wraps · scrolls</text>
-
-  <!-- buttons -->
-  <rect x="42" y="174" width="336" height="34" class="cy"/>
-  <rect x="52" y="179" width="150" height="24" rx="5" class="wire"/>
-  <text x="127" y="195" text-anchor="middle" class="lbl">Done</text>
-  <rect x="216" y="179" width="150" height="24" rx="5" class="wire"/>
-  <text x="291" y="195" text-anchor="middle" class="lbl">Later</text>
-  <line x1="378" y1="191" x2="470" y2="191" class="cy"/>
-  <text x="476" y="188" class="cylbl">buttons</text>
-  <text x="476" y="202" class="sub">≤4 · taps flow back</text>
-
-  <!-- footer -->
-  <text x="52" y="226" class="sub">from tiny · card_id=dinner</text>
-  <line x1="220" y1="222" x2="470" y2="222" class="cy"/>
-  <text x="476" y="225" class="cylbl">footer</text>
-
-  <!-- tap flow -->
-  <text x="30" y="272" class="lbl">a tap on [Done] →</text>
-  <text x="160" y="272" class="sub">ui_tap {card_id:"dinner", button_id:"done"}</text>
-  <text x="160" y="290" class="sub">→ owner's activity feed → agent answers with the next card</text>
-  <text x="30" y="322" class="cylbl">The screen is a conversation.</text>
+  <!-- the round trip -->
+  <g class="co">
+    <text x="16" y="276" class="sub">a tap on</text>
+    <rect x="66" y="263" width="46" height="18" rx="4" class="chip"/>
+    <text x="89" y="276" text-anchor="middle" class="chip-t">Done</text>
+    <text x="120" y="276" class="sub">→</text>
+    <text x="136" y="276" class="mono">ui_tap {card_id:"dinner", button_id:"done"}</text>
+    <text x="136" y="294" class="sub">→ your activity feed → the agent answers with the next card</text>
+    <text x="16" y="322" class="say">The screen is a conversation.</text>
+  </g>
 </svg>

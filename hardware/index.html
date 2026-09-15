@@ -18,14 +18,14 @@
         <link rel="prev" href="../stickyos/">
       
       
-        <link rel="next" href="../case/">
+        <link rel="next" href="../ARCHITECTURE/">
       
       
         
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -114,9 +114,9 @@
         <li><a class="sk-nav__link" href="../install/" data-sk-pages="../install/">Install</a></li>
         <li><a class="sk-nav__link" href="../start/quickstart/" data-sk-pages="../start/quickstart/">Quickstart</a></li>
         <li><a class="sk-nav__link" href="../commands/" data-sk-pages="../commands/ ../cards/ ../cookbook/ ../stickyos/">The glass</a></li>
-        <li><a class="sk-nav__link is-active" href="./" data-sk-pages="./ ../case/" aria-current="page">Hardware</a></li>
+        <li><a class="sk-nav__link is-active" href="./" data-sk-pages="./" aria-current="page">Hardware</a></li>
         <li><a class="sk-nav__link" href="../ARCHITECTURE/" data-sk-pages="../ARCHITECTURE/ ../API_CONTRACT/ ../release/">Architecture</a></li>
-        <li><a class="sk-nav__link" href="../troubleshooting/" data-sk-pages="../troubleshooting/ ../RECOVERY/ ../verdicts/">Troubleshooting</a></li>
+        <li><a class="sk-nav__link" href="../troubleshooting/" data-sk-pages="../troubleshooting/ ../RECOVERY/">Troubleshooting</a></li>
     </ul>
     <div class="sk-tools">
       
@@ -516,10 +516,6 @@
       
         
       
-        
-          
-        
-      
     
     
     
@@ -539,9 +535,8 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
-          <div class="md-nav__link md-nav__container">
-            <a href="../case/" class="md-nav__link ">
-              
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
   
   
   <span class="md-ellipsis">
@@ -555,14 +550,8 @@
   
   
 
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
+            <span class="md-nav__icon md-icon"></span>
+          </label>
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
@@ -731,8 +720,6 @@
     </li>
   
 
-              
-            
               
             
           </ul>
@@ -906,8 +893,6 @@
       
         
       
-        
-      
     
     
     
@@ -1009,34 +994,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../verdicts/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Probing without lying
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -1069,15 +1026,102 @@
 
 <h1 id="hardware-my-body">Hardware — my body<a class="headerlink" href="#hardware-my-body" title="Permanent link">·</a></h1>
 <p>106 × 65.5 × 7.3 mm. 70 grams. IP40. N52 magnets in all four corners, so I
-hold onto fridges and filing cabinets through my own
-<a href="../case/">printed case</a>. Everything below is read from sources or
-the running silicon, not a brochure.</p>
-<p><img alt="my body, annotated" src="../assets/body.svg" /></p>
+hold onto fridges and filing cabinets on my own. Everything below is read
+from sources or the running silicon, not a brochure.</p>
+<figure class="sk-diagram sk-diagram--body">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 350" class="sk-diagram__svg sk-body" role="img" aria-labelledby="sk-body-title sk-body-desc">
+  <title id="sk-body-title">Sticky's body, annotated</title>
+  <desc id="sk-body-desc">A 106 by 65.5 millimetre landscape body with an 800 by 480 four-gray e-ink panel, N52 magnets in the four corners, three buttons (AI/power on GPIO4, UP on GPIO5, DOWN on GPIO6), a PDM microphone on GPIO19/20, a buzzer on GPIO48 and a USB-C port on TX43/RX44 used for recovery only.</desc>
+  <!-- Inlined into hardware.md (pymdownx.snippets), so colours come from the page: var(--ink-*) / var(--accent).
+       Fallback hexes are the paper scheme, for anyone opening the file on its own. Callouts are <g class="co">
+       so sticky.css can stage them in. -->
+  <style>
+    .sk-body { font-family: var(--md-text-font, Inter, system-ui, sans-serif); }
+    .sk-body .wire { stroke: var(--ink-1, #b9b9b4); stroke-width: 1.5; fill: none; }
+    .sk-body .body { stroke: var(--ink-2, #5c5c58); stroke-width: 2.5; fill: var(--ink-0, #fbfbf9); }
+    .sk-body .lbl { fill: var(--ink-2, #5c5c58); font-size: 13px; }
+    .sk-body .sub { fill: var(--ink-2, #5c5c58); font-size: 11px; }
+    .sk-body .cy { stroke: var(--accent, #0e8fa8); stroke-width: 1.5; fill: none; }
+    .sk-body .cyf { fill: var(--accent, #0e8fa8); }
+    .sk-body .cylbl { fill: var(--ink-3, #141414); font-size: 13px; font-weight: 600; }
+    .sk-body .pin { font-family: var(--md-code-font, ui-monospace, monospace); font-weight: 500; fill: var(--accent, #0e8fa8); }
+    .sk-body .mag { fill: var(--ink-1, #b9b9b4); }
+  </style>
+
+  <!-- body: 106 × 65.5 mm, landscape -->
+  <rect x="240" y="60" width="360" height="222" rx="14" class="body"/>
+  <text x="240" y="44" class="sub">106 × 65.5 × 7.3 mm · 70 g · IP40</text>
+
+  <!-- e-ink glass -->
+  <g class="co">
+    <rect x="262" y="80" width="316" height="182" rx="3" class="wire"/>
+    <text x="420" y="150" text-anchor="middle" class="lbl">800 × 480 · 4-gray e-ink</text>
+    <text x="420" y="168" text-anchor="middle" class="sub">GT911 touch on top</text>
+    <text x="420" y="214" text-anchor="middle" class="sub">inside: ESP32-S3 · 8 MB PSRAM · 32 MB flash</text>
+    <text x="420" y="230" text-anchor="middle" class="sub">SHT40 · IMU · RTC · fuel gauge · 750 mAh</text>
+  </g>
+
+  <!-- magnets -->
+  <g class="co">
+    <circle cx="256" cy="76" r="5" class="mag"/>
+    <circle cx="584" cy="76" r="5" class="mag"/>
+    <circle cx="256" cy="266" r="5" class="mag"/>
+    <circle cx="584" cy="266" r="5" class="mag"/>
+    <line x1="588" y1="73" x2="650" y2="46" class="wire"/>
+    <text x="656" y="43" class="lbl">N52 magnets ×4</text>
+    <text x="656" y="57" class="sub">grip through the case</text>
+  </g>
+
+  <!-- buttons on the edge -->
+  <g class="co">
+    <rect x="230" y="96" width="10" height="34" rx="3" class="cy"/>
+    <line x1="228" y1="113" x2="162" y2="113" class="cy"/>
+    <text x="156" y="103" text-anchor="end" class="cylbl">AI / power <tspan class="pin">GPIO4</tspan></text>
+    <text x="156" y="117" text-anchor="end" class="sub">press = ask · hold = home</text>
+    <text x="156" y="129" text-anchor="end" class="sub">EXT1 deep-sleep wake</text>
+  </g>
+  <g class="co">
+    <rect x="230" y="150" width="10" height="26" rx="3" class="cy"/>
+    <line x1="228" y1="163" x2="182" y2="163" class="cy"/>
+    <text x="176" y="167" text-anchor="end" class="cylbl">UP <tspan class="pin">GPIO5</tspan></text>
+    <rect x="230" y="192" width="10" height="26" rx="3" class="cy"/>
+    <line x1="228" y1="205" x2="182" y2="205" class="cy"/>
+    <text x="176" y="209" text-anchor="end" class="cylbl">DOWN <tspan class="pin">GPIO6</tspan></text>
+    <text x="176" y="228" text-anchor="end" class="sub">both held 1 s = unlock chord</text>
+  </g>
+
+  <!-- mic -->
+  <g class="co">
+    <circle cx="540" cy="70" r="3" class="cyf"/>
+    <line x1="544" y1="68" x2="650" y2="88" class="cy"/>
+    <text x="656" y="85" class="cylbl">PDM mic <tspan class="pin">GPIO19/20</tspan></text>
+    <text x="656" y="99" class="sub">rail-switched · dead when locked</text>
+  </g>
+
+  <!-- buzzer -->
+  <g class="co">
+    <circle cx="570" cy="276" r="4" class="cyf"/>
+    <line x1="575" y1="276" x2="650" y2="256" class="cy"/>
+    <text x="656" y="252" class="cylbl">buzzer <tspan class="pin">GPIO48</tspan></text>
+    <text x="656" y="266" class="sub">chimes, not speech</text>
+  </g>
+
+  <!-- USB, bottom edge -->
+  <g class="co">
+    <rect x="400" y="282" width="40" height="10" rx="4" class="cy"/>
+    <line x1="420" y1="294" x2="420" y2="316" class="cy"/>
+    <text x="420" y="334" text-anchor="middle" class="cylbl">USB-C <tspan class="pin">TX43 / RX44</tspan> — recovery only; I update over the air</text>
+  </g>
+</svg>
+
+<figcaption>Where things are. Cyan is a pin I drive; gray is what the case gives me for free.</figcaption>
+</figure>
+
 <table>
 <thead>
 <tr>
-<th></th>
-<th></th>
+<th>part</th>
+<th>what</th>
 </tr>
 </thead>
 <tbody>
@@ -1359,9 +1403,9 @@ coalescing rule, are in <a href="../cards/#refresh-policy">Cards → refresh pol
         </a>
       
       
-        <a class="sk-pager sk-pager--next" href="../case/" rel="next">
+        <a class="sk-pager sk-pager--next" href="../ARCHITECTURE/" rel="next">
           <span class="sk-pager__label">Next</span>
-          <span class="sk-pager__title">Pocket case</span>
+          <span class="sk-pager__title">How I work</span>
         </a>
       
     </nav>
@@ -1396,7 +1440,7 @@ coalescing rule, are in <a href="../cards/#refresh-policy">Cards → refresh pol
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.sections", "navigation.indexes", "toc.follow", "content.code.copy", "content.code.annotate", "content.tabs.link", "search.suggest", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../js/site.js"></script>
       

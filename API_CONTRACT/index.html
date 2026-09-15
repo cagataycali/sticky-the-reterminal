@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -114,9 +114,9 @@
         <li><a class="sk-nav__link" href="../install/" data-sk-pages="../install/">Install</a></li>
         <li><a class="sk-nav__link" href="../start/quickstart/" data-sk-pages="../start/quickstart/">Quickstart</a></li>
         <li><a class="sk-nav__link" href="../commands/" data-sk-pages="../commands/ ../cards/ ../cookbook/ ../stickyos/">The glass</a></li>
-        <li><a class="sk-nav__link" href="../hardware/" data-sk-pages="../hardware/ ../case/">Hardware</a></li>
+        <li><a class="sk-nav__link" href="../hardware/" data-sk-pages="../hardware/">Hardware</a></li>
         <li><a class="sk-nav__link is-active" href="../ARCHITECTURE/" data-sk-pages="../ARCHITECTURE/ ./ ../release/" aria-current="page">Architecture</a></li>
-        <li><a class="sk-nav__link" href="../troubleshooting/" data-sk-pages="../troubleshooting/ ../RECOVERY/ ../verdicts/">Troubleshooting</a></li>
+        <li><a class="sk-nav__link" href="../troubleshooting/" data-sk-pages="../troubleshooting/ ../RECOVERY/">Troubleshooting</a></li>
     </ul>
     <div class="sk-tools">
       
@@ -514,10 +514,6 @@
       
         
       
-        
-          
-        
-      
     
     
     
@@ -534,9 +530,8 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
-          <div class="md-nav__link md-nav__container">
-            <a href="../case/" class="md-nav__link ">
-              
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
   
   
   <span class="md-ellipsis">
@@ -550,14 +545,8 @@
   
   
 
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
+            <span class="md-nav__icon md-icon"></span>
+          </label>
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
@@ -596,8 +585,6 @@
     </li>
   
 
-              
-            
               
             
           </ul>
@@ -889,8 +876,6 @@
       
         
       
-        
-      
     
     
     
@@ -979,34 +964,6 @@
     
   
     Recovery
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../verdicts/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Probing without lying
   
 
     
@@ -1242,8 +1199,8 @@ The original trigger was <strong>direction-blind</strong> (<code>strcmp</code> d
   verdict: upgraded / DOWNGRADED / expired — never silence.</li>
 </ul>
 <h2 id="provisioning-portal-device-side-nicla-compatible">Provisioning portal (device-side, Nicla-compatible)<a class="headerlink" href="#provisioning-portal-device-side-nicla-compatible" title="Permanent link">·</a></h2>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>softAP  SSID tiny-XXXX (FNV-1a over the full MAC — a serial suffix collides), key &quot;tinysetup&quot;, 192.168.4.1
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>GET  /info   → {&quot;kind&quot;:&quot;reterminal-sticky&quot;,&quot;name&quot;,&quot;mac&quot;,&quot;version&quot;,&quot;provisioned&quot;}
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>softAP  SSID tiny-XXXX (FNV-1a over the full MAC — a serial suffix collides), key "tinysetup", 192.168.4.1
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>GET  /info   → {"kind":"reterminal-sticky","name","mac","version","provisioned"}
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>POST /setup  {device_id, token[, api, name], networks:[{ssid,key},…]}  → merge into NVS → 200 → reboot
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>GET  /       → minimal HTML form (manual fallback)
 </span></code></pre></div>
@@ -1253,7 +1210,7 @@ reaches a bricked-auth device with no cable. One audited hole stays honest
 here until fixed: the rescue card's text sits at 468 of a 512-byte buffer.</p>
 <h2 id="apiframes-the-remote-render-rail"><code>/api/frames</code> — the remote render rail<a class="headerlink" href="#apiframes-the-remote-render-rail" title="Permanent link">·</a></h2>
 <p>The dashboard rasterizes anim-grammar JSON
-(<a href="https://github.com/cagataycali/sticky-the-reterminal/blob/main/docs/research/EINK_ANIMATION.md">research note</a>) into exact-size frames for the <code>play</code>
+into exact-size frames for the <code>play</code>
 verb; the device stays a dumb pixel-pusher.</p>
 <table>
 <thead>
@@ -1376,7 +1333,7 @@ served <code>.sticky_auth.json</code>; fixed the same commit, secret rotated.</p
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.sections", "navigation.indexes", "toc.follow", "content.code.copy", "content.code.annotate", "content.tabs.link", "search.suggest", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../js/site.js"></script>
       

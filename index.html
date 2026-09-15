@@ -23,7 +23,7 @@
       
       
       <link rel="icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -31,7 +31,7 @@
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="assets/stylesheets/palette.ab4e12ef.min.css">
@@ -111,9 +111,9 @@
         <li><a class="sk-nav__link" href="install/" data-sk-pages="install/">Install</a></li>
         <li><a class="sk-nav__link" href="start/quickstart/" data-sk-pages="start/quickstart/">Quickstart</a></li>
         <li><a class="sk-nav__link" href="commands/" data-sk-pages="commands/ cards/ cookbook/ stickyos/">The glass</a></li>
-        <li><a class="sk-nav__link" href="hardware/" data-sk-pages="hardware/ case/">Hardware</a></li>
+        <li><a class="sk-nav__link" href="hardware/" data-sk-pages="hardware/">Hardware</a></li>
         <li><a class="sk-nav__link" href="ARCHITECTURE/" data-sk-pages="ARCHITECTURE/ API_CONTRACT/ release/">Architecture</a></li>
-        <li><a class="sk-nav__link" href="troubleshooting/" data-sk-pages="troubleshooting/ RECOVERY/ verdicts/">Troubleshooting</a></li>
+        <li><a class="sk-nav__link" href="troubleshooting/" data-sk-pages="troubleshooting/ RECOVERY/">Troubleshooting</a></li>
     </ul>
     <div class="sk-tools">
       
@@ -204,12 +204,12 @@
   <section class="l-hero l-reveal">
     <div class="l-copy">
       <h1 class="l-h1"><span>Hi.</span> <span>I'm Sticky.</span></h1>
-      <p class="l-lead">A 70-gram e-ink body for your tiny. Wi-Fi, a microphone, a touchscreen, three buttons and a buzzer. Firmware you can install from this page.</p>
+      <p class="l-lead">A 70-gram e-ink card your tiny lives in. Hold a button and ask; the answer is painted on glass that keeps its picture with the power off. Custom firmware for Seeed's reTerminal E1001 &mdash; installed from this page.</p>
       <p class="l-cta">
-        <a class="l-btn l-btn--primary" href="install/">Install in your browser</a>
-        <a class="l-btn" href="start/quickstart/">Read the manual</a>
+        <a class="l-btn l-btn--primary l-cta__install" href="install/"><span class="l-fine__desk">Install in your browser</span><span class="l-fine__phone">Install &mdash; from a laptop</span></a>
+        <a class="l-btn l-cta__read" href="start/quickstart/">Read the manual</a>
       </p>
-      <p class="l-fine"><span class="l-fine__desk">Chrome or Edge, one USB cable, ~5 minutes. Prefer a terminal?</span><span class="l-fine__phone">Installing needs a computer: Chrome or Edge, one USB cable, ~5 minutes. Read on here, flash from a desk.</span><code>curl -fsSL https://cagataycali.github.io/sticky-the-reterminal/install.sh | sh</code></p>
+      <p class="l-fine"><span class="l-fine__desk">Chrome or Edge, one USB cable, about five minutes. Prefer a terminal?</span><span class="l-fine__phone">Flashing needs a computer &mdash; Chrome or Edge, one USB cable, about five minutes. Read on here; install from a desk.</span><code>curl -fsSL https://cagataycali.github.io/sticky-the-reterminal/install.sh | sh</code></p>
     </div>
     <div class="l-device">
       <div class="bezel bezel--hero" aria-hidden="true">
@@ -338,7 +338,7 @@
       <li><b><span data-count="800">800</span>×<span data-count="480">480</span></b><span>pixels, four grays</span></li>
       <li><b><span data-count="3">3</span></b><span>buttons, AI · UP · DOWN</span></li>
       <li><b><span data-count="23">23</span></b><span>verbs I answer to</span></li>
-      <li><b><span data-count="0">0</span> mA</b><span>asleep, image held</span></li>
+      <li><b><span data-count="20">20</span> µA</b><span>asleep, image held</span></li>
     </ul>
   </section>
 
@@ -370,15 +370,15 @@
 
   <section class="l-manual l-reveal" id="manual">
     <div class="md-typeset"><h2 id="the-manual">The manual<a class="headerlink" href="#the-manual" title="Permanent link">·</a></h2>
-<p>Every page reads in about three minutes. Start with the
-<a href="start/quickstart/">Quickstart</a> — box to first card — or go straight to
-<a href="install/">Install</a>. The <a href="cards/">Cards</a> page shows every shape I can
-paint; <a href="commands/">Commands</a> lists the 23 verbs your tiny can send me;
-<a href="hardware/">Hardware</a> is my body, pin by pin, verified against the running
-silicon rather than a brochure.</p>
-<p>I was a Seeed reTerminal Sticky whose factory brain was dumped and replaced.
-Keep your own dump — <a href="RECOVERY/">Recovery</a> explains why forty-five minutes
-of <code>read-flash</code> is the best insurance a 32 MB flash can buy.</p></div>
+<p>Six pages, each read against running silicon &mdash; not a brochure.</p>
+<ul>
+<li><strong><a href="start/quickstart/">Quickstart</a></strong> &mdash; box to first card, in the order you will actually do it.</li>
+<li><strong><a href="install/">Install</a></strong> &mdash; the browser flasher, or one line of shell.</li>
+<li><strong><a href="cards/">Cards</a></strong> &mdash; the render grammar: eight shapes, one JSON spec, your taps back as events.</li>
+<li><strong><a href="commands/">Commands</a></strong> &mdash; the 23 verbs I answer to and what each returns.</li>
+<li><strong><a href="hardware/">Hardware</a></strong> &mdash; the pin map, the sensors, and which button wakes me.</li>
+<li><strong><a href="RECOVERY/">Recovery</a></strong> &mdash; I replaced the factory brain. This puts it back.</li>
+</ul></div>
   </section>
 
   <section class="l-install l-reveal" id="install">
@@ -763,10 +763,6 @@ of <code>read-flash</code> is the best insurance a 32 MB flash can buy.</p></div
       
         
       
-        
-          
-        
-      
     
     
     
@@ -783,9 +779,8 @@ of <code>read-flash</code> is the best insurance a 32 MB flash can buy.</p></div
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
-          <div class="md-nav__link md-nav__container">
-            <a href="case/" class="md-nav__link ">
-              
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
   
   
   <span class="md-ellipsis">
@@ -799,14 +794,8 @@ of <code>read-flash</code> is the best insurance a 32 MB flash can buy.</p></div
   
   
 
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
+            <span class="md-nav__icon md-icon"></span>
+          </label>
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
@@ -845,8 +834,6 @@ of <code>read-flash</code> is the best insurance a 32 MB flash can buy.</p></div
     </li>
   
 
-              
-            
               
             
           </ul>
@@ -1020,8 +1007,6 @@ of <code>read-flash</code> is the best insurance a 32 MB flash can buy.</p></div
       
         
       
-        
-      
     
     
     
@@ -1123,34 +1108,6 @@ of <code>read-flash</code> is the best insurance a 32 MB flash can buy.</p></div
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="verdicts/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Probing without lying
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -1220,7 +1177,7 @@ of <code>read-flash</code> is the best insurance a 32 MB flash can buy.</p></div
     
     
   
-      <script src="assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="js/site.js"></script>
       

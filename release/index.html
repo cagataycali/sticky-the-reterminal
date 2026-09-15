@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -114,9 +114,9 @@
         <li><a class="sk-nav__link" href="../install/" data-sk-pages="../install/">Install</a></li>
         <li><a class="sk-nav__link" href="../start/quickstart/" data-sk-pages="../start/quickstart/">Quickstart</a></li>
         <li><a class="sk-nav__link" href="../commands/" data-sk-pages="../commands/ ../cards/ ../cookbook/ ../stickyos/">The glass</a></li>
-        <li><a class="sk-nav__link" href="../hardware/" data-sk-pages="../hardware/ ../case/">Hardware</a></li>
+        <li><a class="sk-nav__link" href="../hardware/" data-sk-pages="../hardware/">Hardware</a></li>
         <li><a class="sk-nav__link is-active" href="../ARCHITECTURE/" data-sk-pages="../ARCHITECTURE/ ../API_CONTRACT/ ./" aria-current="page">Architecture</a></li>
-        <li><a class="sk-nav__link" href="../troubleshooting/" data-sk-pages="../troubleshooting/ ../RECOVERY/ ../verdicts/">Troubleshooting</a></li>
+        <li><a class="sk-nav__link" href="../troubleshooting/" data-sk-pages="../troubleshooting/ ../RECOVERY/">Troubleshooting</a></li>
     </ul>
     <div class="sk-tools">
       
@@ -514,10 +514,6 @@
       
         
       
-        
-          
-        
-      
     
     
     
@@ -534,9 +530,8 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
-          <div class="md-nav__link md-nav__container">
-            <a href="../case/" class="md-nav__link ">
-              
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
   
   
   <span class="md-ellipsis">
@@ -550,14 +545,8 @@
   
   
 
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
+            <span class="md-nav__icon md-icon"></span>
+          </label>
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
@@ -596,8 +585,6 @@
     </li>
   
 
-              
-            
               
             
           </ul>
@@ -900,8 +887,6 @@
       
         
       
-        
-      
     
     
     
@@ -990,34 +975,6 @@
     
   
     Recovery
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../verdicts/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Probing without lying
   
 
     
@@ -1160,8 +1117,8 @@
 
 
 <h1 id="build-release-discipline">Build &amp; release discipline<a class="headerlink" href="#build-release-discipline" title="Permanent link">·</a></h1>
-<p>Six rules, each purchased with a real incident on nights when two agent lanes
-shared one checkout. They are structural, not personal: the lane that wrote
+<p>Six rules, each purchased with a real incident on nights when two people
+shared one checkout. They are structural, not personal: the one who wrote
 up the <code>sed</code> hazard for others tripped it a day later.</p>
 <h2 id="1-publish-builds-happen-in-a-clean-detached-worktree">1. Publish builds happen in a clean detached worktree<a class="headerlink" href="#1-publish-builds-happen-in-a-clean-detached-worktree" title="Permanent link">·</a></h2>
 <p><code>git worktree add /tmp/sticky-&lt;label&gt; &lt;sha&gt;</code>, build there, never in the shared
@@ -1183,7 +1140,7 @@ time with a <code>-dirty</code> suffix, surfaced as <code>fw_commit</code> in ev
 <h2 id="4-never-publish-a-dirty-or-unpushed-fw_commit">4. Never publish a <code>-dirty</code> or unpushed <code>fw_commit</code><a class="headerlink" href="#4-never-publish-a-dirty-or-unpushed-fw_commit" title="Permanent link">·</a></h2>
 <p>The field caught its first offender within hours: the glass was running
 <code>9cdf43cf-dirty</code> — a fine ancestor plus an unknown delta, most plausibly a
-sibling lane's race hunk. An artifact that cannot name its exact tree cannot
+race hunk from the other editor. An artifact that cannot name its exact tree cannot
 be audited, rolled back to, or reproduced. Corollary from the same night:
 the sha is read from git but the source from the working tree — in a shared
 tree those are two different things, hence rule 1.</p>
@@ -1212,9 +1169,10 @@ Sharpened three times since:</p>
 <p>Heartbeat capabilities and the dispatcher's branch table must come from the
 same truth. They drifted twice — once in git (caught by review), once on glass
 (caught by probes). Advertise exactly what dispatches.</p>
-<p>Probe etiquette for the shared glass — announce, restore, stand down for a
-human, and attribute a tap before deferring to it — is in
-<a href="../verdicts/">Probing without lying to yourself</a>.</p>
+<p>Probe etiquette for a glass someone may be holding: <code>status</code> and <code>sensors</code>
+first (they don't repaint), look at <code>idle_for_s</code> and the last <code>ui_tap</code>
+before painting, restore home after. A reply is not a frame — only a
+<code>screenshot</code> proves pixels.</p>
 
 
 
@@ -1297,7 +1255,7 @@ human, and attribute a tap before deferring to it — is in
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.sections", "navigation.indexes", "toc.follow", "content.code.copy", "content.code.annotate", "content.tabs.link", "search.suggest", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../js/site.js"></script>
       

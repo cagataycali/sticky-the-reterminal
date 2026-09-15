@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://cagataycali.github.io/sticky-the-reterminal/ARCHITECTURE/">
       
       
-        <link rel="prev" href="../case/">
+        <link rel="prev" href="../hardware/">
       
       
         <link rel="next" href="../API_CONTRACT/">
@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -114,9 +114,9 @@
         <li><a class="sk-nav__link" href="../install/" data-sk-pages="../install/">Install</a></li>
         <li><a class="sk-nav__link" href="../start/quickstart/" data-sk-pages="../start/quickstart/">Quickstart</a></li>
         <li><a class="sk-nav__link" href="../commands/" data-sk-pages="../commands/ ../cards/ ../cookbook/ ../stickyos/">The glass</a></li>
-        <li><a class="sk-nav__link" href="../hardware/" data-sk-pages="../hardware/ ../case/">Hardware</a></li>
+        <li><a class="sk-nav__link" href="../hardware/" data-sk-pages="../hardware/">Hardware</a></li>
         <li><a class="sk-nav__link is-active" href="./" data-sk-pages="./ ../API_CONTRACT/ ../release/" aria-current="page">Architecture</a></li>
-        <li><a class="sk-nav__link" href="../troubleshooting/" data-sk-pages="../troubleshooting/ ../RECOVERY/ ../verdicts/">Troubleshooting</a></li>
+        <li><a class="sk-nav__link" href="../troubleshooting/" data-sk-pages="../troubleshooting/ ../RECOVERY/">Troubleshooting</a></li>
     </ul>
     <div class="sk-tools">
       
@@ -514,10 +514,6 @@
       
         
       
-        
-          
-        
-      
     
     
     
@@ -534,9 +530,8 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
-          <div class="md-nav__link md-nav__container">
-            <a href="../case/" class="md-nav__link ">
-              
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
   
   
   <span class="md-ellipsis">
@@ -550,14 +545,8 @@
   
   
 
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
+            <span class="md-nav__icon md-icon"></span>
+          </label>
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
@@ -596,8 +585,6 @@
     </li>
   
 
-              
-            
               
             
           </ul>
@@ -878,8 +865,6 @@
       
         
       
-        
-      
     
     
     
@@ -968,34 +953,6 @@
     
   
     Recovery
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../verdicts/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Probing without lying
   
 
     
@@ -1122,9 +1079,9 @@ Everything below describes the binary as built.</p>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>│  tiny_main.cpp — boot sequence, task wiring (board_init FIRST, always)      │
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>│                                                                             │
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>│  the tiny layer, as built (22 modules; design heritage: strands-nicla):       │
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│   ├─ tiny_config      NVS &quot;tiny&quot; namespace: networks[] roaming list,        │
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│   ├─ tiny_config      NVS "tiny" namespace: networks[] roaming list,        │
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>│   │                   device_id, token, api, name — merge() semantics       │
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>│   ├─ tiny_provision   first-boot softAP &quot;tiny-XXXX&quot;/&quot;tinysetup&quot;/192.168.4.1 │
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>│   ├─ tiny_provision   first-boot softAP "tiny-XXXX"/"tinysetup"/192.168.4.1 │
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>│   │                   same shapes as Nicla → iOS app onboards unchanged     │
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>│   ├─ tiny_wifi        join + roaming list; w+/w- truth for the glance bar   │
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>│   ├─ tiny_node        heartbeat 30 s (advertises caps = dispatch, parity    │
@@ -1141,7 +1098,7 @@ Everything below describes the binary as built.</p>
 </span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>│   ├─ tiny_lock        §11 pocket lockout: manual + IMU auto-entry, input    │
 </span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>│   │                   gates (touch/buttons/mic), status.locked truth        │
 </span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>│   ├─ tiny_orient      IMU classify → auto-rotate (settle before commit);    │
-</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>│   │                   its 1 Hz reader also feeds tiny_lock&#39;s walk detector  │
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>│   │                   its 1 Hz reader also feeds tiny_lock's walk detector  │
 </span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>│   ├─ tiny_audio       PDM capture → WAV in PSRAM (capture-entry gate, §11)  │
 </span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>│   │                   · buzzer chime, LEDC GPIO48 — chimes, never speech    │
 </span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>│   ├─ tiny_upload      POST /api/media via esp_http_client (PSRAM buffer)    │
@@ -1300,9 +1257,9 @@ skips the portal by writing the same NVS blob over serial
     
     <nav class="sk-footer__pager" aria-label="Neighbouring pages">
       
-        <a class="sk-pager sk-pager--prev" href="../case/" rel="prev">
+        <a class="sk-pager sk-pager--prev" href="../hardware/" rel="prev">
           <span class="sk-pager__label">Previous</span>
-          <span class="sk-pager__title">Pocket case</span>
+          <span class="sk-pager__title">Body</span>
         </a>
       
       
@@ -1343,7 +1300,7 @@ skips the portal by writing the same NVS blob over serial
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.sections", "navigation.indexes", "toc.follow", "content.code.copy", "content.code.annotate", "content.tabs.link", "search.suggest", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../js/site.js"></script>
       

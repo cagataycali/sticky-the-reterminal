@@ -1,4 +1,4 @@
-/* site.js — SHELL lane. Inner-page behaviour, ≤6 KB, no dependencies.
+/* site.js — inner-page behaviour, ≤6 KB, no dependencies.
    1. Keep the shared bar's active link honest across Material's instant navigation: the header is not
       re-rendered on a page swap, so the Jinja-rendered .is-active would go stale. Each link carries
       data-sk-pages = every page URL under that nav entry (relative to the page that rendered it).
@@ -25,7 +25,20 @@
     document.querySelectorAll('.md-typeset__scrollwrap').forEach(function (wrap) {
       var box = wrap.querySelector('.md-typeset__table'), t = wrap.querySelector('table');
       if (!box || !t) return;
-      if ((t.tHead && t.tHead.rows[0] ? t.tHead.rows[0].cells.length : 0) >= 3) wrap.classList.add("sk-wide");   // on the wrapper: a class on the table itself would defeat Material's table:not([class])
+      var heads = t.tHead && t.tHead.rows[0] ? Array.prototype.slice.call(t.tHead.rows[0].cells) : [];
+      if (heads.length >= 3) wrap.classList.add("sk-wide");   // on the wrapper: a class on the table itself would defeat Material's table:not([class])
+      // prose tables (3+ columns, some cell longer than a sentence) stack into one card per row on a phone —
+      // a verb table scrolled sideways folds its prose into 4-line cells nobody reads. Labels come from the header.
+      if (heads.length >= 3) {
+        var longest = 0;
+        Array.prototype.forEach.call(t.tBodies[0] ? t.tBodies[0].rows : [], function (r) {
+          Array.prototype.forEach.call(r.cells, function (c, i) {
+            longest = Math.max(longest, c.textContent.trim().length);
+            if (heads[i]) c.setAttribute('data-label', heads[i].textContent.trim());
+          });
+        });
+        if (longest > 48) wrap.classList.add('sk-stack');
+      }
       var update = function () { wrap.classList.toggle('has-more', box.scrollWidth - box.clientWidth - box.scrollLeft > 8); };
       box.addEventListener('scroll', update, { passive: true }); window.addEventListener('resize', update, { passive: true }); update();
     });

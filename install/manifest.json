@@ -1,6 +1,6 @@
 {
   "name": "Sticky",
-  "version": "0.27.0-u2",
+  "version": "0.28.0",
   "new_install_prompt_erase": true,
   "new_install_improv_wait_time": 0,
   "builds": [

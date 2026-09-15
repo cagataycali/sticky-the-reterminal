@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -114,9 +114,9 @@
         <li><a class="sk-nav__link" href="../install/" data-sk-pages="../install/">Install</a></li>
         <li><a class="sk-nav__link" href="../start/quickstart/" data-sk-pages="../start/quickstart/">Quickstart</a></li>
         <li><a class="sk-nav__link is-active" href="../commands/" data-sk-pages="../commands/ ./ ../cookbook/ ../stickyos/" aria-current="page">The glass</a></li>
-        <li><a class="sk-nav__link" href="../hardware/" data-sk-pages="../hardware/ ../case/">Hardware</a></li>
+        <li><a class="sk-nav__link" href="../hardware/" data-sk-pages="../hardware/">Hardware</a></li>
         <li><a class="sk-nav__link" href="../ARCHITECTURE/" data-sk-pages="../ARCHITECTURE/ ../API_CONTRACT/ ../release/">Architecture</a></li>
-        <li><a class="sk-nav__link" href="../troubleshooting/" data-sk-pages="../troubleshooting/ ../RECOVERY/ ../verdicts/">Troubleshooting</a></li>
+        <li><a class="sk-nav__link" href="../troubleshooting/" data-sk-pages="../troubleshooting/ ../RECOVERY/">Troubleshooting</a></li>
     </ul>
     <div class="sk-tools">
       
@@ -726,10 +726,6 @@
       
         
       
-        
-          
-        
-      
     
     
     
@@ -746,9 +742,8 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
-          <div class="md-nav__link md-nav__container">
-            <a href="../case/" class="md-nav__link ">
-              
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
   
   
   <span class="md-ellipsis">
@@ -762,14 +757,8 @@
   
   
 
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
+            <span class="md-nav__icon md-icon"></span>
+          </label>
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
@@ -808,8 +797,6 @@
     </li>
   
 
-              
-            
               
             
           </ul>
@@ -983,8 +970,6 @@
       
         
       
-        
-      
     
     
     
@@ -1073,34 +1058,6 @@
     
   
     Recovery
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../verdicts/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Probing without lying
   
 
     
@@ -1330,14 +1287,95 @@
 screen — one renderer draws them all from JSON. The rule inherited from
 tiny's <code>render_ui</code>: <strong>no code ships in a card, only data.</strong> I render each
 type natively, 800×480, four grays.</p>
-<p><img alt="anatomy of a card" src="../assets/card-anatomy.svg" /></p>
+<figure class="sk-diagram sk-diagram--card">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 330" class="sk-diagram__svg sk-ca" role="img" aria-labelledby="sk-ca-title sk-ca-desc">
+  <title id="sk-ca-title">Anatomy of a card</title>
+  <desc id="sk-ca-desc">A card on the glass has four bands: a title bar with the glance cluster (clock, battery, Wi-Fi), a body that wraps and scrolls, up to four buttons that answer upstream as ui_tap, and a footer carrying the card id. A tap on Done becomes ui_tap card_id dinner button_id done, reaches the owner's activity feed, and the agent answers with the next card.</desc>
+  <!-- Inlined into cards.md (pymdownx.snippets). Page ink/accent via CSS vars; <g class="co"> bands stage in top to bottom
+       (sticky.css). Fallback hexes = paper scheme for anyone opening the file alone. -->
+  <style>
+    .sk-ca { font-family: var(--md-text-font, Inter, system-ui, sans-serif); }
+    .sk-ca .panel { fill: #fff; stroke: var(--ink-3, #141414); stroke-width: 2; }
+    .sk-ca .ink { fill: #141414; font-size: 13px; }
+    .sk-ca .ink-dim { fill: #6b6b66; font-size: 10px; }
+    .sk-ca .glass-line { stroke: #141414; stroke-width: 1.5; }
+    .sk-ca .btn { fill: none; stroke: #141414; stroke-width: 1.5; }
+    .sk-ca .band { fill: var(--accent, #0e8fa8); fill-opacity: .08; stroke: var(--accent, #0e8fa8); stroke-width: 1.25; stroke-dasharray: 3 3; }
+    .sk-ca .lead { stroke: var(--accent, #0e8fa8); stroke-width: 1.25; fill: none; }
+    .sk-ca .lbl { fill: var(--accent, #0e8fa8); font-size: 13px; font-weight: 650; }
+    .sk-ca .sub { fill: var(--ink-2, #5c5c58); font-size: 11px; }
+    .sk-ca .mono { font-family: var(--md-code-font, ui-monospace, monospace); font-size: 11px; fill: var(--ink-3, #141414); }
+    .sk-ca .chip { fill: none; stroke: var(--ink-3, #141414); stroke-width: 1.5; }
+    .sk-ca .chip-t { fill: var(--ink-3, #141414); font-size: 11px; }
+    .sk-ca .say { fill: var(--ink-3, #141414); font-size: 13px; font-weight: 650; letter-spacing: -.01em; }
+  </style>
+
+  <!-- the glass: a real card as it paints, 4:2.4 -->
+  <g class="co">
+    <rect x="16" y="16" width="380" height="228" rx="6" class="panel"/>
+    <text x="30" y="40" class="ink" font-weight="600">Dinner</text>
+    <text x="300" y="40" class="ink-dim">19:04 · 84% · w+</text>
+    <line x1="30" y1="50" x2="382" y2="50" class="glass-line"/>
+    <text x="30" y="78" class="ink">Back at 19:30.</text>
+    <text x="30" y="98" class="ink">Pizza in the fridge.</text>
+    <rect x="30" y="170" width="166" height="30" rx="6" class="btn"/>
+    <text x="113" y="190" text-anchor="middle" class="ink">Done</text>
+    <rect x="216" y="170" width="166" height="30" rx="6" class="btn"/>
+    <text x="299" y="190" text-anchor="middle" class="ink">Later</text>
+    <text x="30" y="230" class="ink-dim">from tiny · card_id=dinner</text>
+  </g>
+
+  <!-- title band -->
+  <g class="co">
+    <rect x="24" y="24" width="364" height="30" class="band"/>
+    <line x1="388" y1="39" x2="430" y2="39" class="lead"/>
+    <text x="436" y="36" class="lbl">title</text>
+    <text x="436" y="50" class="sub">+ glance cluster: clock · battery · Wi-Fi</text>
+  </g>
+  <!-- body band -->
+  <g class="co">
+    <rect x="24" y="60" width="364" height="100" class="band"/>
+    <line x1="388" y1="110" x2="430" y2="110" class="lead"/>
+    <text x="436" y="107" class="lbl">body</text>
+    <text x="436" y="121" class="sub">wraps · scrolls · [cut] past the fold</text>
+  </g>
+  <!-- buttons band -->
+  <g class="co">
+    <rect x="24" y="164" width="364" height="42" class="band"/>
+    <line x1="388" y1="185" x2="430" y2="185" class="lead"/>
+    <text x="436" y="182" class="lbl">buttons</text>
+    <text x="436" y="196" class="sub">≤ 4 · each one a touch region</text>
+  </g>
+  <!-- footer band -->
+  <g class="co">
+    <rect x="24" y="214" width="364" height="24" class="band"/>
+    <line x1="388" y1="226" x2="430" y2="226" class="lead"/>
+    <text x="436" y="223" class="lbl">footer</text>
+    <text x="436" y="237" class="sub">card_id comes back in every receipt</text>
+  </g>
+
+  <!-- the round trip -->
+  <g class="co">
+    <text x="16" y="276" class="sub">a tap on</text>
+    <rect x="66" y="263" width="46" height="18" rx="4" class="chip"/>
+    <text x="89" y="276" text-anchor="middle" class="chip-t">Done</text>
+    <text x="120" y="276" class="sub">→</text>
+    <text x="136" y="276" class="mono">ui_tap {card_id:"dinner", button_id:"done"}</text>
+    <text x="136" y="294" class="sub">→ your activity feed → the agent answers with the next card</text>
+    <text x="16" y="322" class="say">The screen is a conversation.</text>
+  </g>
+</svg>
+
+<figcaption>Four bands, one JSON object. The accent outlines are the fields; everything in black is what actually paints.</figcaption>
+</figure>
+
 <p>Every card can carry: <code>title</code>, <code>card_id</code> (echoed back in receipts — it's
 how you know what's actually on my glass), <code>footer</code>, and <code>buttons</code>.
 A tap on a button goes upstream as a <code>ui_tap</code> event; the agent answers
 with the next card. The screen is a conversation.</p>
 <h2 id="the-types-i-render">The types I render<a class="headerlink" href="#the-types-i-render" title="Permanent link">·</a></h2>
 <h3 id="text">text<a class="headerlink" href="#text" title="Permanent link">·</a></h3>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;text&quot;</span><span class="p">,</span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Dinner&quot;</span><span class="p">,</span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="s2">&quot;Back at 19:30 — pizza in fridge&quot;</span><span class="p">}</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"text"</span><span class="p">,</span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"Dinner"</span><span class="p">,</span><span class="nt">"body"</span><span class="p">:</span><span class="s2">"Back at 19:30 — pizza in fridge"</span><span class="p">}</span>
 </span></code></pre></div>
 <p>Word-wrapped. An unknown type degrades to a labelled error card, never a
 blank panel. A card without an id gets a stable one hashed from its content
@@ -1348,14 +1386,14 @@ a visible <code>[cut]</code>.</p>
 <figcaption>A <code>text</code> card with a footer and two buttons — each button is a touch region that answers upstream as <code>ui_tap</code>.</figcaption>
 </figure>
 <h3 id="list">list<a class="headerlink" href="#list" title="Permanent link">·</a></h3>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;list&quot;</span><span class="p">,</span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Groceries&quot;</span><span class="p">,</span><span class="nt">&quot;items&quot;</span><span class="p">:[</span><span class="s2">&quot;milk&quot;</span><span class="p">,</span><span class="s2">&quot;eggs&quot;</span><span class="p">,</span><span class="s2">&quot;bread&quot;</span><span class="p">]}</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"list"</span><span class="p">,</span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"Groceries"</span><span class="p">,</span><span class="nt">"items"</span><span class="p">:[</span><span class="s2">"milk"</span><span class="p">,</span><span class="s2">"eggs"</span><span class="p">,</span><span class="s2">"bread"</span><span class="p">]}</span>
 </span></code></pre></div>
 <figure class="glass">
 <div class="glass__bezel"><img src="../img/glass/card-list.png" alt="A list of seven — long items wrap, the footer stays pinned." width="800" height="480" loading="lazy" decoding="async"></div>
 <figcaption>A <code>list</code> of seven — long items wrap, the footer stays pinned.</figcaption>
 </figure>
 <h3 id="kv">kv<a class="headerlink" href="#kv" title="Permanent link">·</a></h3>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;kv&quot;</span><span class="p">,</span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Status&quot;</span><span class="p">,</span><span class="nt">&quot;rows&quot;</span><span class="p">:{</span><span class="nt">&quot;in&quot;</span><span class="p">:</span><span class="s2">&quot;19:30&quot;</span><span class="p">,</span><span class="nt">&quot;battery&quot;</span><span class="p">:</span><span class="s2">&quot;84%&quot;</span><span class="p">}}</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"kv"</span><span class="p">,</span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"Status"</span><span class="p">,</span><span class="nt">"rows"</span><span class="p">:{</span><span class="nt">"in"</span><span class="p">:</span><span class="s2">"19:30"</span><span class="p">,</span><span class="nt">"battery"</span><span class="p">:</span><span class="s2">"84%"</span><span class="p">}}</span>
 </span></code></pre></div>
 <p><code>rows</code> takes an object or ordered <code>[["k","v"],…]</code> pairs.</p>
 <figure class="glass">
@@ -1363,7 +1401,7 @@ a visible <code>[cut]</code>.</p>
 <figcaption>A <code>kv</code> card with live Open-Meteo numbers — keys in gray, values in black, one hairline per row.</figcaption>
 </figure>
 <h3 id="composite">composite<a class="headerlink" href="#composite" title="Permanent link">·</a></h3>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;composite&quot;</span><span class="p">,</span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Morning&quot;</span><span class="p">,</span><span class="nt">&quot;parts&quot;</span><span class="p">:[{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;kv&quot;</span><span class="p">},{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;list&quot;</span><span class="p">}]}</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"composite"</span><span class="p">,</span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"Morning"</span><span class="p">,</span><span class="nt">"parts"</span><span class="p">:[{</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"kv"</span><span class="p">},{</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"list"</span><span class="p">}]}</span>
 </span></code></pre></div>
 <p>Up to 4 parts sharing the body evenly. More than that is illegible at my
 glyph size, so I refuse rather than squint.</p>
@@ -1372,7 +1410,7 @@ glyph size, so I refuse rather than squint.</p>
 <figcaption>A <code>composite</code> of a <code>kv</code> and a <code>list</code> sharing the body — two parts, one footer.</figcaption>
 </figure>
 <h3 id="qr">qr<a class="headerlink" href="#qr" title="Permanent link">·</a></h3>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;qr&quot;</span><span class="p">,</span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="s2">&quot;WIFI:S:tiny-1a2b;T:WPA;P:tinysetup;;&quot;</span><span class="p">,</span><span class="nt">&quot;caption&quot;</span><span class="p">:</span><span class="s2">&quot;scan to join&quot;</span><span class="p">}</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"qr"</span><span class="p">,</span><span class="nt">"text"</span><span class="p">:</span><span class="s2">"WIFI:S:tiny-1a2b;T:WPA;P:tinysetup;;"</span><span class="p">,</span><span class="nt">"caption"</span><span class="p">:</span><span class="s2">"scan to join"</span><span class="p">}</span>
 </span></code></pre></div>
 <p>Exists because typing a Wi-Fi password <em>off</em> a 4-gray panel is the worst
 part of setup. An unscannable QR looks exactly like a scannable one, so:
@@ -1384,7 +1422,7 @@ count named, not encoded wrong.</p>
 <figcaption>A <code>qr</code> card at 3+ px per module — this one scans; when one would not, I say so instead of painting it.</figcaption>
 </figure>
 <h3 id="chart">chart<a class="headerlink" href="#chart" title="Permanent link">·</a></h3>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;chart&quot;</span><span class="p">,</span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="s2">&quot;Battery&quot;</span><span class="p">,</span><span class="nt">&quot;data&quot;</span><span class="p">:[</span><span class="mi">92</span><span class="p">,</span><span class="mi">90</span><span class="p">,</span><span class="mi">88</span><span class="p">,</span><span class="mi">85</span><span class="p">,</span><span class="mi">84</span><span class="p">],</span><span class="nt">&quot;style&quot;</span><span class="p">:</span><span class="s2">&quot;line&quot;</span><span class="p">,</span><span class="nt">&quot;y_min&quot;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">&quot;y_max&quot;</span><span class="p">:</span><span class="mi">100</span><span class="p">}</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"chart"</span><span class="p">,</span><span class="nt">"title"</span><span class="p">:</span><span class="s2">"Battery"</span><span class="p">,</span><span class="nt">"data"</span><span class="p">:[</span><span class="mi">92</span><span class="p">,</span><span class="mi">90</span><span class="p">,</span><span class="mi">88</span><span class="p">,</span><span class="mi">85</span><span class="p">,</span><span class="mi">84</span><span class="p">],</span><span class="nt">"style"</span><span class="p">:</span><span class="s2">"line"</span><span class="p">,</span><span class="nt">"y_min"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nt">"y_max"</span><span class="p">:</span><span class="mi">100</span><span class="p">}</span>
 </span></code></pre></div>
 <p>Line or bar, scale drawn on the axis — a chart that hides its scale is a
 mood, not a measurement. E-ink tuning: 2 px stroke (1 px ghosts), 160-point
@@ -1394,9 +1432,9 @@ cap. Fewer than 2 points gets an honest void.</p>
 <figcaption>A <code>chart</code> of 24 hourly points with its y-axis drawn — 15 to 30 °C, not autoscaled to look dramatic.</figcaption>
 </figure>
 <h3 id="chat">chat<a class="headerlink" href="#chat" title="Permanent link">·</a></h3>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;chat&quot;</span><span class="p">,</span><span class="nt">&quot;card_id&quot;</span><span class="p">:</span><span class="s2">&quot;ask&quot;</span><span class="p">,</span><span class="nt">&quot;messages&quot;</span><span class="p">:[</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="p">{</span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="s2">&quot;user&quot;</span><span class="p">,</span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="s2">&quot;what&#39;s the weather&quot;</span><span class="p">},</span>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="p">{</span><span class="nt">&quot;role&quot;</span><span class="p">:</span><span class="s2">&quot;assistant&quot;</span><span class="p">,</span><span class="nt">&quot;body&quot;</span><span class="p">:</span><span class="s2">&quot;Sunny, 24C.&quot;</span><span class="p">}</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"chat"</span><span class="p">,</span><span class="nt">"card_id"</span><span class="p">:</span><span class="s2">"ask"</span><span class="p">,</span><span class="nt">"messages"</span><span class="p">:[</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="p">{</span><span class="nt">"role"</span><span class="p">:</span><span class="s2">"user"</span><span class="p">,</span><span class="nt">"body"</span><span class="p">:</span><span class="s2">"what's the weather"</span><span class="p">},</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span><span class="p">{</span><span class="nt">"role"</span><span class="p">:</span><span class="s2">"assistant"</span><span class="p">,</span><span class="nt">"body"</span><span class="p">:</span><span class="s2">"Sunny, 24C."</span><span class="p">}</span>
 </span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">]}</span>
 </span></code></pre></div>
 <p>The phone conversation in four grays: yours filled and right-aligned, the
@@ -1408,7 +1446,7 @@ full refresh. "Yes." is a chip, not a banner.</p>
 <figcaption>A <code>chat</code> card — your turns filled and right-aligned, mine outlined on the left.</figcaption>
 </figure>
 <h3 id="image">image<a class="headerlink" href="#image" title="Permanent link">·</a></h3>
-<div class="language-json highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="s2">&quot;image&quot;</span><span class="p">,</span><span class="nt">&quot;card_id&quot;</span><span class="p">:</span><span class="s2">&quot;my-frame&quot;</span><span class="p">,</span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="s2">&quot;https://…/portrait_1bit.bin&quot;</span><span class="p">}</span>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"image"</span><span class="p">,</span><span class="nt">"card_id"</span><span class="p">:</span><span class="s2">"my-frame"</span><span class="p">,</span><span class="nt">"url"</span><span class="p">:</span><span class="s2">"https://…/portrait_1bit.bin"</span><span class="p">}</span>
 </span></code></pre></div>
 <p>Server-rendered pixels: the backend dithers, I fetch the exact-size raw
 frame and blit it. First frame screenshotted back and diffed against the
@@ -1466,9 +1504,7 @@ the whole model (<code>offset</code> / <code>content_h</code> / <code>view_h</co
 favourite spec line: a goodbye card survives deep sleep at <strong>10–20 µA</strong>.</p>
 <h2 id="whats-not-a-card">What's not a card<a class="headerlink" href="#whats-not-a-card" title="Permanent link">·</a></h2>
 <p>Frame sequences graduated to the <a href="../commands/#the-verbs"><code>play</code> verb</a>.
-Recipes for all of the above are in the <a href="../cookbook/">Cookbook</a>; the
-renderer's full history, convictions and retractions included, is in the
-<a href="https://github.com/cagataycali/sticky-the-reterminal/blob/main/archive/docs/JOURNAL.md">journal</a>.</p>
+Recipes for all of the above are in the <a href="../cookbook/">Cookbook</a>.</p>
 
 
 
@@ -1551,7 +1587,7 @@ renderer's full history, convictions and retractions included, is in the
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.sections", "navigation.indexes", "toc.follow", "content.code.copy", "content.code.annotate", "content.tabs.link", "search.suggest", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../js/site.js"></script>
       

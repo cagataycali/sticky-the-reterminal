@@ -25,7 +25,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -114,9 +114,9 @@
         <li><a class="sk-nav__link" href="../install/" data-sk-pages="../install/">Install</a></li>
         <li><a class="sk-nav__link" href="../start/quickstart/" data-sk-pages="../start/quickstart/">Quickstart</a></li>
         <li><a class="sk-nav__link is-active" href="./" data-sk-pages="./ ../cards/ ../cookbook/ ../stickyos/" aria-current="page">The glass</a></li>
-        <li><a class="sk-nav__link" href="../hardware/" data-sk-pages="../hardware/ ../case/">Hardware</a></li>
+        <li><a class="sk-nav__link" href="../hardware/" data-sk-pages="../hardware/">Hardware</a></li>
         <li><a class="sk-nav__link" href="../ARCHITECTURE/" data-sk-pages="../ARCHITECTURE/ ../API_CONTRACT/ ../release/">Architecture</a></li>
-        <li><a class="sk-nav__link" href="../troubleshooting/" data-sk-pages="../troubleshooting/ ../RECOVERY/ ../verdicts/">Troubleshooting</a></li>
+        <li><a class="sk-nav__link" href="../troubleshooting/" data-sk-pages="../troubleshooting/ ../RECOVERY/">Troubleshooting</a></li>
     </ul>
     <div class="sk-tools">
       
@@ -610,10 +610,6 @@
       
         
       
-        
-          
-        
-      
     
     
     
@@ -630,9 +626,8 @@
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
-          <div class="md-nav__link md-nav__container">
-            <a href="../case/" class="md-nav__link ">
-              
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
   
   
   <span class="md-ellipsis">
@@ -646,14 +641,8 @@
   
   
 
-            </a>
-            
-              
-              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
-                <span class="md-nav__icon md-icon"></span>
-              </label>
-            
-          </div>
+            <span class="md-nav__icon md-icon"></span>
+          </label>
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
@@ -692,8 +681,6 @@
     </li>
   
 
-              
-            
               
             
           </ul>
@@ -867,8 +854,6 @@
       
         
       
-        
-      
     
     
     
@@ -957,34 +942,6 @@
     
   
     Recovery
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../verdicts/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Probing without lying
   
 
     
@@ -1098,7 +1055,7 @@
 <strong>advertises what I implement</strong> (one drift, below). Envelopes are
 <code>{type:"invoke", prompt:"&lt;verb&gt; [args]"}</code>; I always reply — unknown input gets
 the help string, never silence. From any tiny surface:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>use_device invoke → prompt: &quot;status&quot;
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>use_device invoke → prompt: "status"
 </span></code></pre></div>
 <figure class="glass">
 <div class="glass__bezel"><img src="../img/glass/say.png" alt="say — one text card titled *tiny*, an ack chime, no agent turn. What you sent is exactly what I painted." width="800" height="480" loading="eager" decoding="async"></div>
@@ -1249,13 +1206,12 @@ the help string, never silence. From any tiny surface:</p>
 </tr>
 </tbody>
 </table>
-<div class="admonition warning">
-<p class="admonition-title">One drift, on the record</p>
-<p><strong>23 dispatched, 22 advertised.</strong> <code>sd</code> is missing from the heartbeat
-<code>caps[]</code> array (<code>firmware/main/tiny_node.cpp</code>), so nothing offers it — send
-it anyway, it answers. The help string also still names 0.14-era verbs.
-Every count in these docs is the dispatch table's 23. Written here until a
-firmware release closes the gap.</p>
+<div class="admonition note">
+<p class="admonition-title">Parity, restored in 0.28.0</p>
+<p><strong>23 dispatched, 23 advertised.</strong> Between 0.26.0 and 0.27.x <code>sd</code> dispatched
+but was missing from the heartbeat <code>caps[]</code> array, so nothing offered it.
+0.28.0 (grammar v12) added it. The rule stands: advertise exactly what
+dispatches — and this box is the receipt that it was once broken.</p>
 </div>
 <h2 id="two-status-fields-worth-knowing">Two <code>status</code> fields worth knowing<a class="headerlink" href="#two-status-fields-worth-knowing" title="Permanent link">·</a></h2>
 <ul>
@@ -1359,7 +1315,7 @@ Exact shapes: <a href="../API_CONTRACT/">API contract</a>.</p>
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.instant.progress", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "navigation.sections", "navigation.indexes", "toc.follow", "content.code.copy", "content.code.annotate", "content.tabs.link", "search.suggest", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../js/site.js"></script>
       

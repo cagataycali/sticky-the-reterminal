@@ -1,40 +1,50 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 170" font-family="Inter, -apple-system, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 150" class="sk-diagram__svg sk-fb" role="img" aria-labelledby="sk-fb-title sk-fb-desc">
+  <title id="sk-fb-title">First boot, left to right</title>
+  <desc id="sk-fb-desc">Power on reads NVS; with no token the portal opens as access point tiny-XXXX with a QR on the glass; the form or the iOS app POSTs token and Wi-Fi to /setup, which writes NVS and reboots; then Sticky is alive, heartbeating every 30 seconds and polling every 5.</desc>
+  <!-- Inlined into start/quickstart.md (pymdownx.snippets): colours are the page's ink/accent, stages are <g class="co"> so
+       sticky.css stages them in left to right. Fallback hexes = paper scheme for anyone opening the file on its own. -->
+  <style>
+    .sk-fb { font-family: var(--md-text-font, Inter, system-ui, sans-serif); }
+    .sk-fb .wire { stroke: var(--ink-1, #b9b9b4); stroke-width: 1.5; fill: none; }
+    .sk-fb .box { fill: var(--ink-0, #fbfbf9); stroke: var(--ink-1, #b9b9b4); stroke-width: 1.5; }
+    .sk-fb .lbl { fill: var(--ink-3, #141414); font-size: 13px; font-weight: 600; }
+    .sk-fb .sub { fill: var(--ink-2, #5c5c58); font-size: 11px; }
+    .sk-fb .me { stroke: var(--accent, #0e8fa8); stroke-width: 2; }
+    .sk-fb .melbl { fill: var(--accent, #0e8fa8); }
+    .sk-fb .arr { fill: var(--ink-1, #b9b9b4); }
+    .sk-fb .arr-me { fill: var(--accent, #0e8fa8); }
+    .sk-fb .mono { font-family: var(--md-code-font, ui-monospace, monospace); font-weight: 500; }
+  </style>
   <defs>
-    <style>
-      .wire { stroke:#8a8a8a; stroke-width:1.5; fill:none; }
-      .box  { fill:none; stroke:#8a8a8a; stroke-width:1.5; }
-      .lbl  { fill:#8a8a8a; font-size:13px; }
-      .sub  { fill:#8a8a8a; font-size:10px; opacity:.75; }
-      .me   { stroke:#00b8c8; stroke-width:2.5; }
-      .melbl{ fill:#00b8c8; font-weight:600; }
-      .arr  { fill:#8a8a8a; }
-    </style>
-    <marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
-      <path d="M0,0 L8,4 L0,8 z" class="arr"/>
-    </marker>
+    <marker id="sk-fb-a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" class="arr"/></marker>
+    <marker id="sk-fb-b" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" class="arr-me"/></marker>
   </defs>
 
-  <rect x="16"  y="55" width="120" height="60" rx="8" class="box"/>
-  <text x="76" y="80" text-anchor="middle" class="lbl">power on</text>
-  <text x="76" y="97" text-anchor="middle" class="sub">latch held, NVS read</text>
-
-  <line x1="136" y1="85" x2="196" y2="85" class="wire" marker-end="url(#a)"/>
-  <text x="166" y="75" text-anchor="middle" class="sub">no token?</text>
-
-  <rect x="200" y="55" width="150" height="60" rx="8" class="box"/>
-  <text x="275" y="80" text-anchor="middle" class="lbl">portal opens</text>
-  <text x="275" y="97" text-anchor="middle" class="sub">AP tiny-XXXX · QR on glass</text>
-
-  <line x1="350" y1="85" x2="410" y2="85" class="wire" marker-end="url(#a)"/>
-  <text x="380" y="75" text-anchor="middle" class="sub">iOS app</text>
-
-  <rect x="414" y="55" width="140" height="60" rx="8" class="box"/>
-  <text x="484" y="80" text-anchor="middle" class="lbl">POST /setup</text>
-  <text x="484" y="97" text-anchor="middle" class="sub">token + Wi-Fi → NVS, reboot</text>
-
-  <line x1="554" y1="85" x2="614" y2="85" class="wire me" marker-end="url(#a)"/>
-
-  <rect x="618" y="55" width="126" height="60" rx="8" class="box me"/>
-  <text x="681" y="80" text-anchor="middle" class="lbl melbl">alive</text>
-  <text x="681" y="97" text-anchor="middle" class="sub">heartbeat 30s · poll 5s</text>
+  <g class="co">
+    <rect x="16" y="45" width="156" height="60" rx="10" class="box"/>
+    <text x="94" y="71" text-anchor="middle" class="lbl">power on</text>
+    <text x="94" y="88" text-anchor="middle" class="sub">latch held · NVS read</text>
+  </g>
+  <g class="co">
+    <line x1="172" y1="75" x2="240" y2="75" class="wire" marker-end="url(#sk-fb-a)"/>
+    <text x="208" y="36" text-anchor="middle" class="sub">no token?</text>
+    <rect x="244" y="45" width="156" height="60" rx="10" class="box"/>
+    <text x="322" y="71" text-anchor="middle" class="lbl">portal opens</text>
+    <text x="322" y="88" text-anchor="middle" class="sub">AP <tspan class="mono">tiny-XXXX</tspan> · QR on glass</text>
+  </g>
+  <g class="co">
+    <line x1="400" y1="75" x2="468" y2="75" class="wire" marker-end="url(#sk-fb-a)"/>
+    <text x="436" y="36" text-anchor="middle" class="sub">form or iOS app</text>
+    <rect x="472" y="45" width="156" height="60" rx="10" class="box"/>
+    <text x="550" y="71" text-anchor="middle" class="lbl mono">POST /setup</text>
+    <text x="550" y="88" text-anchor="middle" class="sub">token + Wi-Fi → NVS · reboot</text>
+  </g>
+  <g class="co">
+    <line x1="628" y1="75" x2="696" y2="75" class="wire me" marker-end="url(#sk-fb-b)"/>
+    <text x="662" y="36" text-anchor="middle" class="sub">joins your Wi-Fi</text>
+    <rect x="700" y="45" width="156" height="60" rx="10" class="box me"/>
+    <text x="778" y="71" text-anchor="middle" class="lbl melbl">alive</text>
+    <text x="778" y="88" text-anchor="middle" class="sub">heartbeat 30 s · poll 5 s</text>
+  </g>
+  <text x="16" y="132" class="sub">Everything left of the cyan box happens once. After that, the cable is for emergencies.</text>
 </svg>

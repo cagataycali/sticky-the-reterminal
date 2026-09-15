@@ -1,10 +1,15 @@
-// landing.js — LANDING lane. Reveal-on-scroll + pinned frame crossfade. ~1 KB, no deps.
+// landing.js — reveal-on-scroll + pinned frame crossfade. ~1 KB, no deps.
 // transform/opacity only; prefers-reduced-motion → sections are static via CSS, we only mark them .in.
 (function () {
   var root = document.getElementById('landing');
   if (!root) return;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var reveals = root.querySelectorAll('.l-reveal');
+  // an e-ink refresh on a bezel: restart the .is-refreshing animation (landing.css sk-eink, 400 ms) — no-op under reduced motion
+  var refresh = function (el) {
+    var b = el.closest ? el.closest('.bezel') : null; if (!b || reduce) return;
+    b.classList.remove('is-refreshing'); void b.offsetWidth; b.classList.add('is-refreshing');
+  };
   if (!('IntersectionObserver' in window) || reduce) {
     reveals.forEach(function (el) { el.classList.add('in'); });
   } else {
@@ -18,7 +23,8 @@
     var frames = sec.querySelectorAll('.frame');
     var steps = sec.querySelectorAll('[data-frame]');
     if (!frames.length || !steps.length) return;
-    var show = function (i) { frames.forEach(function (f, k) { f.classList.toggle('is-on', k === i); }); };
+    var cur = 0;
+    var show = function (i) { if (i === cur) return; cur = i; refresh(frames[0]); frames.forEach(function (f, k) { f.classList.toggle('is-on', k === i); }); };
     if (!('IntersectionObserver' in window)) return;
     var so = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) { if (e.isIntersecting) show(+e.target.getAttribute('data-frame') || 0); });
@@ -30,7 +36,7 @@
     var frames = sec.querySelectorAll('.frame'), dots = sec.querySelectorAll('.l-dot'), label = sec.querySelector('[data-shot-label]');
     var i = 0, timer = null, held = false, seen = false;
     var show = function (n) {
-      i = (n + frames.length) % frames.length;
+      n = (n + frames.length) % frames.length; if (n === i) return; i = n; refresh(frames[0]);
       frames.forEach(function (f, k) { f.classList.toggle('is-on', k === i); });
       dots.forEach(function (d, k) { d.classList.toggle('is-on', k === i); d.setAttribute('aria-selected', k === i ? 'true' : 'false'); });
       if (label) label.textContent = dots[i] ? dots[i].getAttribute('aria-label') : '';

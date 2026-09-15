@@ -95,7 +95,7 @@
 .md-sidebar--secondary .md-nav__link--active { color: var(--accent); }
 .md-progress { background: var(--accent); }
 
-/* ==== .sk-* : the shell every page shares (SHELL lane). Partials: overrides/partials/sk-header.html ====
+/* ==== .sk-* : the shell every page shares. Partials: overrides/partials/sk-header.html ====
    One slim bar: wordmark · seven quiet links · theme · search · GitHub. Sticky, paper behind it, one hairline under it.
    It replaces Material's header AND tabs AND the left sidebar on desktop; under 76.25em the burger opens Material's
    drawer, restyled as paper + ink. Material's ids stay so its JS keeps working. */
@@ -103,7 +103,7 @@
   background: color-mix(in srgb, var(--paper) 86%, transparent); -webkit-backdrop-filter: saturate(1.2) blur(12px); backdrop-filter: saturate(1.2) blur(12px);
   color: var(--ink-3); transition: none; }
 @supports not (background: color-mix(in srgb, red 50%, transparent)) { .sk-header { background: var(--paper); } }
-/* S6: at night a white e-ink capture sliding under a 14 %-clear bar blooms through as a grey slab — near-opaque in slate, the blur still softens edges */
+/* at night a white e-ink capture sliding under a 14 %-clear bar blooms through as a grey slab — near-opaque in slate, the blur still softens edges */
 [data-md-color-scheme="slate"] .sk-header { background: color-mix(in srgb, var(--paper) 95%, transparent); }
 .sk-bar { display: flex; align-items: center; gap: 1.2rem; max-width: 72rem; margin: 0 auto; padding: 0 1.25rem; height: 2.8rem; }
 .sk-wordmark { font-weight: 650; font-size: .95rem; letter-spacing: -.02em; color: var(--ink-3); text-decoration: none; line-height: 1; padding: .3rem 0; }
@@ -164,8 +164,8 @@
 .md-overlay { background: rgba(20,20,20,.35); }
 [data-md-color-scheme="slate"] .md-overlay { background: rgba(0,0,0,.6); }
 
-/* ==== S2 · the reading column. Scoped to pages wearing the bar (`.sk-header ~ .md-container`) so Home's manual
-   block keeps Material's ramp until LANDING-2 adopts the shell. One centred 42 rem prose column (≈70ch at 1.05 rem),
+/* ==== the reading column. Scoped to pages wearing the bar (`.sk-header ~ .md-container`) so Home's manual
+   block keeps Material's ramp. One centred 42 rem prose column (≈70ch at 1.05 rem),
    the TOC to its right on wide screens, the landing's type scale and section rhythm. ==== */
 .sk-header ~ .md-container .md-main__inner { max-width: none; margin: 0; padding: 0; display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 42rem) minmax(0, 1fr); column-gap: 0; align-items: start; }
@@ -217,7 +217,7 @@
   .sk-header ~ .md-container .md-typeset table:not([class]) { font-size: .74rem; }
 }
 
-/* ==== S3 · surfaces. Tables, code, notes and details as the landing draws them: ink-0 cards, one hairline,
+/* ==== surfaces. Tables, code, notes and details as the landing draws them: ink-0 cards, one hairline,
    14 px corners, mono-caps labels, cyan only where it means something. Same `.sk-header ~ .md-container` scope. ==== */
 /* inline code = the landing's chip */
 .sk-header ~ .md-container .md-typeset code { background: var(--ink-0); border: var(--hairline); border-radius: 6px; padding: .1em .4em; color: var(--ink-3); }
@@ -227,8 +227,10 @@
 .sk-header ~ .md-container .md-typeset .highlight, .sk-header ~ .md-container .md-typeset > pre { margin: 1.4rem 0; }
 .sk-header ~ .md-container .md-typeset .highlight > pre, .sk-header ~ .md-container .md-typeset > pre { margin: 0; }
 .sk-header ~ .md-container .md-typeset .highlight > pre > code, .sk-header ~ .md-container .md-typeset > pre > code {
-  display: block; background: var(--ink-0); border: var(--hairline); border-radius: 14px; padding: 1rem 1.2rem; line-height: 1.6; tab-size: 2; }
+  display: block; background: var(--ink-0); border: var(--hairline); border-radius: 14px; padding: 1rem 2.9rem 1rem 1.2rem; line-height: 1.6; tab-size: 2; }   /* right pad clears the copy button at the end of a scrolled line */
 .sk-header ~ .md-container .md-typeset .highlight .md-clipboard { top: .55rem; right: .55rem; width: 1.6rem; height: 1.6rem; color: var(--ink-1); }
+.sk-header ~ .md-container .md-typeset .highlight .md-code__nav { top: .55rem; right: .55rem; background: transparent; padding: 0; }
+.sk-header ~ .md-container .md-typeset .highlight .md-code__button { color: var(--ink-1); }
 .sk-header ~ .md-container .md-typeset .highlight .md-clipboard::after { width: 1rem; height: 1rem; margin: .3rem; }
 .sk-header ~ .md-container .md-typeset .highlight:hover .md-clipboard { color: var(--ink-2); }
 .sk-header ~ .md-container .md-typeset .highlight .filename { font-family: var(--md-code-font); font-size: .62rem; letter-spacing: .08em; text-transform: uppercase;
@@ -252,16 +254,16 @@
 .sk-header ~ .md-container .md-typeset__scrollwrap::after { content: ""; position: absolute; top: 1px; right: 1px; bottom: 1px; width: 3rem; border-radius: 0 14px 14px 0; pointer-events: none;
   background: linear-gradient(to right, transparent, var(--ink-0)); opacity: 0; transition: opacity .3s; }
 .sk-header ~ .md-container .md-typeset__scrollwrap.has-more::after { opacity: 1; }
-/* S6: long code lines — same fade as tables, on the block; the code element itself scrolls */
+/* long code lines — same fade as tables, on the block; the code element itself scrolls */
 .sk-header ~ .md-container .md-typeset .highlight, .sk-header ~ .md-container .md-typeset > pre { position: relative; }
 .sk-header ~ .md-container .md-typeset .highlight::after, .sk-header ~ .md-container .md-typeset > pre::after { content: ""; position: absolute; top: 1px; right: 1px; bottom: 1px; width: 3rem;
   border-radius: 0 14px 14px 0; pointer-events: none; background: linear-gradient(to right, transparent, var(--ink-0)); opacity: 0; transition: opacity .3s; }
 .sk-header ~ .md-container .md-typeset .highlight.has-more::after, .sk-header ~ .md-container .md-typeset > pre.has-more::after { opacity: 1; }
-.sk-header ~ .md-container .md-typeset .highlight.has-more .md-clipboard { opacity: 0; }   /* the fade is the affordance; the copy button returns at the end of the line */
-.sk-header ~ .md-container .md-typeset .highlight.has-more:hover .md-clipboard { opacity: 1; }
-/* S6: the version chip on the install button must not break mid-token on a phone */
+.sk-header ~ .md-container .md-typeset .highlight.has-more .md-clipboard, .sk-header ~ .md-container .md-typeset .highlight.has-more .md-code__nav { opacity: 0; }   /* the fade is the affordance; the copy button returns at the end of the line (Material ≥9.6 names it .md-code__nav) */
+.sk-header ~ .md-container .md-typeset .highlight.has-more:hover .md-clipboard, .sk-header ~ .md-container .md-typeset .highlight.has-more:hover .md-code__nav { opacity: 1; }
+/* the version chip on the install button must not break mid-token on a phone */
 .sk-header ~ .md-container .install-cta small { white-space: nowrap; }
-/* S6: two-up grids must not let an unbreakable code line inflate one column (1fr = minmax(auto,1fr)) */
+/* two-up grids must not let an unbreakable code line inflate one column (1fr = minmax(auto,1fr)) */
 .sk-header ~ .md-container .md-typeset .install-hero > *, .sk-header ~ .md-container .md-typeset .grid > * { min-width: 0; }
 @media screen and (min-width: 76.25em) {   /* wide tables borrow 2 rem of gutter each side and drop a size — four columns in 70ch is a squeeze */
   .sk-header ~ .md-container .sk-wide { margin-left: -2rem; margin-right: -2rem; }
@@ -272,6 +274,19 @@
   .sk-header ~ .md-container .md-typeset__table table:not([class]) { font-size: .74rem; }
   .sk-header ~ .md-container .sk-wide .md-typeset__table table:not([class]) { min-width: 36rem; }   /* 3+ columns: scroll, do not fold into 110 px rows */
   .sk-header ~ .md-container .md-typeset table:not([class]) th, .sk-header ~ .md-container .md-typeset table:not([class]) td { padding: .6rem .8rem; }
+  /* prose tables (site.js marks .sk-stack): one card per row, the first column is the row's name, the rest are labelled lines */
+  .sk-header ~ .md-container .sk-stack .md-typeset__table table:not([class]) { min-width: 0; display: block; }
+  .sk-header ~ .md-container .sk-stack table:not([class]) thead { display: none; }
+  .sk-header ~ .md-container .sk-stack table:not([class]) tbody, .sk-header ~ .md-container .sk-stack table:not([class]) tr { display: block; }
+  .sk-header ~ .md-container .sk-stack table:not([class]) tr { padding: .9rem 1rem 1rem; border-top: var(--hairline); }
+  .sk-header ~ .md-container .sk-stack table:not([class]) tr:first-child { border-top: 0; }
+  .sk-header ~ .md-container .sk-stack table:not([class]) td { display: block; padding: .35rem 0 .1rem; border: 0; font-size: .85rem; line-height: 1.5; }   /* block, not grid: a cell's inline runs (text, code, links) must stay one line of prose */
+  .sk-header ~ .md-container .sk-stack table:not([class]) td::before { content: attr(data-label); display: block; font-family: var(--md-code-font); font-size: .58rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); margin-bottom: .1rem; }
+  .sk-header ~ .md-container .sk-stack table:not([class]) td:first-child { display: block; padding: 0 0 .4rem; font-size: .95rem; }
+  .sk-header ~ .md-container .sk-stack table:not([class]) td:first-child::before { display: none; }
+  .sk-header ~ .md-container .sk-stack table:not([class]) td:first-child code { font-weight: 600; font-size: .95rem; }
+  .sk-header ~ .md-container .sk-stack table:not([class]) td code, .sk-header ~ .md-container .sk-stack table:not([class]) td:first-child code { white-space: normal; overflow-wrap: anywhere; }   /* a row title like "ask failed (422): nothing transcribed" wraps instead of clipping */
+  .sk-header ~ .md-container .sk-stack.has-more::after { display: none; }
 }
 /* notes and details = the same card; the label is the only decoration */
 .sk-header ~ .md-container .md-typeset .admonition, .sk-header ~ .md-container .md-typeset details { border-radius: 14px; font-size: .92rem; padding: 0 1.2rem .3rem; margin: 1.4rem 0; }
@@ -291,7 +306,7 @@
 .sk-header ~ .md-container .md-typeset .tabbed-content { padding-top: .6rem; }
 .sk-header ~ .md-container .md-typeset img:not(.glass img) { border-radius: 14px; }
 
-/* ==== S4 · the footer. One hairline, the pager, a quiet meta row — the same column as the prose. ==== */
+/* ==== the footer. One hairline, the pager, a quiet meta row — the same column as the prose. ==== */
 .sk-footer { background: var(--paper); color: var(--ink-2); border-top: var(--hairline); margin-top: clamp(3rem, 8vh, 5rem); }
 .sk-footer__inner { max-width: 42rem; margin: 0 auto; padding: 0 1.25rem 3rem; }
 .sk-footer__pager { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding: 1.6rem 0; border-bottom: var(--hairline); }
@@ -415,10 +430,16 @@
   color: var(--md-default-fg-color--light); margin: 0 0 1.2rem; display: flex; gap: 1.2rem; flex-wrap: wrap; }
 .sticky-budget b { color: var(--accent); font-weight: 500; }
 
-/* ---- S5 motion: a block rises 10 px into place the first time it scrolls in (site.js adds .sk-reveal below the fold only) ---- */
+/* ---- motion: the e-ink refresh. A real panel does not fade a picture in; it inverts — black, white, black, white, then the
+   image — so that is how a capture arrives here: 400 ms, a filter on the box (the frames under it can be swapped while it is
+   opaque), no fade. Used by the landing (hero + every frame change) and by .glass figures the first time they scroll in. ---- */
+@keyframes sk-eink { 0%, 29% { filter: brightness(0); } 30%, 54% { filter: brightness(0) invert(1); } 55%, 74% { filter: brightness(0); } 75%, 99% { filter: brightness(0) invert(1); } 100% { filter: none; } }
+.sk-js .sk-reveal.glass { transform: none; transition-duration: .3s; }             /* the bezel is furniture: it appears, it does not slide */
+.sk-js .sk-reveal.glass.is-in .glass__bezel > img { animation: sk-eink .4s both .1s; }   /* the glass repaints */
+/* ---- motion: a block rises 10 px into place the first time it scrolls in (site.js adds .sk-reveal below the fold only) ---- */
 .sk-js .sk-reveal { opacity: 0; transform: translateY(10px); transition: opacity .5s cubic-bezier(.2,.7,.2,1), transform .5s cubic-bezier(.2,.7,.2,1); }
 .sk-js .sk-reveal.is-in { opacity: 1; transform: none; }
-@media (prefers-reduced-motion: reduce) { .sk-js .sk-reveal { opacity: 1; transform: none; transition: none; } }
+@media (prefers-reduced-motion: reduce) { .sk-js .sk-reveal { opacity: 1; transform: none; transition: none; } .sk-js .sk-reveal.glass.is-in .glass__bezel > img { animation: none; } }
 
 /* ---- motion: e-ink does not animate, and neither should the manual for people who asked it not to ---- */
 @media (prefers-reduced-motion: reduce) {
@@ -430,3 +451,22 @@
   .md-typeset pre > code { font-size: .68rem; }
 }
 @media print { .md-header, .md-tabs, .md-sidebar, .md-footer, .md-top { display: none !important; } .md-typeset a { text-decoration: none; } }
+
+/* ==== diagrams: an inline SVG (pymdownx.snippets) takes the page's ink and accent, so it is right in both schemes
+   and legible at any size. On a phone it keeps a readable minimum width and scrolls, like a table. Callouts (<g class="co">)
+   are staged in one after another — 300 ms each, 90 ms apart, opacity only — and are simply present under reduced motion. ==== */
+.md-typeset figure.sk-diagram { display: block; width: auto; max-width: none; margin: 1.6em 0 1.8em; padding: 0; overflow-x: auto; -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin; scrollbar-color: var(--ink-1) transparent; }
+.md-typeset .sk-diagram__svg { display: block; width: 100%; height: auto; min-width: 34rem; overflow: visible; }
+.md-typeset .sk-diagram > figcaption { font-style: italic; font-size: .8rem; line-height: 1.5; color: var(--ink-2); margin: .7em .2em 0; text-align: left; max-width: none; }
+.md-typeset .sk-diagram .co { animation: sk-co-in .3s cubic-bezier(.2,.7,.2,1) both; }
+.md-typeset .sk-diagram .co:nth-of-type(2) { animation-delay: .09s; } .md-typeset .sk-diagram .co:nth-of-type(3) { animation-delay: .18s; }
+.md-typeset .sk-diagram .co:nth-of-type(4) { animation-delay: .27s; } .md-typeset .sk-diagram .co:nth-of-type(5) { animation-delay: .36s; }
+.md-typeset .sk-diagram .co:nth-of-type(6) { animation-delay: .45s; } .md-typeset .sk-diagram .co:nth-of-type(7) { animation-delay: .54s; }
+.md-typeset .sk-diagram .co:nth-of-type(8) { animation-delay: .63s; }
+@keyframes sk-co-in { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .md-typeset .sk-diagram .co { animation: none; } }
+@media (max-width: 44rem) { .md-typeset .sk-diagram__svg { min-width: 30rem; } }
+.md-typeset .sk-diagram--firstboot .sk-diagram__svg { min-width: 38rem; }
+.md-typeset .sk-diagram--card .sk-diagram__svg { max-width: 40rem; min-width: 30rem; }   /* five boxes in a row need the width; scrolls on a phone */
+@media screen and (min-width: 76.25em) { .sk-header ~ .md-container .md-typeset figure.sk-diagram { margin-left: -4rem; margin-right: -4rem; } }   /* borrow the gutter: 13 px labels stay ≥ 12 px */
