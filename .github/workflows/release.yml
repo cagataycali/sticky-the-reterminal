@@ -1,0 +1,100 @@
+# Release rail, on demand (Actions billing is off for this repo today — run from the
+# Actions tab when minutes exist; until then tools/release.sh --deploy from a laptop
+# is the rail and produces byte-identical artefacts).
+#
+# What a run does: build fw in the pinned IDF container → tools/release.sh writes
+# docs/install/manifest.json + sha256sums.txt from that build → mkdocs site (the
+# install_assets hook ships the 4 parts into site/install/fw/, sha-gated) → push to
+# gh-pages → tag v<version> + GitHub release carrying the same parts + sums.
+name: release
+on:
+  workflow_dispatch:
+    inputs:
+      publish_release:
+        description: "also create the GitHub release + tag v<fw version>"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: espressif/idf:v5.4
+    outputs:
+      version: ${{ steps.ver.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: ver
+        shell: bash
+        run: echo "version=$(sed -n 's/.*TINY_FW_VERSION *"\([^"]*\)".*/\1/p' firmware/main/tiny/tiny_version.h)" >> "$GITHUB_OUTPUT"
+      - name: idf.py build
+        shell: bash
+        run: |
+          . $IDF_PATH/export.sh
+          cd firmware && idf.py build
+      - name: manifest + sha256sums
+        shell: bash
+        run: tools/release.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fw-${{ steps.ver.outputs.version }}
+          path: |
+            firmware/build/flasher_args.json
+            firmware/build/tiny_sticky.bin
+            firmware/build/bootloader/bootloader.bin
+            firmware/build/partition_table/partition-table.bin
+            firmware/build/ota_data_initial.bin
+            docs/install/manifest.json
+            docs/install/sha256sums.txt
+
+  pages:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: fw-${{ needs.build.outputs.version }}
+          path: .
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install mkdocs-material
+      - name: mkdocs gh-deploy (hook ships site/install/fw from firmware/build)
+        run: |
+          git config user.name "release[bot]"; git config user.email "actions@github.com"
+          mkdocs gh-deploy --force
+      - name: verify live parts
+        run: |
+          B=https://cagataycali.github.io/sticky-the-reterminal/install
+          sleep 60
+          for f in manifest.json sha256sums.txt fw/bootloader.bin fw/partition-table.bin fw/ota_data_initial.bin fw/tiny_sticky.bin; do
+            curl -fsSI "$B/$f" | head -1 || exit 1
+          done
+          cd docs/install && curl -fsSL "$B/sha256sums.txt" | diff - sha256sums.txt
+
+  release:
+    if: ${{ inputs.publish_release }}
+    needs: [build, pages]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: fw-${{ needs.build.outputs.version }}
+          path: fw
+      - name: stage assets
+        run: |
+          mkdir out
+          cp fw/firmware/build/tiny_sticky.bin fw/firmware/build/bootloader/bootloader.bin \
+             fw/firmware/build/partition_table/partition-table.bin fw/firmware/build/ota_data_initial.bin \
+             fw/docs/install/manifest.json fw/docs/install/sha256sums.txt out/
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ needs.build.outputs.version }}
+          name: Sticky ${{ needs.build.outputs.version }}
+          body: |
+            Install from the browser: https://cagataycali.github.io/sticky-the-reterminal/install/
+            Or: `curl -fsSL https://cagataycali.github.io/sticky-the-reterminal/install.sh | sh`
+            Parts flash at 0x0 / 0x8000 / 0xf000 / 0x20000 (dio, 32MB, 80m) — see manifest.json; verify with sha256sums.txt.
+          files: out/*

@@ -1,0 +1,8 @@
+[
+  {"label": "Newark", "zone": "America/New_York", "home": true},
+  {"label": "San Francisco", "zone": "America/Los_Angeles"},
+  {"label": "London", "zone": "Europe/London"},
+  {"label": "Istanbul", "zone": "Europe/Istanbul"},
+  {"label": "Bangalore", "zone": "Asia/Kolkata"},
+  {"label": "Tokyo", "zone": "Asia/Tokyo"}
+]

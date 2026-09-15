@@ -1,0 +1,4 @@
+Inter (Rasmus Andersson) and JetBrains Mono (JetBrains): SIL Open Font License 1.1.
+Variable-weight latin subsets as served by Google Fonts (inter v20, jetbrainsmono v24),
+self-hosted here so the site makes no third-party request and reads the same on a
+closed network. Full OFL text: https://openfontlicense.org/open-font-license-official-text/

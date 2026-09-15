@@ -1,0 +1,38 @@
+# ESP-IDF
+firmware/build/
+firmware/sdkconfig
+firmware/managed_components/
+firmware/dependencies.lock
+# Recovery images are huge — regenerate via docs/RECOVERY.md
+recovery/*.bin
+recovery/readflash.log
+# macOS
+.DS_Store
+__pycache__/
+# mkdocs
+site/
+.sticky_auth.json
+.sticky_tls/
+docs/dashboard/frontend/node_modules/
+docs/dashboard/frontend/dist/
+.secrets.device.json
+.sticky_activity.jsonl
+.sticky_ota_watch.json
+firmware/.logs/
+
+# dashboard runtime artifacts
+docs/dashboard/.anim_frames/
+docs/dashboard/.sticky_pending.json
+.secrets.*.json
+
+# local logs and session files — never source
+.logs/
+recovery/verify.log
+.claude/
+*.log
+
+# TypeScript incremental build state
+docs/dashboard/frontend/tsconfig.tsbuildinfo
+
+# Playground registry package — regenerate with tools/playground_package.sh
+playground/*/firmware/

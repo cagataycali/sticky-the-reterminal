@@ -1,0 +1,192 @@
+{
+ "t": 1788778022.234751,
+ "arm": {
+  "port": "/dev/cu.usbmodemXXXX",
+  "ok": true,
+  "joints": [
+   {
+    "id": 1,
+    "name": "shoulder_pan",
+    "deg": 176.9,
+    "home": 176.66,
+    "speed": 0,
+    "load": 0,
+    "v": 5.5,
+    "c": 29,
+    "torque": false,
+    "range": [
+     66.36,
+     251.02
+    ],
+    "min": 66.4,
+    "max": 251.0
+   },
+   {
+    "id": 2,
+    "name": "shoulder_lift",
+    "deg": 84.0,
+    "home": 83.85,
+    "speed": 0,
+    "load": 0,
+    "v": 5.6,
+    "c": 30,
+    "torque": false,
+    "range": [
+     83.23,
+     290.04
+    ],
+    "min": 83.2,
+    "max": 290.0
+   },
+   {
+    "id": 3,
+    "name": "elbow_flex",
+    "deg": 262.3,
+    "home": 262.35,
+    "speed": 0,
+    "load": 0,
+    "v": 5.5,
+    "c": 29,
+    "torque": false,
+    "range": [
+     68.73,
+     262.44
+    ],
+    "min": 68.7,
+    "max": 262.4
+   },
+   {
+    "id": 4,
+    "name": "wrist_flex",
+    "deg": 255.9,
+    "home": 256.46,
+    "speed": 0,
+    "load": 0,
+    "v": 5.5,
+    "c": 29,
+    "torque": false,
+    "range": [
+     84.29,
+     284.85
+    ],
+    "min": 84.3,
+    "max": 284.9
+   },
+   {
+    "id": 5,
+    "name": "wrist_roll",
+    "deg": 188.1,
+    "home": 187.82,
+    "speed": 0,
+    "load": 0,
+    "v": 5.6,
+    "c": 30,
+    "torque": false,
+    "min": 0.0,
+    "max": 359.9
+   },
+   {
+    "id": 6,
+    "name": "tilt",
+    "deg": 179.1,
+    "home": 180.35,
+    "speed": 0,
+    "load": 0,
+    "v": 5.6,
+    "c": 30,
+    "torque": false,
+    "min": 0.0,
+    "max": 359.9
+   }
+  ],
+  "pose": "home",
+  "hz": 10.0,
+  "holds": false,
+  "hold_left_ms": 0,
+  "strays": [],
+  "error": null,
+  "teleop": {
+   "on": false,
+   "hz": 0.0,
+   "source": null
+  },
+  "job": null
+ },
+ "nicla": {
+  "ok": true,
+  "transport": "lan",
+  "rssi": -45,
+  "imu": {
+   "ax": -0.048,
+   "ay": 0.735,
+   "az": 0.637,
+   "gx": 0.14,
+   "gy": -0.07,
+   "gz": 0.21,
+   "roll": 49.1,
+   "pitch": 2.8
+  },
+  "tof_mm": 28
+ },
+ "robot": {
+  "arm_role": "leader",
+  "head": {
+   "mount": "pan_tilt"
+  },
+  "base": false,
+  "nicla_url": "",
+  "joints": {
+   "1": "shoulder_pan",
+   "2": "shoulder_lift",
+   "3": "elbow_flex",
+   "4": "wrist_flex",
+   "5": "wrist_roll",
+   "6": "tilt"
+  },
+  "head_ids": [
+   5,
+   6
+  ],
+  "gripper_id": null
+ },
+ "guard": {
+  "home": {
+   "1": 176.66,
+   "2": 83.85,
+   "3": 262.35,
+   "4": 256.46,
+   "5": 187.82,
+   "6": 180.35
+  },
+  "windows": {
+   "1": [
+    66.36,
+    251.02
+   ],
+   "2": [
+    83.23,
+    290.04
+   ],
+   "3": [
+    68.73,
+    262.44
+   ],
+   "4": [
+    84.29,
+    284.85
+   ]
+  },
+  "head_window": {
+   "5": [
+    20.0,
+    340.0
+   ],
+   "6": [
+    100.0,
+    260.0
+   ]
+  },
+  "step_deg": 10,
+  "speed_dps": 30
+ }
+}

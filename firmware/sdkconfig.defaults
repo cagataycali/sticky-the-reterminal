@@ -1,0 +1,43 @@
+CONFIG_IDF_TARGET="esp32s3"
+CONFIG_ESPTOOLPY_FLASHSIZE_32MB=y
+CONFIG_ESPTOOLPY_FLASHMODE_DIO=y
+CONFIG_ESPTOOLPY_FLASHFREQ_80M=y
+CONFIG_PARTITION_TABLE_CUSTOM=y
+CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="partitions.csv"
+CONFIG_SPIRAM=y
+CONFIG_SPIRAM_MODE_OCT=y
+CONFIG_SPIRAM_SPEED_80M=y
+CONFIG_ESP_MAIN_TASK_STACK_SIZE=8192
+CONFIG_FREERTOS_HZ=1000
+# TLS to tiny.technology
+CONFIG_ESP_TLS_INSECURE=n
+CONFIG_MBEDTLS_CERTIFICATE_BUNDLE=y
+# app rollback for tiny_ota trial-boot
+CONFIG_BOOTLOADER_APP_ROLLBACK_ENABLE=y
+CONFIG_ESP_CONSOLE_UART_BAUDRATE=115200
+# M10.3 BLE scan page (NimBLE host; scan-only in firmware v1). All roles ON:
+# IDF 5.4's ble_gap.c does not compile with central/peripheral pruned out
+# (role-macro guards, build-verified), and peripheral is the future iOS
+# proximity link anyway. NimBLE over Bluedroid for RAM (~60KB vs ~180KB).
+CONFIG_BT_ENABLED=y
+CONFIG_BT_NIMBLE_ENABLED=y
+CONFIG_BT_NIMBLE_ROLE_CENTRAL=y
+CONFIG_BT_NIMBLE_ROLE_PERIPHERAL=y
+CONFIG_BT_NIMBLE_ROLE_BROADCASTER=y
+CONFIG_BT_NIMBLE_ROLE_OBSERVER=y
+
+# P0 internal-RAM exhaustion (0.23.0 autopsy): mbedTLS was pinned to
+# MALLOC_CAP_INTERNAL — every TLS session (~40KB) drained the rail lwip/wifi
+# dies on, watermark hit 41KB at 62s uptime. PSRAM is 8MB deep and this
+# workload (relay poll cadence, not throughput) doesn't feel the speed tax.
+CONFIG_MBEDTLS_EXTERNAL_MEM_ALLOC=y
+
+# --- P0 gate 0 (0.23.4): raise the internal-RAM floor ---
+# Static .bss arrays marked EXT_RAM_BSS_ATTR land in PSRAM (tiny_node's ~21KB
+# of ask/relay/status sinks). sizeof semantics preserved — they stay arrays.
+CONFIG_SPIRAM_ALLOW_BSS_SEG_EXTERNAL_MEMORY=y
+# NimBLE host allocates its pools from PSRAM instead of MALLOC_CAP_INTERNAL.
+CONFIG_BT_NIMBLE_MEM_ALLOC_MODE_EXTERNAL=y
+
+# SD card photo library: long filenames (timestamped names > 8.3)
+CONFIG_FATFS_LFN_HEAP=y

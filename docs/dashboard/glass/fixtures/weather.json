@@ -1,0 +1,154 @@
+{
+ "place": "Demo City",
+ "admin": "",
+ "country": "",
+ "tz": "America/New_York",
+ "time": "2026-09-07T05:00",
+ "units": "f",
+ "temp": 58.0,
+ "feels": 57.5,
+ "humidity": 84,
+ "wind": 3.6,
+ "wind_unit": "mph",
+ "code": 0,
+ "is_day": false,
+ "condition": "Clear",
+ "glyph": "moon",
+ "hi": 79.2,
+ "lo": 56.6,
+ "precip": 0,
+ "sunrise": "06:29",
+ "sunset": "19:18",
+ "hours": [
+  {
+   "t": "05:00",
+   "temp": 58.0,
+   "precip": 0,
+   "code": 0
+  },
+  {
+   "t": "06:00",
+   "temp": 56.8,
+   "precip": 0,
+   "code": 0
+  },
+  {
+   "t": "07:00",
+   "temp": 56.6,
+   "precip": 0,
+   "code": 0
+  },
+  {
+   "t": "08:00",
+   "temp": 60.0,
+   "precip": 0,
+   "code": 0
+  },
+  {
+   "t": "09:00",
+   "temp": 63.4,
+   "precip": 0,
+   "code": 0
+  },
+  {
+   "t": "10:00",
+   "temp": 66.8,
+   "precip": 0,
+   "code": 0
+  },
+  {
+   "t": "11:00",
+   "temp": 70.0,
+   "precip": 0,
+   "code": 0
+  },
+  {
+   "t": "12:00",
+   "temp": 73.3,
+   "precip": 0,
+   "code": 0
+  },
+  {
+   "t": "13:00",
+   "temp": 76.7,
+   "precip": 0,
+   "code": 0
+  },
+  {
+   "t": "14:00",
+   "temp": 78.4,
+   "precip": 0,
+   "code": 0
+  },
+  {
+   "t": "15:00",
+   "temp": 79.1,
+   "precip": 0,
+   "code": 0
+  },
+  {
+   "t": "16:00",
+   "temp": 79.2,
+   "precip": 0,
+   "code": 0
+  }
+ ],
+ "days": [
+  {
+   "date": "2026-09-07",
+   "dow": "Today",
+   "hi": 79.2,
+   "lo": 56.6,
+   "precip": 0,
+   "code": 3
+  },
+  {
+   "date": "2026-09-08",
+   "dow": "Tue",
+   "hi": 82.1,
+   "lo": 57.7,
+   "precip": 2,
+   "code": 3
+  },
+  {
+   "date": "2026-09-09",
+   "dow": "Wed",
+   "hi": 86.7,
+   "lo": 68.3,
+   "precip": 1,
+   "code": 3
+  },
+  {
+   "date": "2026-09-10",
+   "dow": "Thu",
+   "hi": 87.4,
+   "lo": 70.7,
+   "precip": 26,
+   "code": 51
+  },
+  {
+   "date": "2026-09-11",
+   "dow": "Fri",
+   "hi": 80.6,
+   "lo": 66.4,
+   "precip": 26,
+   "code": 3
+  },
+  {
+   "date": "2026-09-12",
+   "dow": "Sat",
+   "hi": 75.6,
+   "lo": 67.2,
+   "precip": 13,
+   "code": 3
+  },
+  {
+   "date": "2026-09-13",
+   "dow": "Sun",
+   "hi": 72.1,
+   "lo": 55.0,
+   "precip": 65,
+   "code": 63
+  }
+ ]
+}

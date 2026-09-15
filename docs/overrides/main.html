@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+  {#- self-hosted faces (docs/fonts, OFL) — no fonts.googleapis.com round trip -#}
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="{{ 'fonts/inter-latin.woff2' | url }}" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="{{ 'fonts/jetbrains-mono-latin.woff2' | url }}" />
+  {% set title = page.title if page and page.title else config.site_name %}
+  {% set full_title = config.site_name if title == config.site_name else title ~ " · " ~ config.site_name %}
+  {% set desc = page.meta.description if page and page.meta and page.meta.description else config.site_description %}
+  {#- site_url is normalised WITH a trailing slash by mkdocs, so concatenating
+      "/img/…" doubled the slash on every page (verified in the live HTML) -#}
+  {% set image = config.site_url.rstrip("/") ~ "/img/home-live.png" %}
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="{{ full_title }}" />
+  <meta property="og:description" content="{{ desc }}" />
+  <meta property="og:url" content="{{ page.canonical_url }}" />
+  <meta property="og:image" content="{{ image }}" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{{ full_title }}" />
+  <meta name="twitter:description" content="{{ desc }}" />
+  <meta name="twitter:image" content="{{ image }}" />
+  <meta name="theme-color" content="#f3f2ee" />
+  <meta name="color-scheme" content="light dark" />
+{% endblock %}
+
+{#- inner pages wear the shared slim bar (partials/sk-header.html) instead of Material's header + tabs.
+    Home keeps Material's chrome here; the partial is adopted in home.html. -#}
+{% block header %}
+  {% if page.is_homepage %}{{ super() }}{% else %}{% include "partials/sk-header.html" %}{% endif %}
+{% endblock %}
+{% block tabs %}{% if page.is_homepage %}{{ super() }}{% endif %}{% endblock %}
+
+{#- the right TOC earns its place only on pages with four or more sections; the primary sidebar stays
+    (it is the phone drawer) and is display:none on desktop where the bar is the nav. Home keeps its own block. -#}
+{% block site_nav %}
+  {% if page.is_homepage %}{{ super() }}{% else %}
+    {% if nav %}
+      <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+        <div class="md-sidebar__scrollwrap"><div class="md-sidebar__inner">{% include "partials/nav.html" %}</div></div>
+      </div>
+    {% endif %}
+    {% set h2s = (page.toc | first).children | length if page.toc and (page.toc | first) else 0 %}
+    {% if "toc.integrate" not in features and h2s >= 4 and not (page.meta and page.meta.hide and "toc" in page.meta.hide) %}
+      <div class="md-sidebar md-sidebar--secondary sk-toc" data-md-component="sidebar" data-md-type="toc">
+        <div class="md-sidebar__scrollwrap"><div class="md-sidebar__inner">{% include "partials/toc.html" %}</div></div>
+      </div>
+    {% endif %}
+  {% endif %}
+{% endblock %}
+
+{#- one footer for every inner page (partials/sk-footer.html). Home empties this block itself. -#}
+{% block footer %}
+  {% if page.is_homepage %}{{ super() }}{% else %}{% include "partials/sk-footer.html" %}{% endif %}
+{% endblock %}
+
+{% block content %}
+  {#- every page carries its reading budget; the brand promise is three minutes -#}
+  {% if page.meta and page.meta.readtime %}
+  <p class="sticky-budget"><span><b>~{{ page.meta.readtime }} min</b> read</span>{% if page.meta.long %}<span>long-form · a deep dive, honestly labelled</span>{% endif %}</p>
+  {% endif %}
+  {{ super() }}
+{% endblock %}

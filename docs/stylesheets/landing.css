@@ -1,0 +1,214 @@
+/* landing.css — Home landing page + Install page. Extends sticky.css. */
+
+/* ---- install page ---- */
+.install-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin: 1.5rem 0; }
+@media (max-width: 60em) { .install-hero { grid-template-columns: 1fr; } }
+.install-card { border: var(--hairline); border-radius: 14px; padding: 1.5rem 1.6rem 1.25rem; background: var(--ink-0); display: flex; flex-direction: column; }
+.md-typeset .install-card > h3 { margin: 0 0 .6rem; font-size: 1.3rem; font-weight: 650; letter-spacing: -.02em; }
+.md-typeset .install-card > p { margin: 0 0 .9rem; }
+.md-typeset .install-card > p:last-child { margin-top: auto; color: var(--ink-2); font-size: .9rem; margin-bottom: 0; }
+.install-button-row { margin: .5rem 0 1rem; min-height: 3.25rem; }
+.md-typeset .install-card pre > code { white-space: pre-wrap; overflow-wrap: anywhere; }   /* the one-liner wraps in a half-width card instead of hiding under the copy button */
+/* the install button is the one filled control on the site (primary is paper here, which Material would render as a disabled-looking box) */
+.md-typeset .install-cta.md-button { display: inline-block; background: var(--ink-3); color: var(--paper); border: 1.5px solid var(--ink-3); border-radius: 999px; padding: .85em 1.5em; font-weight: 600; letter-spacing: -0.01em; font-size: 1rem; cursor: pointer; transition: transform .25s cubic-bezier(.2,.7,.2,1), background .25s, border-color .25s; }
+.md-typeset .install-cta.md-button:hover { background: var(--accent); border-color: var(--accent); color: #fff; transform: translateY(-1px); }
+.md-typeset .install-cta.md-button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.install-cta small { font-weight: 400; opacity: .75; margin-left: .45em; font-family: var(--md-code-font); font-size: .75em; }
+.install-note { display: inline-block; color: var(--ink-2); font-size: .85em; line-height: 1.5; }
+esp-web-install-button { --esp-tools-button-color: var(--ink-3); --esp-tools-button-text-color: var(--paper); }
+
+/* ---- Home landing ---------------------------------------------------------- */
+.landing { --ease: cubic-bezier(.2,.7,.2,1); --dur: .4s;   /* nothing on this page takes longer than one e-ink refresh */ font-family: var(--md-text-font); color: var(--ink-3); overflow-x: clip; }
+.landing section { max-width: 72rem; margin: 0 auto; padding: clamp(3rem, 8vh, 6rem) 1.25rem; box-sizing: border-box; }
+.landing h1, .landing h2 { letter-spacing: -0.035em; line-height: 1.02; font-weight: 700; margin: 0 0 1rem; text-wrap: balance; }
+.l-h1 { font-size: clamp(3rem, 8vw, 6.5rem); letter-spacing: -0.045em; }
+.l-h1 span { display: inline-block; }
+.landing h2 { font-size: clamp(2rem, 4.5vw, 3.5rem); }
+.landing p { font-size: clamp(1.05rem, 1.4vw, 1.3rem); line-height: 1.45; color: var(--ink-2); margin: 0 0 1rem; max-width: 34ch; }
+.landing code { font-family: var(--md-code-font); font-size: .85em; background: var(--ink-0); border: var(--hairline); border-radius: 6px; padding: .1em .4em; color: var(--ink-3); }
+.l-fine { font-size: .9rem !important; color: var(--ink-2); max-width: none !important; }
+.l-fine code { white-space: normal; overflow-wrap: normal; word-break: keep-all; display: block; max-width: max-content; box-sizing: border-box; font-size: .76rem; line-height: 1.5; padding: .55em .8em; margin-top: .5rem; border-radius: 10px; }
+.l-fine__phone { display: none; }
+.l-caption { font-size: .85rem !important; text-align: center; margin: 1.5rem auto 0; max-width: 40ch !important; }
+.l-btn { display: inline-block; padding: .8em 1.4em; border-radius: 999px; border: 1.5px solid var(--ink-3); color: var(--ink-3); font-weight: 600; text-decoration: none; margin: 0 .5rem .5rem 0; transition: transform .25s var(--ease), background .25s; }
+.l-btn:hover { transform: translateY(-1px); }
+.l-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.l-btn--primary { background: var(--ink-3); color: var(--paper); }
+.l-btn--primary:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+.l-cta--center { text-align: center; max-width: none !important; margin-top: 2rem; }
+
+/* hero — the bezel sits in a 3D stage; landing.js writes --rx/--ry from scroll (≤6°), CSS does the easing */
+.l-hero .l-device { perspective: 1400px; }
+.bezel--hero { transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .4s var(--ease); transform-style: preserve-3d; }
+
+/* hero */
+.l-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 3rem; align-items: center; min-height: calc(100vh - 6rem); }
+.l-hero > *, .l-split > *, .l-pin > * { min-width: 0; }
+.l-hero .l-h1 span { opacity: 0; transform: translateY(.35em); animation: rise var(--dur) var(--ease) forwards; }
+.l-hero .l-h1 span:nth-child(2) { animation-delay: .08s; }
+.l-hero .l-lead, .l-hero .l-cta, .l-hero .l-fine { opacity: 0; animation: rise var(--dur) var(--ease) .18s forwards; }
+.l-hero .l-cta { animation-delay: .26s; } .l-hero .l-fine { animation-delay: .34s; }
+.l-hero .l-device { opacity: 0; transform: translateY(2rem) scale(.96); animation: rise-device .4s var(--ease) .2s forwards; }
+@keyframes rise { to { opacity: 1; transform: none; } }
+@keyframes rise-device { to { opacity: 1; transform: none; } }
+/* e-ink refresh (keyframes sk-eink live in sticky.css): the glass inverts black · white · black · white · image, 400 ms. */
+.l-hero .bezel .screen { animation: sk-eink .4s both .6s; }         /* the glass paints once the body has landed */
+.bezel.is-refreshing .screen { animation: sk-eink .4s both; }      /* landing.js: every frame change is a refresh */
+
+/* the device: 106 × 65.5 mm body (will-change: transform-only animation), 3.97" 800×480 panel, four corner magnets, three buttons on the top edge */
+.bezel { position: relative; width: 100%; aspect-ratio: 106 / 65.5; border-radius: 22px; will-change: transform; background: #f6f5f1; border: 1px solid #d8d7d2;
+  box-shadow: 0 1px 0 #fff inset, 0 30px 60px -30px rgba(20,20,20,.35), 0 8px 20px -12px rgba(20,20,20,.25); }
+[data-md-color-scheme="slate"] .bezel { border-color: #b8b7b1; box-shadow: 0 1px 0 #fff inset, 0 40px 80px -30px rgba(0,0,0,.9), 0 8px 24px -12px rgba(0,0,0,.7); }  /* the shell IS white — dark mode only deepens the room */
+.bezel .screen { position: absolute; left: 9.4%; right: 9.4%; top: 10.3%; bottom: 10.3%; overflow: hidden; border-radius: 3px; background: #e9e8e2; box-shadow: 0 0 0 1px rgba(0,0,0,.08) inset; }
+.bezel .glass { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; filter: contrast(1.02); }
+.bezel .magnet { position: absolute; width: 4.2%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #cfcecb, #9a9995); opacity: .55; }
+.bezel .magnet.tl { left: 2.4%; top: 4%; } .bezel .magnet.tr { right: 2.4%; top: 4%; } .bezel .magnet.bl { left: 2.4%; bottom: 4%; } .bezel .magnet.br { right: 2.4%; bottom: 4%; }
+.bezel .btn-ai, .bezel .btn-up, .bezel .btn-down { position: absolute; top: -2.2%; height: 2.4%; border-radius: 2px 2px 0 0; background: #c9c8c3; }
+[data-md-color-scheme="slate"] .bezel .btn-ai, [data-md-color-scheme="slate"] .bezel .btn-up, [data-md-color-scheme="slate"] .bezel .btn-down { background: #b8b7b1; }
+.bezel .btn-ai { left: 12%; width: 9%; } .bezel .btn-up { right: 22%; width: 6%; } .bezel .btn-down { right: 13%; width: 6%; }
+
+/* pinned story: device sticks, steps scroll, frames crossfade */
+.l-pin { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 3rem; align-items: start; padding-top: 0 !important; }
+.l-pin__device { position: sticky; top: calc(50vh - 20vw); }
+.l-pin .frame { opacity: 0; }
+.l-pin .frame.is-on { opacity: 1; }
+.l-step { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; }
+.l-step:last-child { min-height: 70vh; }
+
+/* split sections + reveal */
+.l-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 3rem; align-items: center; min-height: 80vh; }
+.l-split:nth-of-type(even) .l-copy { order: 2; }
+.l-reveal > * { opacity: 0; transform: translateY(1.5rem); transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease); }
+.l-reveal.in > * { opacity: 1; transform: none; }
+.l-reveal.in > *:nth-child(2) { transition-delay: .12s; }
+.l-hero.l-reveal > * { opacity: 1; transform: none; transition: none; }  /* hero animates itself */
+
+/* product shots: real card captures crossfade inside the shell (4 s dwell, hover/focus holds, dots pick) */
+.bezel--shots .frame { opacity: 0; }
+.bezel--shots .frame.is-on { opacity: 1; }
+.l-dots { display: flex; justify-content: center; gap: .25rem; margin-top: 1.25rem; }
+.l-dot { width: 44px; height: 44px; padding: 0; border: 0; background: none; cursor: pointer; display: grid; place-items: center; border-radius: 50%; }
+.l-dot span { width: 8px; height: 8px; border-radius: 50%; background: var(--ink-1); transition: transform .3s var(--ease), background .3s; display: block; }
+.l-dot:hover span { background: var(--ink-2); }
+.l-dot.is-on span { background: var(--ink-3); transform: scale(1.5); }
+.l-dot:focus-visible { outline: 2px solid var(--accent); outline-offset: -6px; }
+.l-shots__now { font-size: .9rem !important; } .l-shots__hint { color: var(--ink-1); }
+.l-caption a { color: var(--ink-3); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--ink-1); }
+
+/* listen: the glass listens (five bars breathe over the home page), then the real ask capture paints in */
+.bezel--listen .frame { transition: opacity 0s; }                     /* frames swap under the refresh, never fade */
+.bezel--listen .frame--idle { opacity: 1; } .bezel--listen .frame--ask { opacity: 0; }
+.in .bezel--listen .screen { animation: sk-eink .4s forwards 2s; }          /* the glass repaints after two seconds of listening */
+.in .bezel--listen .frame--idle { opacity: 0; transition-delay: 2.2s; }
+.in .bezel--listen .frame--ask { opacity: 1; transition-delay: 2.2s; }
+.mic { position: absolute; left: 50%; bottom: 14%; transform: translateX(-50%); display: flex; gap: 12%; align-items: center; height: 14%; width: 11%; opacity: 0; transition: opacity .4s var(--ease); }
+.mic i { flex: 1; height: 100%; border-radius: 999px; background: #141414; transform: scaleY(.2); transform-origin: center; }
+.in .mic { opacity: 1; animation: mic-out .3s var(--ease) 1.9s forwards; }
+.in .mic i { animation: mic-bar 1s ease-in-out infinite alternate; }
+.in .mic i:nth-child(2) { animation-delay: .12s; } .in .mic i:nth-child(3) { animation-delay: .24s; }
+.in .mic i:nth-child(4) { animation-delay: .36s; } .in .mic i:nth-child(5) { animation-delay: .48s; }
+@keyframes mic-bar { from { transform: scaleY(.2); } to { transform: scaleY(1); } }
+@keyframes mic-out { to { opacity: 0; } }
+
+/* sleep: the page dims, the glass stays */
+.l-dark { position: relative; }
+.l-dark::before { content: ""; position: absolute; inset: 0 -50vw; background: #15171a; z-index: -1; opacity: 0; transition: opacity .4s var(--ease); }
+.l-dark.in::before { opacity: 1; }
+.l-dark.in h2 { color: #ecebe6; } .l-dark.in p { color: #a2a39f; } .l-dark.in code { background: #1d1f23; border-color: #4d4f54; color: #ecebe6; }
+.l-dark .bezel { border-color: #b8b7b1; box-shadow: 0 1px 0 #fff inset, 0 40px 80px -30px rgba(0,0,0,.9); }  /* lit shell in a dark room: the point of the section */
+[data-md-color-scheme="slate"] .l-dark::before { background: #0d0e10; }
+
+/* pocket: the device stands up. The bezel turns −90° (a landscape box, so the column gets 21 % vertical air = (W−H)/2)
+   and the glass crossfades from the flat capture to the real portrait one (480×800, drawn rotated +90° so it reads
+   upright once the shell has turned). Transform/opacity only. */
+.l-device--turn { padding: 21% 0; }
+.bezel--pocket { transform: rotate(-6deg); transition: transform .4s var(--ease); }
+.l-reveal.in .bezel--pocket { transform: rotate(-90deg); }
+.bezel--pocket .frame { transition: opacity 0s .55s; }                 /* swapped while the refresh is opaque */
+.l-reveal.in .bezel--pocket .screen { animation: sk-eink .4s forwards .35s; }  /* the IMU noticed; the page turns with me */
+.bezel--pocket .frame--land { opacity: 1; }
+.bezel--pocket .frame--port { inset: auto; left: 20%; top: -33.333%; width: 60%; height: 166.667%; transform: rotate(90deg); opacity: 0; }
+.l-reveal.in .bezel--pocket .frame--land { opacity: 0; }
+.l-reveal.in .bezel--pocket .frame--port { opacity: 1; }
+
+/* ota */
+.ota-steps { display: grid; gap: 1rem; max-width: 34rem; margin: 0 auto; }
+.ota-step { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; border: var(--hairline); border-radius: 14px; padding: 1.5rem 1.75rem; font-size: 1.15rem; background: var(--ink-0); opacity: 0; transform: translateX(1rem); transition: opacity .4s var(--ease), transform .4s var(--ease); }
+.in .ota-step { opacity: 1; transform: none; }
+.in .ota-step:nth-child(2) { transition-delay: .15s; } .in .ota-step:nth-child(3) { transition-delay: .3s; }
+.ota-step b { font-family: var(--md-code-font); font-weight: 600; font-size: 1.15rem; } .ota-step span { color: var(--ink-2); font-size: 1rem; text-align: right; }
+
+/* limits + spec */
+.l-limits ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 1rem; grid-template-columns: repeat(3, 1fr); }
+.l-limits li { border-top: 2px solid var(--ink-3); padding-top: 1rem; font-size: 1.05rem; line-height: 1.45; color: var(--ink-2); }
+.l-limits li b { color: var(--ink-3); display: block; margin-bottom: .25rem; font-size: 1.25rem; letter-spacing: -0.01em; }
+.l-spec dl { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: var(--hairline); border-left: var(--hairline); margin: 0; }
+.l-spec dl > div { border-right: var(--hairline); border-bottom: var(--hairline); padding: 1.1rem 1rem; }
+.l-spec dt { font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-2); }
+.l-spec dd { margin: .3rem 0 0; font-weight: 600; font-size: 1.05rem; letter-spacing: -0.01em; }
+.l-foot { text-align: center; padding: 3rem 1.25rem 2rem; color: var(--ink-2); font-size: .9rem; }
+.l-foot p { max-width: 60ch; margin: 0 auto; font-size: .9rem; }
+.l-foot a { color: var(--ink-3); }
+/* numbers strip: five facts, counted up once on reveal */
+.l-numbers ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, auto); justify-content: space-between; gap: 1rem 2.5rem; border-top: var(--hairline); padding-top: 2rem; }
+.l-numbers li { display: flex; flex-direction: column; gap: .35rem; }
+.l-numbers b { font-size: clamp(2rem, 4.2vw, 3.4rem); font-weight: 700; letter-spacing: -0.04em; line-height: 1; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.l-numbers li > span { font-size: .95rem; color: var(--ink-2); }
+
+/* closing install: the product's one action, on the page itself */
+.l-install { text-align: center; max-width: 46rem !important; padding-block: clamp(5rem, 14vh, 9rem) !important; }
+.l-install h2 { font-size: clamp(2rem, 5vw, 3.6rem); letter-spacing: -0.035em; margin: 0 0 1rem; }
+.l-install p { margin: 0 auto; }
+.l-install__row { display: flex; gap: .75rem; justify-content: center; flex-wrap: wrap; margin: 2rem 0 1.25rem; }
+.l-btn--big { padding: 1rem 1.6rem; font-size: 1.05rem; }
+.l-btn--big small { font-weight: 400; opacity: .7; margin-left: .4em; font-family: var(--md-code-font); font-size: .75em; }
+.l-install .l-fine { text-align: center; }
+.l-install .l-fine code { white-space: normal; word-break: break-all; }
+
+.l-manual { max-width: 44rem !important; border-top: var(--hairline); border-bottom: var(--hairline); }
+.l-manual .md-typeset { font-size: 1.05rem; }
+.l-manual .md-typeset h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); letter-spacing: -0.02em; margin: 0 0 .75rem; }
+.l-manual .md-typeset p { max-width: none; font-size: 1.05rem; }
+.l-manual .md-typeset a { color: var(--ink-3); text-decoration: underline; text-decoration-color: var(--ink-1); text-underline-offset: 3px; }
+.l-manual .md-typeset a:hover { text-decoration-color: var(--accent); }
+.l-manual .md-typeset ul { list-style: none; margin: 1.5rem 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 2.5rem; }
+.l-manual .md-typeset li { margin: 0; padding: .9rem 0; border-top: var(--hairline); font-size: 1rem; line-height: 1.45; color: var(--ink-2); }
+.l-manual .md-typeset li strong { color: var(--ink-3); }
+.l-manual .md-typeset li a { text-decoration: none; }
+.l-manual .md-typeset li a:hover { color: var(--accent); }
+.l-foot { border-top: var(--hairline); max-width: 72rem; margin: 0 auto; }
+
+/* small screens: single column, device first */
+@media (max-width: 60em) {
+  .l-hero, .l-split, .l-pin { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; min-height: 0; }
+  .l-fine code, .l-fine__desk { display: none; }  /* a phone cannot flash me: Web Serial is desktop Chrome/Edge only */
+  .l-fine__phone { display: inline; }
+  .l-cta .l-btn { display: block; text-align: center; margin-right: 0; }
+  .l-hero .l-device { order: 1; max-width: 26rem; margin: .5rem auto 0; }   /* words first: the verb is on the first screen */
+  .l-cta { display: flex; flex-direction: column; }
+  .l-cta__install { order: 2; background: transparent; color: var(--ink-3); }          /* a phone cannot flash me… */
+  .l-cta__read { order: 1; background: var(--ink-3); color: var(--paper); }            /* …so reading is the filled verb */
+  .l-manual .md-typeset ul { grid-template-columns: 1fr; }
+  .l-split .l-copy { order: 0 !important; }
+  .l-split .l-device { max-width: 26rem; margin: 0 auto; width: 100%; }
+  .l-pin__device { position: sticky; top: 3.2rem; z-index: 1; padding: .75rem 0; background: var(--paper); max-width: 26rem; margin: 0 auto; width: 100%; }
+  .l-step { min-height: 55vh; }
+  .l-h1 { font-size: clamp(2.6rem, 14vw, 4rem); }
+  .l-dots { gap: 0; margin-inline: -.5rem; } .l-dot { flex: 0 0 44px; }
+  .l-limits ul, .l-spec dl { grid-template-columns: 1fr 1fr; }
+  .l-numbers ul { grid-template-columns: 1fr 1fr; } .l-numbers li:last-child { grid-column: span 2; }
+  .l-limits ul { grid-template-columns: 1fr; }
+}
+
+/* reduced motion: everything static, everything visible */
+@media (prefers-reduced-motion: reduce) {
+  .landing *, .landing *::before { animation: none !important; transition: none !important; }
+  .l-hero .l-h1 span, .l-hero .l-lead, .l-hero .l-cta, .l-hero .l-fine, .l-hero .l-device, .l-reveal > *, .ota-step { opacity: 1 !important; transform: none !important; }
+  .mic { display: none; } .bezel--listen .frame--idle { opacity: 0 !important; } .bezel--listen .frame--ask { opacity: 1 !important; transition: none !important; }
+  .bezel--pocket { transform: rotate(-90deg) !important; } .bezel--pocket .frame--land { opacity: 0 !important; } .bezel--pocket .frame--port { opacity: 1 !important; transform: rotate(90deg) !important; }
+  .l-dark::before { opacity: 1; } .l-dark h2 { color: #ecebe6; } .l-dark p { color: #a2a39f; }
+}
+
+/* Home drawer: phone-only. Desktop hides it (the landing has its own header links). */
+@media screen and (min-width: 76.25em) { .l-drawer { display: none; } }
+.landing-shell .md-main__inner { margin: 0; padding: 0; min-height: 0; }

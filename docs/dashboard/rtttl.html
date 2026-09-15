@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>🧲 sticky — rtttl composer</title>
+<style>
+  :root {
+    --bg: #0f1115; --panel: #171a20; --border: #262b34; --ink: #e6e8ea;
+    --dim: #8892a0; --accent: #7bd88f; --warn: #f3b562; --err: #ee6a6a;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  }
+  html, body { background: var(--bg); color: var(--ink); font-family: system-ui, sans-serif; margin: 0; padding: 0; }
+  header { padding: 14px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: baseline; gap: 12px; }
+  header h1 { margin: 0; font-size: 18px; font-weight: 500; }
+  header .sub { color: var(--dim); font-size: 13px; }
+  header .back { margin-left: auto; }
+  header a { color: var(--dim); text-decoration: none; border: 1px solid var(--border); padding: 4px 10px; border-radius: 6px; }
+  header a:hover { color: var(--ink); border-color: var(--dim); }
+  main { max-width: 1200px; margin: 0 auto; padding: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+  .card h2 { margin: 0 0 10px; font-size: 14px; font-weight: 500; color: var(--dim); text-transform: uppercase; letter-spacing: 0.05em; }
+  textarea {
+    width: 100%; min-height: 140px; background: #0a0c10; color: var(--ink);
+    border: 1px solid var(--border); border-radius: 6px; padding: 10px;
+    font-family: var(--mono); font-size: 12px; line-height: 1.5; resize: vertical; box-sizing: border-box;
+  }
+  select {
+    background: #212630; color: var(--ink); border: 1px solid var(--border);
+    padding: 6px 10px; border-radius: 6px; font-family: inherit; font-size: 13px;
+  }
+  .row { display: flex; gap: 10px; align-items: center; margin-top: 10px; flex-wrap: wrap; }
+  button {
+    background: #212630; color: var(--ink); border: 1px solid var(--border);
+    padding: 6px 14px; border-radius: 6px; font-family: inherit; font-size: 13px; cursor: pointer;
+  }
+  button:hover:not(:disabled) { border-color: var(--dim); }
+  button.primary { background: var(--accent); color: #0a0c10; border-color: var(--accent); font-weight: 500; }
+  button.primary:hover:not(:disabled) { background: #9be0a8; }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  canvas { background: #0a0c10; border: 1px solid var(--border); border-radius: 6px; width: 100%; height: auto; display: block; }
+  .stats { font-family: var(--mono); font-size: 12px; color: var(--dim); margin-top: 8px; }
+  .msg { padding: 8px 10px; border-radius: 6px; margin-top: 10px; font-family: var(--mono); font-size: 12px; white-space: pre-wrap; }
+  .msg.ok { background: rgba(123, 216, 143, 0.1); color: var(--accent); border: 1px solid rgba(123, 216, 143, 0.3); }
+  .msg.err { background: rgba(238, 106, 106, 0.1); color: var(--err); border: 1px solid rgba(238, 106, 106, 0.3); }
+  .tooltip { position: relative; display: inline-block; }
+  .tooltip .tip {
+    visibility: hidden; background: #0a0c10; color: var(--ink); text-align: center;
+    padding: 6px 10px; border-radius: 6px; position: absolute; z-index: 1;
+    bottom: 125%; left: 50%; transform: translateX(-50%); white-space: nowrap;
+    font-size: 12px; border: 1px solid var(--border);
+  }
+  .tooltip:hover .tip { visibility: visible; }
+  .full-width { grid-column: 1 / -1; }
+  .legend { font-family: var(--mono); font-size: 11px; color: var(--dim); line-height: 1.6; }
+  label { font-size: 13px; color: var(--dim); }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>🧲 sticky — rtttl composer</h1>
+  <span class="sub">piezo tunes · square-wave preview · GPIO48 semantics</span>
+  <span class="back"><a href="/">← dashboard</a></span>
+</header>
+<main>
+  <section class="card">
+    <h2>RTTTL string</h2>
+    <div class="row">
+      <label for="preset">preset:</label>
+      <select id="preset"></select>
+    </div>
+    <textarea id="src" spellcheck="false"></textarea>
+    <div class="row">
+      <button id="play" class="primary">▶ Preview</button>
+      <button id="stop" disabled>■ Stop</button>
+      <span class="tooltip">
+        <button id="send" disabled>Send to device</button>
+        <span class="tip">chime/play verb not in firmware yet</span>
+      </span>
+    </div>
+    <div id="msg" class="msg" style="display:none"></div>
+    <div class="legend">
+      format: <b>name:d=N,o=N,b=N:notes</b> · defaults d=4 o=6 b=63 · dotted = ×1.5 (accepts 4e.6 and 4e6.) ·
+      p = rest · octaves 4–7 · 10ms inter-note gap (piezo articulation, per corpus §3)
+    </div>
+  </section>
+  <section class="card">
+    <h2>Piano roll</h2>
+    <canvas id="roll" width="760" height="360"></canvas>
+    <div id="stats" class="stats">—</div>
+  </section>
+</main>
+<script>
+"use strict";
+// ── corpus presets (docs/research/RTTTL_CORPUS.md §2, all 12) ──────────
+const PRESETS = [
+  "Nokia:d=4,o=5,b=180:8e6,8d6,f#,g#,8c#6,8b,d,e,8b,8a,c#,e,2a",
+  "Boot:d=16,o=6,b=140:c,e,g,8c7",
+  "Success:d=16,o=6,b=160:g,8c7",
+  "Fail:d=8,o=5,b=120:e,c,2a4",
+  "Notify:d=32,o=7,b=160:c,p,c",
+  "Ping:d=32,o=7,b=180:e",
+  "Alert:d=16,o=6,b=200:a,p,a,p,a",
+  "OdeToJoy:d=4,o=5,b=140:e,e,f,g,g,f,e,d,c,c,d,e,e.,8d,2d",
+  "FurElise:d=8,o=5,b=125:e6,d#6,e6,d#6,e6,b,d6,c6,2a",
+  "Scale:d=16,o=5,b=160:c,d,e,f,g,a,b,c6",
+  "Shave:d=4,o=5,b=140:c6,8g,8g,a,g,p,b,c6",
+  "Doom:d=16,o=5,b=180:e4,e4,e5,e4,e4,d5,e4,e4,c5,e4,e4,a#4",
+];
+
+// ── parser (spec §1: name:defaults:notes) ──────────────────────────────
+const SEMI = { c:0, "c#":1, d:2, "d#":3, e:4, f:5, "f#":6, g:7, "g#":8, a:9, "a#":10, b:11 };
+const DURS = [1,2,4,8,16,32];
+const GAP_MS = 10; // inter-note gap, corpus §3
+
+function freqHz(pitch, oct) {
+  return 261.63 * Math.pow(2, oct - 4) * Math.pow(2, SEMI[pitch] / 12);
+}
+
+function parseRTTTL(src) {
+  const errs = [];
+  const s = src.trim();
+  if (!s) return { errs: ["empty input"], notes: [], name: "", d: 4, o: 6, b: 63 };
+  const parts = s.split(":");
+  if (parts.length !== 3) return { errs: [`expected 3 colon-separated sections (name:defaults:notes), got ${parts.length}`], notes: [] };
+  const name = parts[0].trim();
+  if (name.length > 10) errs.push(`name "${name}" > 10 chars (informational, tolerated)`);
+  // defaults: d=N,o=N,b=N any order, all optional (spec defaults d=4 o=6 b=63)
+  let d = 4, o = 6, b = 63;
+  const defStr = parts[1].trim();
+  if (defStr) {
+    for (const kvRaw of defStr.split(",")) {
+      const kv = kvRaw.trim().toLowerCase();
+      if (!kv) continue;
+      const m = kv.match(/^([dob])\s*=\s*(\d+)$/);
+      if (!m) { errs.push(`bad default "${kvRaw}" (want d=N, o=N or b=N)`); continue; }
+      const v = parseInt(m[2], 10);
+      if (m[1] === "d") { if (!DURS.includes(v)) errs.push(`d=${v} not in 1/2/4/8/16/32`); else d = v; }
+      else if (m[1] === "o") { if (v < 4 || v > 7) errs.push(`o=${v} out of range 4–7`); else o = v; }
+      else { if (v < 40 || v > 900) errs.push(`b=${v} implausible tempo`); else b = v; }
+    }
+  }
+  const whole = 240000 / b; // 4 beats in ms
+  const notes = [];
+  const toks = parts[2].split(",");
+  toks.forEach((tokRaw, i) => {
+    const tok = tokRaw.trim().toLowerCase().replace(/\s+/g, "");
+    if (!tok) { errs.push(`note ${i + 1}: empty token`); return; }
+    // [duration] pitch [octave] [.] — dot accepted before OR after octave
+    const m = tok.match(/^(\d+)?([a-gp]#?)(\.)?([4-7])?(\.)?$/);
+    if (!m) { errs.push(`note ${i + 1}: cannot parse "${tokRaw}"`); return; }
+    const [, durS, pitch, dot1, octS, dot2] = m;
+    let dur = d;
+    if (durS !== undefined) {
+      dur = parseInt(durS, 10);
+      if (!DURS.includes(dur)) { errs.push(`note ${i + 1}: duration ${dur} not in 1/2/4/8/16/32`); return; }
+    }
+    if (pitch !== "p" && !(pitch in SEMI)) { errs.push(`note ${i + 1}: bad pitch "${pitch}"`); return; }
+    if (pitch === "p" && octS !== undefined) errs.push(`note ${i + 1}: rest "p" takes no octave (tolerated)`);
+    const oct = octS !== undefined ? parseInt(octS, 10) : o;
+    const dotted = !!(dot1 || dot2);
+    let ms = whole / dur;
+    if (dotted) ms *= 1.5;
+    notes.push({
+      raw: tokRaw.trim(), rest: pitch === "p", pitch, oct,
+      freq: pitch === "p" ? 0 : freqHz(pitch, oct),
+      ms, dotted,
+    });
+  });
+  if (notes.length === 0 && errs.length === 0) errs.push("no notes");
+  return { errs, notes, name, d, o, b };
+}
+
+// ── DOM ────────────────────────────────────────────────────────────────
+const $src = document.getElementById("src");
+const $preset = document.getElementById("preset");
+const $play = document.getElementById("play");
+const $stop = document.getElementById("stop");
+const $msg = document.getElementById("msg");
+const $stats = document.getElementById("stats");
+const $roll = document.getElementById("roll");
+const ctx2d = $roll.getContext("2d");
+
+PRESETS.forEach((p, i) => {
+  const opt = document.createElement("option");
+  opt.value = i; opt.textContent = p.split(":")[0];
+  $preset.appendChild(opt);
+});
+
+function showMsg(kind, text) {
+  $msg.style.display = "block";
+  $msg.className = "msg " + kind;
+  $msg.textContent = text;
+}
+function hideMsg() { $msg.style.display = "none"; }
+
+// ── piano roll (canvas, note blocks on time axis) ──────────────────────
+function midiIndex(n) { return (n.oct * 12) + SEMI[n.pitch]; } // rank within o4–o7 span
+function drawRoll(notes, playheadMs = -1) {
+  const W = $roll.width, H = $roll.height;
+  ctx2d.clearRect(0, 0, W, H);
+  ctx2d.fillStyle = "#0a0c10"; ctx2d.fillRect(0, 0, W, H);
+  if (!notes.length) return;
+  const totalMs = notes.reduce((a, n) => a + n.ms, 0);
+  const pitched = notes.filter(n => !n.rest);
+  const lo = pitched.length ? Math.min(...pitched.map(midiIndex)) - 1 : 48;
+  const hi = pitched.length ? Math.max(...pitched.map(midiIndex)) + 1 : 96;
+  const span = Math.max(hi - lo, 4);
+  const padL = 36, padT = 8, padB = 20;
+  const plotW = W - padL - 8, plotH = H - padT - padB;
+  // horizontal pitch gridlines at octave boundaries (c of each octave)
+  ctx2d.font = "10px ui-monospace, monospace";
+  for (let m = Math.ceil(lo / 12) * 12; m <= hi; m += 12) {
+    const y = padT + plotH - ((m - lo) / span) * plotH;
+    ctx2d.strokeStyle = "#1c212b"; ctx2d.beginPath();
+    ctx2d.moveTo(padL, y); ctx2d.lineTo(W - 8, y); ctx2d.stroke();
+    ctx2d.fillStyle = "#5a6474"; ctx2d.fillText("c" + (m / 12), 6, y + 3);
+  }
+  // note blocks
+  let t = 0;
+  for (const n of notes) {
+    const x = padL + (t / totalMs) * plotW;
+    const w = Math.max(((n.ms - GAP_MS) / totalMs) * plotW, 1.5); // visualize the 10ms gap too
+    if (!n.rest) {
+      const y = padT + plotH - ((midiIndex(n) - lo) / span) * plotH;
+      const hRow = Math.max(plotH / span, 4);
+      ctx2d.fillStyle = n.dotted ? "#f3b562" : "#7bd88f";
+      ctx2d.fillRect(x, y - hRow / 2, w, hRow);
+    } else {
+      ctx2d.fillStyle = "#2a3140";
+      ctx2d.fillRect(x, padT + plotH - 3, w, 3);
+    }
+    t += n.ms;
+  }
+  // time axis labels
+  ctx2d.fillStyle = "#5a6474";
+  ctx2d.fillText("0", padL, H - 6);
+  ctx2d.fillText((totalMs / 1000).toFixed(2) + "s", W - 46, H - 6);
+  // playhead
+  if (playheadMs >= 0) {
+    const x = padL + (playheadMs / totalMs) * plotW;
+    ctx2d.strokeStyle = "#ee6a6a"; ctx2d.beginPath();
+    ctx2d.moveTo(x, padT); ctx2d.lineTo(x, padT + plotH); ctx2d.stroke();
+  }
+}
+
+// ── Web Audio preview — square osc per note, 10ms gaps, piezo-ish ─────
+let audioCtx = null, playing = false, playToken = 0, rafId = 0;
+function ensureCtx() {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  if (audioCtx.state === "suspended") audioCtx.resume();
+  return audioCtx;
+}
+
+function play(notes) {
+  const ac = ensureCtx();
+  playing = true; playToken++;
+  const token = playToken;
+  $play.disabled = true; $stop.disabled = false;
+  const t0 = ac.currentTime + 0.05;
+  const master = ac.createGain();
+  // piezo-ish: modest level + gentle highpass (small piezos have no lows)
+  master.gain.value = 0.18;
+  const hp = ac.createBiquadFilter();
+  hp.type = "highpass"; hp.frequency.value = 300;
+  master.connect(hp).connect(ac.destination);
+  let t = t0;
+  for (const n of notes) {
+    if (!n.rest && n.freq > 0) {
+      const osc = ac.createOscillator();
+      osc.type = "square";
+      osc.frequency.value = n.freq;
+      const g = ac.createGain();
+      const on = Math.max((n.ms - GAP_MS) / 1000, 0.005); // duty-off 10ms early
+      g.gain.setValueAtTime(1, t);
+      g.gain.setValueAtTime(1, t + on - 0.002);
+      g.gain.linearRampToValueAtTime(0, t + on); // 2ms declick, honest square otherwise
+      osc.connect(g).connect(master);
+      osc.start(t); osc.stop(t + on + 0.01);
+    }
+    t += n.ms / 1000;
+  }
+  const totalMs = notes.reduce((a, n) => a + n.ms, 0);
+  const startWall = performance.now();
+  function tick() {
+    if (!playing || token !== playToken) return;
+    const el = performance.now() - startWall;
+    drawRoll(notes, Math.min(el, totalMs));
+    $stats.textContent = statsLine(notes) + ` · ${(el / 1000).toFixed(2)}s`;
+    if (el < totalMs + 60) { rafId = requestAnimationFrame(tick); }
+    else { stopPlayback(notes); }
+  }
+  rafId = requestAnimationFrame(tick);
+}
+
+function stopPlayback(notes) {
+  playing = false; playToken++;
+  cancelAnimationFrame(rafId);
+  $play.disabled = false; $stop.disabled = true;
+  if (notes) { drawRoll(notes); $stats.textContent = statsLine(notes); }
+}
+
+function statsLine(notes) {
+  const totalMs = notes.reduce((a, n) => a + n.ms, 0);
+  const pitched = notes.filter(n => !n.rest).length;
+  return `${notes.length} notes (${pitched} pitched) · ${(totalMs / 1000).toFixed(2)}s total`;
+}
+
+// ── wiring ─────────────────────────────────────────────────────────────
+function reparse() {
+  const { errs, notes, name, d, o, b } = parseRTTTL($src.value);
+  if (errs.length) {
+    showMsg("err", errs.map(e => "✗ " + e).join("\n"));
+  } else {
+    showMsg("ok", `✓ ${name || "(unnamed)"} · d=${d} o=${o} b=${b} · ${statsLine(notes)}`);
+  }
+  drawRoll(notes);
+  $stats.textContent = notes.length ? statsLine(notes) : "—";
+  return { errs, notes };
+}
+
+$src.addEventListener("input", reparse);
+$preset.addEventListener("change", () => {
+  $src.value = PRESETS[$preset.value];
+  stopPlayback();
+  reparse();
+});
+$play.addEventListener("click", () => {
+  const { errs, notes } = reparse();
+  if (errs.length) return;
+  play(notes);
+});
+$stop.addEventListener("click", () => {
+  const { notes } = parseRTTTL($src.value);
+  stopPlayback(notes);
+});
+
+// initial state
+$src.value = PRESETS[0];
+reparse();
+</script>
+</body>
+</html>

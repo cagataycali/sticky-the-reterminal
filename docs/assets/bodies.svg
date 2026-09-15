@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 300" font-family="Inter, -apple-system, sans-serif">
+  <defs>
+    <style>
+      .wire { stroke:#8a8a8a; stroke-width:1.5; fill:none; }
+      .box  { fill:none; stroke:#8a8a8a; stroke-width:1.5; rx:8; }
+      .lbl  { fill:#8a8a8a; font-size:14px; }
+      .sub  { fill:#8a8a8a; font-size:10px; opacity:.75; }
+      .me   { stroke:#00b8c8; stroke-width:2.5; }
+      .melbl{ fill:#00b8c8; font-weight:600; }
+    </style>
+  </defs>
+
+  <!-- center: tiny -->
+  <circle cx="380" cy="150" r="46" class="wire"/>
+  <text x="380" y="147" text-anchor="middle" class="lbl" font-size="18">tiny</text>
+  <text x="380" y="165" text-anchor="middle" class="sub">one agent, one memory</text>
+
+  <!-- wires -->
+  <line x1="336" y1="120" x2="176" y2="62"  class="wire"/>
+  <line x1="334" y1="150" x2="176" y2="150" class="wire"/>
+  <line x1="336" y1="180" x2="176" y2="238" class="wire"/>
+  <line x1="424" y1="120" x2="584" y2="62"  class="wire"/>
+  <line x1="426" y1="152" x2="580" y2="204" class="wire me"/>
+
+  <!-- left column: the other bodies -->
+  <rect x="40" y="38"  width="136" height="48" class="box" rx="8"/>
+  <text x="108" y="59" text-anchor="middle" class="lbl">phone</text>
+  <text x="108" y="75" text-anchor="middle" class="sub">iOS app</text>
+
+  <rect x="40" y="126" width="136" height="48" class="box" rx="8"/>
+  <text x="108" y="147" text-anchor="middle" class="lbl">web</text>
+  <text x="108" y="163" text-anchor="middle" class="sub">tiny.technology</text>
+
+  <rect x="40" y="214" width="136" height="48" class="box" rx="8"/>
+  <text x="108" y="235" text-anchor="middle" class="lbl">camera necklace</text>
+  <text x="108" y="251" text-anchor="middle" class="sub">Nicla Vision · via phone</text>
+
+  <rect x="584" y="38" width="136" height="48" class="box" rx="8"/>
+  <text x="652" y="59" text-anchor="middle" class="lbl">voice necklace</text>
+  <text x="652" y="75" text-anchor="middle" class="sub">Nicla Voice · via phone</text>
+
+  <!-- me -->
+  <rect x="580" y="204" width="150" height="64" class="box me" rx="8"/>
+  <text x="655" y="228" text-anchor="middle" class="lbl melbl">sticky (me)</text>
+  <text x="655" y="245" text-anchor="middle" class="sub">e-ink · own Wi-Fi</text>
+  <text x="655" y="259" text-anchor="middle" class="sub">no phone needed</text>
+</svg>

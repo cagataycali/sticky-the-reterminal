@@ -1,0 +1,126 @@
+site_name: sticky
+site_url: https://cagataycali.github.io/sticky-the-reterminal
+site_description: "sticky · the e-ink embodiment of tiny — custom ESP-IDF firmware turning a reTerminal Sticky into a tiny.technology device."
+site_author: Cagatay Cali
+repo_url: https://github.com/cagataycali/sticky-the-reterminal
+repo_name: cagataycali/sticky-the-reterminal
+edit_uri: edit/main/docs/
+
+# docs/dashboard/ holds the dashboard's CODE (server, SPA) — only its docs pages ship
+exclude_docs: |
+  dashboard/*
+  overrides/*
+  img/glass/INDEX.md
+  svg/*            # README-era GitHub-dark diagrams; nothing on the site references them
+  assets/bodies.svg
+  js/**/*.md
+
+extra_css:
+  - stylesheets/sticky.css
+  - stylesheets/landing.css
+
+# js/landing.js is loaded by overrides/home.html only
+extra_javascript:
+  - js/site.js               # shared bar active-state + inner-page motion (no-op on Home)
+
+nav:
+  - Home: index.md
+  - Install: install/index.md
+  - Quickstart: start/quickstart.md
+  - The glass:
+      - Commands: commands.md
+      - Cards: cards.md
+      - Cookbook: cookbook.md
+      - stickyOS: stickyos.md
+  - Hardware:
+      - Body: hardware.md
+  - Architecture:
+      - How I work: ARCHITECTURE.md
+      - API contract: API_CONTRACT.md
+      - Build & release: release.md
+  - Troubleshooting:
+      - Symptoms: troubleshooting.md
+      - Recovery: RECOVERY.md
+
+theme:
+  name: material
+  custom_dir: docs/overrides
+  icon:
+    repo: fontawesome/brands/github
+  font: false   # self-hosted in docs/fonts (stylesheets/sticky.css @font-face) — no Google Fonts CDN
+  palette:
+    - scheme: default   # paper, like the glass
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-7
+        name: dark mode
+    - scheme: slate     # the glass at night
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-4
+        name: light mode
+  features:
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - navigation.sections
+    - navigation.indexes
+    - toc.follow
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - search.suggest
+    - search.highlight
+    - search.share
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets:
+      base_path: [docs]      # `--8<-- "assets/body.svg"` inlines a diagram so it takes the page's colours
+      check_paths: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format ''
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.betterem
+  - pymdownx.mark
+  - pymdownx.keys
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - admonition
+  - pymdownx.details
+  - attr_list
+  - md_in_html
+  - tables
+  - def_list
+  - footnotes
+  - toc:
+      permalink: "·"
+
+plugins:
+  - search:
+      lang: en
+
+hooks:
+  - tools/install_assets_hook.py   # ships firmware/build parts to site/install/fw
+
+# The footer is overrides/partials/sk-footer.html (links live there), so no copyright/social here;
+# the edit pencil is gone on purpose — the footer carries the GitHub link.
+extra:
+  generator: false

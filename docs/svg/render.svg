@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" font-family="ui-monospace,SFMono-Regular,Menlo,monospace">
+  <style>
+    .bg{fill:#0d1117}.panel{fill:#161b22;stroke:#30363d;stroke-width:1.5}
+    .t{fill:#c9d1d9;font-size:12px}.h{fill:#e6edf3;font-size:13px;font-weight:bold}
+    .dim{fill:#8b949e;font-size:10.5px}.cyan{fill:#58a6ff}.green{fill:#3fb950}
+    .yellow{fill:#d29922}.mag{fill:#bc8cff}
+    .wire{stroke:#30363d;stroke-width:2;fill:none}
+    .ink{fill:#e6e2d8}
+  </style>
+  <rect class="bg" width="960" height="420" rx="12"/>
+  <text x="24" y="32" class="h" font-size="16">render_ui + touch — the screen is a conversation</text>
+
+  <!-- agent -->
+  <rect x="24" y="70" width="190" height="86" class="panel" rx="10"/>
+  <text x="119" y="96" text-anchor="middle" class="h">owner's agent</text>
+  <text x="119" y="116" text-anchor="middle" class="t">composes a card spec</text>
+  <text x="119" y="134" text-anchor="middle" class="dim">any tiny surface · use_device</text>
+
+  <!-- card spec -->
+  <rect x="264" y="52" width="270" height="150" class="panel" rx="10"/>
+  <text x="280" y="76" class="h">envelope prompt</text>
+  <text x="280" y="98"  class="cyan" font-size="11">render_ui {"type":"composite",</text>
+  <text x="292" y="115" class="t" font-size="11">"title":"Dinner",</text>
+  <text x="292" y="132" class="t" font-size="11">"body":"Back 19:30 — pizza in fridge",</text>
+  <text x="292" y="149" class="t" font-size="11">"buttons":[{"id":"done",</text>
+  <text x="292" y="166" class="t" font-size="11">            "label":"Done ✓"}]}</text>
+  <text x="280" y="190" class="dim">types: text · list · kv · chart · image · buttons</text>
+
+  <!-- e-ink device mock -->
+  <rect x="600" y="46" width="336" height="200" rx="14" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+  <rect x="616" y="60" width="304" height="172" rx="4" class="ink"/>
+  <text x="632" y="88" fill="#1c1c1c" font-size="16" font-weight="bold">Dinner</text>
+  <line x1="632" y1="98" x2="904" y2="98" stroke="#1c1c1c" stroke-width="1"/>
+  <text x="632" y="124" fill="#333" font-size="13">Back 19:30 — pizza in fridge</text>
+  <!-- button -->
+  <g>
+    <rect x="632" y="180" width="110" height="34" rx="6" fill="none" stroke="#1c1c1c" stroke-width="2"/>
+    <text x="687" y="202" text-anchor="middle" fill="#1c1c1c" font-size="13" font-weight="bold">Done ✓</text>
+  </g>
+  <!-- e-ink refresh sweep -->
+  <rect x="616" y="60" width="304" height="172" rx="4" fill="#1c1c1c" opacity="0">
+    <animate attributeName="opacity" values="0;0;0.85;0;0" keyTimes="0;0.32;0.38;0.44;1" dur="8s" repeatCount="indefinite"/>
+  </rect>
+  <!-- touch tap ripple -->
+  <circle cx="687" cy="197" r="8" fill="none" stroke="#d29922" stroke-width="3" opacity="0">
+    <animate attributeName="opacity" values="0;0;1;0;0" keyTimes="0;0.55;0.6;0.7;1" dur="8s" repeatCount="indefinite"/>
+    <animate attributeName="r" values="6;6;8;22;22" keyTimes="0;0.55;0.6;0.7;1" dur="8s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- wires: agent -> spec -> device -->
+  <path class="wire" d="M214 113 L264 113"/>
+  <path class="wire" d="M534 113 L600 113"/>
+  <circle r="5" fill="#58a6ff">
+    <animateMotion dur="8s" repeatCount="indefinite" keyPoints="0;0.13;0.3;0.3;1" keyTimes="0;0.15;0.3;0.32;1"
+      path="M119 156 L119 113 L264 113 L534 113 L600 113"/>
+    <animate attributeName="opacity" values="1;1;1;0;0" keyTimes="0;0.15;0.3;0.32;1" dur="8s" repeatCount="indefinite"/>
+  </circle>
+  <text x="556" y="105" class="dim" font-size="10">relay</text>
+
+  <!-- tap event path back -->
+  <path class="wire" stroke-dasharray="4 3" d="M687 246 L687 300 L119 300 L119 156"/>
+  <circle r="5" fill="#d29922">
+    <animateMotion dur="8s" repeatCount="indefinite" keyPoints="0;0;0.4;1;1" keyTimes="0;0.62;0.78;0.92;1"
+      path="M687 246 L687 300 L119 300 L119 160"/>
+    <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.6;0.62;0.92;1" dur="8s" repeatCount="indefinite"/>
+  </circle>
+  <text x="403" y="292" text-anchor="middle" class="yellow" font-size="11">tap → GT911 touch region → POST /api/devices/event {kind:"ui_tap", card_id, button_id}</text>
+  <text x="403" y="316" text-anchor="middle" class="dim">the tap lands in the owner's activity feed → the agent answers with the NEXT card → loop</text>
+
+  <!-- refresh policy strip -->
+  <rect x="24" y="340" width="912" height="60" class="panel" rx="10"/>
+  <text x="40" y="362" class="h">refresh policy (e-ink physics, honestly)</text>
+  <text x="40" y="384" class="t">text/buttons → mono full ~600 ms · clock/stream frames → partial · <tspan class="mag">gray4</tspan> photos → 4-level full (slowest, prettiest) · min 1.5 s between refreshes, bursts coalesce</text>
+</svg>

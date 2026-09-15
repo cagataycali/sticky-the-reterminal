@@ -1,0 +1,211 @@
+{#- home.html — the product page. Extends main.html. -#}
+{% extends "main.html" %}
+
+{% set base = config.site_url | default("") %}
+{% macro glass(src, alt, eager=false, cls="", w=800, h=480) -%}
+  <img class="glass{% if cls %} {{ cls }}{% endif %}" src="{{ src | url }}" alt="{{ alt }}" width="{{ w }}" height="{{ h }}"
+       {% if eager %}fetchpriority="high" decoding="async"{% else %}loading="lazy" decoding="async"{% endif %} />
+{%- endmacro %}
+{% macro bezel(inner, cls="") -%}
+  <div class="bezel{% if cls %} {{ cls }}{% endif %}" aria-hidden="true">
+    <span class="magnet tl"></span><span class="magnet tr"></span><span class="magnet bl"></span><span class="magnet br"></span>
+    <div class="screen">{{ inner }}</div>
+    <span class="btn-ai"></span><span class="btn-up"></span><span class="btn-down"></span>
+  </div>
+{%- endmacro %}
+
+{#- Home wears the SAME bar as every inner page (the shared partial). It keeps Material's
+    ids (__drawer, __search), so the phone drawer below still works. -#}
+{% block header %}{% include "partials/sk-header.html" %}{% endblock %}
+
+{#- Home: no TOC, and the nav is desktop-hidden — but the drawer must EXIST or the
+    header's hamburger toggles nothing on a phone (owner report, iOS). -#}
+{% block site_nav %}
+  {% if nav %}
+  <div class="md-sidebar md-sidebar--primary l-drawer" data-md-component="sidebar" data-md-type="navigation">
+    <div class="md-sidebar__scrollwrap"><div class="md-sidebar__inner">{% include "partials/nav.html" %}</div></div>
+  </div>
+  {% endif %}
+{% endblock %}
+
+{% block hero %}
+<main class="landing" id="landing">
+
+  <section class="l-hero l-reveal">
+    <div class="l-copy">
+      <h1 class="l-h1"><span>Hi.</span> <span>I'm Sticky.</span></h1>
+      <p class="l-lead">A 70-gram e-ink card your tiny lives in. Hold a button and ask; the answer is painted on glass that keeps its picture with the power off. Custom firmware for Seeed's reTerminal E1001 &mdash; installed from this page.</p>
+      <p class="l-cta">
+        <a class="l-btn l-btn--primary l-cta__install" href="{{ 'install/' | url }}"><span class="l-fine__desk">Install in your browser</span><span class="l-fine__phone">Install &mdash; from a laptop</span></a>
+        <a class="l-btn l-cta__read" href="{{ 'start/quickstart/' | url }}">Read the manual</a>
+      </p>
+      <p class="l-fine"><span class="l-fine__desk">Chrome or Edge, one USB cable, about five minutes. Prefer a terminal?</span><span class="l-fine__phone">Flashing needs a computer &mdash; Chrome or Edge, one USB cable, about five minutes. Read on here; install from a desk.</span><code>curl -fsSL {{ config.site_url | trim('/') }}/install.sh | sh</code></p>
+    </div>
+    <div class="l-device">
+      {{ bezel(glass('img/home-live.png', 'my home screen — the real 800×480 framebuffer', eager=true), 'bezel--hero') }}
+      <p class="l-caption">My actual screen, fetched with my own <code>screenshot</code> verb. Not a mockup.</p>
+    </div>
+  </section>
+
+  <section class="l-story l-pin" data-frames>
+    <div class="l-pin__device">
+      {{ bezel(
+          glass('img/glass/messages.png', 'inbox card', cls='frame is-on') ~
+          glass('img/glass/sensors.png', 'sensors page', cls='frame') ~
+          glass('img/glass/universe.png', 'agent roster', cls='frame') ~
+          glass('img/glass/wifi.png', 'wi-fi page', cls='frame')
+      ) }}
+    </div>
+    <div class="l-pin__steps">
+      <div class="l-step l-reveal" data-frame="0"><h2>I paint what your tiny says.</h2><p>Text, list, key-value, chart, QR, menu, keyboard. Your agent sends a spec; I render it in four grays. Buttons become touch regions, and your tap goes back as an event.</p></div>
+      <div class="l-step l-reveal" data-frame="1"><h2>I know how I feel.</h2><p>Temperature, humidity, a fuel gauge, a clock, an IMU — one page, read live from the silicon.</p></div>
+      <div class="l-step l-reveal" data-frame="2"><h2>One agent, one memory.</h2><p>Every tiny on your account is on my roster. I am the surface; the thinking stays where it is strong.</p></div>
+      <div class="l-step l-reveal" data-frame="3"><h2>My own Wi-Fi. No phone in between.</h2><p>A heartbeat every 30 seconds, a poll for work every 5. Roaming list, RSSI, and a join form on my own glass.</p></div>
+    </div>
+  </section>
+
+  <section class="l-story l-split l-reveal" id="shots" data-shots>
+    <div class="l-copy">
+      <h2>Eight shapes. One spec.</h2>
+      <p>Text, list, key-value, menu, QR, chart, chat, composite. Your agent sends a few lines of JSON; I paint them in four grays and hand your taps back as events.</p>
+      <p class="l-shots__now">Showing: <code data-shot-label>text</code> <span class="l-shots__hint">— hover to hold, tap a dot to pick.</span></p>
+    </div>
+    <div class="l-device">
+      {{ bezel(
+          glass('img/glass/card-text.png', 'text card', cls='frame is-on') ~
+          glass('img/glass/card-list.png', 'list card', cls='frame') ~
+          glass('img/glass/card-kv.png', 'key-value card', cls='frame') ~
+          glass('img/glass/card-menu.png', 'menu card', cls='frame') ~
+          glass('img/glass/card-qr.png', 'QR card', cls='frame') ~
+          glass('img/glass/card-chart.png', 'chart card', cls='frame') ~
+          glass('img/glass/card-chat.png', 'chat card', cls='frame') ~
+          glass('img/glass/card-composite.png', 'composite card', cls='frame'),
+          'bezel--shots') }}
+      <div class="l-dots" role="tablist" aria-label="card types">
+        {% for n in ['text','list','kv','menu','qr','chart','chat','composite'] %}<button class="l-dot{% if loop.first %} is-on{% endif %}" role="tab" aria-selected="{{ 'true' if loop.first else 'false' }}" data-shot="{{ loop.index0 }}" aria-label="{{ n }}"><span></span></button>{% endfor %}
+      </div>
+      <p class="l-caption">Every frame is a <code>screenshot</code> of my glass after a <code>render_ui</code> call. The specs are in <a href="{{ 'cards/' | url }}">Cards</a>.</p>
+    </div>
+  </section>
+
+  <section class="l-story l-split l-reveal" id="listen">
+    <div class="l-copy">
+      <h2>Hold the AI button. Speak.</h2>
+      <p>A full agent turn runs — tools, memory, every device you own — and the answer streams onto my glass. This one was asked out loud: <em>“In one short sentence, what is a reTerminal E1001?”</em></p>
+    </div>
+    <div class="l-device">
+      {{ bezel(
+          glass('img/glass/home.png', 'home screen, listening', cls='frame frame--idle') ~
+          glass('img/glass/ask.png', 'the spoken question and the streamed answer on the glass', cls='frame frame--ask') ~
+          '<div class="mic" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>',
+          'bezel--listen') }}
+      <p class="l-caption">Real <code>ask</code> turn, captured with <code>screenshot</code> right after the reply streamed.</p>
+    </div>
+  </section>
+
+  <section class="l-story l-split l-dark l-reveal" id="sleep">
+    <div class="l-copy">
+      <h2>I sleep at ~0 mA.</h2>
+      <p>Microamps, not milliamps: deep sleep measures <b>10&ndash;20&nbsp;&micro;A</b> with the AI button armed to wake me. Say <code>sleep</code> and I show a goodbye card, then power down &mdash; and e-ink holds that image at genuinely zero draw. The page goes dark, the glass does not.</p>
+    </div>
+    <div class="l-device">
+      {{ bezel(glass('img/glass/status.png', 'status page, still on the glass while asleep'), 'bezel--sleep') }}
+    </div>
+  </section>
+
+  <section class="l-story l-split l-reveal" id="pocket">
+    <div class="l-copy">
+      <h2>I live in a pocket.</h2>
+      <p>Face-down for 3 seconds, or walking for 5, and I lock my own inputs — touch, buttons, microphone. Fabric cannot hold my AI button and record you. Hold UP + DOWN for a second to unlock.</p>
+      <p>Stand me on the desk and the page turns with me — the same IMU, the same 800×480 panel, now tall.</p>
+    </div>
+    <div class="l-device l-device--turn">
+      {{ bezel(
+          glass('img/glass/settings.png', 'settings page, lying flat', cls='frame frame--land') ~
+          glass('img/glass/portrait-home.png', 'home screen, standing upright', cls='frame frame--port', w=480, h=800),
+          'bezel--pocket') }}
+    </div>
+  </section>
+
+  <section class="l-story l-split l-reveal" id="ota">
+    <div class="l-copy">
+      <h2>I update myself.</h2>
+      <p>The new image is checked against a pinned sha256, boots as a trial with rollback armed, and only stays if it can heartbeat home. If the new me cannot call, the old me comes back.</p>
+    </div>
+    <div class="l-device">
+      <div class="ota-steps" aria-hidden="true">
+        <div class="ota-step"><b>stage</b><span>sha256 verified</span></div>
+        <div class="ota-step"><b>trial boot</b><span>rollback armed</span></div>
+        <div class="ota-step"><b>heartbeat</b><span>keep — or roll back</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="l-numbers l-reveal" id="numbers" aria-label="by the numbers">
+    <ul>
+      <li><b><span data-count="70">70</span> g</b><span>in the hand</span></li>
+      <li><b><span data-count="800">800</span>×<span data-count="480">480</span></b><span>pixels, four grays</span></li>
+      <li><b><span data-count="3">3</span></b><span>buttons, AI · UP · DOWN</span></li>
+      <li><b><span data-count="23">23</span></b><span>verbs I answer to</span></li>
+      <li><b><span data-count="20">20</span> µA</b><span>asleep, image held</span></li>
+    </ul>
+  </section>
+
+  <section class="l-story l-limits l-reveal" id="limits">
+    <h2>What I won't pretend to do.</h2>
+    <ul>
+      <li><b>No speaker.</b> A buzzer chimes; it never speaks. Voice goes in through my mic and out on my glass.</li>
+      <li><b>No video.</b> A full e-ink refresh is one to two seconds of physics, not firmware.</li>
+      <li><b>No brain on board.</b> My intelligence is your tiny at tiny.technology. Without Wi-Fi the last card stays, but I cannot think alone.</li>
+    </ul>
+  </section>
+
+  <section class="l-spec l-reveal" id="spec">
+    <dl>
+      <div><dt>Display</dt><dd>3.97″ 800×480 · 4 grays</dd></div>
+      <div><dt>Brain stem</dt><dd>ESP32-S3</dd></div>
+      <div><dt>Mass</dt><dd>70 g</dd></div>
+      <div><dt>Body</dt><dd>106 × 65.5 × 7.3 mm</dd></div>
+      <div><dt>Radio</dt><dd>Wi-Fi · BLE</dd></div>
+      <div><dt>Ears</dt><dd>PDM microphone</dd></div>
+      <div><dt>Touch</dt><dd>GT911 capacitive</dd></div>
+      <div><dt>Buttons</dt><dd>AI · UP · DOWN</dd></div>
+      <div><dt>Voice</dt><dd>Buzzer (chimes)</dd></div>
+      <div><dt>Sensors</dt><dd>IMU · temp/RH · RTC · fuel gauge</dd></div>
+      <div><dt>Storage</dt><dd>microSD</dd></div>
+      <div><dt>Battery</dt><dd>750 mAh</dd></div>
+    </dl>
+  </section>
+
+  <section class="l-manual l-reveal" id="manual">
+    <div class="md-typeset">{{ page.content }}</div>
+  </section>
+
+  <section class="l-install l-reveal" id="install">
+    <h2>Plug me in. Press once.</h2>
+    <p>Chrome or Edge on a laptop, one USB cable, about five minutes. The port is called <b>USB Single Serial</b>. The first install erases the flash — that is the honest default.</p>
+    <div class="l-install__row">
+      <esp-web-install-button manifest="{{ 'install/manifest.json' | url }}">
+        <button slot="activate" class="l-btn l-btn--primary l-btn--big">Install Sticky <small>v0.28.0</small></button>
+        <a slot="unsupported" class="l-btn l-btn--primary l-btn--big" href="{{ 'install/' | url }}">Install from a laptop</a>
+        <a slot="not-allowed" class="l-btn l-btn--primary l-btn--big" href="{{ 'install/' | url }}">Open the installer</a>
+      </esp-web-install-button>
+      <a class="l-btn l-btn--big" href="{{ 'install/' | url }}">Prefer a terminal?</a>
+    </div>
+    <p class="l-fine"><code>curl -fsSL https://cagataycali.github.io/sticky-the-reterminal/install.sh | sh</code></p>
+  </section>
+
+</main>
+{% endblock %}
+
+{#- index.md's prose renders inside the landing (#manual); no second content column, no second footer -#}
+{% block container %}{% endblock %}
+{#- one footer for the whole site — the landing's own .l-foot is gone,
+    sk-footer says the same four things (Seeed / Apache-2.0 / GitHub / tiny.technology). -#}
+{% block footer %}{% include "partials/sk-footer.html" %}{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script src="{{ 'js/landing.js' | url }}" defer></script>
+  <script type="module" src="{{ 'js/esp-web-tools/install-button.js' | url }}"></script>
+{% endblock %}

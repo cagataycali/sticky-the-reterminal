@@ -1,0 +1,12 @@
+{
+ "day_start": "07:00", "day_end": "20:00", "session_min": 50, "break_min": 10,
+ "blocks": [
+  {"start": "07:30", "end": "08:20", "label": "Firmware: sd caps drift", "done": true},
+  {"start": "08:30", "end": "09:20", "label": "Firmware: sd caps drift", "done": true},
+  {"start": "10:00", "end": "10:50", "label": "Glass components", "done": true},
+  {"start": "11:00", "end": "11:50", "label": "Glass components", "done": false},
+  {"start": "13:30", "end": "14:20", "label": "Fomo: nicla node", "done": false},
+  {"start": "14:30", "end": "15:20", "label": "Fomo: nicla node", "done": false},
+  {"start": "16:00", "end": "16:50", "label": "Writing: launch thread", "done": false}
+ ]
+}

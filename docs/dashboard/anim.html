@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>🧲 sticky — anim composer</title>
+<style>
+  :root {
+    --bg: #0f1115; --panel: #171a20; --border: #262b34; --ink: #e6e8ea;
+    --dim: #8892a0; --accent: #7bd88f; --warn: #f3b562; --err: #ee6a6a;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  }
+  html, body { background: var(--bg); color: var(--ink); font-family: system-ui, sans-serif; margin: 0; padding: 0; }
+  header { padding: 14px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: baseline; gap: 12px; }
+  header h1 { margin: 0; font-size: 18px; font-weight: 500; }
+  header .sub { color: var(--dim); font-size: 13px; }
+  header .back { margin-left: auto; }
+  header a { color: var(--dim); text-decoration: none; border: 1px solid var(--border); padding: 4px 10px; border-radius: 6px; }
+  header a:hover { color: var(--ink); border-color: var(--dim); }
+  main { max-width: 1200px; margin: 0 auto; padding: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+  .card h2 { margin: 0 0 10px; font-size: 14px; font-weight: 500; color: var(--dim); text-transform: uppercase; letter-spacing: 0.05em; }
+  textarea {
+    width: 100%; min-height: 340px; background: #0a0c10; color: var(--ink);
+    border: 1px solid var(--border); border-radius: 6px; padding: 10px;
+    font-family: var(--mono); font-size: 12px; line-height: 1.5; resize: vertical; box-sizing: border-box;
+  }
+  .row { display: flex; gap: 10px; align-items: center; margin-top: 10px; flex-wrap: wrap; }
+  button {
+    background: #212630; color: var(--ink); border: 1px solid var(--border);
+    padding: 6px 14px; border-radius: 6px; font-family: inherit; font-size: 13px; cursor: pointer;
+  }
+  button:hover:not(:disabled) { border-color: var(--dim); }
+  button.primary { background: var(--accent); color: #0a0c10; border-color: var(--accent); font-weight: 500; }
+  button.primary:hover:not(:disabled) { background: #9be0a8; }
+  button.ghost { background: transparent; }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  .preview-wrap { display: flex; flex-direction: column; align-items: center; }
+  canvas {
+    background: #cccccc; border: 2px solid #444; image-rendering: pixelated;
+    max-width: 100%; height: auto;
+  }
+  .stats { font-family: var(--mono); font-size: 12px; color: var(--dim); margin-top: 8px; text-align: center; }
+  .msg { padding: 8px 10px; border-radius: 6px; margin-top: 10px; font-family: var(--mono); font-size: 12px; }
+  .msg.ok { background: rgba(123, 216, 143, 0.1); color: var(--accent); border: 1px solid rgba(123, 216, 143, 0.3); }
+  .msg.warn { background: rgba(243, 181, 98, 0.1); color: var(--warn); border: 1px solid rgba(243, 181, 98, 0.3); }
+  .msg.err { background: rgba(238, 106, 106, 0.1); color: var(--err); border: 1px solid rgba(238, 106, 106, 0.3); }
+  .tooltip { position: relative; display: inline-block; }
+  .tooltip .tip {
+    visibility: hidden; background: #0a0c10; color: var(--ink); text-align: center;
+    padding: 6px 10px; border-radius: 6px; position: absolute; z-index: 1;
+    bottom: 125%; left: 50%; transform: translateX(-50%); white-space: nowrap;
+    font-size: 12px; border: 1px solid var(--border);
+  }
+  .tooltip:hover .tip { visibility: visible; }
+  .presets { display: flex; gap: 6px; flex-wrap: wrap; }
+  .full-width { grid-column: 1 / -1; }
+  .spec-link { color: var(--dim); font-size: 12px; }
+  .spec-link a { color: var(--dim); text-decoration: underline; }
+  .legend { font-family: var(--mono); font-size: 11px; color: var(--dim); line-height: 1.6; }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>🧲 sticky — anim composer</h1>
+  <span class="sub">preview e-ink JSON anim specs · honest ghosting simulation</span>
+  <span class="back"><a href="/">← dashboard</a></span>
+</header>
+<main>
+  <section class="card">
+    <h2>Anim spec (JSON)</h2>
+    <div class="presets">
+      <button class="ghost" data-preset="typewriter">▸ typewriter</button>
+      <button class="ghost" data-preset="progress">▸ progress bar</button>
+      <button class="ghost" data-preset="breathing">▸ breathing dot</button>
+    </div>
+    <textarea id="spec" spellcheck="false"></textarea>
+    <div class="row">
+      <button id="validate">Validate</button>
+      <button id="play" class="primary">▶ Play preview</button>
+      <button id="stop" disabled>■ Stop</button>
+      <span class="tooltip">
+        <button id="send" disabled>Send to device</button>
+        <span class="tip">firmware anim verb not shipped yet</span>
+      </span>
+    </div>
+    <div id="msg"></div>
+    <p class="spec-link">Spec reference: <a href="/anim-spec">docs/research/EINK_ANIMATION.md §4</a></p>
+  </section>
+
+  <section class="card">
+    <h2>Preview (800×480 · e-ink simulator)</h2>
+    <div class="preview-wrap">
+      <canvas id="pv" width="800" height="480" style="width: 100%; max-width: 800px;"></canvas>
+      <div class="stats" id="stats">idle — press ▶ Play</div>
+    </div>
+    <p class="legend">
+      Simulation: 1-bit partials render at 350-500ms cadence per spec. Ghosting
+      accumulates ~2% per partial as gray residue in touched regions; full-flush
+      clears it. Frame budget capped at 64. Region area warned if
+      &gt;half-panel at &lt;500ms.
+    </p>
+  </section>
+
+  <section class="card full-width">
+    <h2>Op vocabulary (client-side validator)</h2>
+    <div class="legend">
+      <b>blit</b> {tile:{x,y,w,h}, glyph|bitmap_b64} — 1-bit pixel push to tile ·
+      <b>card_diff</b> {patch_id} — apply pre-computed patch (agent supplies patch table) ·
+      <b>delay</b> {ms} — pause without update ·
+      <b>flush</b> {} — force full refresh (rare, scene change only) ·
+      <b>Budgets</b>: max_frames=64 · region ≤ 800×480 · flush_every_n_frames ≤ 20 (spinner) / ≤ 40 (typewriter) ·
+      <b>loop</b>: -1 = infinite (ambient only)
+    </div>
+  </section>
+</main>
+
+<script>
+// ── presets ────────────────────────────────────────────────────────────
+const PRESETS = {
+  typewriter: {
+    anim_id: "typewriter_hello",
+    version: 1,
+    mode: "1bit_partial",
+    region: { x: 40, y: 200, w: 400, h: 48 },
+    frame_budget_ms: 400,
+    loop: 1,
+    flush_every_n_frames: 40,
+    frames: [
+      { op: "blit", tile: { x: 40, y: 200, w: 24, h: 48 }, glyph: "H" },
+      { op: "blit", tile: { x: 64, y: 200, w: 24, h: 48 }, glyph: "e" },
+      { op: "blit", tile: { x: 88, y: 200, w: 24, h: 48 }, glyph: "l" },
+      { op: "blit", tile: { x: 112, y: 200, w: 24, h: 48 }, glyph: "l" },
+      { op: "blit", tile: { x: 136, y: 200, w: 24, h: 48 }, glyph: "o" },
+      { op: "delay", ms: 400 },
+      { op: "blit", tile: { x: 160, y: 200, w: 24, h: 48 }, glyph: "," },
+      { op: "blit", tile: { x: 200, y: 200, w: 24, h: 48 }, glyph: "s" },
+      { op: "blit", tile: { x: 224, y: 200, w: 24, h: 48 }, glyph: "t" },
+      { op: "blit", tile: { x: 248, y: 200, w: 24, h: 48 }, glyph: "i" },
+      { op: "blit", tile: { x: 272, y: 200, w: 24, h: 48 }, glyph: "c" },
+      { op: "blit", tile: { x: 296, y: 200, w: 24, h: 48 }, glyph: "k" },
+      { op: "blit", tile: { x: 320, y: 200, w: 24, h: 48 }, glyph: "y" }
+    ],
+    on_complete: "full_flush"
+  },
+  progress: {
+    anim_id: "progress_16seg",
+    version: 1,
+    mode: "1bit_partial",
+    region: { x: 100, y: 220, w: 600, h: 40 },
+    frame_budget_ms: 350,
+    loop: 1,
+    flush_every_n_frames: 40,
+    frames: Array.from({ length: 16 }, (_, i) => ({
+      op: "blit",
+      tile: { x: 100 + i * 36, y: 220, w: 32, h: 40 },
+      glyph: "█"
+    })),
+    on_complete: "full_flush"
+  },
+  breathing: {
+    anim_id: "breathing_dot",
+    version: 1,
+    mode: "4gray_partial",
+    region: { x: 380, y: 220, w: 40, h: 40 },
+    frame_budget_ms: 800,
+    loop: -1,
+    flush_every_n_frames: 15,
+    frames: [
+      { op: "blit", tile: { x: 380, y: 220, w: 40, h: 40 }, glyph: "○" },
+      { op: "delay", ms: 400 },
+      { op: "blit", tile: { x: 380, y: 220, w: 40, h: 40 }, glyph: "◔" },
+      { op: "delay", ms: 400 },
+      { op: "blit", tile: { x: 380, y: 220, w: 40, h: 40 }, glyph: "●" },
+      { op: "delay", ms: 400 },
+      { op: "blit", tile: { x: 380, y: 220, w: 40, h: 40 }, glyph: "◔" }
+    ],
+    on_complete: "full_flush"
+  }
+};
+
+// ── DOM refs ───────────────────────────────────────────────────────────
+const $spec = document.getElementById("spec");
+const $msg = document.getElementById("msg");
+const $stats = document.getElementById("stats");
+const $pv = document.getElementById("pv");
+const $play = document.getElementById("play");
+const $stop = document.getElementById("stop");
+const $validate = document.getElementById("validate");
+const ctx = $pv.getContext("2d");
+
+// ── validator ──────────────────────────────────────────────────────────
+const VALID_OPS = new Set(["blit", "card_diff", "delay", "flush"]);
+const MAX_FRAMES = 64;
+const PANEL_W = 800, PANEL_H = 480;
+
+function validate(spec) {
+  const errs = [];
+  const warns = [];
+  if (!spec || typeof spec !== "object") { errs.push("spec must be a JSON object"); return { errs, warns }; }
+  if (!spec.anim_id) errs.push("missing anim_id");
+  if (spec.version !== 1) errs.push("version must be 1");
+  if (!["1bit_partial", "4gray_partial", "full"].includes(spec.mode)) errs.push("mode must be 1bit_partial | 4gray_partial | full");
+  if (!spec.region || typeof spec.region !== "object") errs.push("missing region {x,y,w,h}");
+  else {
+    const r = spec.region;
+    for (const k of ["x", "y", "w", "h"]) if (typeof r[k] !== "number") errs.push(`region.${k} must be number`);
+    if (r.x < 0 || r.y < 0 || r.x + r.w > PANEL_W || r.y + r.h > PANEL_H) errs.push(`region out of 800×480 panel`);
+    if (r.w * r.h > (PANEL_W * PANEL_H) / 2 && (spec.frame_budget_ms || 400) < 500)
+      warns.push(`region >half-panel at <500ms budget — expect frame drops on real hardware`);
+  }
+  if (typeof spec.frame_budget_ms !== "number" || spec.frame_budget_ms < 250)
+    errs.push("frame_budget_ms must be ≥250 (hardware limit; see EINK_ANIMATION.md §2)");
+  if (spec.frame_budget_ms > 350 && spec.frame_budget_ms < 500) { /* ok */ }
+  if (spec.loop !== -1 && (!Number.isInteger(spec.loop) || spec.loop < 1)) errs.push("loop must be positive int or -1 (infinite)");
+  if (typeof spec.flush_every_n_frames !== "number") errs.push("flush_every_n_frames required");
+  if (spec.flush_every_n_frames > 40) warns.push("flush_every_n_frames >40 — typewriter cap is 40, spinner cap is 20");
+  if (!Array.isArray(spec.frames)) errs.push("frames must be an array");
+  else {
+    if (spec.frames.length === 0) errs.push("frames array is empty");
+    if (spec.frames.length > MAX_FRAMES) errs.push(`frames.length=${spec.frames.length} exceeds max_frames=${MAX_FRAMES}`);
+    spec.frames.forEach((f, i) => {
+      if (!f || typeof f !== "object") { errs.push(`frames[${i}] not an object`); return; }
+      if (!VALID_OPS.has(f.op)) errs.push(`frames[${i}].op="${f.op}" not in {blit,card_diff,delay,flush}`);
+      if (f.op === "blit" && (!f.tile || typeof f.tile !== "object")) errs.push(`frames[${i}] blit missing tile`);
+      if (f.op === "blit" && f.tile) {
+        const t = f.tile;
+        if (t.x < 0 || t.y < 0 || t.x + t.w > PANEL_W || t.y + t.h > PANEL_H)
+          errs.push(`frames[${i}] tile out of 800×480`);
+      }
+      if (f.op === "delay" && (typeof f.ms !== "number" || f.ms < 0)) errs.push(`frames[${i}] delay.ms invalid`);
+      if (f.op === "card_diff" && !f.patch_id) errs.push(`frames[${i}] card_diff missing patch_id`);
+    });
+  }
+  if (spec.loop === -1 && spec.mode !== "1bit_partial")
+    warns.push("infinite loop with non-1bit mode → heavy ghost + slow cadence; ambient-only patterns should be 1-bit");
+  return { errs, warns };
+}
+
+function showMsg(kind, text) {
+  $msg.innerHTML = `<div class="msg ${kind}">${text.replace(/&/g, "&amp;").replace(/</g, "&lt;")}</div>`;
+}
+
+// ── e-ink simulator ────────────────────────────────────────────────────
+// State: baseImg holds "settled" pixels; ghostMap tracks residual charge per pixel.
+let baseImg = null, ghostMap = null;
+let playing = false, playToken = 0;
+
+function resetPanel() {
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(0, 0, PANEL_W, PANEL_H);
+  baseImg = ctx.getImageData(0, 0, PANEL_W, PANEL_H);
+  ghostMap = new Float32Array(PANEL_W * PANEL_H);  // 0.0 = clean, 1.0 = fully ghosted
+}
+
+function drawGlyph(tile, glyph) {
+  // Render into baseImg + touch ghostMap in tile region.
+  ctx.putImageData(baseImg, 0, 0);
+  ctx.fillStyle = "#000000";
+  ctx.font = `${Math.floor(tile.h * 0.9)}px ui-monospace, monospace`;
+  ctx.textBaseline = "middle";
+  ctx.textAlign = "center";
+  ctx.fillText(glyph || "▪", tile.x + tile.w / 2, tile.y + tile.h / 2);
+  baseImg = ctx.getImageData(0, 0, PANEL_W, PANEL_H);
+  // Ghost bump: +2% in touched tile
+  for (let y = Math.max(0, tile.y); y < Math.min(PANEL_H, tile.y + tile.h); y++) {
+    for (let x = Math.max(0, tile.x); x < Math.min(PANEL_W, tile.x + tile.w); x++) {
+      ghostMap[y * PANEL_W + x] = Math.min(1.0, ghostMap[y * PANEL_W + x] + 0.02);
+    }
+  }
+}
+
+function fullFlush() {
+  ghostMap = new Float32Array(PANEL_W * PANEL_H);
+  ctx.putImageData(baseImg, 0, 0);
+  // Simulate flash: quick white-black-white pulse (2 frames of ~50ms visual cue)
+}
+
+function renderWithGhost() {
+  // Composite: baseImg + ghost residue (gray tint on touched pixels)
+  const out = ctx.createImageData(PANEL_W, PANEL_H);
+  const b = baseImg.data;
+  for (let i = 0; i < ghostMap.length; i++) {
+    const g = ghostMap[i];
+    const idx = i * 4;
+    // If pixel is white, ghost adds gray residue; if pixel is black, no change.
+    const isBlack = b[idx] < 128;
+    if (isBlack) {
+      out.data[idx] = 0; out.data[idx + 1] = 0; out.data[idx + 2] = 0; out.data[idx + 3] = 255;
+    } else {
+      const shade = Math.round(255 - g * 40);  // up to ~40 units of gray at full ghost
+      out.data[idx] = shade; out.data[idx + 1] = shade; out.data[idx + 2] = shade; out.data[idx + 3] = 255;
+    }
+  }
+  ctx.putImageData(out, 0, 0);
+}
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+async function play(spec) {
+  const myToken = ++playToken;
+  playing = true;
+  $play.disabled = true; $stop.disabled = false;
+  resetPanel();
+  renderWithGhost();
+  const budget = spec.frame_budget_ms || 400;
+  const flushN = spec.flush_every_n_frames || 40;
+  let frameCount = 0;
+  const loops = spec.loop === -1 ? Infinity : (spec.loop || 1);
+  const startT = performance.now();
+  for (let l = 0; l < loops && playing && myToken === playToken; l++) {
+    for (const f of spec.frames) {
+      if (!playing || myToken !== playToken) break;
+      if (f.op === "blit") {
+        drawGlyph(f.tile, f.glyph);
+        renderWithGhost();
+        frameCount++;
+        if (frameCount % flushN === 0) { fullFlush(); renderWithGhost(); $stats.textContent = `frame ${frameCount} · full-flush · ${((performance.now()-startT)/1000).toFixed(1)}s`; await sleep(150); }
+        else $stats.textContent = `frame ${frameCount} · ${((performance.now()-startT)/1000).toFixed(1)}s`;
+        await sleep(budget);
+      } else if (f.op === "delay") {
+        $stats.textContent = `delay ${f.ms}ms · frame ${frameCount}`;
+        await sleep(f.ms);
+      } else if (f.op === "flush") {
+        fullFlush(); renderWithGhost();
+        $stats.textContent = `explicit full-flush · frame ${frameCount}`;
+        await sleep(200);
+      } else if (f.op === "card_diff") {
+        // simulate as a mid-size tile blit
+        drawGlyph({ x: 200, y: 240, w: 400, h: 80 }, `[patch:${f.patch_id}]`);
+        renderWithGhost();
+        frameCount++;
+        $stats.textContent = `card_diff patch=${f.patch_id} · frame ${frameCount}`;
+        await sleep(budget);
+      }
+    }
+    if (spec.on_complete === "full_flush" && (l + 1 < loops || loops === Infinity)) {
+      fullFlush(); renderWithGhost();
+    }
+    if (l + 1 === loops) {
+      if (spec.on_complete === "full_flush") { fullFlush(); renderWithGhost(); }
+    }
+  }
+  if (myToken === playToken) {
+    playing = false;
+    $play.disabled = false; $stop.disabled = true;
+    $stats.textContent += " · done";
+  }
+}
+
+// ── wiring ─────────────────────────────────────────────────────────────
+function loadPreset(name) {
+  $spec.value = JSON.stringify(PRESETS[name], null, 2);
+  showMsg("ok", `loaded preset: ${name}`);
+}
+
+document.querySelectorAll("[data-preset]").forEach(b => {
+  b.addEventListener("click", () => loadPreset(b.dataset.preset));
+});
+
+$validate.addEventListener("click", () => {
+  let spec;
+  try { spec = JSON.parse($spec.value); }
+  catch (e) { showMsg("err", `JSON parse error: ${e.message}`); return; }
+  const { errs, warns } = validate(spec);
+  if (errs.length) { showMsg("err", "invalid:\n" + errs.map(e => "  ✗ " + e).join("\n")); return; }
+  if (warns.length) { showMsg("warn", "valid, with warnings:\n" + warns.map(w => "  ⚠ " + w).join("\n")); return; }
+  showMsg("ok", `valid · frames=${spec.frames.length} · budget=${spec.frame_budget_ms}ms · loop=${spec.loop} · flush_every=${spec.flush_every_n_frames}`);
+});
+
+$play.addEventListener("click", () => {
+  let spec;
+  try { spec = JSON.parse($spec.value); }
+  catch (e) { showMsg("err", `JSON parse error: ${e.message}`); return; }
+  const { errs } = validate(spec);
+  if (errs.length) { showMsg("err", "cannot play — fix errors first:\n" + errs.map(e => "  ✗ " + e).join("\n")); return; }
+  play(spec);
+});
+
+$stop.addEventListener("click", () => {
+  playing = false; playToken++;
+  $play.disabled = false; $stop.disabled = true;
+  $stats.textContent += " · stopped";
+});
+
+// initial state
+resetPanel();
+renderWithGhost();
+loadPreset("typewriter");
+</script>
+</body>
+</html>

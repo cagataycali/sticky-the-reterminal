@@ -1,0 +1,12 @@
+menu "tiny Sticky"
+
+config TINY_DASHBOARD_URL
+    string "Dashboard base URL (settings QR target)"
+    default "https://sticky.cagatay.my"
+    help
+        The settings page shows a QR code pointing at
+        <this URL>/s/<device_id>, where a phone configures WiFi and toggles.
+        It is the self-hosted dashboard under docs/dashboard; point this at
+        your own deployment. The device sends no secret to it.
+
+endmenu

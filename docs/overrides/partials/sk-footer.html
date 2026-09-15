@@ -1,0 +1,36 @@
+{#- sk-footer.html — the one footer every inner page shares.
+    A pager for the neighbouring pages, then a quiet meta row: wordmark + one line, four links, one credit.
+    Home keeps its own (empty) footer block; this is included from main.html. -#}
+<footer class="md-footer sk-footer">
+  <div class="sk-footer__inner">
+    {% if page.previous_page or page.next_page %}
+    <nav class="sk-footer__pager" aria-label="Neighbouring pages">
+      {% if page.previous_page %}
+        <a class="sk-pager sk-pager--prev" href="{{ page.previous_page.url | url }}" rel="prev">
+          <span class="sk-pager__label">Previous</span>
+          <span class="sk-pager__title">{{ page.previous_page.title }}</span>
+        </a>
+      {% else %}<span></span>{% endif %}
+      {% if page.next_page %}
+        <a class="sk-pager sk-pager--next" href="{{ page.next_page.url | url }}" rel="next">
+          <span class="sk-pager__label">Next</span>
+          <span class="sk-pager__title">{{ page.next_page.title }}</span>
+        </a>
+      {% endif %}
+    </nav>
+    {% endif %}
+    <div class="sk-footer__meta">
+      <div class="sk-footer__brand">
+        <a class="sk-wordmark" href="{{ nav.homepage.url | url }}">Sticky</a>
+        <p>An e-ink body for tiny — open firmware for the Seeed reTerminal Sticky, one binary for the whole fleet.</p>
+      </div>
+      <ul class="sk-footer__links">
+        <li><a href="https://www.seeedstudio.com/sticky" rel="noopener">Seeed reTerminal Sticky</a></li>
+        <li><a href="{{ config.repo_url }}/blob/main/LICENSE" rel="noopener">Apache-2.0</a></li>
+        <li><a href="{{ config.repo_url }}" rel="noopener">GitHub</a></li>
+        <li><a href="https://tiny.technology" rel="noopener">tiny.technology</a></li>
+      </ul>
+    </div>
+    <p class="sk-footer__credit">Written, tested and shipped by one tiny — the agent that lives on this glass.</p>
+  </div>
+</footer>

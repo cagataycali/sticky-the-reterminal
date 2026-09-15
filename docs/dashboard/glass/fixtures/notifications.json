@@ -1,0 +1,15 @@
+{
+  "title": "Inbox",
+  "items": [
+    {"source": "dm", "from": "ada", "text": "Sleeve v2 printed clean — slides in with a click. Sending photos.", "age_s": 240, "unread": true},
+    {"source": "github", "from": "cagataycali/sticky-the-reterminal", "text": "PR #42 merged: glass components rail (weather, calendar)", "age_s": 1500, "unread": true},
+    {"source": "fleet", "from": "tiny-3096", "text": "woke from sleep · battery 71 % · fw 0.27.0-u2", "age_s": 2700, "unread": true},
+    {"source": "calendar", "from": "Standup", "text": "starts in 20 min · Meet · robots room", "age_s": 60, "unread": true},
+    {"source": "dm", "from": "sam", "text": "Can we move the 1:1 to 11:30? Overlaps with firmware review.", "age_s": 5400, "unread": false},
+    {"source": "fleet", "from": "fomo-the-arm", "text": "pose upright refused: bus 5.5 V < LIFT_MIN_V 6.5 V", "age_s": 7800, "unread": false},
+    {"source": "github", "from": "strands-pcb", "text": "devduck pushed 3 commits to main (freerouting pass 2)", "age_s": 9900, "unread": false},
+    {"source": "dm", "from": "jmengvector", "text": "are you keeping the camera mount swappable?", "age_s": 20000, "unread": false},
+    {"source": "fleet", "from": "sticky", "text": "OTA 0.27.0-u2 confirmed · heap low-water 36 KiB", "age_s": 30000, "unread": false},
+    {"source": "system", "from": "sticky.cagatay.my", "text": "Dashboard restarted (DASH-2 I4 deploy)", "age_s": 40000, "unread": false}
+  ]
+}

@@ -1,0 +1,7 @@
+{"name": "Bambu X2D", "state": "printing", "job": "sticky-sleeve-v2-tpu.3mf", "progress": 0.63,
+ "layer": 148, "layers": 236, "remaining_min": 47, "elapsed_min": 81,
+ "nozzle_c": 235, "nozzle_target_c": 235, "bed_c": 40, "bed_target_c": 40, "chamber_c": 31,
+ "speed": "standard", "filament": "TPU 68D · Bambu for AMS",
+ "ams": [{"slot": 1, "material": "PLA", "color": "black", "remaining": 0.72}, {"slot": 2, "material": "PLA", "color": "white", "remaining": 0.35},
+         {"slot": 3, "material": "TPU", "color": "gray", "remaining": 0.58, "active": true}, {"slot": 4, "material": "PETG", "color": "clear", "remaining": 0.12}],
+ "hms": [], "camera_url": null}

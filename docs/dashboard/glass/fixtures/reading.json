@@ -1,0 +1,22 @@
+{
+  "current": {
+    "title": "The Design of Everyday Things",
+    "author": "Don Norman",
+    "pages": 368,
+    "started": "2026-08-24",
+    "log": [
+      {"date": "2026-08-24", "page": 18}, {"date": "2026-08-25", "page": 41}, {"date": "2026-08-26", "page": 63},
+      {"date": "2026-08-28", "page": 92}, {"date": "2026-08-29", "page": 104}, {"date": "2026-08-30", "page": 131},
+      {"date": "2026-08-31", "page": 150}, {"date": "2026-09-01", "page": 162}, {"date": "2026-09-03", "page": 188},
+      {"date": "2026-09-04", "page": 201}, {"date": "2026-09-05", "page": 229}, {"date": "2026-09-06", "page": 246}
+    ],
+    "note": "Affordances are relationships, not properties — the e-ink lesson too: the glass affords reading, not tapping."
+  },
+  "next": ["Thinking in Systems — Donella Meadows", "The Nature of Order, Book 1 — Christopher Alexander"],
+  "finished": [
+    {"title": "Make Something Wonderful", "author": "Steve Jobs", "date": "2026-08-20", "pages": 320},
+    {"title": "Understanding Comics", "author": "Scott McCloud", "date": "2026-07-30", "pages": 224},
+    {"title": "The Timeless Way of Building", "author": "Christopher Alexander", "date": "2026-07-02", "pages": 552},
+    {"title": "Ways of Seeing", "author": "John Berger", "date": "2026-06-11", "pages": 176}
+  ]
+}

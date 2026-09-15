@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<!-- Mobile-first scan-to-configure page — served at /s/<device_id>.
+     The Sticky's settings page renders a QR pointing here; the phone has
+     the keyboard the e-ink never will. Every API call is WebAuthn-gated
+     server-side; this page checks /auth/status and sends you to the SPA
+     login when the session is missing. Honesty rule: writes are gated on
+     the firmware advertising `config`/`set` in its heartbeat — when it
+     doesn't, this page says so instead of pretending. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>sticky · settings</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:16px/1.5 -apple-system, system-ui, sans-serif;
+         background:#0b0e13; color:#e8ecf2; padding:16px; max-width:520px;
+         margin-inline:auto; }
+  h1 { font-size:20px; margin:8px 0 2px; }
+  .sub { color:#8b96a5; font-size:13px; margin-bottom:16px; }
+  .card { background:#141a23; border:1px solid #232c3a; border-radius:14px;
+          padding:16px; margin-bottom:14px; }
+  .card h2 { font-size:15px; margin:0 0 10px; color:#aeb9c9; }
+  input[type=text], input[type=password] {
+    width:100%; padding:12px 14px; margin-bottom:10px; border-radius:10px;
+    border:1px solid #2b3648; background:#0e131b; color:#e8ecf2; font-size:16px; }
+  button { padding:12px 16px; border-radius:10px; border:0; background:#2f6fed;
+           color:#fff; font-size:15px; font-weight:600; width:100%; }
+  button:disabled { background:#28303d; color:#6b7686; }
+  button.ghost { background:transparent; border:1px solid #38445a; color:#c9d3e0;
+                 width:auto; padding:8px 12px; font-size:13px; }
+  .row { display:flex; align-items:center; justify-content:space-between; gap:10px;
+         padding:10px 0; border-bottom:1px solid #1d2531; }
+  .row:last-child { border-bottom:0; }
+  .gate { background:#241d10; border:1px solid #4a3a14; color:#e3c877;
+          border-radius:10px; padding:10px 12px; font-size:13px; margin-bottom:10px;
+          display:none; }
+  .msg { font-size:13px; margin-top:8px; min-height:18px; color:#8b96a5; white-space:pre-wrap; }
+  .ok { color:#7fd48a; } .err { color:#ef8080; }
+  .toggle { appearance:none; width:48px; height:28px; border-radius:14px;
+            background:#28303d; position:relative; transition:.15s; flex:none; }
+  .toggle:checked { background:#2f6fed; }
+  .toggle::after { content:""; position:absolute; top:3px; left:3px; width:22px;
+                   height:22px; border-radius:50%; background:#fff; transition:.15s; }
+  .toggle:checked::after { left:23px; }
+  .pill { font-size:12px; padding:2px 8px; border-radius:8px; background:#1c2432;
+          color:#8b96a5; }
+  .pill.on { background:#12301b; color:#7fd48a; }
+</style>
+</head>
+<body>
+<h1>🧲 sticky settings</h1>
+<div class="sub" id="devline">connecting…</div>
+
+<div class="gate" id="gate"></div>
+
+<div class="card">
+  <h2>Add Wi-Fi network</h2>
+  <input type="text" id="ssid" placeholder="Network name (SSID)" autocapitalize="off" autocorrect="off">
+  <input type="password" id="pw" placeholder="Password — full symbols welcome">
+  <button id="addbtn" onclick="addWifi()">Save to device</button>
+  <div class="msg" id="wifimsg"></div>
+</div>
+
+<div class="card">
+  <h2>Saved networks</h2>
+  <div id="nets" class="msg">readable once the firmware `config get` side ships — never a fake list.</div>
+</div>
+
+<div class="card">
+  <h2>Toggles</h2>
+  <div id="toggles"></div>
+  <div class="msg" id="togmsg"></div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+let gate = { config_ready:false, set_ready:false, reason:"probing…" };
+const TOGGLE_LABELS = { snooze:"🔕 Snooze (mute beeps)", buzzer:"🔊 Buzzer",
+                        lift_wake:"👋 Wake on lift", auto_lock:"🔒 Pocket auto-lock" };
+
+async function api(path, opts) {
+  const r = await fetch(path, Object.assign({ credentials:"same-origin",
+    headers:{ "content-type":"application/json" } }, opts));
+  if (r.status === 401 || r.status === 403) {
+    location.href = "/?next=" + encodeURIComponent(location.pathname);
+    throw new Error("auth required");
+  }
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(j.detail || r.status);
+  return j;
+}
+
+async function load() {
+  try {
+    const auth = await fetch("/auth/status", {credentials:"same-origin"}).then(r=>r.json());
+    if (auth && auth.authenticated === false && auth.enrolled !== false) {
+      location.href = "/?next=" + encodeURIComponent(location.pathname); return;
+    }
+    const j = await api("/api/settings");
+    gate = j.gate || gate;
+    const d = j.device || {};
+    $("devline").textContent =
+      (d.name || d.id || "device") + " · " + (d.online ? "online" : "offline")
+      + (gate.fw ? " · fw " + gate.fw : "");
+    if (gate.reason) { $("gate").style.display = "block"; $("gate").textContent = "⏳ " + gate.reason; }
+    else { $("gate").style.display = "none"; }
+    $("addbtn").disabled = !gate.config_ready;
+    renderToggles(j.toggles || []);
+  } catch (e) { $("devline").textContent = "⚠ " + e.message; }
+}
+
+function renderToggles(keys) {
+  $("toggles").innerHTML = keys.map(k => `
+    <div class="row">
+      <span>${TOGGLE_LABELS[k] || k}</span>
+      <span style="display:flex;align-items:center;gap:8px">
+        <span class="pill" id="pill-${k}">unknown</span>
+        <input type="checkbox" class="toggle" ${gate.set_ready ? "" : "disabled"}
+               onchange="setToggle('${k}', this)">
+      </span>
+    </div>`).join("");
+}
+
+async function setToggle(key, el) {
+  $("togmsg").textContent = "…";
+  try {
+    const j = await api("/api/settings/toggle",
+      { method:"POST", body: JSON.stringify({ key, value: el.checked }) });
+    $("togmsg").className = "msg ok";
+    $("togmsg").textContent = "✓ " + (j.result || "applied");
+    const p = $("pill-" + key); p.textContent = el.checked ? "on" : "off";
+    p.className = "pill" + (el.checked ? " on" : "");
+  } catch (e) {
+    el.checked = !el.checked;
+    $("togmsg").className = "msg err"; $("togmsg").textContent = "✗ " + e.message;
+  }
+}
+
+async function addWifi() {
+  const ssid = $("ssid").value.trim(), pw = $("pw").value;
+  if (!ssid) { $("wifimsg").textContent = "SSID required"; return; }
+  $("addbtn").disabled = true; $("wifimsg").className = "msg"; $("wifimsg").textContent = "sending…";
+  try {
+    const j = await api("/api/settings/wifi",
+      { method:"POST", body: JSON.stringify({ ssid, password: pw }) });
+    $("wifimsg").className = "msg ok";
+    $("wifimsg").textContent = "✓ " + (j.result || (j.pending ? "queued — device applies on next poll" : "saved"));
+    $("pw").value = "";
+  } catch (e) { $("wifimsg").className = "msg err"; $("wifimsg").textContent = "✗ " + e.message; }
+  $("addbtn").disabled = !gate.config_ready;
+}
+
+load();
+</script>
+</body>
+</html>

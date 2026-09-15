@@ -1,0 +1,15 @@
+{
+ "title": "Today",
+ "items": [
+  {"text": "Flip sticky-the-reterminal public", "done": false, "due": "today", "tag": "ship", "top": true},
+  {"text": "Print TPU sleeve v2 (tp_clr 0.25)", "done": false, "due": "today", "tag": "case"},
+  {"text": "Reply to @jmengvector — swap mechanism + STL", "done": false, "due": "today", "tag": "launch"},
+  {"text": "Power the arm bus at 7.4 V, run `pose upright`", "done": false, "due": "tomorrow", "tag": "fomo"},
+  {"text": "Flash fomo_node onto the Nicla", "done": false, "due": "tomorrow", "tag": "fomo"},
+  {"text": "Heat-shrink servo daisy-chain (off the arm)", "done": false, "due": "week", "tag": "fomo"},
+  {"text": "Cron for a live lock screen (glass show every 5 min)", "done": false, "due": "week", "tag": "sticky"},
+  {"text": "Quote-tweet the strands-arm thread, 9–10 ET", "done": true, "tag": "launch"},
+  {"text": "Import manual calibration into ~/.fomo", "done": true, "tag": "fomo"},
+  {"text": "Merge sd caps-array fix", "done": true, "tag": "firmware"}
+ ]
+}

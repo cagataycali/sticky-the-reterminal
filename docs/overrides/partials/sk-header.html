@@ -1,0 +1,39 @@
+{#- sk-header.html — the one top bar every page shares.
+    Named sk-* so it never shadows Material's own partials/header.html. Keeps Material's ids/components
+    (__drawer, __search, palette form, data-md-component="header") so the drawer, search overlay and theme
+    toggle keep working; everything visual is ours (sticky.css, .sk-header). Included from main.html and home.html. -#}
+<header class="md-header sk-header" data-md-component="header">
+  <nav class="sk-bar" aria-label="Site">
+    <label class="md-header__button md-icon sk-burger" for="__drawer" aria-label="Menu">
+      {% include ".icons/material/menu.svg" %}
+    </label>
+    <a class="sk-wordmark" href="{{ nav.homepage.url | url }}" title="Home">Sticky</a>
+    {%- macro leaves(item) -%}{% if item.children %}{% for c in item.children %}{{ leaves(c) }}{% endfor %}{% else %}{{ item.url | url }} {% endif %}{%- endmacro -%}
+    <ul class="sk-nav" data-sk-nav>
+      {%- for item in nav %}
+        {%- if item.children %}{% set target = item.children[0] %}{% for _ in range(8) %}{% if target.children %}{% set target = target.children[0] %}{% endif %}{% endfor %}{% else %}{% set target = item %}{% endif %}
+        <li><a class="sk-nav__link{% if item.active %} is-active{% endif %}" href="{{ target.url | url }}" data-sk-pages="{{ leaves(item) | trim }}"{% if item.active %} aria-current="page"{% endif %}>{{ item.title }}</a></li>
+      {%- endfor %}
+    </ul>
+    <div class="sk-tools">
+      {% if config.theme.palette and not config.theme.palette is mapping %}
+        {% include "partials/palette.html" %}
+        {% include "partials/javascripts/palette.html" %}
+      {% endif %}
+      {% if "material/search" in config.plugins %}
+        {% set search = config.plugins["material/search"] | attr("config") %}
+        {% if search.enabled %}
+          <label class="md-header__button md-icon sk-search-btn" for="__search" aria-label="Search">
+            {% include ".icons/material/magnify.svg" %}
+          </label>
+          {% include "partials/search.html" %}
+        {% endif %}
+      {% endif %}
+      {% if config.repo_url %}
+        <a class="sk-github md-icon" href="{{ config.repo_url }}" title="Source on GitHub" aria-label="GitHub" data-md-component="source">
+          {% include ".icons/fontawesome/brands/github.svg" %}
+        </a>
+      {% endif %}
+    </div>
+  </nav>
+</header>

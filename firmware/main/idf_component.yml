@@ -1,0 +1,12 @@
+# Managed dependencies for the `main` component.
+#
+# espressif/qrcode is here for the `qr` card type (tiny_display.cpp): the softAP
+# provisioning portal has to show a scannable WIFI: code, and nothing in ESP-IDF
+# v5.4, in vendor/, or on this machine can encode a QR offline (checked).
+# Apache-2.0, zero dependencies, no target restrictions; it wraps
+# nayuki/QR-Code-generator and hands back modules through a callback, which maps
+# straight onto Canvas::fill_rect.
+#
+# Adding this file makes the component manager re-resolve firmware/dependencies.lock.
+dependencies:
+  espressif/qrcode: "^0.2.0"

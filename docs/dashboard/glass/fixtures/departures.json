@@ -1,0 +1,8 @@
+{"stop": "Bedford Av", "agency": "MTA Subway", "walk_min": 6,
+ "lines": [
+  {"line": "L", "dest": "Manhattan · 8 Av", "times": ["+3", "+9", "+17", "+24"], "note": null},
+  {"line": "L", "dest": "Canarsie · Rockaway Pkwy", "times": ["+5", "+12", "+21"], "note": null},
+  {"line": "B62", "dest": "Queens Plaza", "times": ["+8", "+23"], "note": "bus · Bedford Av/N 7 St", "kind": "bus"},
+  {"line": "G", "dest": "Church Av", "times": ["+11", "+19", "+31"], "note": "from Metropolitan Av, 9 min walk"}
+ ],
+ "alerts": ["L: weekend service runs every 8–10 min", "G: no Court Sq service after 23:45"]}

@@ -1,0 +1,15 @@
+#!/bin/sh
+# Glass structural rules at commit time — only when a glass component is staged.
+# Install once:  git config core.hooksPath tools/hooks
+# Skip once:     GLASS_SKIP_HOOK=1 git commit …
+[ -n "$GLASS_SKIP_HOOK" ] && exit 0
+git diff --cached --name-only --diff-filter=ACMR | grep -q '^docs/dashboard/glass/.*\.py$' || exit 0
+PY="${GLASS_PY:-$HOME/.tiny/pypi/bin/python}"
+[ -x "$PY" ] || PY=python3
+cd docs/dashboard || exit 0
+echo "glass: 11 px floor · two-step contrast · 40 % ink …"
+STICKY_MOCK=0 "$PY" -m pytest -q test_glass.py \
+  -k "legible or contrast or ink_budget" -p no:cacheprovider 2>&1 | tail -2
+st=$?
+[ "$st" -eq 0 ] || echo "glass: a component broke a structural rule — fix it or GLASS_SKIP_HOOK=1 to override."
+exit $st

@@ -1,0 +1,15 @@
+{"devices": [
+ {"name": "sticky", "platform": "esp32s3", "kind": "daemon", "age_s": 40, "fw": "0.27.0-u2", "battery_pct": 82, "charging": true, "caps": 23},
+ {"name": "tiny-3096", "platform": "esp32s3", "kind": "daemon", "age_s": 700, "fw": "0.27.0-u2", "battery_pct": 61, "charging": false, "caps": 23},
+ {"name": "tiny-5f51", "platform": "esp32s3", "kind": "daemon", "age_s": 720, "fw": "0.27.0-u2", "battery_pct": 34, "charging": false, "caps": 23},
+ {"name": "tiny-ddd9", "platform": "nicla-sense", "kind": "daemon", "age_s": 6, "caps": 9},
+ {"name": "tiny-b3d3", "platform": "nicla-vision", "kind": "daemon", "age_s": 190000, "caps": 6},
+ {"name": "cagatay-mac", "platform": "darwin-arm64", "kind": "cli", "age_s": 3, "caps": 16},
+ {"name": "cagatay-cagatay", "platform": "linux-arm64", "kind": "cli", "age_s": 9, "caps": 7},
+ {"name": "cagatay-80a997247062", "platform": "darwin-arm64", "kind": "cli", "age_s": 320000, "caps": 5},
+ {"name": "cagataycali-iphone", "platform": "ios-arm64", "kind": "daemon", "age_s": 2700, "caps": 8},
+ {"name": "cagataycali-pixel", "platform": "android-arm64", "kind": "daemon", "age_s": 690000, "caps": 6},
+ {"name": "cagataycali-ipad", "platform": "ios-arm64", "kind": "daemon", "age_s": 3700000, "caps": 8},
+ {"name": "3D printer", "platform": "bambu-x2d", "kind": "endpoint", "age_s": null, "caps": 4},
+ {"name": "fomo-the-arm", "platform": "strands-arm", "kind": "endpoint", "age_s": null, "caps": 4}
+]}

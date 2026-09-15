@@ -1,0 +1,86 @@
+{
+"currency": "$",
+"month_budget": 4200,
+"entries": [
+{
+"date": "2026-09-01",
+"amount": 30.95,
+"category": "eating out",
+"note": "Sunday bagels"
+},
+{
+"date": "2026-09-01",
+"amount": 77.13,
+"category": "groceries",
+"note": "Trader Joe's"
+},
+{
+"date": "2026-09-02",
+"amount": 14.06,
+"category": "fun",
+"note": "books"
+},
+{
+"date": "2026-09-02",
+"amount": 24.19,
+"category": "groceries",
+"note": "Whole Foods"
+},
+{
+"date": "2026-09-03",
+"amount": 16.35,
+"category": "eating out",
+"note": "dinner w/ Ece"
+},
+{
+"date": "2026-09-04",
+"amount": 18.67,
+"category": "fun",
+"note": "books"
+},
+{
+"date": "2026-09-05",
+"amount": 59.55,
+"category": "groceries",
+"note": "Whole Foods"
+},
+{
+"date": "2026-09-05",
+"amount": 88.29,
+"category": "groceries",
+"note": "Trader Joe's"
+},
+{
+"date": "2026-09-05",
+"amount": 70.09,
+"category": "fun",
+"note": "Steam"
+},
+{
+"date": "2026-09-06",
+"amount": 37.95,
+"category": "eating out",
+"note": "coffee \u00d72"
+},
+{
+"date": "2026-09-06",
+"amount": 67.13,
+"category": "fun",
+"note": "books"
+},
+{
+"date": "2026-09-07",
+"amount": 49.98,
+"category": "fun",
+"note": "books"
+},
+{
+"date": "2026-09-01",
+"amount": 2450.0,
+"category": "rent",
+"note": "September rent",
+"fixed": true
+}
+],
+"month": "2026-09"
+}

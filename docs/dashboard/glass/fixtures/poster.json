@@ -1,0 +1,174 @@
+{
+ "words": [
+  {
+   "word": "sonder",
+   "pron": "SON·der",
+   "pos": "noun",
+   "def": "The realisation that each passer-by has a life as vivid and complex as your own.",
+   "eg": "A word from the Dictionary of Obscure Sorrows, not the OED — used anyway."
+  },
+  {
+   "word": "petrichor",
+   "pron": "PET·ri·kor",
+   "pos": "noun",
+   "def": "The earthy smell that follows the first rain after a long dry spell.",
+   "eg": "Coined in 1964 by two mineralogists from Greek petra (stone) and ichor."
+  },
+  {
+   "word": "hiraeth",
+   "pron": "HEER·eyeth",
+   "pos": "noun, Welsh",
+   "def": "A homesickness for a home you cannot return to, or that never was.",
+   "eg": "No single English word; the Welsh keep it."
+  },
+  {
+   "word": "apricity",
+   "pron": "uh·PRISS·i·tee",
+   "pos": "noun",
+   "def": "The warmth of the sun in winter.",
+   "eg": "One recorded use, 1623; revived by people who missed it."
+  },
+  {
+   "word": "ephemeral",
+   "pron": "ih·FEM·er·uhl",
+   "pos": "adjective",
+   "def": "Lasting for a very short time.",
+   "eg": "An e-ink frame is the opposite: it holds its last image with the power off."
+  },
+  {
+   "word": "kintsugi",
+   "pron": "kin·TSU·gi",
+   "pos": "noun, Japanese",
+   "def": "Repairing broken pottery with gold, treating the break as part of the history.",
+   "eg": "金継ぎ — golden joinery."
+  },
+  {
+   "word": "saudade",
+   "pron": "sow·DAH·jee",
+   "pos": "noun, Portuguese",
+   "def": "A deep, melancholic longing for someone or something absent.",
+   "eg": "The presence of absence, as one poet put it."
+  },
+  {
+   "word": "meraki",
+   "pron": "meh·RAH·kee",
+   "pos": "noun, Greek",
+   "def": "Doing something with soul, creativity and love — putting yourself into the work.",
+   "eg": "The word for how this card was meant to be made."
+  },
+  {
+   "word": "lacuna",
+   "pron": "luh·KYOO·nuh",
+   "pos": "noun",
+   "def": "An unfilled space or gap; a missing part of a manuscript.",
+   "eg": "Plural lacunae. From Latin, a pool or pit."
+  },
+  {
+   "word": "serendipity",
+   "pron": "ser·uhn·DIP·i·tee",
+   "pos": "noun",
+   "def": "Finding something good without looking for it.",
+   "eg": "Horace Walpole, 1754, after the princes of Serendip."
+  },
+  {
+   "word": "umbra",
+   "pron": "UM·bruh",
+   "pos": "noun",
+   "def": "The fully shaded inner region of a shadow, where the light source is completely hidden.",
+   "eg": "Stand in the moon's umbra and the eclipse is total."
+  },
+  {
+   "word": "liminal",
+   "pron": "LIM·i·nuhl",
+   "pos": "adjective",
+   "def": "At a threshold; between one state and the next.",
+   "eg": "From Latin limen, the doorstep."
+  },
+  {
+   "word": "tacit",
+   "pron": "TASS·it",
+   "pos": "adjective",
+   "def": "Understood without being said.",
+   "eg": "Most of what a good team knows is tacit."
+  },
+  {
+   "word": "penumbra",
+   "pron": "pih·NUM·bruh",
+   "pos": "noun",
+   "def": "The partial shadow at the edge of a full one.",
+   "eg": "This glass has one gray for it."
+  }
+ ],
+ "lines": [
+  {
+   "text": "I have measured out my life with coffee spoons.",
+   "by": "T. S. Eliot",
+   "src": "The Love Song of J. Alfred Prufrock, 1915"
+  },
+  {
+   "text": "Hope is the thing with feathers that perches in the soul.",
+   "by": "Emily Dickinson",
+   "src": "c. 1861"
+  },
+  {
+   "text": "Do I dare disturb the universe?",
+   "by": "T. S. Eliot",
+   "src": "Prufrock, 1915"
+  },
+  {
+   "text": "The fog comes on little cat feet.",
+   "by": "Carl Sandburg",
+   "src": "Fog, 1916"
+  },
+  {
+   "text": "Tell all the truth but tell it slant.",
+   "by": "Emily Dickinson",
+   "src": "c. 1868"
+  },
+  {
+   "text": "Because I could not stop for Death, he kindly stopped for me.",
+   "by": "Emily Dickinson",
+   "src": "c. 1863"
+  },
+  {
+   "text": "Two roads diverged in a wood, and I took the one less traveled by.",
+   "by": "Robert Frost",
+   "src": "The Road Not Taken, 1916"
+  },
+  {
+   "text": "The woods are lovely, dark and deep, but I have promises to keep.",
+   "by": "Robert Frost",
+   "src": "Stopping by Woods on a Snowy Evening, 1923"
+  },
+  {
+   "text": "Nature's first green is gold, her hardest hue to hold.",
+   "by": "Robert Frost",
+   "src": "Nothing Gold Can Stay, 1923"
+  },
+  {
+   "text": "I contain multitudes.",
+   "by": "Walt Whitman",
+   "src": "Song of Myself, 1855"
+  },
+  {
+   "text": "Shall I compare thee to a summer's day?",
+   "by": "William Shakespeare",
+   "src": "Sonnet 18, 1609"
+  },
+  {
+   "text": "Season of mists and mellow fruitfulness.",
+   "by": "John Keats",
+   "src": "To Autumn, 1819"
+  },
+  {
+   "text": "Things fall apart; the centre cannot hold.",
+   "by": "W. B. Yeats",
+   "src": "The Second Coming, 1919"
+  },
+  {
+   "text": "Attention is the beginning of devotion.",
+   "by": "Mary Oliver",
+   "src": "Upstream, 2016"
+  }
+ ]
+}
