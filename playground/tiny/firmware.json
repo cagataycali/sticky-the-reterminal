@@ -8,7 +8,7 @@
   "mode": "flash",
   "status": "experimental",
   "summary": "A voice + touch agent surface for reTerminal Sticky — your tiny.technology agent, on e-ink, in your pocket.",
-  "description": "tiny turns reTerminal Sticky into the fifth body of one personal agent: hold the AI button and speak, or type on the on-glass keyboard, and the answer streams onto the e-ink and stays there. The agent composes cards (text, list, key/value, menu, QR, chart, chat, composite, image, gallery) that the firmware renders natively; taps flow back as events. Requires a free tiny.technology account — the device holds only a revocable device token, never an account credential. Includes on-device Wi-Fi setup with scan + keyboard, a softAP portal for the tiny iOS app, sha256-pinned OTA with rollback, IMU pocket-lock and auto-rotate, deep sleep with the last card left on the glass, and a local shell (home, status, sensors, settings, messages, gallery).",
+  "description": "tiny turns reTerminal Sticky into a body for one personal agent: hold the AI button and speak, or type on the on-glass keyboard, and the answer streams onto the e-ink and stays there. The agent composes cards (text, list, key/value, menu, QR, chart, chat, composite, image, gallery) that the firmware renders natively in four grays; taps flow back as events. Requires a free tiny.technology account — the device holds only a revocable device token, never an account credential. Includes first-run onboarding on the glass (Wi-Fi via phone QR or on-device scan + keyboard, pairing, a short tour), sha256-pinned A/B OTA with rollback, IMU pocket-lock and auto-rotate, deep sleep with the last card left on the glass, a microSD gallery, and a local shell that works without the network.",
   "author": {
     "name": "Cagatay Cali",
     "url": "https://github.com/cagataycali"
@@ -46,9 +46,9 @@
   "flash": {
     "versions": [
       {
-        "version": "0.27.0-u2",
+        "version": "0.28.0",
         "channel": "experimental",
-        "manifestPath": "firmware/0.27.0-u2/manifest.json"
+        "manifestPath": "firmware/0.28.0/manifest.json"
       }
     ],
     "notes": [
@@ -58,15 +58,15 @@
       },
       {
         "title": "Clean installation",
-        "description": "Accept the erase prompt. The first install wipes the factory demo and starts with an empty settings store; the firmware's OTA is A/B with rollback from then on."
+        "description": "Accept the erase prompt. The first install wipes the whole flash including Seeed's factory demo (dump it first if you want it back — see Recovery in the docs) and starts with an empty settings store. From then on updates arrive over the air into the other A/B slot with rollback."
       },
       {
-        "title": "Wi-Fi + pairing",
-        "description": "On first boot the glass shows a QR code for the tiny-XXXX setup network (password tinysetup). Scan it with your phone, then open the tiny app or http://192.168.4.1 to pass your Wi-Fi and pair the device to your tiny.technology account."
+        "title": "First boot: Wi-Fi and pairing on the glass",
+        "description": "The device walks you through setup on its own screen: scan the QR with your phone to join the tiny-XXXX setup network (password tinysetup) and open http://192.168.4.1, or tap \"Type it here\" to pick a network from the on-glass scan list and type the password on the e-ink keyboard. Then pair it to your tiny.technology account and take the one-screen tour. No app required."
       },
       {
         "title": "What it needs",
-        "description": "A tiny.technology account (free). The intelligence runs server-side; without Wi-Fi the device keeps its local pages (home, status, sensors, settings) and the last card on the glass, but cannot answer questions."
+        "description": "2.4 GHz Wi-Fi and a tiny.technology account (free). The intelligence runs server-side; without Wi-Fi the device keeps its local pages (home, status, sensors, settings, gallery) and the last card on the glass, but cannot answer questions."
       }
     ]
   }

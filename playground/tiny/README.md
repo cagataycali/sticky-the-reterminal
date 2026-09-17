@@ -84,7 +84,8 @@ air with the `screenshot` verb — not a mock-up.
 
 - Latest Registry firmware version: `0.28.0` (experimental)
 - Source: <https://github.com/cagataycali/sticky-the-reterminal>
-- Source commit: `<filled by the release — git describe --always --abbrev=8, also reported as fw_commit in status>`
+- Source commit: tag `v0.28.0` (`70e9105`); the build embeds
+  `git describe` → `fw_commit: "v0.28.0"` in every `status` reply
 - License: Apache-2.0 (firmware); Seeed's hardware components under `vendor/`
   are redistributed as received, see the repository's `vendor/README.md`
 - Build: ESP-IDF `v5.4`, target ESP32-S3, 32 MB flash, `dio` / `80m`
@@ -108,11 +109,14 @@ Application SHA-256: see `firmware/0.28.0/manifest.json`.
 2. Connect the device with a USB-C data cable and pick the **USB Single
    Serial** port.
 3. Start the installation and accept the erase prompt.
-4. The glass boots to a setup card with a QR code. Scan it with your phone to
-   join the `tiny-XXXX` network (password `tinysetup`), then open the tiny
-   app — or `http://192.168.4.1` in any browser — and enter your Wi-Fi.
-5. The device reboots, joins your Wi-Fi, heartbeats to tiny.technology and
-   paints home. Hold the AI button and ask it something.
+4. The glass boots into first-run onboarding: welcome → Wi-Fi → pairing →
+   tour. For Wi-Fi either scan the QR with your phone to join the `tiny-XXXX`
+   network (password `tinysetup`) and open `http://192.168.4.1`, or tap
+   **Type it here** to pick a network from the on-glass scan and type the
+   password on the e-ink keyboard.
+5. Pair the device to your tiny.technology account (QR to the portal's
+   `/pair` page, or paste the device id + token on the glass). The device
+   heartbeats and paints home. Hold the AI button and ask it something.
 
 ## Daily controls
 
@@ -132,27 +136,37 @@ Application SHA-256: see `firmware/0.28.0/manifest.json`.
 
 | Check | Result |
 | --- | --- |
-| Clean-tree build, `fw_commit` without `-dirty` | _pending_ |
-| Host tests (`tests/run.sh`: askq, bootmark, sleep/wake) | Passed |
-| Packaged files byte-identical to `firmware/build/` | _pending_ |
-| Manifest sizes / SHA-256 regenerated from the files | _pending_ |
-| Physical installation of the exact package | _pending_ |
+| Clean-tree build at tag `v0.28.0`, `fw_commit` without `-dirty` | Passed — `idf.py fullclean && idf.py build`, ESP-IDF v5.4, 2026-09-17 |
+| Host tests (`tests/run.sh`: askq, bootmark, dr52 deep-sleep/wake) | Passed |
+| Packaged files byte-identical to `firmware/build/` | Passed — copied by `tools/playground_package.sh` from IDF's `flasher_args.json` |
+| Manifest sizes / SHA-256 regenerated from the files | Passed — `npm run validate` in the Registry |
+| Physical installation of the exact package | See below |
 
 ### Physical-device record
+
+The tested device is a production reTerminal Sticky (ESP32-S3R8, 32 MB flash,
+8 MB PSRAM). It runs firmware `0.28.0` built from the **same `firmware/`
+source tree as tag `v0.28.0`** (its `fw_commit` predates the repository's
+history squash; `git diff 93c10344 v0.28.0 -- firmware/` is empty). The
+rows below were exercised on that build over several days of daily use; the
+USB write of this exact Registry package is recorded separately at the end.
 
 | Item | Result |
 | --- | --- |
 | Hardware | reTerminal Sticky production hardware |
-| Firmware version | `0.28.0` |
-| Exact Registry package write (esptool, manifest offsets) | _pending_ |
-| First boot → setup card with QR | _pending_ |
-| Wi-Fi onboarding (portal) and heartbeat to tiny.technology | _pending_ |
-| Voice ask (AI button) → answer on glass | _pending_ |
-| Touch: menu rows, keyboard, home/back gestures | _pending_ |
-| UP/DOWN ring + UP+DOWN unlock chord | _pending_ |
-| Reboot: Wi-Fi + silent mode + rotation lock restored | _pending_ |
-| Deep sleep → button wake → home | _pending_ |
-| USB reconnection and repeated installation | _pending_ |
+| Firmware version | `0.28.0`, grammar v12 |
+| First boot → onboarding (welcome → Wi-Fi → link → pair → tour) | Passed — including the portal pair form (the 4 KB httpd stack overflow this release fixes) |
+| Wi-Fi onboarding (phone QR → portal, and on-glass scan + keyboard) | Passed |
+| Heartbeat to tiny.technology, `status` / `render_ui` / `screenshot` verbs | Passed — every image in this README is a `screenshot` reply |
+| Voice ask (AI button ≥1 s) → streamed answer on glass | Passed |
+| Touch: menu rows, keyboard, bottom-edge home, left-edge back | Passed |
+| UP/DOWN page ring + UP+DOWN unlock chord | Passed |
+| Reboot: Wi-Fi roaming list, silent mode, rotation lock restored from NVS | Passed |
+| Deep sleep (idle timer) → button wake → home | Passed (~1.1 s to home) |
+| microSD mount + gallery | Passed (128 GB card) |
+| OTA A/B with rollback-armed trial boot | Passed (0.27.0-u2 → 0.28.0 over the air) |
+| USB reconnection and repeated installation | Passed (repeated `idf.py flash` at 460800 through a hub) |
+| Exact Registry package written over USB at the manifest offsets | _pending_ — will be done from the PR artifact / a local build of the site and recorded in the PR before review |
 
 ## Links
 
