@@ -227,16 +227,25 @@ extern "C" void tiny_node_set_paint_breakdown(int board_ms, int disp_ms) {
 
 extern "C" int tiny_node_unread(void) { return s_unread; }
 
+// The verb roster — ONE list for the heartbeat AND the BLE catalog (SPEC §3),
+// so a tool a nearby phone reads over Bluetooth is a tool the relay can call.
+static const char *const s_caps[] = { "render_ui", "status", "sensors", "say", "ask", "play",
+                                      "voice", "screenshot", "miccheck", "page", "rotate", "glance",
+                                      "tap", "swipe", "scroll", "lock", "unlock",
+                                      "sleep", "ota", "messages", "config", "agent", "sd" };
+extern "C" const char *const *tiny_node_caps(int *count) {
+    if (count) *count = (int)(sizeof s_caps / sizeof *s_caps);
+    return s_caps;
+}
+
 static int heartbeat(void) {
     cJSON *b = base_body();
     // Advertise only verbs dispatch() actually implements — a capability the
     // platform calls and gets nothing back from is worse than a missing one.
-    const char *caps[] = { "render_ui", "status", "sensors", "say", "ask", "play",
-                           "voice", "screenshot", "miccheck", "page", "rotate", "glance",
-                           "tap", "swipe", "scroll", "lock", "unlock",
-                           "sleep", "ota", "messages", "config", "agent", "sd" };
+    int ncaps = 0;
+    const char *const *caps = tiny_node_caps(&ncaps);
     cJSON *arr = cJSON_AddArrayToObject(b, "capabilities");
-    for (size_t i = 0; i < sizeof caps / sizeof *caps; ++i)
+    for (int i = 0; i < ncaps; ++i)
         cJSON_AddItemToArray(arr, cJSON_CreateString(caps[i]));
     // Opt-in DM badge (worker b553660d): reply gains {"unread":n}. STRING "1"
     // — the edge zod schema string lesson (messages_call comment) applies.

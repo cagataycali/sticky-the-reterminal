@@ -1,5 +1,6 @@
 // tiny_ble — NimBLE observer, scan-only. See tiny_ble.h.
 #include "tiny/tiny_ble.h"
+#include "tiny/tiny_beacon.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -24,7 +25,7 @@ static SemaphoreHandle_t s_done = NULL;
 static tiny_ble_dev_t s_devs[16];
 static int s_dev_count = 0;
 
-static void on_sync(void) { s_synced = true; }
+static void on_sync(void) { s_synced = true; tiny_beacon_on_sync(); }
 static void host_task(void *) {
     nimble_port_run();
     nimble_port_freertos_deinit();
@@ -88,6 +89,8 @@ static esp_err_t ensure_started(void) {
         return err;
     }
     ble_hs_cfg.sync_cb = on_sync;
+    // GATT services must exist before the host starts (SPEC §3 catalog).
+    tiny_beacon_gatt_register();
     nimble_port_freertos_init(host_task);
     // wait for host<->controller sync (fast; give it 3s)
     for (int i = 0; i < 300 && !s_synced; ++i) vTaskDelay(pdMS_TO_TICKS(10));
@@ -95,9 +98,11 @@ static esp_err_t ensure_started(void) {
     s_done = xSemaphoreCreateBinary();
     if (!s_done) return ESP_ERR_NO_MEM;
     s_started = true;
-    ESP_LOGI(TAG, "NimBLE up (observer)");
+    ESP_LOGI(TAG, "NimBLE up (observer + beacon)");
     return ESP_OK;
 }
+
+extern "C" esp_err_t tiny_ble_start(void) { return ensure_started(); }
 
 extern "C" esp_err_t tiny_ble_scan(tiny_ble_dev_t *out, int max, int *count,
                                    int scan_ms) {

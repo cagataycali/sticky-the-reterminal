@@ -24,6 +24,8 @@
 #include "tiny/tiny_display.h"
 #include "tiny/tiny_touch.h"
 #include "tiny/tiny_config.h"
+#include "tiny/tiny_ble.h"
+#include "tiny/tiny_beacon.h"
 #include "tiny/tiny_wifi.h"
 #include "sticky_battery.h"
 #include "sticky_sdcard.h"
@@ -169,7 +171,29 @@ extern "C" void app_main(void)
 
     // M3: load config; join wifi when provisioned with at least one network.
     tiny_config_t cfg;
-    if (tiny_config_load(&cfg) == ESP_OK && cfg.network_count > 0) {
+    bool cfg_ok = tiny_config_load(&cfg) == ESP_OK;
+    // TinyBeacon v2 (docs/ble-mesh/SPEC.md): a Sticky is a device, so it is on
+    // air by default — kind/caps/tool-count/session only; the display name
+    // rides only when social (off until a config key says otherwise), and the
+    // device id never leaves the board unhashed. Coexists with Wi-Fi (NimBLE
+    // + esp_wifi share the radio via the controller's coexistence scheduler).
+    {
+        int ntools = 0;
+        const char *const *tools = tiny_node_caps(&ntools);
+        tiny_beacon_cfg_t bc = {};
+        bc.name = cfg_ok ? cfg.name : "";
+        bc.device_id = cfg_ok ? cfg.device_id : "";
+        bc.fw = TINY_FW_VERSION;
+        bc.tools = tools; bc.tool_count = ntools;
+        bc.social = false;
+        bc.battery = true;
+        bc.caps = (1u << 2) | (1u << 3) | (1u << 4) | (1u << 8) | (1u << 11) | (1u << 12) | (1u << 13); // speaker display imu wifi env touch eink = 0x391c (fixtures.json sticky_full)
+        bc.rssi1m = -61;
+        esp_err_t berr = tiny_beacon_start(&bc);
+        if (berr == ESP_OK) berr = tiny_ble_start();
+        ESP_LOGI(TAG, "ble beacon: %s", esp_err_to_name(berr));
+    }
+    if (cfg_ok && cfg.network_count > 0) {
         esp_err_t werr = tiny_wifi_connect(&cfg);
         ESP_LOGI(TAG, "wifi: %s", esp_err_to_name(werr));
         tiny_bootmark_stage(8);

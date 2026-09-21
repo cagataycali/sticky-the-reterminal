@@ -2,7 +2,7 @@ idf_component_register(
   SRCS "tiny_main.cpp" "tiny_lock.cpp"
        "board.cpp" "sticky_display.cpp" "sticky_power.cpp" "sticky_buzzer.cpp" "sticky_sdcard.cpp"
        "canvas.cpp" "font.cpp"
-       "tiny_display.cpp" "tiny_touch.cpp" "tiny_config.cpp" "tiny_wifi.cpp" "tiny_node.cpp" "tiny_provision.cpp" "tiny_shell.cpp" "tiny_ble.cpp"
+       "tiny_display.cpp" "tiny_touch.cpp" "tiny_config.cpp" "tiny_wifi.cpp" "tiny_node.cpp" "tiny_provision.cpp" "tiny_shell.cpp" "tiny_ble.cpp" "tiny_beacon.cpp"
        "tiny_audio.cpp" "tiny_upload.cpp" "tiny_ota.cpp" "tiny_button.cpp" "sticky_battery.cpp" "tiny_screenshot.cpp"
        "tiny_sensors.cpp" "sticky_sht40.cpp" "sticky_imu.cpp" "sticky_rtc.cpp"
        "tiny_time.cpp" "tiny_orient.cpp" "tiny_stream.cpp" "tiny_askq.cpp" "tiny_bootmark.cpp" "tiny_agent.cpp" "tiny_onboard.cpp"

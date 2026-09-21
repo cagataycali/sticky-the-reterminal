@@ -9,6 +9,8 @@
 extern "C" {
 #endif
 esp_err_t tiny_node_start(void);   // spawns node task; needs wifi up + provisioned cfg
+// The verb roster the heartbeat advertises (also served over BLE by tiny_beacon).
+const char *const *tiny_node_caps(int *count);
 void      tiny_node_stop(void);
 // Reset the idle/cadence activity clock from outside the node (the unlock
 // chord restores the full auto-sleep budget starting at unlock).
