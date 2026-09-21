@@ -4,6 +4,23 @@ Firmware versions come from `firmware/main/tiny/tiny_version.h`; the verb
 grammar version (`TINY_GRAMMAR_VERSION`) is what clients gate on. One line per
 release, newest first.
 
+## 0.29.0 — grammar v12 — TinyBeacon v2 presence
+
+- **firmware** — the Sticky is findable over Bluetooth without pairing
+  (tinyai-id `docs/ble-mesh/SPEC.md`). New `tiny_beacon`: NimBLE broadcaster +
+  peripheral on the existing scan-only host — ADV_IND = flags + Catalog UUID +
+  mfg SHORT (31 B exactly), SCAN_RSP = mfg FULL `'TN'` + 9-byte header (+ name
+  only when social); Catalog GATT `identity` / `tools` (paged, ≤512 B) /
+  `hello` / `endpoint` serving the 23 firmware verbs; session rotates every
+  15 min (esp_random); 250–400 ms interval; connectable, advertising resumes
+  after a disconnect. ON at boot, **anonymous** (kind + tool count, no name) —
+  a device named after its owner must not leak it. `tiny_ble` now registers
+  GATT before `nimble_port_freertos_init` (gap/gatt svc init were never called
+  before). Caps 0x391c = fixtures `sticky_full`.
+- **rollout** — first flashed to ONE bench Sticky over the `sticky-dev` channel
+  (lane BLE-ROLLOUT, 2026-09-21); the other two follow after the catalog read
+  from a Mac/phone is proven.
+
 ## 0.28.0 — grammar v12 — first-run onboarding
 
 - **firmware** — a real first boot. New `tiny_onboard` module: welcome →

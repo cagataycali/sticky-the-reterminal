@@ -1,5 +1,5 @@
 #pragma once
-#define TINY_FW_VERSION "0.28.0"
+#define TINY_FW_VERSION "0.29.0"
 
 // The verb grammar is a 3-consumer contract (dashboard, iOS StickyPanel,
 // relay agents) held together by string prefixes. Bump this on ANY change to
