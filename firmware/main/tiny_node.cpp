@@ -3,6 +3,7 @@
 // EVERY request: 15s timeout. 401 on heartbeat/poll -> STRIKE, not wipe;
 // reboot (fresh boot lands in unprovisioned path -> portal once M3b lands).
 #include "tiny/tiny_node.h"
+#include "tiny/tiny_beacon.h"
 #include "tiny/tiny_askq.h"
 #include "tiny/tiny_agent.h"
 #include "tiny/tiny_lock.h"
@@ -133,6 +134,30 @@ static int http_json_t(esp_http_client_method_t method, const char *path,
 static int http_json(esp_http_client_method_t method, const char *path,
                      const char *body, char *resp, int resp_cap) {
     return http_json_t(method, path, body, resp, resp_cap, HTTP_TIMEOUT_MS);
+}
+
+// ---------- BLE presence: account secret (SPEC §2.4) ----------
+static bool s_ble_secret_tried = false;
+// {"ok":true,"secret":"<base64url of exactly 32 bytes, 43 chars>"} → 32 raw bytes.
+static bool ble_secret_decode(const char *resp, uint8_t out[32]) {
+    cJSON *o = cJSON_Parse(resp);
+    if (!o) return false;
+    const cJSON *sv = cJSON_GetObjectItem(o, "secret");
+    bool ok = false;
+    if (cJSON_IsString(sv) && sv->valuestring && strlen(sv->valuestring) >= 43) {
+        static const char *A = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
+        uint32_t acc = 0; int bits = 0, n = 0;
+        ok = true;
+        for (const char *c = sv->valuestring; *c && *c != '='; ++c) {
+            const char *pos = strchr(A, *c);
+            if (!pos) { ok = false; break; }
+            acc = (acc << 6) | (uint32_t)(pos - A); bits += 6;
+            if (bits >= 8) { bits -= 8; if (n < 32) out[n++] = (uint8_t)(acc >> bits); }
+        }
+        ok = ok && n == 32;
+    }
+    cJSON_Delete(o);
+    return ok;
 }
 
 // ---------- auth'd bodies ----------
@@ -2531,6 +2556,20 @@ static void node_task(void *) {
                     esp_ota_mark_app_valid_cancel_rollback();
                     ESP_LOGI(TAG, "OTA image marked VALID (first heartbeat 200)");
                     tiny_bootmark_stage(9);  // flight recorder: clean run
+                }
+                // BLE presence (SPEC §2.4): fetch the account `mine` secret ONCE
+                // per boot, right here — the 200 just proved wifi+TLS+auth, which
+                // is exactly what the fetch needs. Fail-open: no secret = the
+                // beacon stays anonymous ("a tiny Sticky"), never a boot blocker.
+                if (!tiny_beacon_has_secret() && !s_ble_secret_tried) {
+                    s_ble_secret_tried = true;
+                    char sresp[256] = "";
+                    int sst = post_cjson(HTTP_METHOD_POST, "/api/devices/ble-secret", base_body(), sresp, sizeof sresp);
+                    uint8_t sec[32];
+                    if (sst == 200 && ble_secret_decode(sresp, sec)) {
+                        tiny_beacon_set_secret(sec, sizeof sec);
+                        ESP_LOGI(TAG, "ble-secret: account (mine tag on air)");
+                    } else ESP_LOGW(TAG, "ble-secret: %d — beacon stays anonymous", sst);
                 }
             }
             // §16 law 2 drain: ONE queued ask per healthy heartbeat — the

@@ -2,7 +2,7 @@
 //
 // Packet layout (SPEC §2.4, 31-byte legacy PDUs):
 //   ADV_IND : flags(3) + Complete 128-bit UUID list(18) + mfg SHORT(10) = 31 ✔
-//   SCAN_RSP: mfg FULL 'T''N'+header(15) + Complete Local Name(≤14+2)
+//   SCAN_RSP: mfg FULL 'T''N'+header+mine tail(18) + Complete Local Name(≤11+2)
 // Passive observers (another Sticky) read the SHORT form witnessed by the UUID;
 // active scanners (iPhone, Mac, bleak) get the FULL header + name.
 //
@@ -22,6 +22,7 @@
 #include "host/ble_gap.h"
 #include "host/ble_hs.h"
 #include "host/util/util.h"
+#include "mbedtls/md.h"
 #include "mbedtls/sha256.h"
 #include "os/os_mbuf.h"
 #include "services/gap/ble_svc_gap.h"
@@ -36,6 +37,7 @@ static const char *TAG = "tiny_beacon";
 #define TB_FLAG_SOCIAL      (1u << 1)
 #define TB_FLAG_CATALOG     (1u << 2)
 #define TB_FLAG_BATTERY     (1u << 3)
+#define TB_FLAG_MINE        (1u << 5)
 #define TB_FLAG_AGENT       (1u << 6)
 #define TB_TOOLS_PER_PAGE 6
 #define TB_ROTATE_US (15ULL * 60 * 1000 * 1000)
@@ -55,6 +57,7 @@ static char s_name[48], s_devid[48], s_fw[24];
 static const char *s_tools[32];
 static bool s_configured = false, s_running = false, s_synced = false;
 static uint16_t s_session = 0;
+static uint8_t s_secret[32]; static bool s_have_secret = false;   // account `mine` secret (SPEC §2.2 bit 5 / §2.4 tail)
 static uint8_t s_tools_page = 0;
 static bool s_hello_seen = false;
 static esp_timer_handle_t s_rotate = NULL;
@@ -64,7 +67,18 @@ static uint8_t flags_byte(void) {
     uint8_t f = TB_FLAG_PROVISIONED | TB_FLAG_CATALOG | TB_FLAG_AGENT;
     if (s_cfg.social) f |= TB_FLAG_SOCIAL;
     if (s_cfg.battery) f |= TB_FLAG_BATTERY;
+    if (s_have_secret) f |= TB_FLAG_MINE;
     return f;
+}
+// SPEC §2.4 mine tail: HMAC-SHA256(secret, session LE)[0..3] — the raw bytes of
+// the 4-char base64url `mine` tag. A Sticky has no name carrier (one 31 B PDU),
+// so without this it can never resolve as "your Sticky" on the owner's phone.
+static void mine_tail3(uint8_t out[3]) {
+    uint8_t msg[2] = { (uint8_t)(s_session & 0xFF), (uint8_t)(s_session >> 8) };
+    uint8_t mac[32];
+    const mbedtls_md_info_t *md = mbedtls_md_info_from_type(MBEDTLS_MD_SHA256);
+    if (md && mbedtls_md_hmac(md, s_secret, sizeof s_secret, msg, sizeof msg, mac) == 0) memcpy(out, mac, 3);
+    else memset(out, 0, 3);
 }
 static void header9(uint8_t out[9]) {
     int tools = s_cfg.tool_count > 255 ? 255 : s_cfg.tool_count;
@@ -185,12 +199,15 @@ static int start_adv(void) {
     int rc = ble_gap_adv_set_fields(&adv);
     if (rc != 0) { ESP_LOGE(TAG, "adv fields rc=%d", rc); return rc; }
     // SCAN_RSP: mfg FULL + name (name only when social — SPEC §4.3)
-    uint8_t mfull[15] = { 0xff, 0xff, 0x54, 0x4e };
+    uint8_t mfull[18] = { 0xff, 0xff, 0x54, 0x4e };
     memcpy(mfull + 4, h, 9);
+    uint8_t mlen = 13;
+    if (s_have_secret) { mine_tail3(mfull + 13); mlen = 16; }   // §2.4 tail only with flags.mine
     struct ble_hs_adv_fields rsp = {};
-    rsp.mfg_data = mfull; rsp.mfg_data_len = sizeof mfull;
+    rsp.mfg_data = mfull; rsp.mfg_data_len = mlen;
     if (s_cfg.social && s_name[0]) {
-        rsp.name = (uint8_t *)s_name; rsp.name_len = strlen(s_name) > 14 ? 14 : strlen(s_name); rsp.name_is_complete = 1;
+        const size_t room = 31 - (2 + mlen) - 2;   // SCAN_RSP budget: mfg AD + name AD header
+        rsp.name = (uint8_t *)s_name; rsp.name_len = strlen(s_name) > room ? room : strlen(s_name); rsp.name_is_complete = 1;
     }
     rc = ble_gap_adv_rsp_set_fields(&rsp);
     if (rc != 0) { ESP_LOGE(TAG, "rsp fields rc=%d", rc); return rc; }
@@ -203,7 +220,7 @@ static int start_adv(void) {
     ble_hs_id_infer_auto(0, &own_addr_type);
     rc = ble_gap_adv_start(own_addr_type, NULL, BLE_HS_FOREVER, &p, gap_event, NULL);
     if (rc != 0 && rc != BLE_HS_EALREADY) { ESP_LOGE(TAG, "adv start rc=%d", rc); return rc; }
-    ESP_LOGI(TAG, "on air: kind sticky session 0x%04x tools %d %s", s_session, s_cfg.tool_count, s_cfg.social ? "social" : "quiet");
+    ESP_LOGI(TAG, "on air: kind sticky session 0x%04x tools %d %s%s", s_session, s_cfg.tool_count, s_cfg.social ? "social" : "quiet", s_have_secret ? " mine" : "");
     return 0;
 }
 
@@ -236,6 +253,19 @@ extern "C" esp_err_t tiny_beacon_start(const tiny_beacon_cfg_t *cfg) {
     if (s_synced) return start_adv() == 0 ? ESP_OK : ESP_FAIL;
     return ESP_OK;   // tiny_ble bring-up calls tiny_beacon_on_sync
 }
+
+// Called by tiny_node once /api/devices/ble-secret answered (needs wifi + the
+// device token → after the first heartbeat 200). 32 bytes; re-advertises with
+// flags.mine + the tail. Idempotent; a different secret (rotation) re-keys.
+extern "C" esp_err_t tiny_beacon_set_secret(const uint8_t *secret, size_t len) {
+    if (!secret || len != 32) return ESP_ERR_INVALID_ARG;
+    if (s_have_secret && memcmp(s_secret, secret, 32) == 0) return ESP_OK;
+    memcpy(s_secret, secret, 32); s_have_secret = true;
+    ESP_LOGI(TAG, "mine secret set — advertising flags.mine + tail");
+    if (s_running && s_synced) { ble_gap_adv_stop(); start_adv(); }
+    return ESP_OK;
+}
+extern "C" bool tiny_beacon_has_secret(void) { return s_have_secret; }
 
 extern "C" esp_err_t tiny_beacon_stop(void) {
     s_running = false;

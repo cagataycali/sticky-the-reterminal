@@ -29,6 +29,10 @@ esp_err_t tiny_beacon_start(const tiny_beacon_cfg_t *cfg);
 esp_err_t tiny_beacon_stop(void);
 bool      tiny_beacon_running(void);
 uint16_t  tiny_beacon_session(void);
+// Account `mine` secret (32 B, /api/devices/ble-secret) → flags.mine + the 3-byte
+// HMAC tail in the FULL mfg (SPEC §2.4). Safe to call any time after start.
+esp_err_t tiny_beacon_set_secret(const uint8_t *secret, size_t len);
+bool      tiny_beacon_has_secret(void);
 
 // Internal hooks used by tiny_ble.cpp (host bring-up order).
 void tiny_beacon_gatt_register(void);   // ble_svc_gap/gatt init + catalog svc (before host start)
