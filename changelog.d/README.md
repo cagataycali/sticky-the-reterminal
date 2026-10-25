@@ -1,6 +1,7 @@
 # changelog.d — one note per change
 
-Pull requests do not edit `CHANGELOG.md`. Each one adds a small file here, and
+Pull requests and pushes to `main` do not edit `CHANGELOG.md`. Each change adds
+a small file here, and
 the notes are gathered into `CHANGELOG.md` when a firmware version is released.
 Two open pull requests never touch the same file, so they never conflict on the
 changelog. The tool is [changelog.d](https://cagataycali.github.io/changelog.d/).
@@ -34,16 +35,22 @@ The rules:
   changes a verb, its args or a reply shape also bumps `TINY_GRAMMAR_VERSION`
   and says so in the note (`### grammar v13: …`).
 - One change per file. No `##` headings — those are versions.
-- Use the real PR number. `0000-wip.md`-style names are refused.
+- Use a real number: the PR's, or for a push straight to `main`, the issue it
+  closes (with no issue, the next number GitHub would hand out: the newest
+  issue/PR number + 1). `0000-wip.md`-style names are refused.
 - Only notes and this README live here; any other file is an error.
 
-Nothing a user would notice (typo, CI, comment)? Ask for the `skip-changelog`
-label instead.
+Nothing a user would notice (typo, CI, comment)? On a pull request, ask for the
+`skip-changelog` label instead. A push has no labels, so a direct push to
+`main` that changes anything outside `.github/`, `changelog.d/` and
+`tiny_version.h` carries a note.
 
 ## Checking
 
-`changelog-d check` validates every note here; `changelog-d gate` runs the same
-check the pull request workflow (`.github/workflows/changelog.yml`) runs.
+`changelog-d check` validates every note here; `changelog-d gate --base-ref
+origin/main` runs the same check the `changelog` workflow
+(`.github/workflows/changelog.yml`) runs on every pull request and every push
+to `main`.
 
 ## Releasing
 
