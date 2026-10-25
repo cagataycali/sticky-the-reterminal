@@ -31,7 +31,8 @@ Versions live in exactly one place: `firmware/main/tiny/tiny_version.h` —
 `TINY_FW_VERSION` (string, e.g. `0.27.0-u2`) and `TINY_GRAMMAR_VERSION`
 (int, currently 12). CMake reads the first; the heartbeat and `status` report
 both. Bump the grammar on **any** change to a verb, its args, or a reply
-shape, and write a line in `CHANGELOG.md`.
+shape, and add a changelog note (`changelog.d/<pr>-<name>.md`, see
+`changelog.d/README.md` — never edit `CHANGELOG.md` in a PR).
 
 Live truth about a device is never in a file. Ask it: `status` over the relay
 (`sticky_display` tool → verb `status`, or `use_device invoke`). It answers
@@ -127,7 +128,7 @@ Dispatched in `tiny_node.cpp::dispatch_inner()` — **23 verbs**:
 Advertised in the heartbeat `caps[]` (`tiny_node.cpp` ~line 233) — the same
 **23** since 0.28.0 (grammar v12 added `sd`, which had dispatched unadvertised
 since 0.26.0). The rule: *advertise exactly what dispatches*. When you add a
-verb, add it to BOTH, bump the grammar, write the CHANGELOG line.
+verb, add it to BOTH, bump the grammar, add the `changelog.d/` note.
 
 Reply contract: `PATCH /api/devices/relay {inReplyTo, payload:"<string ≤8000 B>"}`
 where payload is a serialized JSON string `{"result":…[, "images":[{url,format}]]}`.
@@ -191,7 +192,10 @@ Release rail: `tools/release.sh [--build] [--deploy]` rewrites
 `docs/install/manifest.json` + `sha256sums.txt` from `firmware/build/`; the
 mkdocs hook `tools/install_assets_hook.py` copies the four parts into
 `site/install/fw/` and refuses bytes that don't match the sums. Tags are
-`v<TINY_FW_VERSION>`.
+`v<TINY_FW_VERSION>`. Before tagging, `tools/changelog.sh release
+"<version> — grammar vN — <name>"` folds `changelog.d/` into `CHANGELOG.md`;
+the `release` workflow refuses pending notes and uses that section as the
+release body (`docs/release.md#changelog-at-release`).
 
 ## 8. Sticky Playground registry (Seeed) — what we ship and how
 
@@ -285,6 +289,8 @@ package. `PLAYGROUND.md` at the root is the short version of this section.
 ## 13. When you are done
 
 Run `tests/run.sh`. If you touched `firmware/`, build it. If you touched a
-verb or a reply shape, bump `TINY_GRAMMAR_VERSION` and write the CHANGELOG
-line. If you changed a number that appears in prose, grep for it. If you
+verb or a reply shape, bump `TINY_GRAMMAR_VERSION`. Any change a user would
+notice gets one `changelog.d/<pr>-<name>.md` note (`changelog-d check`), not a
+`CHANGELOG.md` edit. If you changed a number that appears in prose, grep for
+it. If you
 painted the glass, restore home. Then update this file if it lied to you.
