@@ -96,7 +96,9 @@ fresh empty `## [Unreleased]` above it, so the next notes have a place to go.
 The heading starts with the version; `tools/changelog.sh notes <version>`
 prints that section, which the `release` workflow uses as the GitHub release
 body. The workflow also refuses to run while `changelog.d/` still holds notes.
-The release pull request (version bump + folded notes) carries the
-`skip-changelog` label: it adds no note of its own, and the label never
-waives the check that nothing was hand-written into `## [Unreleased]`.
+The release commit (version bump + folded notes) adds no note of its own and
+needs none: `firmware/main/tiny/tiny_version.h` and `changelog.d/` are on the
+`changelog` workflow's ignore list, so it passes whether it lands as a pull
+request or a push to `main`. That never waives the check that nothing was
+hand-written into `## [Unreleased]`.
 Released sections below are history; never rewrite them.

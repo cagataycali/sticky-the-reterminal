@@ -1,11 +1,15 @@
-# Changelog check (changelog.d). A pull request that changes the tree adds one
-# note under changelog.d/ and never edits CHANGELOG.md; this job checks both in
-# seconds. Rules and remedy: changelog.d/README.md. A PR with nothing a user
-# would notice takes the `skip-changelog` label instead.
+# Changelog check (changelog.d). A change to the tree adds one note under
+# changelog.d/ and never edits CHANGELOG.md; this job checks both in seconds,
+# on every pull request AND on every push to main (judged against the commit
+# main pointed at before the push, so a direct push is checked exactly like a
+# PR). Rules and remedy: changelog.d/README.md. A PR with nothing a user would
+# notice takes the `skip-changelog` label instead; a push has no labels.
 name: changelog
 on:
   pull_request:
     types: [opened, synchronize, reopened, labeled, unlabeled]
+  push:
+    branches: [main]
 
 permissions:
   contents: read
@@ -17,10 +21,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0          # compares the PR against its base
+          fetch-depth: 0          # compares against the PR base / pre-push commit
           persist-credentials: false
       - uses: cagataycali/changelog.d@main
         with:
           ignore: |
             .github/**
-            changelog.d/README.md
+            changelog.d/**
+            firmware/main/tiny/tiny_version.h
