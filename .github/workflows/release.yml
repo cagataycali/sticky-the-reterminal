@@ -5,7 +5,9 @@
 # What a run does: build fw in the pinned IDF container → tools/release.sh writes
 # docs/install/manifest.json + sha256sums.txt from that build → mkdocs site (the
 # install_assets hook ships the 4 parts into site/install/fw/, sha-gated) → push to
-# gh-pages → tag v<version> + GitHub release carrying the same parts + sums.
+# gh-pages → tag v<version> + GitHub release carrying the same parts + sums, its body
+# the version's CHANGELOG.md section. Refuses to start while changelog.d/ still holds
+# notes: fold them first with tools/changelog.sh release (docs/release.md).
 name: release
 on:
   workflow_dispatch:
@@ -26,6 +28,12 @@ jobs:
       version: ${{ steps.ver.outputs.version }}
     steps:
       - uses: actions/checkout@v4
+      - name: changelog folded for this version
+        shell: bash
+        run: |
+          tools/changelog.sh pending
+          v=$(sed -n 's/.*TINY_FW_VERSION *"\([^"]*\)".*/\1/p' firmware/main/tiny/tiny_version.h)
+          tools/changelog.sh notes "$v" >/dev/null
       - id: ver
         shell: bash
         run: echo "version=$(sed -n 's/.*TINY_FW_VERSION *"\([^"]*\)".*/\1/p' firmware/main/tiny/tiny_version.h)" >> "$GITHUB_OUTPUT"
@@ -79,10 +87,22 @@ jobs:
     needs: [build, pages]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
         with:
           name: fw-${{ needs.build.outputs.version }}
           path: fw
+      - name: release notes from CHANGELOG.md
+        env:
+          VER: ${{ needs.build.outputs.version }}
+        run: |
+          {
+            echo "Install from the browser: https://cagataycali.github.io/sticky-the-reterminal/install/"
+            echo 'Or: `curl -fsSL https://cagataycali.github.io/sticky-the-reterminal/install.sh | sh`'
+            echo "Parts flash at 0x0 / 0x8000 / 0xf000 / 0x20000 (dio, 32MB, 80m) — see manifest.json; verify with sha256sums.txt."
+            echo
+            tools/changelog.sh notes "$VER"
+          } > notes.md
       - name: stage assets
         run: |
           mkdir out
@@ -93,8 +113,5 @@ jobs:
         with:
           tag_name: v${{ needs.build.outputs.version }}
           name: Sticky ${{ needs.build.outputs.version }}
-          body: |
-            Install from the browser: https://cagataycali.github.io/sticky-the-reterminal/install/
-            Or: `curl -fsSL https://cagataycali.github.io/sticky-the-reterminal/install.sh | sh`
-            Parts flash at 0x0 / 0x8000 / 0xf000 / 0x20000 (dio, 32MB, 80m) — see manifest.json; verify with sha256sums.txt.
+          body_path: notes.md
           files: out/*

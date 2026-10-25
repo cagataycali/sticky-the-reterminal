@@ -1,0 +1,26 @@
+# Changelog check (changelog.d). A pull request that changes the tree adds one
+# note under changelog.d/ and never edits CHANGELOG.md; this job checks both in
+# seconds. Rules and remedy: changelog.d/README.md. A PR with nothing a user
+# would notice takes the `skip-changelog` label instead.
+name: changelog
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+
+permissions:
+  contents: read
+
+jobs:
+  changelog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0          # compares the PR against its base
+          persist-credentials: false
+      - uses: cagataycali/changelog.d@main
+        with:
+          ignore: |
+            .github/**
+            changelog.d/README.md

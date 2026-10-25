@@ -7,7 +7,8 @@ description: "Sticky's build and release rules — clean worktrees, monotonic la
 
 Six rules, each purchased with a real incident on nights when two people
 shared one checkout. They are structural, not personal: the one who wrote
-up the `sed` hazard for others tripped it a day later.
+up the `sed` hazard for others tripped it a day later. The changelog step
+that goes with every release is [at the end](#changelog-at-release).
 
 ## 1. Publish builds happen in a clean detached worktree
 
@@ -75,3 +76,27 @@ Probe etiquette for a glass someone may be holding: `status` and `sensors`
 first (they don't repaint), look at `idle_for_s` and the last `ui_tap`
 before painting, restore home after. A reply is not a frame — only a
 `screenshot` proves pixels.
+
+## Changelog at release
+
+Pull requests add one note under `changelog.d/`, never an edit to
+`CHANGELOG.md` (the `changelog` workflow refuses both mistakes). When a
+version is cut, in the same commit that bumps `TINY_FW_VERSION`:
+
+```sh
+pip install git+https://github.com/cagataycali/changelog.d
+tools/changelog.sh check                                   # every pending note is valid
+changelog-d print                                          # preview the entries
+tools/changelog.sh release "0.30.0 — grammar v13 — <name>"  # fold them in
+```
+
+`release` runs `changelog-d apply` — all or nothing: one bad note and it
+changes nothing — then turns `## [Unreleased]` into `## <heading>` with a
+fresh empty `## [Unreleased]` above it, so the next notes have a place to go.
+The heading starts with the version; `tools/changelog.sh notes <version>`
+prints that section, which the `release` workflow uses as the GitHub release
+body. The workflow also refuses to run while `changelog.d/` still holds notes.
+The release pull request (version bump + folded notes) carries the
+`skip-changelog` label: it adds no note of its own, and the label never
+waives the check that nothing was hand-written into `## [Unreleased]`.
+Released sections below are history; never rewrite them.

@@ -41,7 +41,11 @@ Host tests compile shipped firmware files against the shims in `tests/host/shim`
 
 - One change per PR, small enough to review in ten minutes. Say what and why.
 - Firmware changes must build; anything touching a verb or reply shape bumps
-  `TINY_GRAMMAR_VERSION` and gets a line in `CHANGELOG.md`.
+  `TINY_GRAMMAR_VERSION`.
+- Add a changelog note: one file `changelog.d/<pr-number>-<short-name>.md`, never
+  an edit to `CHANGELOG.md`. Format and commands are in `changelog.d/README.md`;
+  `changelog-d check` validates it and the `changelog` workflow checks it on the PR.
+  Nothing a user would notice? Ask for the `skip-changelog` label.
 - No build logs, receipts, tokens or your own WiFi in the tree. `.gitignore`
   already covers the usual places; `git status` before you push.
 - Less code is more code. Deleting is a contribution.
